@@ -1,3 +1,10 @@
+import { Accordion, Box, Group, ScrollArea, Stack, Text } from "@mantine/core";
+import { useToggle } from "@mantine/hooks";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useContext, useMemo, useState } from "react";
+import { useHotkeys } from "react-hotkeys-hook";
+import { useTranslation } from "react-i18next";
+import { useStore } from "zustand";
 import { commands } from "@/bindings";
 import GameInfo from "@/components/common/GameInfo";
 import { TreeStateContext } from "@/components/common/TreeStateContext";
@@ -9,13 +16,6 @@ import { formatNumber } from "@/utils/format";
 import { getTreeStats } from "@/utils/repertoire";
 import { getNodeAtPath } from "@/utils/treeReducer";
 import { unwrap } from "@/utils/unwrap";
-import { Accordion, Box, Group, ScrollArea, Stack, Text } from "@mantine/core";
-import { useToggle } from "@mantine/hooks";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { useContext, useMemo, useState } from "react";
-import { useHotkeys } from "react-hotkeys-hook";
-import { useTranslation } from "react-i18next";
-import { useStore } from "zustand";
 import FenSearch from "./FenSearch";
 import FileInfo from "./FileInfo";
 import GameSelector from "./GameSelector";
@@ -102,9 +102,7 @@ function GameSelectorAccordion({
 
     if (!currentTab?.file) return;
 
-    const data = unwrap(
-      await commands.readGames(currentTab.file.path, page, page),
-    );
+    const data = unwrap(await commands.readGames(currentTab.file.path, page, page));
     const tree = await parsePGN(data[0]);
     setState(tree);
 
@@ -133,12 +131,8 @@ function GameSelectorAccordion({
   }
 
   const keyMap = useAtomValue(keyMapAtom);
-  useHotkeys(keyMap.NEXT_GAME.keys, () =>
-    setPage(Math.min(gameNumber + 1, currentTab.file!.numGames - 1)),
-  );
-  useHotkeys(keyMap.PREVIOUS_GAME.keys, () =>
-    setPage(Math.max(0, gameNumber - 1)),
-  );
+  useHotkeys(keyMap.NEXT_GAME.keys, () => setPage(Math.min(gameNumber + 1, currentTab.file!.numGames - 1)));
+  useHotkeys(keyMap.PREVIOUS_GAME.keys, () => setPage(Math.max(0, gameNumber - 1)));
 
   return (
     <>

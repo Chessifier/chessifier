@@ -1,13 +1,13 @@
-import { type UciOptionConfig, commands } from "@/bindings";
-import { type LocalEngine, requiredEngineSettings } from "@/utils/engines";
-import { usePlatform } from "@/utils/files";
-import { unwrap } from "@/utils/unwrap";
 import { Button, Input, NumberInput, Text, TextInput } from "@mantine/core";
 import type { UseFormReturnType } from "@mantine/form";
 import { open } from "@tauri-apps/plugin-dialog";
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { match } from "ts-pattern";
+import { commands, type UciOptionConfig } from "@/bindings";
+import { type LocalEngine, requiredEngineSettings } from "@/utils/engines";
+import { usePlatform } from "@/utils/files";
+import { unwrap } from "@/utils/unwrap";
 import FileInput from "../common/FileInput";
 
 export default function EngineForm({
@@ -22,9 +22,7 @@ export default function EngineForm({
   const { t } = useTranslation();
 
   const { os } = usePlatform();
-  const config = useRef<{ name: string; options: UciOptionConfig[] } | null>(
-    null,
-  );
+  const config = useRef<{ name: string; options: UciOptionConfig[] } | null>(null);
   const settings = config.current?.options
     .filter((o) => requiredEngineSettings.includes(o.value.name))
     .map((o) => ({
@@ -38,11 +36,7 @@ export default function EngineForm({
     .otherwise(() => []);
 
   return (
-    <form
-      onSubmit={form.onSubmit(async (values) =>
-        onSubmit({ ...values, loaded: true, settings: settings || [] }),
-      )}
-    >
+    <form onSubmit={form.onSubmit(async (values) => onSubmit({ ...values, loaded: true, settings: settings || [] }))}>
       <FileInput
         label={t("Engines.Add.BinaryFile")}
         description={t("Engines.Add.BinaryFile.Desc")}
@@ -54,9 +48,7 @@ export default function EngineForm({
             filters,
           });
           if (!selected) return;
-          config.current = unwrap(
-            await commands.getEngineConfig(selected as string),
-          );
+          config.current = unwrap(await commands.getEngineConfig(selected as string));
           form.setFieldValue("path", selected as string);
           form.setFieldValue("name", config.current.name);
         }}
@@ -69,11 +61,7 @@ export default function EngineForm({
         {...form.getInputProps("name")}
       />
 
-      <NumberInput
-        label="Elo"
-        placeholder={t("Engines.Add.Elo.Desc")}
-        {...form.getInputProps("elo")}
-      />
+      <NumberInput label="Elo" placeholder={t("Engines.Add.Elo.Desc")} {...form.getInputProps("elo")} />
 
       <Input.Wrapper
         label={t("Engines.Add.ImageFile")}

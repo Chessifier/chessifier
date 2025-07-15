@@ -1,56 +1,28 @@
-import { capitalize } from "@/utils/format";
-import {
-  Button,
-  Center,
-  Chip,
-  Group,
-  Input,
-  Stack,
-  Text,
-  Title,
-} from "@mantine/core";
+import { Button, Center, Chip, Group, Input, Stack, Text, Title } from "@mantine/core";
 import { useToggle } from "@mantine/hooks";
 import { IconPlus, IconSearch, IconX } from "@tabler/icons-react";
 import { useLoaderData } from "@tanstack/react-router";
-import {
-  BaseDirectory,
-  type DirEntry,
-  type FileInfo,
-  readDir,
-  remove,
-} from "@tauri-apps/plugin-fs";
+import { BaseDirectory, type DirEntry, type FileInfo, readDir, remove } from "@tauri-apps/plugin-fs";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import useSWR from "swr";
+import { capitalize } from "@/utils/format";
 import ConfirmModal from "../common/ConfirmModal";
 import OpenFolderButton from "../common/OpenFolderButton";
 import DirectoryTable from "./DirectoryTable";
 import FileCard from "./FileCard";
+import { type FileMetadata, type FileType, processEntriesRecursively } from "./file";
 import { CreateModal, EditModal } from "./Modals";
-import {
-  type FileMetadata,
-  type FileType,
-  processEntriesRecursively,
-} from "./file";
 
-const FILE_TYPES: FileType[] = [
-  "game",
-  "repertoire",
-  "tournament",
-  "puzzle",
-  "other",
-];
+const FILE_TYPES: FileType[] = ["game", "repertoire", "tournament", "puzzle", "other"];
 
 const useFileDirectory = (dir: string) => {
-  const { data, error, isLoading, mutate } = useSWR(
-    "file-directory",
-    async () => {
-      const entries = await readDir(dir);
-      const allEntries = processEntriesRecursively(dir, entries);
+  const { data, error, isLoading, mutate } = useSWR("file-directory", async () => {
+    const entries = await readDir(dir);
+    const allEntries = processEntriesRecursively(dir, entries);
 
-      return allEntries;
-    },
-  );
+    return allEntries;
+  });
   console.log(error);
   return {
     files: data,
@@ -115,11 +87,7 @@ function FilesPage() {
               value={search}
               onChange={(e) => setSearch(e.currentTarget.value)}
             />
-            <Button
-              size="xs"
-              leftSection={<IconPlus size="1rem" />}
-              onClick={() => toggleCreateModal()}
-            >
+            <Button size="xs" leftSection={<IconPlus size="1rem" />} onClick={() => toggleCreateModal()}>
               {t("Common.Create")}
             </Button>
             <Button
@@ -137,11 +105,7 @@ function FilesPage() {
               <Chip
                 variant="outline"
                 key={type}
-                onChange={(v) =>
-                  setFilter((filter) =>
-                    v ? type : filter === type ? null : filter,
-                  )
-                }
+                onChange={(v) => setFilter((filter) => (v ? type : filter === type ? null : filter))}
                 checked={filter === type}
               >
                 {t(`Files.FileType.${capitalize(type)}`)}
@@ -177,12 +141,7 @@ function FilesPage() {
                 setSelected(null);
               }}
             />
-            <FileCard
-              selected={selected}
-              games={games}
-              setGames={setGames}
-              toggleEditModal={toggleEditModal}
-            />
+            <FileCard selected={selected} games={games} setGames={setGames} toggleEditModal={toggleEditModal} />
           </>
         ) : (
           <Center h="100%">

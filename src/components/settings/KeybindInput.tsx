@@ -1,4 +1,3 @@
-import { keyMapAtom } from "@/state/keybindings";
 import { ActionIcon, Box, Group, Kbd } from "@mantine/core";
 import { useColorScheme } from "@mantine/hooks";
 import { IconCheck, IconX } from "@tabler/icons-react";
@@ -6,6 +5,7 @@ import cx from "clsx";
 import { useAtom } from "jotai";
 import { useState } from "react";
 import { useRecordHotkeys } from "react-hotkeys-hook";
+import { keyMapAtom } from "@/state/keybindings";
 import * as classes from "./KeybindInput.css";
 
 function KeybindInput({
@@ -25,11 +25,7 @@ function KeybindInput({
   return (
     <>
       {!isRecording ? (
-        <Box
-          onMouseEnter={() => setHovering(true)}
-          onMouseLeave={() => setHovering(false)}
-          onClick={() => start()}
-        >
+        <Box onMouseEnter={() => setHovering(true)} onMouseLeave={() => setHovering(false)} onClick={() => start()}>
           <KbdDisplay keys={keybind.keys} hovering={hovering} />
         </Box>
       ) : (
@@ -39,13 +35,7 @@ function KeybindInput({
   );
 }
 
-function KbdDisplay({
-  keys,
-  hovering,
-}: {
-  keys: string;
-  hovering: boolean;
-}) {
+function KbdDisplay({ keys, hovering }: { keys: string; hovering: boolean }) {
   const splitted = keys.split("+");
   return (
     <Group>
@@ -59,25 +49,13 @@ function KbdDisplay({
   );
 }
 
-function ShortcutInput({
-  keys,
-  action,
-  stop,
-}: {
-  keys: Set<string>;
-  action: string;
-  stop: () => void;
-}) {
+function ShortcutInput({ keys, action, stop }: { keys: Set<string>; action: string; stop: () => void }) {
   const [, setKeymap] = useAtom(keyMapAtom);
   const stringed = Array.from(keys).join("+");
 
   return (
     <Group>
-      {stringed === "" ? (
-        <Kbd>Press any key</Kbd>
-      ) : (
-        <KbdDisplay keys={stringed} hovering={false} />
-      )}
+      {stringed === "" ? <Kbd>Press any key</Kbd> : <KbdDisplay keys={stringed} hovering={false} />}
       <ActionIcon
         variant="outline"
         color="gray"

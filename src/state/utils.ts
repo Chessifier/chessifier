@@ -1,17 +1,11 @@
-import {
-  BaseDirectory,
-  readTextFile,
-  remove,
-  writeTextFile,
-} from "@tauri-apps/plugin-fs";
+import { BaseDirectory, readTextFile, remove, writeTextFile } from "@tauri-apps/plugin-fs";
+import { warn } from "@tauri-apps/plugin-log";
 import type {
   AsyncStorage,
   AsyncStringStorage,
   SyncStorage,
   SyncStringStorage,
 } from "jotai/vanilla/utils/atomWithStorage";
-
-import { warn } from "@tauri-apps/plugin-log";
 import type { z } from "zod";
 
 const options = { baseDir: BaseDirectory.AppData };
@@ -31,10 +25,7 @@ export const fileStorage: AsyncStringStorage = {
   },
 };
 
-export function createZodStorage<Value>(
-  schema: z.ZodType<Value>,
-  storage: SyncStringStorage,
-): SyncStorage<Value> {
+export function createZodStorage<Value>(schema: z.ZodType<Value>, storage: SyncStringStorage): SyncStorage<Value> {
   return {
     getItem(key, initialValue) {
       const storedValue = storage.getItem(key);

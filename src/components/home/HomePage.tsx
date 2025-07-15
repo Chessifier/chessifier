@@ -4,13 +4,7 @@ import Databases from "./Databases";
 
 function HomePage() {
   return (
-    <SimpleGrid
-      cols={2}
-      spacing="md"
-      p="md"
-      h="100%"
-      style={{ overflow: "hidden" }}
-    >
+    <SimpleGrid cols={2} spacing="md" p="md" h="100%" style={{ overflow: "hidden" }}>
       <Card>
         <Stack h="100%">
           <Title>Accounts</Title>

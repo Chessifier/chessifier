@@ -1,9 +1,3 @@
-import type { Score } from "@/bindings";
-import { Chessground } from "@/chessground/Chessground";
-import MoveCell from "@/components/common/MoveCell";
-import { TreeStateContext } from "@/components/common/TreeStateContext";
-import { previewBoardOnHoverAtom, scoreTypeFamily } from "@/state/atoms";
-import { positionFromFen } from "@/utils/chessops";
 import { ActionIcon, Box, Flex, Portal, Table } from "@mantine/core";
 import { useForceUpdate } from "@mantine/hooks";
 import { IconChevronDown } from "@tabler/icons-react";
@@ -12,15 +6,14 @@ import { chessgroundMove } from "chessops/compat";
 import { makeFen } from "chessops/fen";
 import { parseSan } from "chessops/san";
 import { useAtom, useAtomValue } from "jotai";
-import {
-  useContext,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
-import React from "react";
+import React, { useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
+import type { Score } from "@/bindings";
+import { Chessground } from "@/chessground/Chessground";
+import MoveCell from "@/components/common/MoveCell";
+import { TreeStateContext } from "@/components/common/TreeStateContext";
+import { previewBoardOnHoverAtom, scoreTypeFamily } from "@/state/atoms";
+import { positionFromFen } from "@/utils/chessops";
 import ScoreBubble from "./ScoreBubble";
 
 function AnalysisRow({
@@ -76,12 +69,7 @@ function AnalysisRow({
     <>
       <Table.Tr style={{ verticalAlign: "top" }}>
         <Table.Td width={70}>
-          <ScoreBubble
-            size="md"
-            score={score}
-            evalDisplay={evalDisplay}
-            setEvalDisplay={setEvalDisplay}
-          />
+          <ScoreBubble size="md" score={score} evalDisplay={evalDisplay} setEvalDisplay={setEvalDisplay} />
         </Table.Td>
         <Table.Td>
           <Flex
@@ -164,12 +152,8 @@ function BoardPopover({
 
   return (
     <>
-      <Box
-        onMouseEnter={() => setHovering(true)}
-        onMouseLeave={() => setHovering(false)}
-      >
-        {(index === 0 || is_white) &&
-          `${move_number.toString()}${is_white ? "." : "..."}`}
+      <Box onMouseEnter={() => setHovering(true)} onMouseLeave={() => setHovering(false)}>
+        {(index === 0 || is_white) && `${move_number.toString()}${is_white ? "." : "..."}`}
         <MoveCell
           move={san}
           isCurrentVariation={false}

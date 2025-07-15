@@ -144,8 +144,7 @@ export const it_IT = {
     "Board.Practice.Build": "Costruisci",
     "Board.Practice.NoPositionForTrain1":
       "Nessuna posizione disponibile per l'allenamento. Inizia aggiungendo posizioni a questo file PNG.",
-    "Board.Practice.NoPositionForTrain2":
-      "È necessario passare alla modalità di analisi per aggiungere posizioni.",
+    "Board.Practice.NoPositionForTrain2": "È necessario passare alla modalità di analisi per aggiungere posizioni.",
     "Board.Practice.SeeAnser": "Vedi soluzione",
     "Board.Practice.Practiced": "Già praticato",
     "Board.Practice.Due": "Da fare",
@@ -167,15 +166,12 @@ export const it_IT = {
     "Board.Analysis.GeneratingReport": "Generazione report",
     "Board.Analysis.NotAnalysed": "Non analizzata",
     "Board.Analysis.EngineRequired": "Motore richiesto",
-    "Board.Analysis.RefDBRequired":
-      "Nessun database selezionato. Inizia selezionandone uno nella pagina del database",
+    "Board.Analysis.RefDBRequired": "Nessun database selezionato. Inizia selezionandone uno nella pagina del database",
     "Board.Analysis.Time": "Tempo (ms)",
     "Board.Analysis.Reversed": "Analisi inversa",
-    "Board.Analysis.Reversed.Desc":
-      "Analizza la partita dall'ultima posizione.",
+    "Board.Analysis.Reversed.Desc": "Analizza la partita dall'ultima posizione.",
     "Board.Analysis.AnnotateNovelties": "Annotta novità",
-    "Board.Analysis.AnnotateNovelties.Desc":
-      "Aggiungi un commento nella prima posizione che non è nel database.",
+    "Board.Analysis.AnnotateNovelties.Desc": "Aggiungi un commento nella prima posizione che non è nel database.",
     "Board.Analysis.Analyze": "Analizza",
     "Board.Analysis.Advantage": "Vantaggio",
     "Board.Analysis.Accuracy": "Precisione",
@@ -186,10 +182,8 @@ export const it_IT = {
     "Board.Database.Stats": "Statistiche",
     "Board.Database.Games": "Partite",
     "Board.Database.Options": "Impostazioni",
-    "Board.Database.NoReference1":
-      "Nessun database di riferimento selezionato.",
-    "Board.Database.NoReference2":
-      "Per favore, seleziona un database di riferimento.",
+    "Board.Database.NoReference1": "Nessun database di riferimento selezionato.",
+    "Board.Database.NoReference2": "Per favore, seleziona un database di riferimento.",
     "Board.Database.SelectReference": "Seleziona riferimento",
     "Board.Database.NoReference3": "prima contrassegnalo come riferimento",
     "Board.Database.TimeControl": "Cadenza",
@@ -207,19 +201,16 @@ export const it_IT = {
     "Engines.Settings.Reset": "Ripristina impostazioni predefinite",
     "Engines.Add.Title": "Aggiungi Motore",
     "Engines.Add.Cloud": "Cloud",
-    "Engines.Add.ErrorFetch":
-      "Impossibile recuperare le informazioni del motore dal server.",
+    "Engines.Add.ErrorFetch": "Impossibile recuperare le informazioni del motore dal server.",
     "Engines.Add.BinaryFile": "File binario",
     "Engines.Add.BinaryFile.Desc": "Clicca per selezionare il file binario",
     "Engines.Add.Name": "Nome",
     "Engines.Add.Name.Autodetect": "Rilevamento automatico",
     "Engines.Add.Elo.Desc": "Elo del motore",
     "Engines.Add.ImageFile": "File immagine",
-    "Engines.Add.ImageFile.Desc":
-      "Clicca per selezionare il file immagine (dimensione consigliata: 60x60)",
+    "Engines.Add.ImageFile.Desc": "Clicca per selezionare il file immagine (dimensione consigliata: 60x60)",
     "Engines.Remove.Title": "Rimuovi Motore",
-    "Engines.Remove.Message":
-      "Sei sicuro di voler rimuovere questo motore da Chessifier?",
+    "Engines.Remove.Message": "Sei sicuro di voler rimuovere questo motore da Chessifier?",
 
     "Databases.Title": "Database",
     "Databases.Card.Games": "Partite",
@@ -227,8 +218,7 @@ export const it_IT = {
     "Databases.Card.Storage": "Archivio",
     "Databases.Add.Title": "Aggiungi Database",
     "Databases.Add.Web": "Web",
-    "Databases.Add.ErrorFetch":
-      "Impossibile recuperare le informazioni del database dal server.",
+    "Databases.Add.ErrorFetch": "Impossibile recuperare le informazioni del database dal server.",
     "Databases.Add.ClickToSelectPGN": "Clicca per selezionare il file PGN",
     "Databases.Add.Convert": "Converti",
     "Databases.Settings.ReferenceDatabase": "Database di Riferimento",
@@ -251,8 +241,7 @@ export const it_IT = {
     "Databases.Settings.AddGames": "Aggiungi Partite",
     "Databases.Settings.ExportPGN": "Esporta in PGN",
     "Databases.Delete.Title": "Elimina database",
-    "Databases.Delete.Message":
-      "Sei sicuro di voler eliminare questo database?",
+    "Databases.Delete.Message": "Sei sicuro di voler eliminare questo database?",
 
     "Files.Title": "File",
     "Files.FileType": "Tipo di file",
@@ -278,8 +267,7 @@ export const it_IT = {
     "Settings.Keybindings": "Tasti di Scelta Rapida",
     "Settings.Directories": "Cartelle",
 
-    "Settings.Board.Desc":
-      "Personalizza la scacchiera di analisi e i controlli di gioco",
+    "Settings.Board.Desc": "Personalizza la scacchiera di analisi e i controlli di gioco",
     "Settings.PieceDest": "Destinazioni dei Pezzi",
     "Settings.PieceDest.Desc": "Mostra le mosse possibili per ogni pezzo",
     "Settings.Arrows": "Frecce",
@@ -289,13 +277,11 @@ export const it_IT = {
     "Settings.ConsecutiveArrows": "Frecce Consecutive",
     "Settings.ConsecutiveArrows.Desc":
       "Mostra più frecce per la miglior linea, se comporta muovere lo stesso pezzo più volte",
-    "Settings.EraseDrawablesOnClick":
-      "Cancella annotazioni grafiche con un Click",
+    "Settings.EraseDrawablesOnClick": "Cancella annotazioni grafiche con un Click",
     "Settings.EraseDrawablesOnClick.Desc":
       "Pulisci la scacchiera da frecce e cerchi disegnati cliccando con il tasto sinistro del mouse",
     "Settings.AutoPromition": "Promozione Automatica",
-    "Settings.AutoPromition.Desc":
-      "Promuove automaticamente a donna quando un pedone raggiunge l'ultima traversa",
+    "Settings.AutoPromition.Desc": "Promuove automaticamente a donna quando un pedone raggiunge l'ultima traversa",
     "Settings.Coordinates": "Coordinate",
     "Settings.Coordinates.Desc": "Mostra le coordinate sulla scacchiera",
     "Settings.AutoSave": "Salvataggio Automatico",
@@ -304,34 +290,27 @@ export const it_IT = {
     "Settings.PreviewBoard.Desc":
       "Mostra un'anteprima della scacchiera quando si passa con il mouse su una mossa nell'analisi del motore",
     "Settings.ScrollThroughMoves": "Scorri tra le Mosse",
-    "Settings.ScrollThroughMoves.Desc":
-      "Abilita o disabilita lo scorrimento tra le mosse sulla scacchiera",
+    "Settings.ScrollThroughMoves.Desc": "Abilita o disabilita lo scorrimento tra le mosse sulla scacchiera",
     "Settings.Inputs.Desc": "Personalizza le impostazioni di input",
     "Settings.Inputs.TextInput": "Inserimento Mosse Testuali",
     "Settings.Inputs.TextInput.Desc": "Inserisci le mosse in formato testuale",
     "Settings.Inputs.SpellCheck": "Correttore Ortografico",
-    "Settings.Inputs.SpellCheck.Desc":
-      "Abilita o disabilita il correttore ortografico sugli input testuali",
-    "Settings.OpeningReport.Desc":
-      "Personalizza le impostazioni del rapporto di apertura",
+    "Settings.Inputs.SpellCheck.Desc": "Abilita o disabilita il correttore ortografico sugli input testuali",
+    "Settings.OpeningReport.Desc": "Personalizza le impostazioni del rapporto di apertura",
     "Settings.OpeningReport.PercentCoverage": "Copertura Percentuale",
-    "Settings.OpeningReport.PercentCoverage.Desc":
-      "Percentuale di mosse coperte in ogni posizione",
+    "Settings.OpeningReport.PercentCoverage.Desc": "Percentuale di mosse coperte in ogni posizione",
     "Settings.OpeningReport.MinGames": "Partite Minime",
-    "Settings.OpeningReport.MinGames.Desc":
-      "Numero minimo di partite in ogni posizione affinché sia considerata",
+    "Settings.OpeningReport.MinGames.Desc": "Numero minimo di partite in ogni posizione affinché sia considerata",
     "Settings.Anarchy.Desc": "Opzioni divertenti",
     "Settings.Anarchy.ForcedChessifier": "Chessifier Forzato",
-    "Settings.Anarchy.ForcedChessifier.Desc":
-      "Ti obbliga a giocare Chessifier, se è una mossa legale.",
+    "Settings.Anarchy.ForcedChessifier.Desc": "Ti obbliga a giocare Chessifier, se è una mossa legale.",
     "Settings.Appearance.Desc": "Personalizza l'aspetto dell'app",
     "Settings.Appearance.Theme": "Tema",
     "Settings.Appearance.Theme.Desc": "Schema di colori generale",
     "Settings.Appearance.Theme.Light": "Chiaro",
     "Settings.Appearance.Theme.Dark": "Scuro",
     "Settings.Appearance.TitleBar": "Barra del Titolo",
-    "Settings.Appearance.TitleBar.Desc":
-      "Scegli tra la barra del titolo nativa o personalizzata",
+    "Settings.Appearance.TitleBar.Desc": "Scegli tra la barra del titolo nativa o personalizzata",
     "Settings.Appearance.Language": "Lingua",
     "Settings.Appearance.Language.Desc": "Lingua utilizzata nell'app",
     "Settings.Appearance.TitleBar.Native": "Nativa",
@@ -341,8 +320,7 @@ export const it_IT = {
     "Settings.Appearance.PieceSet": "Set di Pezzi",
     "Settings.Appearance.PieceSet.Desc": "Pezzi utilizzati sulle scacchiere",
     "Settings.Appearance.BoardImage": "Immagine della Scacchiera",
-    "Settings.Appearance.BoardImage.Desc":
-      "Immagine utilizzata come sfondo della scacchiera",
+    "Settings.Appearance.BoardImage.Desc": "Immagine utilizzata come sfondo della scacchiera",
     "Settings.Appearance.AccentColor": "Colore Evidenziazione",
     "Settings.Appearance.AccentColor.Desc": "Colore principale dell'app",
     "Settings.Sound.Desc": "Personalizza le impostazioni del suono",
@@ -350,11 +328,9 @@ export const it_IT = {
     "Settings.Sound.Volume.Desc": "Volume generale",
     "Settings.Sound.Collection": "Collezione di Suoni",
     "Settings.Sound.Collection.Desc": "Collezione di suoni utilizzati",
-    "Settings.Directories.Desc":
-      "Personalizza le directory utilizzate dall'app",
+    "Settings.Directories.Desc": "Personalizza le directory utilizzate dall'app",
     "Settings.Directories.Files": "Directory dei File",
-    "Settings.Directories.Files.Desc":
-      "Qui vengono archiviati i tuoi giochi nella pagina File",
+    "Settings.Directories.Files.Desc": "Qui vengono archiviati i tuoi giochi nella pagina File",
 
     "PgnInput.Comments": "Commenti",
     "PgnInput.Glyphs": "Simboli",

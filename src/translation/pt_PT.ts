@@ -144,8 +144,7 @@ export const pt_PT = {
     "Board.Practice.Build": "Construir",
     "Board.Practice.NoPositionForTrain1":
       "Não há posições para treinar. Começa por adicionar jogadas a este ficheiro PGN.",
-    "Board.Practice.NoPositionForTrain2":
-      "É preciso alterar para o modo de análise para se adicionar jogadas.",
+    "Board.Practice.NoPositionForTrain2": "É preciso alterar para o modo de análise para se adicionar jogadas.",
     "Board.Practice.SeeAnser": "Ver resposta",
     "Board.Practice.Practiced": "Praticado",
     "Board.Practice.Due": "Por praticar",
@@ -173,8 +172,7 @@ export const pt_PT = {
     "Board.Analysis.Reversed": "Análise invertida",
     "Board.Analysis.Reversed.Desc": "Analisar jogo a partir da última posição.",
     "Board.Analysis.AnnotateNovelties": "Anotar novidades",
-    "Board.Analysis.AnnotateNovelties.Desc":
-      "Adicionar comentário na primeira posição que não está na base de dados.",
+    "Board.Analysis.AnnotateNovelties.Desc": "Adicionar comentário na primeira posição que não está na base de dados.",
     "Board.Analysis.Analyze": "Analisar",
     "Board.Analysis.Advantage": "Vantagem",
     "Board.Analysis.Accuracy": "Precisão",
@@ -206,17 +204,14 @@ export const pt_PT = {
     "Engines.Add.Cloud": "Cloud",
     "Engines.Add.ErrorFetch": "Falha a buscar os engines do servidor.",
     "Engines.Add.BinaryFile": "Ficheiro executável",
-    "Engines.Add.BinaryFile.Desc":
-      "Clica para selecionar o ficheiro executável",
+    "Engines.Add.BinaryFile.Desc": "Clica para selecionar o ficheiro executável",
     "Engines.Add.Name": "Nome",
     "Engines.Add.Name.Autodetect": "Autodetetar",
     "Engines.Add.Elo.Desc": "Elo de engine",
     "Engines.Add.ImageFile": "Ficheiro de imagem",
-    "Engines.Add.ImageFile.Desc":
-      "Clica para selecionar o ficheiro de imagem (recomendado: 60x60)",
+    "Engines.Add.ImageFile.Desc": "Clica para selecionar o ficheiro de imagem (recomendado: 60x60)",
     "Engines.Remove.Title": "Remover Engine",
-    "Engines.Remove.Message":
-      "Tens a certeza que queres remover este engine do Chessifier?",
+    "Engines.Remove.Message": "Tens a certeza que queres remover este engine do Chessifier?",
 
     "Databases.Title": "Bases de dados",
     "Databases.Card.Games": "Jogos",
@@ -229,8 +224,7 @@ export const pt_PT = {
     "Databases.Add.Convert": "Converter",
     "Databases.Settings.ReferenceDatabase": "Base de dados de referência",
     "Databases.Settings.Indexed": "Indexado",
-    "Databases.Settings.Indexed.Desc":
-      "Indexes são usados para acelerar a pesquisa, mas ocupam armazenamento extra.",
+    "Databases.Settings.Indexed.Desc": "Indexes são usados para acelerar a pesquisa, mas ocupam armazenamento extra.",
     "Databases.Settings.Events": "Eventos",
     "Databases.Settings.Explore": "Explorar",
     "Databases.Settings.AdvancedTools": "Ferramentas avançadas",
@@ -247,8 +241,7 @@ export const pt_PT = {
     "Databases.Settings.AddGames": "Adicioanr Games",
     "Databases.Settings.ExportPGN": "Exportar para PGN",
     "Databases.Delete.Title": "Apagar base de dados",
-    "Databases.Delete.Message":
-      "Tens a certeza que queres apagar esta base de dados?",
+    "Databases.Delete.Message": "Tens a certeza que queres apagar esta base de dados?",
 
     "Files.Title": "Ficheiros",
     "Files.FileType": "Tipo de ficheiro",
@@ -274,8 +267,7 @@ export const pt_PT = {
     "Settings.Keybindings": "Atalhos de teclado",
     "Settings.Directories": "Diretorias",
 
-    "Settings.Board.Desc":
-      "Customizar o tabuleiro de análise e controlos de jogo",
+    "Settings.Board.Desc": "Customizar o tabuleiro de análise e controlos de jogo",
     "Settings.PieceDest": "Destino dos peças",
     "Settings.PieceDest.Desc": "Mostra destinos possíveis para cada peça",
     "Settings.Arrows": "Setas",
@@ -295,37 +287,29 @@ export const pt_PT = {
     "Settings.AutoSave": "Gravar automaticamente",
     "Settings.AutoSave.Desc": "Grava automaticamente após cada jogada",
     "Settings.PreviewBoard": "Tabuleiro de visualização",
-    "Settings.PreviewBoard.Desc":
-      "Mostra tabuleiro ao passar rato por cima de uma jogada na análise",
+    "Settings.PreviewBoard.Desc": "Mostra tabuleiro ao passar rato por cima de uma jogada na análise",
     "Settings.ScrollThroughMoves": "Scroll pelas jogadas",
-    "Settings.ScrollThroughMoves.Desc":
-      "Ativa ou desativa scroll pelas jogadas no tabuleiro",
+    "Settings.ScrollThroughMoves.Desc": "Ativa ou desativa scroll pelas jogadas no tabuleiro",
     "Settings.Inputs.Desc": "Customizar inputs",
     "Settings.Inputs.TextInput": "Input de texto",
     "Settings.Inputs.TextInput.Desc": "Insere jogadas a partir de texto",
     "Settings.Inputs.SpellCheck": "Verificar ortografia",
-    "Settings.Inputs.SpellCheck.Desc":
-      "Ativa ou desativa verificação de ortografia nos inputs de texto",
-    "Settings.OpeningReport.Desc":
-      "Customizar configurações do relatório de abertura",
+    "Settings.Inputs.SpellCheck.Desc": "Ativa ou desativa verificação de ortografia nos inputs de texto",
+    "Settings.OpeningReport.Desc": "Customizar configurações do relatório de abertura",
     "Settings.OpeningReport.PercentCoverage": "Percentagem de cobertura",
-    "Settings.OpeningReport.PercentCoverage.Desc":
-      "Percentagem de jogadas cobertas em cada posição",
+    "Settings.OpeningReport.PercentCoverage.Desc": "Percentagem de jogadas cobertas em cada posição",
     "Settings.OpeningReport.MinGames": "Jogos mínimos",
-    "Settings.OpeningReport.MinGames.Desc":
-      "Mínimo de jogos em cada posição para ser considerado",
+    "Settings.OpeningReport.MinGames.Desc": "Mínimo de jogos em cada posição para ser considerado",
     "Settings.Anarchy.Desc": "Opções divertidas",
     "Settings.Anarchy.ForcedChessifier": "Chessifier forçado",
-    "Settings.Anarchy.ForcedChessifier.Desc":
-      "Obriga jogar Chessifier, caso seja uma jogada legal.",
+    "Settings.Anarchy.ForcedChessifier.Desc": "Obriga jogar Chessifier, caso seja uma jogada legal.",
     "Settings.Appearance.Desc": "Customizar aspeto da aplicação",
     "Settings.Appearance.Theme": "Tema",
     "Settings.Appearance.Theme.Desc": "Esquema de cores geral",
     "Settings.Appearance.Theme.Light": "Claro",
     "Settings.Appearance.Theme.Dark": "Escuro",
     "Settings.Appearance.TitleBar": "Barra de título",
-    "Settings.Appearance.TitleBar.Desc":
-      "Choose between native or custom title bar",
+    "Settings.Appearance.TitleBar.Desc": "Choose between native or custom title bar",
     "Settings.Appearance.Language": "Linguagem",
     "Settings.Appearance.Language.Desc": "Linguagem usada na aplicação",
     "Settings.Appearance.TitleBar.Native": "Nativo",
@@ -335,8 +319,7 @@ export const pt_PT = {
     "Settings.Appearance.PieceSet": "Conjunto de peças",
     "Settings.Appearance.PieceSet.Desc": "Peças usadas no tabuleiro",
     "Settings.Appearance.BoardImage": "Imagem do tabuleiro",
-    "Settings.Appearance.BoardImage.Desc":
-      "Imagem usada como fundo do tabuleiro",
+    "Settings.Appearance.BoardImage.Desc": "Imagem usada como fundo do tabuleiro",
     "Settings.Appearance.AccentColor": "Cor principal",
     "Settings.Appearance.AccentColor.Desc": "Cor principal da aplicação",
     "Settings.Sound.Desc": "Customizar as configurações de som",
@@ -346,8 +329,7 @@ export const pt_PT = {
     "Settings.Sound.Collection.Desc": "Coleção de sons usados",
     "Settings.Directories.Desc": "Customizar diretorias usadas pela aplicação",
     "Settings.Directories.Files": "Diretoria para ficheiros",
-    "Settings.Directories.Files.Desc":
-      "Aqui é onde os ficheiros de jogos estão armazenados na página de ficheiros",
+    "Settings.Directories.Files.Desc": "Aqui é onde os ficheiros de jogos estão armazenados na página de ficheiros",
 
     "PgnInput.Comments": "Comentários",
     "PgnInput.Glyphs": "Símbolos",

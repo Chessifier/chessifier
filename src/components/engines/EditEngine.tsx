@@ -1,15 +1,11 @@
-import { enginesAtom } from "@/state/atoms";
-import type { LocalEngine } from "@/utils/engines";
 import { useForm } from "@mantine/form";
 import { useAtom } from "jotai";
 import { useTranslation } from "react-i18next";
+import { enginesAtom } from "@/state/atoms";
+import type { LocalEngine } from "@/utils/engines";
 import EngineForm from "./EngineForm";
 
-export default function EditEngine({
-  initialEngine,
-}: {
-  initialEngine: LocalEngine;
-}) {
+export default function EditEngine({ initialEngine }: { initialEngine: LocalEngine }) {
   const { t } = useTranslation();
 
   const [engines, setEngines] = useAtom(enginesAtom);
@@ -19,8 +15,7 @@ export default function EditEngine({
     validate: {
       name: (value) => {
         if (!value) return "Name is required";
-        if (engines.find((e) => e.name === value && e !== initialEngine))
-          return "Name already used";
+        if (engines.find((e) => e.name === value && e !== initialEngine)) return "Name already used";
       },
       path: (value) => {
         if (!value) return "Path is required";
@@ -33,9 +28,7 @@ export default function EditEngine({
       submitLabel={t("Common.Save")}
       form={form}
       onSubmit={(values) => {
-        setEngines(async (prev) =>
-          (await prev).map((e) => (e === initialEngine ? values : e)),
-        );
+        setEngines(async (prev) => (await prev).map((e) => (e === initialEngine ? values : e)));
       }}
     />
   );

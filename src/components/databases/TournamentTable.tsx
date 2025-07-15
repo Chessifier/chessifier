@@ -1,18 +1,13 @@
-import {
-  type DatabaseInfo,
-  type Event,
-  type TournamentSort,
-  commands,
-} from "@/bindings";
-import { unwrap } from "@/utils/unwrap";
 import { Center, Flex, Text, TextInput } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
 import { DataTable, type DataTableSortStatus } from "mantine-datatable";
 import { useEffect, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
+import { commands, type DatabaseInfo, type Event, type TournamentSort } from "@/bindings";
+import { unwrap } from "@/utils/unwrap";
 import GridLayout from "./GridLayout";
-import TournamentCard from "./TournamentCard";
 import * as classes from "./styles.css";
+import TournamentCard from "./TournamentCard";
 
 function TournamentTable({ database }: { database: DatabaseInfo }) {
   const file = database.file;
@@ -136,11 +131,7 @@ function TournamentTable({ database }: { database: DatabaseInfo }) {
       }
       preview={
         selected !== null && tournaments[selected] ? (
-          <TournamentCard
-            tournament={tournaments[selected]}
-            file={database.file}
-            key={tournaments[selected].id}
-          />
+          <TournamentCard tournament={tournaments[selected]} file={database.file} key={tournaments[selected].id} />
         ) : (
           <Center h="100%">
             <Text>No tournament selected</Text>

@@ -1,21 +1,4 @@
-import { events, commands } from "@/bindings";
-import type { DatabaseInfo } from "@/bindings";
-import { downloadChessCom } from "@/utils/chess.com/api";
-import { getDatabases, query_games } from "@/utils/db";
-import { capitalize } from "@/utils/format";
-import { downloadLichess } from "@/utils/lichess/api";
-import { unwrap } from "@/utils/unwrap";
-import {
-  Accordion,
-  ActionIcon,
-  Card,
-  Group,
-  Loader,
-  Progress,
-  Stack,
-  Text,
-  Tooltip,
-} from "@mantine/core";
+import { Accordion, ActionIcon, Card, Group, Loader, Progress, Stack, Text, Tooltip } from "@mantine/core";
 import {
   IconArrowDownRight,
   IconArrowRight,
@@ -28,6 +11,13 @@ import {
 import { appDataDir, resolve } from "@tauri-apps/api/path";
 import { info } from "@tauri-apps/plugin-log";
 import { useEffect, useState } from "react";
+import type { DatabaseInfo } from "@/bindings";
+import { commands, events } from "@/bindings";
+import { downloadChessCom } from "@/utils/chess.com/api";
+import { getDatabases, query_games } from "@/utils/db";
+import { capitalize } from "@/utils/format";
+import { downloadLichess } from "@/utils/lichess/api";
+import { unwrap } from "@/utils/unwrap";
 import LichessLogo from "./LichessLogo";
 import * as classes from "./styles.css";
 
@@ -108,15 +98,7 @@ export function AccountCard({
         .pop()!
         .replace(".pgn", ".db3")}`,
     );
-    unwrap(
-      await commands.convertPgn(
-        filepath,
-        dbPath,
-        timestamp ? timestamp / 1000 : null,
-        filename,
-        null,
-      ),
-    );
+    unwrap(await commands.convertPgn(filepath, dbPath, timestamp ? timestamp / 1000 : null, filename, null));
     events.downloadProgress.emit({
       id: `${type}_${title}`,
       progress: 100,
@@ -141,15 +123,10 @@ export function AccountCard({
     };
   }, [setDatabases]);
 
-  const downloadedGames =
-    database?.type === "success" ? database.game_count : 0;
+  const downloadedGames = database?.type === "success" ? database.game_count : 0;
   const percentage = ((downloadedGames / total) * 100).toFixed(2);
 
-  async function getLastGameDate({
-    database,
-  }: {
-    database: DatabaseInfo;
-  }) {
+  async function getLastGameDate({ database }: { database: DatabaseInfo }) {
     const games = await query_games(database.file, {
       options: {
         page: 1,
@@ -170,20 +147,10 @@ export function AccountCard({
 
   return (
     <Accordion.Item value={type + title}>
-      <Group
-        justify="space-between"
-        wrap="nowrap"
-        pos="relative"
-        pl="sm"
-        className={classes.accordion}
-      >
+      <Group justify="space-between" wrap="nowrap" pos="relative" pl="sm" className={classes.accordion}>
         <Stack>
           <Group wrap="nowrap">
-            {type === "lichess" ? (
-              <LichessLogo />
-            ) : (
-              <img width={30} height={30} src="/chesscom.png" alt="chess.com" />
-            )}
+            {type === "lichess" ? <LichessLogo /> : <img width={30} height={30} src="/chesscom.png" alt="chess.com" />}
             <div>
               <Group wrap="nowrap">
                 <Text size="md" fw="bold">
@@ -201,25 +168,13 @@ export function AccountCard({
                     disabled={loading}
                     onClick={async () => {
                       setLoading(true);
-                      const lastGameDate = database
-                        ? await getLastGameDate({ database })
-                        : null;
+                      const lastGameDate = database ? await getLastGameDate({ database }) : null;
                       if (type === "lichess") {
-                        await downloadLichess(
-                          title,
-                          lastGameDate,
-                          total - downloadedGames,
-                          setProgress,
-                          token,
-                        );
+                        await downloadLichess(title, lastGameDate, total - downloadedGames, setProgress, token);
                       } else {
                         await downloadChessCom(title, lastGameDate);
                       }
-                      const p = await resolve(
-                        await appDataDir(),
-                        "db",
-                        `${title}_${type}.pgn`,
-                      );
+                      const p = await resolve(await appDataDir(), "db", `${title}_${type}.pgn`);
                       try {
                         await convert(p, lastGameDate);
                       } catch (e) {
@@ -228,11 +183,7 @@ export function AccountCard({
                       setLoading(false);
                     }}
                   >
-                    {loading ? (
-                      <Loader size="1rem" />
-                    ) : (
-                      <IconDownload size="1rem" />
-                    )}
+                    {loading ? <Loader size="1rem" /> : <IconDownload size="1rem" />}
                   </ActionIcon>
                 </Tooltip>
                 <Tooltip label="Remove account">
@@ -266,17 +217,7 @@ export function AccountCard({
           </Stack>
         </Accordion.Control>
 
-        {loading && (
-          <Progress
-            pos="absolute"
-            bottom={0}
-            left={0}
-            w="100%"
-            value={progress || 100}
-            animated
-            size="xs"
-          />
-        )}
+        {loading && <Progress pos="absolute" bottom={0} left={0} w="100%" value={progress || 100} animated size="xs" />}
       </Group>
 
       <Accordion.Panel p={0}>

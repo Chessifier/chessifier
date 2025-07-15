@@ -1,12 +1,3 @@
-import { commands } from "@/bindings";
-import { currentTabAtom } from "@/state/atoms";
-import { parsePGN } from "@/utils/chess";
-import { getChesscomGame } from "@/utils/chess.com/api";
-import { chessopsError } from "@/utils/chessops";
-import { createFile } from "@/utils/files";
-import { getLichessGame } from "@/utils/lichess/api";
-import { defaultTree, getGameName } from "@/utils/treeReducer";
-import { unwrap } from "@/utils/unwrap";
 import {
   Button,
   Checkbox,
@@ -17,8 +8,8 @@ import {
   SimpleGrid,
   Stack,
   Text,
-  TextInput,
   Textarea,
+  TextInput,
 } from "@mantine/core";
 import { useLoaderData } from "@tanstack/react-router";
 import { open } from "@tauri-apps/plugin-dialog";
@@ -26,6 +17,15 @@ import { makeFen, parseFen } from "chessops/fen";
 import { useAtom } from "jotai";
 import { useState } from "react";
 import { match } from "ts-pattern";
+import { commands } from "@/bindings";
+import { currentTabAtom } from "@/state/atoms";
+import { parsePGN } from "@/utils/chess";
+import { getChesscomGame } from "@/utils/chess.com/api";
+import { chessopsError } from "@/utils/chessops";
+import { createFile } from "@/utils/files";
+import { getLichessGame } from "@/utils/lichess/api";
+import { defaultTree, getGameName } from "@/utils/treeReducer";
+import { unwrap } from "@/utils/unwrap";
 import GenericCard from "../common/GenericCard";
 import type { FileMetadata, FileType } from "../files/file";
 
@@ -99,10 +99,7 @@ export default function ImportModal({
         }
         const tree = await parsePGN(input);
         setCurrentTab((prev) => {
-          sessionStorage.setItem(
-            prev.value,
-            JSON.stringify({ version: 0, state: tree }),
-          );
+          sessionStorage.setItem(prev.value, JSON.stringify({ version: 0, state: tree }));
           return {
             ...prev,
             name: getGameName(tree.headers),
@@ -132,10 +129,7 @@ export default function ImportModal({
 
       const tree = await parsePGN(pgn);
       setCurrentTab((prev) => {
-        sessionStorage.setItem(
-          prev.value,
-          JSON.stringify({ version: 0, state: tree }),
-        );
+        sessionStorage.setItem(prev.value, JSON.stringify({ version: 0, state: tree }));
         return {
           ...prev,
           name: getGameName(tree.headers),
@@ -154,10 +148,7 @@ export default function ImportModal({
       setCurrentTab((prev) => {
         const tree = defaultTree(parsedFen);
         tree.headers.fen = parsedFen;
-        sessionStorage.setItem(
-          prev.value,
-          JSON.stringify({ version: 0, state: tree }),
-        );
+        sessionStorage.setItem(prev.value, JSON.stringify({ version: 0, state: tree }));
         return {
           ...prev,
           name: "Analysis Board",
@@ -214,11 +205,7 @@ export default function ImportModal({
           />
         </div>
 
-        <Checkbox
-          label="Save to collection"
-          checked={save}
-          onChange={(e) => setSave(e.currentTarget.checked)}
-        />
+        <Checkbox label="Save to collection" checked={save} onChange={(e) => setSave(e.currentTarget.checked)} />
 
         {save && (
           <>
@@ -282,11 +269,7 @@ export default function ImportModal({
     .exhaustive();
 
   return (
-    <Modal
-      opened={openModal}
-      onClose={() => setOpenModal(false)}
-      title="Import game"
-    >
+    <Modal opened={openModal} onClose={() => setOpenModal(false)} title="Import game">
       <Group grow mb="sm">
         <GenericCard
           id={"PGN"}
@@ -312,14 +295,7 @@ export default function ImportModal({
 
       {Input}
 
-      <Button
-        fullWidth
-        mt="md"
-        radius="md"
-        loading={loading}
-        disabled={disabled}
-        onClick={handleSubmit}
-      >
+      <Button fullWidth mt="md" radius="md" loading={loading} disabled={disabled} onClick={handleSubmit}>
         {loading ? "Importing..." : "Import"}
       </Button>
     </Modal>

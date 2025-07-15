@@ -1,8 +1,6 @@
 import type React from "react";
 import { useEffect, useRef } from "react";
-import ReactContentEditable, {
-  type ContentEditableEvent,
-} from "react-contenteditable";
+import ReactContentEditable, { type ContentEditableEvent } from "react-contenteditable";
 
 interface ContentEditableProps {
   onChange?: (event: ContentEditableEvent) => void;

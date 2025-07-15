@@ -1,22 +1,10 @@
+import { BaseDirectory, basename, join } from "@tauri-apps/api/path";
+import { type DirEntry, exists, readDir, readTextFile, writeTextFile } from "@tauri-apps/plugin-fs";
+import { z } from "zod";
 import { commands } from "@/bindings";
 import { unwrap } from "@/utils/unwrap";
-import { BaseDirectory, basename, join } from "@tauri-apps/api/path";
-import {
-  type DirEntry,
-  exists,
-  readDir,
-  readTextFile,
-  writeTextFile,
-} from "@tauri-apps/plugin-fs";
-import { z } from "zod";
 
-const fileTypeSchema = z.enum([
-  "repertoire",
-  "game",
-  "tournament",
-  "puzzle",
-  "other",
-]);
+const fileTypeSchema = z.enum(["repertoire", "game", "tournament", "puzzle", "other"]);
 
 export type FileType = z.infer<typeof fileTypeSchema>;
 
@@ -77,10 +65,7 @@ export type Directory = {
   name: string;
 };
 
-export async function processEntriesRecursively(
-  parent: string,
-  entries: DirEntry[],
-) {
+export async function processEntriesRecursively(parent: string, entries: DirEntry[]) {
   const allEntries: (FileMetadata | Directory)[] = [];
   for (const entry of entries) {
     if (entry.isFile) {

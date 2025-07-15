@@ -1,25 +1,14 @@
-import { TreeStateContext } from "@/components/common/TreeStateContext";
-import { type TablebaseCategory, getTablebaseInfo } from "@/utils/lichess/api";
-import {
-  Accordion,
-  Badge,
-  Group,
-  Paper,
-  SimpleGrid,
-  Stack,
-  Text,
-} from "@mantine/core";
+import { Accordion, Badge, Group, Paper, SimpleGrid, Stack, Text } from "@mantine/core";
 import { parseUci } from "chessops";
 import { useContext } from "react";
 import useSWRImmutable from "swr/immutable";
-import { P, match } from "ts-pattern";
+import { match, P } from "ts-pattern";
 import { useStore } from "zustand";
+import { TreeStateContext } from "@/components/common/TreeStateContext";
+import { getTablebaseInfo, type TablebaseCategory } from "@/utils/lichess/api";
 import * as classes from "./TablebaseInfo.css";
 
-function TablebaseInfo({
-  fen,
-  turn,
-}: { fen: string; turn: "white" | "black" }) {
+function TablebaseInfo({ fen, turn }: { fen: string; turn: "white" | "black" }) {
   const store = useContext(TreeStateContext)!;
   const makeMove = useStore(store, (s) => s.makeMove);
   const { data, error, isLoading } = useSWRImmutable(
@@ -62,9 +51,7 @@ function TablebaseInfo({
                 </Group>
               )}
               {error && <Text ta="center">Error: {error.message}</Text>}
-              {data && (
-                <OutcomeBadge category={data.category} turn={turn} wins />
-              )}
+              {data && <OutcomeBadge category={data.category} turn={turn} wins />}
             </Group>
           </Accordion.Control>
           <Accordion.Panel>
@@ -141,14 +128,11 @@ function OutcomeBadge({
       <Badge autoContrast color={color}>
         {label}
       </Badge>
-      {["blessed-loss", "cursed-win", "maybe-win", "maybe-loss"].includes(
-        category,
-      ) &&
-        wins && (
-          <Text c="dimmed" fz="xs">
-            *due to the 50-move rule
-          </Text>
-        )}
+      {["blessed-loss", "cursed-win", "maybe-win", "maybe-loss"].includes(category) && wins && (
+        <Text c="dimmed" fz="xs">
+          *due to the 50-move rule
+        </Text>
+      )}
     </Group>
   );
 }

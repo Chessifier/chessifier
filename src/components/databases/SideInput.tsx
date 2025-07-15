@@ -1,6 +1,6 @@
-import type { Sides } from "@/utils/db";
 import { Box, Menu, UnstyledButton } from "@mantine/core";
 import { useEffect, useState } from "react";
+import type { Sides } from "@/utils/db";
 import * as classes from "./SideInput.css";
 
 const data = [
@@ -9,18 +9,9 @@ const data = [
   { label: "Any", color: "gray" },
 ];
 
-export function SideInput({
-  label,
-  sides,
-  setSides,
-}: {
-  label: string;
-  sides: Sides;
-  setSides: (val: Sides) => void;
-}) {
+export function SideInput({ label, sides, setSides }: { label: string; sides: Sides; setSides: (val: Sides) => void }) {
   const [selected, setSelected] = useState(
-    (sides === "WhiteBlack" && label === "Player") ||
-      (sides === "BlackWhite" && label === "Opponent")
+    (sides === "WhiteBlack" && label === "Player") || (sides === "BlackWhite" && label === "Opponent")
       ? data[0]
       : sides === "Any"
         ? data[2]
@@ -47,10 +38,7 @@ export function SideInput({
   ));
 
   useEffect(() => {
-    if (
-      (selected.label === "White" && label === "Player") ||
-      (selected.label === "Black" && label === "Opponent")
-    ) {
+    if ((selected.label === "White" && label === "Player") || (selected.label === "Black" && label === "Opponent")) {
       setSides("WhiteBlack");
     } else if (selected.label === "Any") {
       setSides("Any");
@@ -61,8 +49,7 @@ export function SideInput({
 
   useEffect(() => {
     const newSelected =
-      (sides === "WhiteBlack" && label === "Player") ||
-      (sides === "BlackWhite" && label === "Opponent")
+      (sides === "WhiteBlack" && label === "Player") || (sides === "BlackWhite" && label === "Opponent")
         ? data[0]
         : sides === "Any"
           ? data[2]

@@ -1,23 +1,3 @@
-import { type PuzzleDatabaseInfo, commands } from "@/bindings";
-import {
-  activeTabAtom,
-  currentPuzzleAtom,
-  hidePuzzleRatingAtom,
-  jumpToNextPuzzleAtom,
-  progressivePuzzlesAtom,
-  puzzleRatingRangeAtom,
-  selectedPuzzleDbAtom,
-  tabsAtom,
-} from "@/state/atoms";
-import { positionFromFen } from "@/utils/chessops";
-import {
-  type Completion,
-  type Puzzle,
-  getPuzzleDatabases,
-} from "@/utils/puzzles";
-import { createTab } from "@/utils/tabs";
-import { defaultTree } from "@/utils/treeReducer";
-import { unwrap } from "@/utils/unwrap";
 import {
   ActionIcon,
   Button,
@@ -44,6 +24,22 @@ import { useAtom, useSetAtom } from "jotai";
 import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useStore } from "zustand";
+import { commands, type PuzzleDatabaseInfo } from "@/bindings";
+import {
+  activeTabAtom,
+  currentPuzzleAtom,
+  hidePuzzleRatingAtom,
+  jumpToNextPuzzleAtom,
+  progressivePuzzlesAtom,
+  puzzleRatingRangeAtom,
+  selectedPuzzleDbAtom,
+  tabsAtom,
+} from "@/state/atoms";
+import { positionFromFen } from "@/utils/chessops";
+import { type Completion, getPuzzleDatabases, type Puzzle } from "@/utils/puzzles";
+import { createTab } from "@/utils/tabs";
+import { defaultTree } from "@/utils/treeReducer";
+import { unwrap } from "@/utils/unwrap";
 import ChallengeHistory from "../common/ChallengeHistory";
 import GameNotation from "../common/GameNotation";
 import MoveControls from "../common/MoveControls";
@@ -75,21 +71,12 @@ function Puzzles({ id }: { id: string }) {
 
   const [ratingRange, setRatingRange] = useAtom(puzzleRatingRangeAtom);
 
-  const [jumpToNextPuzzleImmediately, setJumpToNextPuzzleImmediately] =
-    useAtom(jumpToNextPuzzleAtom);
+  const [jumpToNextPuzzleImmediately, setJumpToNextPuzzleImmediately] = useAtom(jumpToNextPuzzleAtom);
 
-  const wonPuzzles = puzzles.filter(
-    (puzzle) => puzzle.completion === "correct",
-  );
-  const lostPuzzles = puzzles.filter(
-    (puzzle) => puzzle.completion === "incorrect",
-  );
-  const averageWonRating =
-    wonPuzzles.reduce((acc, puzzle) => acc + puzzle.rating, 0) /
-    wonPuzzles.length;
-  const averageLostRating =
-    lostPuzzles.reduce((acc, puzzle) => acc + puzzle.rating, 0) /
-    lostPuzzles.length;
+  const wonPuzzles = puzzles.filter((puzzle) => puzzle.completion === "correct");
+  const lostPuzzles = puzzles.filter((puzzle) => puzzle.completion === "incorrect");
+  const averageWonRating = wonPuzzles.reduce((acc, puzzle) => acc + puzzle.rating, 0) / wonPuzzles.length;
+  const averageLostRating = lostPuzzles.reduce((acc, puzzle) => acc + puzzle.rating, 0) / lostPuzzles.length;
 
   function setPuzzle(puzzle: { fen: string; moves: string[] }) {
     setFen(puzzle.fen);
@@ -136,9 +123,7 @@ function Puzzles({ id }: { id: string }) {
   const setActiveTab = useSetAtom(activeTabAtom);
 
   const turnToMove =
-    puzzles[currentPuzzle] !== undefined
-      ? positionFromFen(puzzles[currentPuzzle]?.fen)[0]?.turn
-      : null;
+    puzzles[currentPuzzle] !== undefined ? positionFromFen(puzzles[currentPuzzle]?.fen)[0]?.turn : null;
 
   return (
     <>
@@ -154,12 +139,7 @@ function Puzzles({ id }: { id: string }) {
       </Portal>
       <Portal target="#topRight" style={{ height: "100%" }}>
         <Paper h="100%" withBorder p="md">
-          <AddPuzzle
-            puzzleDbs={puzzleDbs}
-            opened={addOpened}
-            setOpened={setAddOpened}
-            setPuzzleDbs={setPuzzleDbs}
-          />
+          <AddPuzzle puzzleDbs={puzzleDbs} opened={addOpened} setOpened={setAddOpened} setPuzzleDbs={setPuzzleDbs} />
           <Group grow>
             <div>
               <Text size="sm" c="dimmed">
@@ -215,32 +195,16 @@ function Puzzles({ id }: { id: string }) {
           <Divider my="sm" />
           <Group>
             <Input.Wrapper label="Rating Range" flex={1}>
-              <RangeSlider
-                min={600}
-                max={2800}
-                value={ratingRange}
-                onChange={setRatingRange}
-                disabled={progressive}
-              />
+              <RangeSlider min={600} max={2800} value={ratingRange} onChange={setRatingRange} disabled={progressive} />
             </Input.Wrapper>
             <Input.Wrapper label="Progressive">
               <Center>
-                <Checkbox
-                  checked={progressive}
-                  onChange={(event) =>
-                    setProgressive(event.currentTarget.checked)
-                  }
-                />
+                <Checkbox checked={progressive} onChange={(event) => setProgressive(event.currentTarget.checked)} />
               </Center>
             </Input.Wrapper>
             <Input.Wrapper label="Hide Rating">
               <Center>
-                <Checkbox
-                  checked={hideRating}
-                  onChange={(event) =>
-                    setHideRating(event.currentTarget.checked)
-                  }
-                />
+                <Checkbox checked={hideRating} onChange={(event) => setHideRating(event.currentTarget.checked)} />
               </Center>
             </Input.Wrapper>
           </Group>
@@ -255,18 +219,13 @@ function Puzzles({ id }: { id: string }) {
             <Group>
               <Switch
                 defaultChecked
-                onChange={(event) =>
-                  setJumpToNextPuzzleImmediately(event.currentTarget.checked)
-                }
+                onChange={(event) => setJumpToNextPuzzleImmediately(event.currentTarget.checked)}
                 checked={jumpToNextPuzzleImmediately}
                 label={t("Puzzle.JumpToNextPuzzleImmediately")}
               />
 
               <Tooltip label="New Puzzle">
-                <ActionIcon
-                  disabled={!selectedDb}
-                  onClick={() => generatePuzzle(selectedDb!)}
-                >
+                <ActionIcon disabled={!selectedDb} onClick={() => generatePuzzle(selectedDb!)}>
                   <IconPlus />
                 </ActionIcon>
               </Tooltip>
@@ -286,9 +245,7 @@ function Puzzles({ id }: { id: string }) {
                         ...defaultTree().headers,
                         fen: puzzles[currentPuzzle]?.fen,
                         orientation:
-                          Chess.fromSetup(
-                            parseFen(puzzles[currentPuzzle].fen).unwrap(),
-                          ).unwrap().turn === "white"
+                          Chess.fromSetup(parseFen(puzzles[currentPuzzle].fen).unwrap()).unwrap().turn === "white"
                             ? "black"
                             : "white",
                       },

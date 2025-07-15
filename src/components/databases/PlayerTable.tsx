@@ -1,19 +1,10 @@
-import type { Player, PlayerSort } from "@/bindings";
-import { type SuccessDatabaseInfo, query_players } from "@/utils/db";
-import {
-  ActionIcon,
-  Center,
-  Collapse,
-  Flex,
-  Group,
-  NumberInput,
-  Text,
-  TextInput,
-} from "@mantine/core";
+import { ActionIcon, Center, Collapse, Flex, Group, NumberInput, Text, TextInput } from "@mantine/core";
 import { IconDotsVertical, IconSearch } from "@tabler/icons-react";
 import { DataTable, type DataTableSortStatus } from "mantine-datatable";
 import { useEffect, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
+import type { Player, PlayerSort } from "@/bindings";
+import { query_players, type SuccessDatabaseInfo } from "@/utils/db";
 import GridLayout from "./GridLayout";
 import PlayerCard from "./PlayerCard";
 import * as classes from "./styles.css";
@@ -110,10 +101,7 @@ function PlayerTable({ database }: { database: SuccessDatabaseInfo }) {
               value={name}
               onChange={(v) => setName(v.currentTarget.value)}
             />
-            <ActionIcon
-              style={{ flexGrow: 0 }}
-              onClick={() => setOpen((prev) => !prev)}
-            >
+            <ActionIcon style={{ flexGrow: 0 }} onClick={() => setOpen((prev) => !prev)}>
               <IconDotsVertical size="1rem" />
             </ActionIcon>
           </Flex>
@@ -150,9 +138,7 @@ function PlayerTable({ database }: { database: SuccessDatabaseInfo }) {
             { accessor: "name", sortable: true },
             { accessor: "elo", sortable: true },
           ]}
-          rowClassName={(_, i) =>
-            i === selectedPlayer ? classes.selected : ""
-          }
+          rowClassName={(_, i) => (i === selectedPlayer ? classes.selected : "")}
           noRecordsText="No players found"
           totalRecords={count}
           recordsPerPage={limit}

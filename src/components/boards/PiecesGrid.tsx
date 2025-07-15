@@ -1,5 +1,5 @@
 import { SimpleGrid } from "@mantine/core";
-import { COLORS, ROLES, parseSquare } from "chessops";
+import { COLORS, parseSquare, ROLES } from "chessops";
 import { makeFen, parseFen } from "chessops/fen";
 import Piece from "../common/Piece";
 

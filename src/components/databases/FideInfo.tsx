@@ -1,22 +1,10 @@
-import {
-  ActionIcon,
-  Badge,
-  Card,
-  Center,
-  Divider,
-  Group,
-  Modal,
-  Stack,
-  Text,
-  Tooltip,
-} from "@mantine/core";
+import { ActionIcon, Badge, Card, Center, Divider, Group, Modal, Stack, Text, Tooltip } from "@mantine/core";
 import { IconCloud } from "@tabler/icons-react";
-import * as Flags from "mantine-flagpack";
-
-import { events, commands } from "@/bindings";
 import { BaseDirectory, exists } from "@tauri-apps/plugin-fs";
+import * as Flags from "mantine-flagpack";
 import { useEffect, useState } from "react";
 import useSWR from "swr/immutable";
+import { commands, events } from "@/bindings";
 import ProgressButton from "../common/ProgressButton";
 import COUNTRIES from "./countries.json";
 
@@ -49,9 +37,7 @@ function FideInfo({
 
   const country = COUNTRIES.find((c) => c.ioc === player?.country);
 
-  const Flag = player?.country
-    ? flags.find((f) => f.key === country?.a2)?.component
-    : undefined;
+  const Flag = player?.country ? flags.find((f) => f.key === country?.a2)?.component : undefined;
 
   useEffect(() => {
     exists("fide.bin", { baseDir: BaseDirectory.AppData }).then((exists) => {
@@ -70,11 +56,7 @@ function FideInfo({
         <Group>
           <b>FIDE Player Info</b>
           {player && (
-            <a
-              href={`https://ratings.fide.com/profile/${player.fideid}`}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href={`https://ratings.fide.com/profile/${player.fideid}`} target="_blank" rel="noreferrer">
               <ActionIcon>
                 <IconCloud />
               </ActionIcon>

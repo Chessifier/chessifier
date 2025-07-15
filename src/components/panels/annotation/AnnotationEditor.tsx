@@ -1,6 +1,3 @@
-import { TreeStateContext } from "@/components/common/TreeStateContext";
-import { spellCheckAtom } from "@/state/atoms";
-import { getNodeAtPath } from "@/utils/treeReducer";
 import { RichTextEditor } from "@mantine/tiptap";
 import Link from "@tiptap/extension-link";
 import Placeholder from "@tiptap/extension-placeholder";
@@ -12,6 +9,9 @@ import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { Markdown } from "tiptap-markdown";
 import { useStore } from "zustand";
+import { TreeStateContext } from "@/components/common/TreeStateContext";
+import { spellCheckAtom } from "@/state/atoms";
+import { getNodeAtPath } from "@/utils/treeReducer";
 
 function AnnotationEditor() {
   const { t } = useTranslation();

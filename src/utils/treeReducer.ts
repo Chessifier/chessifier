@@ -1,7 +1,7 @@
-import type { Outcome, Score } from "@/bindings";
 import type { DrawShape } from "chessground/draw";
 import type { Move } from "chessops";
 import { INITIAL_FEN } from "chessops/fen";
+import type { Outcome, Score } from "@/bindings";
 import type { Annotation } from "./annotation";
 import { positionFromFen } from "./chessops";
 
@@ -155,10 +155,7 @@ export type GameHeaders = {
 };
 
 export function getGameName(headers: GameHeaders) {
-  if (
-    (headers.white && headers.white !== "?") ||
-    (headers.black && headers.black !== "?")
-  ) {
+  if ((headers.white && headers.white !== "?") || (headers.black && headers.black !== "?")) {
     return `${headers.white} - ${headers.black}`;
   }
   if (headers.event) {

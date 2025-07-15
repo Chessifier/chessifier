@@ -3,13 +3,13 @@ import {
   type Color,
   IllegalSetup,
   type Move,
+  makeSquare,
   type PositionError,
+  parseUci,
   type Setup,
   type Square,
   type SquareName,
   SquareSet,
-  makeSquare,
-  parseUci,
   squareFile,
   squareRank,
 } from "chessops";
@@ -18,9 +18,7 @@ import { parseSan } from "chessops/san";
 import { squareFromCoords } from "chessops/util";
 import { match } from "ts-pattern";
 
-export function positionFromFen(
-  fen: string,
-): [Chess, null] | [null, FenError | PositionError] {
+export function positionFromFen(fen: string): [Chess, null] | [null, FenError | PositionError] {
   const [setup, error] = parseFen(fen).unwrap(
     (v) => [v, null],
     (e) => [null, e],
@@ -46,10 +44,7 @@ export function swapMove(fen: string, color?: Color) {
   return makeFen(setup);
 }
 
-export function squareToCoordinates(
-  square: Square,
-  orientation: "white" | "black",
-) {
+export function squareToCoordinates(square: Square, orientation: "white" | "black") {
   let file = squareFile(square) + 1;
   let rank = squareRank(square) + 1;
   if (orientation === "black") {
@@ -64,32 +59,20 @@ export function chessopsError(error: PositionError | FenError) {
     .with({ message: IllegalSetup.Empty }, () => "Errors.EmptyBoard")
     .with({ message: IllegalSetup.Kings }, () => "Errors.InvalidKings")
     .with({ message: IllegalSetup.OppositeCheck }, () => "Errors.OppositeCheck")
-    .with(
-      { message: IllegalSetup.PawnsOnBackrank },
-      () => "Errors.PawnsOnBackrank",
-    )
+    .with({ message: IllegalSetup.PawnsOnBackrank }, () => "Errors.PawnsOnBackrank")
     .with({ message: InvalidFen.Board }, () => "Errors.InvalidBoard")
-    .with(
-      { message: InvalidFen.Castling },
-      () => "Errors.InvalidCastlingRights",
-    )
+    .with({ message: InvalidFen.Castling }, () => "Errors.InvalidCastlingRights")
     .with({ message: InvalidFen.EpSquare }, () => "Errors.InvalidEpSquare")
     .with({ message: InvalidFen.Fen }, () => "Errors.InvalidFen")
     .with({ message: InvalidFen.Fullmoves }, () => "Errors.InvalidFullmoves")
     .with({ message: InvalidFen.Halfmoves }, () => "Errors.InvalidHalfmoves")
     .with({ message: InvalidFen.Pockets }, () => "Errors.InvalidPockets")
-    .with(
-      { message: InvalidFen.RemainingChecks },
-      () => "Errors.InvalidRemainingChecks",
-    )
+    .with({ message: InvalidFen.RemainingChecks }, () => "Errors.InvalidRemainingChecks")
     .with({ message: InvalidFen.Turn }, () => "Errors.InvalidTurn")
     .otherwise(() => "Errors.Unknown");
 }
 
-export function forceEnPassant(
-  dests: Map<SquareName, SquareName[]>,
-  pos: Chess,
-) {
+export function forceEnPassant(dests: Map<SquareName, SquareName[]>, pos: Chess) {
   const epSquare = pos.epSquare ? makeSquare(pos.epSquare) : undefined;
   if (!epSquare) {
     return dests;
@@ -144,14 +127,8 @@ export function parseSanOrUci(pos: Chess, sanOrUci: string): Move | null {
   return null;
 }
 
-export function getCastlingSquare(
-  setup: Setup,
-  color: "w" | "b",
-  side: "q" | "k",
-) {
-  const kingSquare = (color === "w" ? setup.board.white : setup.board.black)
-    .intersect(setup.board.king)
-    .singleSquare();
+export function getCastlingSquare(setup: Setup, color: "w" | "b", side: "q" | "k") {
+  const kingSquare = (color === "w" ? setup.board.white : setup.board.black).intersect(setup.board.king).singleSquare();
   if (kingSquare === undefined) {
     return;
   }

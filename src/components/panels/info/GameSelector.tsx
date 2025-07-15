@@ -1,10 +1,3 @@
-import { commands } from "@/bindings";
-import ConfirmModal from "@/components/common/ConfirmModal";
-import { fontSizeAtom } from "@/state/atoms";
-import { parsePGN } from "@/utils/chess";
-import { formatNumber } from "@/utils/format";
-import { getGameName } from "@/utils/treeReducer";
-import { unwrap } from "@/utils/unwrap";
 import { ActionIcon, Box, Group, ScrollArea, Text } from "@mantine/core";
 import { useToggle } from "@mantine/hooks";
 import { IconX } from "@tabler/icons-react";
@@ -12,6 +5,13 @@ import { useVirtualizer } from "@tanstack/react-virtual";
 import cx from "clsx";
 import { useAtomValue } from "jotai";
 import { useCallback, useEffect, useRef } from "react";
+import { commands } from "@/bindings";
+import ConfirmModal from "@/components/common/ConfirmModal";
+import { fontSizeAtom } from "@/state/atoms";
+import { parsePGN } from "@/utils/chess";
+import { formatNumber } from "@/utils/format";
+import { getGameName } from "@/utils/treeReducer";
+import { unwrap } from "@/utils/unwrap";
 import * as classes from "./GameSelector.css";
 
 export default function GameSelector({
@@ -37,9 +37,7 @@ export default function GameSelector({
 
   const loadMoreRows = useCallback(
     async (startIndex: number, stopIndex: number) => {
-      const data = unwrap(
-        await commands.readGames(path, startIndex, stopIndex),
-      );
+      const data = unwrap(await commands.readGames(path, startIndex, stopIndex));
       const newGames = new Map(games);
       data.forEach(async (game, index) => {
         const { headers } = await parsePGN(game);
@@ -159,12 +157,7 @@ function GameRow({
         </Text>
         {deleteGame && (
           <Group>
-            <ActionIcon
-              onClick={() => toggleDelete()}
-              variant="outline"
-              color="red"
-              size="1rem"
-            >
+            <ActionIcon onClick={() => toggleDelete()} variant="outline" color="red" size="1rem">
               <IconX />
             </ActionIcon>
           </Group>

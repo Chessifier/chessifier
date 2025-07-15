@@ -1,25 +1,14 @@
-import type { ScoreValue } from "@/bindings";
-import { formatScore, getWinChance } from "@/utils/score";
 import { Box, Text, Tooltip, useMantineTheme } from "@mantine/core";
 import type { Color } from "chessground/types";
+import type { ScoreValue } from "@/bindings";
+import { formatScore, getWinChance } from "@/utils/score";
 
-function EvalBar({
-  score,
-  orientation,
-}: {
-  score: ScoreValue | null;
-  orientation: Color;
-}) {
+function EvalBar({ score, orientation }: { score: ScoreValue | null; orientation: Color }) {
   const theme = useMantineTheme();
 
   let ScoreBars = null;
   if (score) {
-    const progress =
-      score.type === "cp"
-        ? getWinChance(score.value)
-        : score.value > 0
-          ? 100
-          : 0;
+    const progress = score.type === "cp" ? getWinChance(score.value) : score.value > 0 ? 100 : 0;
 
     ScoreBars = [
       <Box
@@ -32,13 +21,7 @@ function EvalBar({
           flexDirection: "column",
         }}
       >
-        <Text
-          fz="xs"
-          c={theme.colors.gray[2]}
-          ta="center"
-          py={3}
-          mt={orientation === "black" ? "auto" : undefined}
-        >
+        <Text fz="xs" c={theme.colors.gray[2]} ta="center" py={3} mt={orientation === "black" ? "auto" : undefined}>
           {score.value <= 0 && formatScore(score, 1).replace(/\+|-/, "")}
         </Text>
       </Box>,
@@ -52,13 +35,7 @@ function EvalBar({
           flexDirection: "column",
         }}
       >
-        <Text
-          fz="xs"
-          py={3}
-          c={theme.colors.dark[8]}
-          ta="center"
-          mt={orientation === "white" ? "auto" : undefined}
-        >
+        <Text fz="xs" py={3} c={theme.colors.dark[8]} ta="center" mt={orientation === "white" ? "auto" : undefined}>
           {score.value > 0 && formatScore(score, 1).slice(1)}
         </Text>
       </Box>,

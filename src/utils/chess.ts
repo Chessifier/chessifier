@@ -1,29 +1,16 @@
-import { type Outcome, type Score, type Token, commands } from "@/bindings";
 import type { DrawShape } from "chessground/draw";
-import {
-  type Color,
-  type Move,
-  type Role,
-  makeSquare,
-  makeUci,
-} from "chessops";
+import { type Color, type Move, makeSquare, makeUci, type Role } from "chessops";
 import { type Chess, castlingSide, normalizeMove } from "chessops/chess";
 import { INITIAL_FEN, makeFen, parseFen } from "chessops/fen";
 import { isPawns, parseComment } from "chessops/pgn";
 import { makeSan, parseSan } from "chessops/san";
 import { match } from "ts-pattern";
-import { ANNOTATION_INFO, NAG_INFO, isBasicAnnotation } from "./annotation";
+import { commands, type Outcome, type Score, type Token } from "@/bindings";
+import { ANNOTATION_INFO, isBasicAnnotation, NAG_INFO } from "./annotation";
 import { parseSanOrUci, positionFromFen } from "./chessops";
 import { harmonicMean, isPrefix, mean } from "./misc";
-import { INITIAL_SCORE, formatScore, getAccuracy, getCPLoss } from "./score";
-import {
-  type GameHeaders,
-  type TreeNode,
-  type TreeState,
-  createNode,
-  defaultTree,
-  getNodeAtPath,
-} from "./treeReducer";
+import { formatScore, getAccuracy, getCPLoss, INITIAL_SCORE } from "./score";
+import { createNode, defaultTree, type GameHeaders, getNodeAtPath, type TreeNode, type TreeState } from "./treeReducer";
 import { unwrap } from "./unwrap";
 
 export interface BestMoves {
@@ -47,13 +34,10 @@ export const makeClk = (seconds: number): string => {
   const hours = Math.floor(s / 3600);
   const minutes = Math.floor((s % 3600) / 60);
   s = (s % 3600) % 60;
-  return `${hours}:${minutes.toString().padStart(2, "0")}:${s.toLocaleString(
-    "en",
-    {
-      minimumIntegerDigits: 2,
-      maximumFractionDigits: 3,
-    },
-  )}`;
+  return `${hours}:${minutes.toString().padStart(2, "0")}:${s.toLocaleString("en", {
+    minimumIntegerDigits: 2,
+    maximumFractionDigits: 3,
+  })}`;
 };
 
 export function getMoveText(
@@ -81,9 +65,7 @@ export function getMoveText(
     if (opt.glyphs) {
       for (const annotation of tree.annotations) {
         if (annotation === "") continue;
-        moveText += isBasicAnnotation(annotation)
-          ? tree.annotations
-          : ` $${ANNOTATION_INFO[annotation].nag}`;
+        moveText += isBasicAnnotation(annotation) ? tree.annotations : ` $${ANNOTATION_INFO[annotation].nag}`;
       }
     }
     moveText += " ";
@@ -353,10 +335,7 @@ export function parseKeyboardMove(san: string, fen: string) {
   return null;
 }
 
-export async function getOpening(
-  root: TreeNode,
-  position: number[],
-): Promise<string> {
+export async function getOpening(root: TreeNode, position: number[]): Promise<string> {
   const tree = getNodeAtPath(root, position);
   if (tree === null) {
     return "";
@@ -371,11 +350,7 @@ export async function getOpening(
   return res.data;
 }
 
-function innerParsePGN(
-  tokens: Token[],
-  fen: string = INITIAL_FEN,
-  halfMoves = 0,
-): TreeState {
+function innerParsePGN(tokens: Token[], fen: string = INITIAL_FEN, halfMoves = 0): TreeState {
   const tree = defaultTree(fen);
   let root = tree.root;
   let prevNode = root;
@@ -430,10 +405,7 @@ function innerParsePGN(
       const variation = [];
       let subvariations = 0;
       i++;
-      while (
-        i < tokens.length &&
-        (subvariations > 0 || tokens[i].type !== "ParenClose")
-      ) {
+      while (i < tokens.length && (subvariations > 0 || tokens[i].type !== "ParenClose")) {
         if (tokens[i].type === "ParenOpen") {
           subvariations++;
         } else if (tokens[i].type === "ParenClose") {
@@ -442,11 +414,7 @@ function innerParsePGN(
         variation.push(tokens[i]);
         i++;
       }
-      const newTree = innerParsePGN(
-        variation,
-        prevNode.fen,
-        root.halfMoves - 1,
-      );
+      const newTree = innerParsePGN(variation, prevNode.fen, root.halfMoves - 1);
       if (newTree.root.children.length > 0) {
         prevNode.children.push(newTree.root.children[0]);
       }
@@ -485,10 +453,7 @@ function innerParsePGN(
   return tree;
 }
 
-export async function parsePGN(
-  pgn: string,
-  initialFen?: string,
-): Promise<TreeState> {
+export async function parsePGN(pgn: string, initialFen?: string): Promise<TreeState> {
   const tokens = unwrap(await commands.lexPgn(pgn));
 
   const headers = getPgnHeaders(tokens);
@@ -496,11 +461,7 @@ export async function parsePGN(
 
   const [pos] = positionFromFen(fen);
 
-  const tree = innerParsePGN(
-    tokens,
-    initialFen?.trim() || headers.fen.trim(),
-    pos?.turn === "black" ? 1 : 0,
-  );
+  const tree = innerParsePGN(tokens, initialFen?.trim() || headers.fen.trim(), pos?.turn === "black" ? 1 : 0);
   tree.headers = headers;
   tree.position = headers.start ?? [];
   return tree;
@@ -614,9 +575,7 @@ export function getGameStats(root: TreeNode) {
     const color = node.halfMoves % 2 === 1 ? "white" : "black";
     if (node.score) {
       cplosses[color].push(getCPLoss(prevScore.value, node.score.value, color));
-      accuracies[color].push(
-        getAccuracy(prevScore.value, node.score.value, color),
-      );
+      accuracies[color].push(getAccuracy(prevScore.value, node.score.value, color));
       prevScore = node.score;
     }
   }
@@ -651,8 +610,7 @@ export function getMaterialDiff(fen: string) {
   const board = res.unwrap().board;
   const { white, black } = board;
 
-  const pieceDiff = (piece: Role) =>
-    white.intersect(board[piece]).size() - black.intersect(board[piece]).size();
+  const pieceDiff = (piece: Role) => white.intersect(board[piece]).size() - black.intersect(board[piece]).size();
 
   const pieces = {
     p: pieceDiff("pawn"),
@@ -662,8 +620,7 @@ export function getMaterialDiff(fen: string) {
     q: pieceDiff("queen"),
   };
 
-  const diff =
-    pieces.p * 1 + pieces.n * 3 + pieces.b * 3 + pieces.r * 5 + pieces.q * 9;
+  const diff = pieces.p * 1 + pieces.n * 3 + pieces.b * 3 + pieces.r * 5 + pieces.q * 9;
 
   return { pieces, diff };
 }
@@ -672,21 +629,14 @@ export function stripClock(fen: string): string {
   return fen.split(" ").slice(0, -2).join(" ");
 }
 
-export function hasMorePriority(
-  position1: number[],
-  position2: number[],
-): boolean {
+export function hasMorePriority(position1: number[], position2: number[]): boolean {
   if (isPrefix(position1, position2)) {
     return true;
   }
 
   // remove common beggining of the arrays
   let i = 0;
-  while (
-    i < position1.length &&
-    i < position2.length &&
-    position1[i] === position2[i]
-  ) {
+  while (i < position1.length && i < position2.length && position1[i] === position2[i]) {
     i++;
   }
 

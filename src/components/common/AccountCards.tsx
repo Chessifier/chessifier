@@ -1,22 +1,12 @@
+import { Accordion, ActionIcon, Divider, Group, Paper, ScrollArea, Stack, Text, TextInput } from "@mantine/core";
+import { IconCheck, IconEdit, IconX } from "@tabler/icons-react";
+import { useAtom, useAtomValue } from "jotai";
+import { useEffect, useRef, useState } from "react";
 import type { DatabaseInfo } from "@/bindings";
 import { sessionsAtom } from "@/state/atoms";
 import { getChessComAccount, getStats } from "@/utils/chess.com/api";
 import { getLichessAccount } from "@/utils/lichess/api";
 import type { Session } from "@/utils/session";
-import {
-  Accordion,
-  ActionIcon,
-  Divider,
-  Group,
-  Paper,
-  ScrollArea,
-  Stack,
-  Text,
-  TextInput,
-} from "@mantine/core";
-import { IconCheck, IconEdit, IconX } from "@tabler/icons-react";
-import { useAtom, useAtomValue } from "jotai";
-import { useEffect, useRef, useState } from "react";
 import { AccountCard } from "../home/AccountCard";
 
 function AccountCards({
@@ -27,21 +17,12 @@ function AccountCards({
   setDatabases: React.Dispatch<React.SetStateAction<DatabaseInfo[]>>;
 }) {
   const sessions = useAtomValue(sessionsAtom);
-  const playerNames = Array.from(
-    new Set(
-      sessions.map(
-        (s) => s.player ?? s.lichess?.username ?? s.chessCom?.username,
-      ),
-    ),
-  );
+  const playerNames = Array.from(new Set(sessions.map((s) => s.player ?? s.lichess?.username ?? s.chessCom?.username)));
 
   const playerSessions = playerNames.map((name) => ({
     name,
     sessions: sessions.filter(
-      (s) =>
-        s.player === name ||
-        s.lichess?.username === name ||
-        s.chessCom?.username === name,
+      (s) => s.player === name || s.lichess?.username === name || s.chessCom?.username === name,
     ),
   }));
 
@@ -140,10 +121,7 @@ function PlayerSession({
             onClick={() =>
               setSessions((sessions) =>
                 sessions.filter(
-                  (s) =>
-                    s.player !== name &&
-                    s.lichess?.username !== name &&
-                    s.chessCom?.username !== name,
+                  (s) => s.player !== name && s.lichess?.username !== name && s.chessCom?.username !== name,
                 ),
               )
             }
@@ -211,18 +189,12 @@ function LichessOrChessCom({
         key={account.id}
         token={lichessSession.accessToken}
         type="lichess"
-        database={
-          databases.find(
-            (db) => db.filename === `${account.username}_lichess.db3`,
-          ) ?? null
-        }
+        database={databases.find((db) => db.filename === `${account.username}_lichess.db3`) ?? null}
         title={account.username}
         updatedAt={session.updatedAt}
         total={totalGames}
         logout={() => {
-          setSessions((sessions) =>
-            sessions.filter((s) => s.lichess?.account.id !== account.id),
-          );
+          setSessions((sessions) => sessions.filter((s) => s.lichess?.account.id !== account.id));
         }}
         setDatabases={setDatabases}
         reload={async () => {
@@ -263,21 +235,12 @@ function LichessOrChessCom({
         key={session.chessCom.username}
         type="chesscom"
         title={session.chessCom.username}
-        database={
-          databases.find(
-            (db) =>
-              db.filename === `${session.chessCom?.username}_chesscom.db3`,
-          ) ?? null
-        }
+        database={databases.find((db) => db.filename === `${session.chessCom?.username}_chesscom.db3`) ?? null}
         updatedAt={session.updatedAt}
         total={totalGames}
         stats={getStats(session.chessCom.stats)}
         logout={() => {
-          setSessions((sessions) =>
-            sessions.filter(
-              (s) => s.chessCom?.username !== session.chessCom?.username,
-            ),
-          );
+          setSessions((sessions) => sessions.filter((s) => s.chessCom?.username !== session.chessCom?.username));
         }}
         reload={async () => {
           if (!session.chessCom) return;
@@ -285,8 +248,7 @@ function LichessOrChessCom({
           if (!stats) return;
           setSessions((sessions) =>
             sessions.map((s) =>
-              session.chessCom &&
-              s.chessCom?.username === session.chessCom?.username
+              session.chessCom && s.chessCom?.username === session.chessCom?.username
                 ? {
                     ...s,
                     chessCom: {

@@ -1,13 +1,13 @@
-import { events, type MonthData, type Results, commands } from "@/bindings";
-import type { DatabaseInfo as PlainDatabaseInfo, Player } from "@/bindings";
-import { sessionsAtom } from "@/state/atoms";
-import { type PlayerGameInfo, getDatabases, query_players } from "@/utils/db";
-import type { Session } from "@/utils/session";
-import { unwrap } from "@/utils/unwrap";
 import { Flex, Progress, Select, Text } from "@mantine/core";
 import { useAtomValue } from "jotai";
 import { useEffect, useState } from "react";
 import useSWRImmutable from "swr/immutable";
+import type { DatabaseInfo as PlainDatabaseInfo, Player } from "@/bindings";
+import { commands, events, type MonthData, type Results } from "@/bindings";
+import { sessionsAtom } from "@/state/atoms";
+import { getDatabases, type PlayerGameInfo, query_players } from "@/utils/db";
+import type { Session } from "@/utils/session";
+import { unwrap } from "@/utils/unwrap";
 import PersonalPlayerCard from "./PersonalCard";
 
 type DatabaseInfo = PlainDatabaseInfo & {
@@ -15,8 +15,7 @@ type DatabaseInfo = PlainDatabaseInfo & {
 };
 
 function getSessionUsername(session: Session): string {
-  const username =
-    session.lichess?.account.username || session.chessCom?.username;
+  const username = session.lichess?.account.username || session.chessCom?.username;
   if (username === undefined) {
     throw new Error("Session does not have a username");
   }
@@ -24,9 +23,7 @@ function getSessionUsername(session: Session): string {
 }
 
 function isDatabaseFromSession(db: DatabaseInfo, sessions: Session[]) {
-  const session = sessions.find((session) =>
-    db.filename.includes(getSessionUsername(session)),
-  );
+  const session = sessions.find((session) => db.filename.includes(getSessionUsername(session)));
 
   if (session !== undefined) {
     db.username = getSessionUsername(session);
@@ -54,8 +51,7 @@ function sumGamesPlayed(lists: [string, Results][][]) {
   }
 
   return Array.from(openingCounts.entries()).sort(
-    (a, b) =>
-      b[1].won + b[1].draw + b[1].lost - a[1].won - a[1].draw - a[1].lost,
+    (a, b) => b[1].won + b[1].draw + b[1].lost - a[1].won - a[1].draw - a[1].lost,
   );
 }
 
@@ -86,9 +82,7 @@ function joinMonthData(data: [string, MonthData][][]) {
     });
   }
 
-  return Array.from(monthCounts.entries()).sort((a, b) =>
-    a[0].localeCompare(b[0]),
-  );
+  return Array.from(monthCounts.entries()).sort((a, b) => a[0].localeCompare(b[0]));
 }
 
 function combinePlayerInfo(playerInfos: PlayerGameInfo[]) {
@@ -107,26 +101,13 @@ function Databases() {
   const sessions = useAtomValue(sessionsAtom);
 
   const players = Array.from(
-    new Set(
-      sessions.map(
-        (s) => s.player || s.lichess?.username || s.chessCom?.username || "",
-      ),
-    ),
+    new Set(sessions.map((s) => s.player || s.lichess?.username || s.chessCom?.username || "")),
   );
   const playerDbNames = players.map((name) => ({
     name,
     databases: sessions
-      .filter(
-        (s) =>
-          s.player === name ||
-          s.lichess?.username === name ||
-          s.chessCom?.username === name,
-      )
-      .map((s) =>
-        s.chessCom
-          ? `${s.chessCom.username} Chess.com`
-          : `${s.lichess?.username} Lichess`,
-      ),
+      .filter((s) => s.player === name || s.lichess?.username === name || s.chessCom?.username === name)
+      .map((s) => (s.chessCom ? `${s.chessCom.username} Chess.com` : `${s.lichess?.username} Lichess`)),
   }));
 
   const [name, setName] = useState("");
@@ -148,41 +129,34 @@ function Databases() {
     data: personalInfo,
     isLoading,
     error,
-  } = useSWRImmutable<PersonalInfo[]>(
-    databases && name ? ["personalInfo", name, databases] : null,
-    async () => {
-      const playerDbs = playerDbNames.find((p) => p.name === name)?.databases;
-      if (!databases || !playerDbs) return [];
-      const results = await Promise.allSettled(
-        databases
-          .filter((db) =>
-            playerDbs.includes((db.type === "success" && db.title) || ""),
-          )
-          .map(async (db, i) => {
-            const players = await query_players(db.file, {
-              name: db.username,
-              options: {
-                pageSize: 1,
-                direction: "asc",
-                sort: "id",
-                skipCount: false,
-              },
-            });
-            if (players.data.length === 0) {
-              throw new Error("Player not found in database");
-            }
-            const player = players.data[0];
-            const info = unwrap(
-              await commands.getPlayersGameInfo(db.file, player.id),
-            );
-            return { db, info };
-          }),
-      );
-      return results
-        .filter((r) => r.status === "fulfilled")
-        .map((r) => (r as PromiseFulfilledResult<PersonalInfo>).value);
-    },
-  );
+  } = useSWRImmutable<PersonalInfo[]>(databases && name ? ["personalInfo", name, databases] : null, async () => {
+    const playerDbs = playerDbNames.find((p) => p.name === name)?.databases;
+    if (!databases || !playerDbs) return [];
+    const results = await Promise.allSettled(
+      databases
+        .filter((db) => playerDbs.includes((db.type === "success" && db.title) || ""))
+        .map(async (db, i) => {
+          const players = await query_players(db.file, {
+            name: db.username,
+            options: {
+              pageSize: 1,
+              direction: "asc",
+              sort: "id",
+              skipCount: false,
+            },
+          });
+          if (players.data.length === 0) {
+            throw new Error("Player not found in database");
+          }
+          const player = players.data[0];
+          const info = unwrap(await commands.getPlayersGameInfo(db.file, player.id));
+          return { db, info };
+        }),
+    );
+    return results
+      .filter((r) => r.status === "fulfilled")
+      .map((r) => (r as PromiseFulfilledResult<PersonalInfo>).value);
+  });
 
   const [progress, setProgress] = useState(0);
   useEffect(() => {
@@ -230,11 +204,7 @@ function Databases() {
             </Text>
           </>
         ) : (
-          <PersonalPlayerCard
-            name={name}
-            setName={setName}
-            info={combinePlayerInfo(personalInfo.map((i) => i.info))}
-          />
+          <PersonalPlayerCard name={name} setName={setName} info={combinePlayerInfo(personalInfo.map((i) => i.info))} />
         ))}
     </>
   );

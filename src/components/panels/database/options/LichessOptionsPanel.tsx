@@ -1,10 +1,3 @@
-import ToggleButtonGroup, {
-  type ToggleButtonGroupOption,
-} from "@/components/common/ToggleButtonGroup";
-import { lichessOptionsAtom } from "@/state/atoms";
-import { capitalize } from "@/utils/format";
-import { MIN_DATE } from "@/utils/lichess/api";
-import type { LichessGameSpeed, LichessRating } from "@/utils/lichess/explorer";
 import { Group, Select, Stack, TextInput } from "@mantine/core";
 import { MonthPickerInput } from "@mantine/dates";
 import {
@@ -18,27 +11,21 @@ import {
 import { useAtom } from "jotai";
 import { useTranslation } from "react-i18next";
 import { match } from "ts-pattern";
+import ToggleButtonGroup, { type ToggleButtonGroupOption } from "@/components/common/ToggleButtonGroup";
+import { lichessOptionsAtom } from "@/state/atoms";
+import { capitalize } from "@/utils/format";
+import { MIN_DATE } from "@/utils/lichess/api";
+import type { LichessGameSpeed, LichessRating } from "@/utils/lichess/explorer";
 
 const LichessOptionsPanel = () => {
   const { t } = useTranslation();
 
   const [options, setOptions] = useAtom(lichessOptionsAtom);
 
-  const timeControls: LichessGameSpeed[] = [
-    "ultraBullet",
-    "bullet",
-    "blitz",
-    "rapid",
-    "classical",
-    "correspondence",
-  ];
-  const ratings: LichessRating[] = [
-    0, 1000, 1200, 1400, 1600, 1800, 2000, 2200, 2500,
-  ];
+  const timeControls: LichessGameSpeed[] = ["ultraBullet", "bullet", "blitz", "rapid", "classical", "correspondence"];
+  const ratings: LichessRating[] = [0, 1000, 1200, 1400, 1600, 1800, 2000, 2200, 2500];
 
-  function mapTimeControl(
-    speed: LichessGameSpeed,
-  ): ToggleButtonGroupOption<LichessGameSpeed> {
+  function mapTimeControl(speed: LichessGameSpeed): ToggleButtonGroupOption<LichessGameSpeed> {
     const name = `${speed.charAt(0).toUpperCase()}${speed.slice(1)}`;
     const icon = match(speed)
       .with("ultraBullet", () => <IconChevronsRight />)
@@ -56,9 +43,7 @@ const LichessOptionsPanel = () => {
     };
   }
 
-  function mapRatingOption(
-    rating: LichessRating,
-  ): ToggleButtonGroupOption<LichessRating> {
+  function mapRatingOption(rating: LichessRating): ToggleButtonGroupOption<LichessRating> {
     const name = rating === 0 ? "400" : rating.toString();
     return {
       content: <span>{name}</span>,
@@ -118,9 +103,7 @@ const LichessOptionsPanel = () => {
           value={options.since}
           minDate={MIN_DATE}
           maxDate={new Date()}
-          onChange={(value) =>
-            setOptions({ ...options, since: value ?? undefined })
-          }
+          onChange={(value) => setOptions({ ...options, since: value ?? undefined })}
           clearable
         />
         <MonthPickerInput
@@ -129,9 +112,7 @@ const LichessOptionsPanel = () => {
           value={options.until}
           minDate={MIN_DATE}
           maxDate={new Date()}
-          onChange={(value) =>
-            setOptions({ ...options, until: value ?? undefined })
-          }
+          onChange={(value) => setOptions({ ...options, until: value ?? undefined })}
           clearable
         />
       </Group>
@@ -140,9 +121,7 @@ const LichessOptionsPanel = () => {
           label="Player"
           placeholder="Player's username"
           value={options.player ?? ""}
-          onChange={(e) =>
-            setOptions({ ...options, player: e.currentTarget.value })
-          }
+          onChange={(e) => setOptions({ ...options, player: e.currentTarget.value })}
         />
         <Select
           label="Color"
@@ -152,9 +131,7 @@ const LichessOptionsPanel = () => {
             { label: "Black", value: "black" },
           ]}
           value={options.color}
-          onChange={(v) =>
-            setOptions({ ...options, color: v as "white" | "black" })
-          }
+          onChange={(v) => setOptions({ ...options, color: v as "white" | "black" })}
           clearable={false}
         />
       </Group>

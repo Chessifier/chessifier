@@ -1,23 +1,14 @@
-import { commands } from "@/bindings";
-import type { DatabaseInfo } from "@/bindings";
-import { sessionsAtom } from "@/state/atoms";
-import { getChessComAccount } from "@/utils/chess.com/api";
-import { getDatabases } from "@/utils/db";
-import { getLichessAccount } from "@/utils/lichess/api";
-import {
-  Autocomplete,
-  Button,
-  Checkbox,
-  Group,
-  InputWrapper,
-  Modal,
-  Stack,
-  TextInput,
-} from "@mantine/core";
+import { Autocomplete, Button, Checkbox, Group, InputWrapper, Modal, Stack, TextInput } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 import { listen } from "@tauri-apps/api/event";
 import { useAtom, useAtomValue } from "jotai";
 import { useEffect, useRef, useState } from "react";
+import type { DatabaseInfo } from "@/bindings";
+import { commands } from "@/bindings";
+import { sessionsAtom } from "@/state/atoms";
+import { getChessComAccount } from "@/utils/chess.com/api";
+import { getDatabases } from "@/utils/db";
+import { getLichessAccount } from "@/utils/lichess/api";
 import AccountCards from "../common/AccountCards";
 import GenericCard from "../common/GenericCard";
 import LichessLogo from "./LichessLogo";
@@ -35,11 +26,7 @@ function Accounts() {
     await commands.authenticate(username);
   }
 
-  async function addLichess(
-    player: string,
-    username: string,
-    withLogin: boolean,
-  ) {
+  async function addLichess(player: string, username: string, withLogin: boolean) {
     const p = player !== "" ? player : username;
     if (withLogin) {
       login(username);
@@ -49,13 +36,8 @@ function Accounts() {
       });
       if (!account) return;
       setSessions((sessions) => {
-        const newSessions = sessions.filter(
-          (s) => s.lichess?.username !== username,
-        );
-        return [
-          ...newSessions,
-          { lichess: { username, account }, player: p, updatedAt: Date.now() },
-        ];
+        const newSessions = sessions.filter((s) => s.lichess?.username !== username);
+        return [...newSessions, { lichess: { username, account }, player: p, updatedAt: Date.now() }];
       });
     }
   }
@@ -89,10 +71,7 @@ function Accounts() {
     <>
       <AccountCards databases={databases} setDatabases={setDatabases} />
       <Group>
-        <Button
-          rightSection={<IconPlus size="1rem" />}
-          onClick={() => setOpen(true)}
-        >
+        <Button rightSection={<IconPlus size="1rem" />} onClick={() => setOpen(true)}>
           Add Account
         </Button>
       </Group>
@@ -105,9 +84,7 @@ function Accounts() {
             const p = player !== "" ? player : username;
             if (!stats) return;
             setSessions((sessions) => {
-              const newSessions = sessions.filter(
-                (s) => s.chessCom?.username !== username,
-              );
+              const newSessions = sessions.filter((s) => s.chessCom?.username !== username);
               return [
                 ...newSessions,
                 {
@@ -143,11 +120,7 @@ function AccountModal({
   const [website, setWebsite] = useState<"lichess" | "chesscom">("lichess");
   const [withLogin, setWithLogin] = useState(false);
 
-  const players = new Set(
-    sessions.map(
-      (s) => s.player || s.lichess?.username || s.chessCom?.username || "",
-    ),
-  );
+  const players = new Set(sessions.map((s) => s.player || s.lichess?.username || s.chessCom?.username || ""));
 
   function addAccount() {
     if (website === "lichess") {
@@ -193,12 +166,7 @@ function AccountModal({
                 setSelected={() => setWebsite("chesscom")}
                 Header={
                   <Group>
-                    <img
-                      width={30}
-                      height={30}
-                      src="/chesscom.png"
-                      alt="chess.com"
-                    />
+                    <img width={30} height={30} src="/chesscom.png" alt="chess.com" />
                     Chess.com
                   </Group>
                 }

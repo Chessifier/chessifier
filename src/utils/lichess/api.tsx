@@ -1,19 +1,3 @@
-import {
-  type BestMoves,
-  type EngineOptions,
-  type GoMode,
-  type NormalizedGame,
-  commands,
-} from "@/bindings";
-import { parsePGN, uciNormalize } from "@/utils/chess";
-import { positionFromFen } from "@/utils/chessops";
-import {
-  type LichessGamesOptions,
-  type MasterGamesOptions,
-  getLichessGamesQueryParams,
-  getMasterGamesQueryParams,
-} from "@/utils/lichess/explorer";
-import { countMainPly } from "@/utils/treeReducer";
 import { notifications } from "@mantine/notifications";
 import { IconX } from "@tabler/icons-react";
 import { appDataDir, resolve } from "@tauri-apps/api/path";
@@ -23,7 +7,17 @@ import type { Color } from "chessground/types";
 import { parseUci } from "chessops";
 import { makeFen } from "chessops/fen";
 import { makeSan } from "chessops/san";
-import { P, match } from "ts-pattern";
+import { match, P } from "ts-pattern";
+import { type BestMoves, commands, type EngineOptions, type GoMode, type NormalizedGame } from "@/bindings";
+import { parsePGN, uciNormalize } from "@/utils/chess";
+import { positionFromFen } from "@/utils/chessops";
+import {
+  getLichessGamesQueryParams,
+  getMasterGamesQueryParams,
+  type LichessGamesOptions,
+  type MasterGamesOptions,
+} from "@/utils/lichess/explorer";
+import { countMainPly } from "@/utils/treeReducer";
 
 const baseURL = "https://lichess.org/api";
 const explorerURL = "https://explorer.lichess.ovh";
@@ -163,9 +157,7 @@ type PositionGames = {
   month: string;
 }[];
 
-export async function convertToNormalized(
-  data: PositionGames,
-): Promise<NormalizedGame[]> {
+export async function convertToNormalized(data: PositionGames): Promise<NormalizedGame[]> {
   const results = await Promise.allSettled(
     data.map(async (game, i) => {
       const pgn = await getLichessGame(game.id);
@@ -223,9 +215,7 @@ export async function getLichessAccount({
     response = await fetch(url);
   }
   if (!response.ok) {
-    error(
-      `Failed to fetch Lichess account: ${response.status} ${response.url}`,
-    );
+    error(`Failed to fetch Lichess account: ${response.status} ${response.url}`);
     notifications.show({
       title: "Failed to fetch Lichess account",
       message: `Could not find account "${username}" on lichess.org`,
@@ -255,9 +245,7 @@ export async function getBestMoves(
   }
   const data = await getCloudEvaluation(
     makeFen(pos.toSetup()),
-    Number.parseInt(
-      options.extraOptions.find((o) => o.name === "MultiPV")?.value ?? "1",
-    ),
+    Number.parseInt(options.extraOptions.find((o) => o.name === "MultiPV")?.value ?? "1"),
   );
   return [
     100,
@@ -273,9 +261,7 @@ export async function getBestMoves(
           uciNormalize(
             posCopy,
             move,
-            options.extraOptions.some(
-              (o) => o.name === "UCI_Chess960" && o.value === "true",
-            ),
+            options.extraOptions.some((o) => o.name === "UCI_Chess960" && o.value === "true"),
           ),
         );
         posCopy.play(move);
@@ -284,10 +270,7 @@ export async function getBestMoves(
 
       return {
         score: {
-          value:
-            "cp" in m
-              ? { type: "cp", value: m.cp }
-              : { type: "mate", value: m.mate },
+          value: "cp" in m ? { type: "cp", value: m.cp } : { type: "mate", value: m.mate },
           wdl: null,
         },
         nodes: data.knodes * 1000,
@@ -320,10 +303,7 @@ type LichessMate = {
   moves: string;
 };
 
-async function getCloudEvaluation(
-  fen: string,
-  multipv: number,
-): Promise<LichessCloudData> {
+async function getCloudEvaluation(fen: string, multipv: number): Promise<LichessCloudData> {
   if (cache.has(`${fen}-${multipv}`)) {
     return cache.get(`${fen}-${multipv}`)!;
   }
@@ -337,19 +317,10 @@ async function getCloudEvaluation(
   return data;
 }
 
-export async function getLichessGames(
-  fen: string,
-  options: LichessGamesOptions,
-): Promise<PositionData> {
+export async function getLichessGames(fen: string, options: LichessGamesOptions): Promise<PositionData> {
   const url = match(options.player)
-    .with(
-      P.union(undefined, ""),
-      () =>
-        `${explorerURL}/lichess?${getLichessGamesQueryParams(fen, options)}`,
-    )
-    .otherwise(
-      () => `${explorerURL}/player?${getLichessGamesQueryParams(fen, options)}`,
-    );
+    .with(P.union(undefined, ""), () => `${explorerURL}/lichess?${getLichessGamesQueryParams(fen, options)}`)
+    .otherwise(() => `${explorerURL}/player?${getLichessGamesQueryParams(fen, options)}`);
   const res = await fetch(url);
   const data = await res.json();
 
@@ -359,14 +330,8 @@ export async function getLichessGames(
   return data;
 }
 
-export async function getMasterGames(
-  fen: string,
-  options: MasterGamesOptions,
-): Promise<PositionData> {
-  const url = `${explorerURL}/masters?${getMasterGamesQueryParams(
-    fen,
-    options,
-  )}`;
+export async function getMasterGames(fen: string, options: MasterGamesOptions): Promise<PositionData> {
+  const url = `${explorerURL}/masters?${getMasterGamesQueryParams(fen, options)}`;
   const res = await fetch(url);
   const data = await res.json();
   if (!res.ok) {
@@ -375,16 +340,8 @@ export async function getMasterGames(
   return data;
 }
 
-export async function getPlayerGames(
-  fen: string,
-  player: string,
-  color: Color,
-) {
-  return (
-    await fetch(
-      `${explorerURL}/player?fen=${fen}&player=${player}&color=${color}`,
-    )
-  ).json();
+export async function getPlayerGames(fen: string, player: string, color: Color) {
+  return (await fetch(`${explorerURL}/player?fen=${fen}&player=${player}&color=${color}`)).json();
 }
 
 export async function downloadLichess(
@@ -411,13 +368,9 @@ export async function downloadLichess(
 }
 
 export async function getLichessGame(gameId: string): Promise<string> {
-  const response = await window.fetch(
-    `https://lichess.org/game/export/${gameId.slice(0, 8)}`,
-  );
+  const response = await window.fetch(`https://lichess.org/game/export/${gameId.slice(0, 8)}`);
   if (!response.ok) {
-    throw new Error(
-      `Failed to load lichess game ${gameId} - ${response.statusText}`,
-    );
+    throw new Error(`Failed to load lichess game ${gameId} - ${response.statusText}`);
   }
   return await response.text();
 }

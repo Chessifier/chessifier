@@ -1,7 +1,7 @@
-import { createTreeStore } from "@/state/store";
-import { type TreeState, defaultTree } from "@/utils/treeReducer";
 import { parseUci } from "chessops";
 import { beforeEach, expect, test } from "vitest";
+import { createTreeStore } from "@/state/store";
+import { defaultTree, type TreeState } from "@/utils/treeReducer";
 
 const store = createTreeStore();
 
@@ -328,9 +328,7 @@ test("should handle setComment", () => {
 
 test("should handle setFen", () => {
   store.setState({ ...treeE4D5(), position: [0] });
-  store
-    .getState()
-    .setFen("rnbq1bnr/ppppkppp/8/4p3/4P3/8/PPPPKPPP/RNBQ1BNR w - - 2 3");
+  store.getState().setFen("rnbq1bnr/ppppkppp/8/4p3/4P3/8/PPPPKPPP/RNBQ1BNR w - - 2 3");
 
   expect(getNewState()).toStrictEqual({
     ...defaultTree(),

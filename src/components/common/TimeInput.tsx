@@ -1,14 +1,18 @@
-import type { GoMode } from "@/bindings";
 import { NumberInput, Select } from "@mantine/core";
 import { useState } from "react";
 import { match } from "ts-pattern";
+import type { GoMode } from "@/bindings";
 
 type TimeType = "ms" | "s" | "m" | "h";
 function TimeInput({
   value,
   setValue,
   defaultType,
-}: { value: number; setValue: (v: GoMode) => void; defaultType?: TimeType }) {
+}: {
+  value: number;
+  setValue: (v: GoMode) => void;
+  defaultType?: TimeType;
+}) {
   const [timeType, setTimeType] = useState<TimeType>(defaultType ?? "ms");
   const displayedValue = match(timeType)
     .with("ms", () => value)

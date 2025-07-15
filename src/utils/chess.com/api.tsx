@@ -1,4 +1,3 @@
-import { events } from "@/bindings";
 import { notifications } from "@mantine/notifications";
 import { IconX } from "@tabler/icons-react";
 import { appDataDir, resolve } from "@tauri-apps/api/path";
@@ -6,19 +5,15 @@ import { writeTextFile } from "@tauri-apps/plugin-fs";
 import { fetch } from "@tauri-apps/plugin-http";
 import { error, info } from "@tauri-apps/plugin-log";
 import { Chess } from "chessops";
-import {
-  ChildNode,
-  type PgnNodeData,
-  defaultGame,
-  makePgn,
-} from "chessops/pgn";
+import { ChildNode, defaultGame, makePgn, type PgnNodeData } from "chessops/pgn";
 import { makeSan } from "chessops/san";
 import { z } from "zod";
+import { events } from "@/bindings";
 import { decodeTCN } from "./tcn";
 
 const baseURL = "https://api.chess.com";
 const headers = {
-    "User-Agent": "Chessifier",
+  "User-Agent": "Chessifier",
 };
 
 const ChessComPerf = z.object({
@@ -69,15 +64,11 @@ const ChessComGames = z.object({
   ),
 });
 
-export async function getChessComAccount(
-  player: string,
-): Promise<ChessComStats | null> {
+export async function getChessComAccount(player: string): Promise<ChessComStats | null> {
   const url = `${baseURL}/pub/player/${player.toLowerCase()}/stats`;
   const response = await fetch(url, { headers, method: "GET" });
   if (!response.ok) {
-    error(
-      `Failed to fetch Chess.com account: ${response.status} ${response.url}`,
-    );
+    error(`Failed to fetch Chess.com account: ${response.status} ${response.url}`);
     notifications.show({
       title: "Failed to fetch Chess.com account",
       message: `Could not find account "${player}" on chess.com`,
@@ -89,9 +80,7 @@ export async function getChessComAccount(
   const data = await response.json();
   const stats = ChessComStatsSchema.safeParse(data);
   if (!stats.success) {
-    error(
-      `Invalid response for Chess.com account: ${response.status} ${response.url}\n${stats.error}`,
-    );
+    error(`Invalid response for Chess.com account: ${response.status} ${response.url}\n${stats.error}`);
     notifications.show({
       title: "Failed to fetch Chess.com account",
       message: `Invalid response for "${player}" on chess.com`,
@@ -109,32 +98,18 @@ async function getGameArchives(player: string) {
   return (await response.json()) as Archive;
 }
 
-export async function downloadChessCom(
-  player: string,
-  timestamp: number | null,
-) {
+export async function downloadChessCom(player: string, timestamp: number | null) {
   const timestampDate = new Date(timestamp ?? 0);
-  const approximateDate = new Date(
-    timestampDate.getFullYear(),
-    timestampDate.getMonth(),
-    1,
-  );
+  const approximateDate = new Date(timestampDate.getFullYear(), timestampDate.getMonth(), 1);
   const archives = await getGameArchives(player);
-  const file = await resolve(
-    await appDataDir(),
-    "db",
-    `${player}_chesscom.pgn`,
-  );
+  const file = await resolve(await appDataDir(), "db", `${player}_chesscom.pgn`);
   info(`Found ${archives.archives.length} archives for ${player}`);
   writeTextFile(file, "", {
     append: false,
   });
   const filteredArchives = archives.archives.filter((archive) => {
     const [year, month] = archive.split("/").slice(-2);
-    const archiveDate = new Date(
-      Number.parseInt(year),
-      Number.parseInt(month) - 1,
-    );
+    const archiveDate = new Date(Number.parseInt(year), Number.parseInt(month) - 1);
     return archiveDate >= approximateDate;
   });
 
@@ -147,9 +122,7 @@ export async function downloadChessCom(
     const games = ChessComGames.safeParse(await response.json());
 
     if (!games.success) {
-      error(
-        `Failed to fetch Chess.com games: ${response.status} ${response.url}`,
-      );
+      error(`Failed to fetch Chess.com games: ${response.status} ${response.url}`);
       notifications.show({
         title: "Failed to fetch Chess.com games",
         message: `Could not find games for "${player}" on chess.com for ${archive}`,
@@ -165,8 +138,7 @@ export async function downloadChessCom(
     events.downloadProgress.emit({
       finished: false,
       id: `chesscom_${player}`,
-      progress:
-        (filteredArchives.indexOf(archive) / filteredArchives.length) * 100,
+      progress: (filteredArchives.indexOf(archive) / filteredArchives.length) * 100,
     });
   }
   events.downloadProgress.emit({
@@ -192,13 +164,10 @@ export async function getChesscomGame(gameURL: string) {
   const gameType = match[1];
   const gameId = match[2];
 
-  const response = await fetch(
-    `https://www.chess.com/callback/${gameType}/game/${gameId}`,
-    {
-      headers,
-      method: "GET",
-    },
-  );
+  const response = await fetch(`https://www.chess.com/callback/${gameType}/game/${gameId}`, {
+    headers,
+    method: "GET",
+  });
 
   if (!response.ok) {
     error(`Failed to fetch Chess.com game: ${response.status} ${response.url}`);
@@ -214,9 +183,7 @@ export async function getChesscomGame(gameURL: string) {
   const apiData = await response.json();
   const gameData = chessComGameSchema.safeParse(apiData);
   if (!gameData.success) {
-    error(
-      `Invalid response for Chess.com game: ${response.status} ${response.url}\n${gameData.error}`,
-    );
+    error(`Invalid response for Chess.com game: ${response.status} ${response.url}\n${gameData.error}`);
     notifications.show({
       title: "Failed to fetch Chess.com game",
       message: `Invalid response for "${gameURL}" on chess.com`,
@@ -232,10 +199,7 @@ export async function getChesscomGame(gameURL: string) {
   if (!moves) {
     return "";
   }
-  const game = defaultGame<PgnNodeData>(
-    () =>
-      new Map(Object.entries(pgnHeaders).map(([k, v]) => [k, v.toString()])),
-  );
+  const game = defaultGame<PgnNodeData>(() => new Map(Object.entries(pgnHeaders).map(([k, v]) => [k, v.toString()])));
   const chess = Chess.default();
 
   let lastNode = game.moves;

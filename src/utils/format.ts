@@ -29,14 +29,10 @@ export function formatDuration(ms: number): string {
     parts.push(`${hoursRemainder} hour${hoursRemainder !== 1 ? "s" : ""}`);
   }
   if (minutesRemainder > 0) {
-    parts.push(
-      `${minutesRemainder} minute${minutesRemainder !== 1 ? "s" : ""}`,
-    );
+    parts.push(`${minutesRemainder} minute${minutesRemainder !== 1 ? "s" : ""}`);
   }
   if (secondsRemainder > 0) {
-    parts.push(
-      `${secondsRemainder} second${secondsRemainder !== 1 ? "s" : ""}`,
-    );
+    parts.push(`${secondsRemainder} second${secondsRemainder !== 1 ? "s" : ""}`);
   }
   return parts.join(", ");
 }

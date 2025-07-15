@@ -1,13 +1,9 @@
-import { moveNotationTypeAtom } from "@/state/atoms";
-import {
-  ANNOTATION_INFO,
-  type Annotation,
-  addPieceSymbol,
-} from "@/utils/annotation";
 import { Box, rgba, useMantineTheme } from "@mantine/core";
 import { IconFlag } from "@tabler/icons-react";
 import { useAtom } from "jotai";
 import { type ForwardedRef, forwardRef } from "react";
+import { moveNotationTypeAtom } from "@/state/atoms";
+import { ANNOTATION_INFO, type Annotation, addPieceSymbol } from "@/utils/annotation";
 import * as classes from "./MoveCell.css";
 
 interface MoveCellProps {
@@ -19,10 +15,7 @@ interface MoveCellProps {
   onContextMenu: (e: React.MouseEvent) => void;
 }
 
-const MoveCell = forwardRef(function MoveCell(
-  props: MoveCellProps,
-  ref: ForwardedRef<HTMLButtonElement>,
-) {
+const MoveCell = forwardRef(function MoveCell(props: MoveCellProps, ref: ForwardedRef<HTMLButtonElement>) {
   const [moveNotationType] = useAtom(moveNotationTypeAtom);
 
   const color = ANNOTATION_INFO[props.annotations[0]]?.color || "gray";

@@ -1,14 +1,14 @@
-import { commands } from "@/bindings";
-import type { FileMetadata } from "@/components/files/file";
-import { unwrap } from "@/utils/unwrap";
 import { Result } from "@badrap/result";
 import { resolve } from "@tauri-apps/api/path";
 import { exists, writeTextFile } from "@tauri-apps/plugin-fs";
 import { platform } from "@tauri-apps/plugin-os";
 import { defaultGame, makePgn } from "chessops/pgn";
 import useSWR from "swr";
+import { commands } from "@/bindings";
+import type { FileMetadata } from "@/components/files/file";
+import { unwrap } from "@/utils/unwrap";
 import { parsePGN } from "./chess";
-import { type Tab, createTab } from "./tabs";
+import { createTab, type Tab } from "./tabs";
 import { getGameName } from "./treeReducer";
 
 export function usePlatform() {

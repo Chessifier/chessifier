@@ -1,15 +1,10 @@
+import { ActionIcon, Box, Group, Stack, Tabs, Title } from "@mantine/core";
+import { IconArrowBackUp, IconChess, IconTrophy, IconUser } from "@tabler/icons-react";
+import { Link } from "@tanstack/react-router";
+import { useAtom } from "jotai";
 import GameTable from "@/components/databases/GameTable";
 import PlayerTable from "@/components/databases/PlayerTable";
 import { selectedDatabaseAtom } from "@/state/atoms";
-import { ActionIcon, Box, Group, Stack, Tabs, Title } from "@mantine/core";
-import {
-  IconArrowBackUp,
-  IconChess,
-  IconTrophy,
-  IconUser,
-} from "@tabler/icons-react";
-import { Link } from "@tanstack/react-router";
-import { useAtom } from "jotai";
 import TournamentTable from "./TournamentTable";
 
 function DatabaseView() {
@@ -43,35 +38,17 @@ function DatabaseView() {
               <Tabs.Tab leftSection={<IconUser size="1rem" />} value="players">
                 Players
               </Tabs.Tab>
-              <Tabs.Tab
-                leftSection={<IconTrophy size="1rem" />}
-                value="tournaments"
-              >
+              <Tabs.Tab leftSection={<IconTrophy size="1rem" />} value="tournaments">
                 Tournaments
               </Tabs.Tab>
             </Tabs.List>
-            <Tabs.Panel
-              value="games"
-              flex={1}
-              style={{ overflow: "hidden" }}
-              pt="md"
-            >
+            <Tabs.Panel value="games" flex={1} style={{ overflow: "hidden" }} pt="md">
               <GameTable database={database} />
             </Tabs.Panel>
-            <Tabs.Panel
-              value="players"
-              flex={1}
-              style={{ overflow: "hidden" }}
-              pt="md"
-            >
+            <Tabs.Panel value="players" flex={1} style={{ overflow: "hidden" }} pt="md">
               <PlayerTable database={database} />
             </Tabs.Panel>
-            <Tabs.Panel
-              value="tournaments"
-              flex={1}
-              style={{ overflow: "hidden" }}
-              pt="md"
-            >
+            <Tabs.Panel value="tournaments" flex={1} style={{ overflow: "hidden" }} pt="md">
               <TournamentTable database={database} />
             </Tabs.Panel>
           </Tabs>

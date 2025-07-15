@@ -1,9 +1,9 @@
-import type { PracticeData } from "@/state/atoms";
-import { isPrefix } from "@/utils/misc";
-import { type TreeNode, treeIterator } from "@/utils/treeReducer";
 import type { SetStateAction } from "react";
 import { type Card, createEmptyCard, fsrs, generatorParameters } from "ts-fsrs";
 import { z } from "zod";
+import type { PracticeData } from "@/state/atoms";
+import { isPrefix } from "@/utils/misc";
+import { type TreeNode, treeIterator } from "@/utils/treeReducer";
 
 const params = generatorParameters({ enable_fuzz: true });
 
@@ -21,11 +21,7 @@ export type Position = {
   card: Card;
 };
 
-export function buildFromTree(
-  tree: TreeNode,
-  color: "white" | "black",
-  start: number[],
-) {
+export function buildFromTree(tree: TreeNode, color: "white" | "black", start: number[]) {
   const cards: Position[] = [];
   const iterator = treeIterator(tree);
   for (const item of iterator) {
@@ -37,10 +33,7 @@ export function buildFromTree(
     ) {
       continue;
     }
-    if (
-      (color === "white" && item.node.halfMoves % 2 === 0) ||
-      (color === "black" && item.node.halfMoves % 2 === 1)
-    ) {
+    if ((color === "white" && item.node.halfMoves % 2 === 0) || (color === "black" && item.node.halfMoves % 2 === 1)) {
       cards.push({
         fen: item.node.fen,
         answer: item.node.children[0].san,
@@ -91,9 +84,7 @@ export function getCardForReview(
   }
   const now = new Date();
 
-  const filtered = positions.filter(
-    (position) => new Date(position.card.due) <= now,
-  );
+  const filtered = positions.filter((position) => new Date(position.card.due) <= now);
 
   return filtered.length > 0 ? filtered[0] : null;
 }

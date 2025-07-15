@@ -1,22 +1,15 @@
-import { Chessground } from "@/chessground/Chessground";
-import { parsePGN } from "@/utils/chess";
-import {
-  type GameHeaders,
-  type TreeState,
-  getNodeAtPath,
-} from "@/utils/treeReducer";
 import { Box, Group, Stack, Text } from "@mantine/core";
 import { useElementSize } from "@mantine/hooks";
 import { useContext, useEffect, useState } from "react";
 import useSWRImmutable from "swr/immutable";
 import { useStore } from "zustand";
+import { Chessground } from "@/chessground/Chessground";
+import { parsePGN } from "@/utils/chess";
+import { type GameHeaders, getNodeAtPath, type TreeState } from "@/utils/treeReducer";
 import GameNotation from "../common/GameNotation";
 import MoveControls from "../common/MoveControls";
 import OpeningName from "../common/OpeningName";
-import {
-  TreeStateContext,
-  TreeStateProvider,
-} from "../common/TreeStateContext";
+import { TreeStateContext, TreeStateProvider } from "../common/TreeStateContext";
 
 function GamePreviewWrapper({
   pgn,
@@ -29,23 +22,13 @@ function GamePreviewWrapper({
   hideControls?: boolean;
   showOpening?: boolean;
 }) {
-  const { data: parsedGame, isLoading } = useSWRImmutable(
-    [pgn, headers?.fen],
-    async ([pgn, fen]) => {
-      return await parsePGN(pgn, fen);
-    },
-  );
+  const { data: parsedGame, isLoading } = useSWRImmutable([pgn, headers?.fen], async ([pgn, fen]) => {
+    return await parsePGN(pgn, fen);
+  });
 
   return (
     <>
-      {parsedGame && (
-        <GamePreview
-          key={pgn}
-          game={parsedGame}
-          hideControls={hideControls}
-          showOpening={showOpening}
-        />
-      )}
+      {parsedGame && <GamePreview key={pgn} game={parsedGame} hideControls={hideControls} showOpening={showOpening} />}
     </>
   );
 }
@@ -99,12 +82,7 @@ function PreviewBoard() {
         }
       }}
     >
-      <Chessground
-        coordinates={false}
-        viewOnly={true}
-        fen={fen}
-        orientation={headers.orientation || "white"}
-      />
+      <Chessground coordinates={false} viewOnly={true} fen={fen} orientation={headers.orientation || "white"} />
     </Box>
   );
 }

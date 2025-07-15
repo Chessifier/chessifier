@@ -1,27 +1,13 @@
-import LocalImage from "@/components/common/LocalImage";
-import { activeTabAtom, enginesAtom } from "@/state/atoms";
-import { type Engine, stopEngine } from "@/utils/engines";
-import {
-  Center,
-  Checkbox,
-  Group,
-  Paper,
-  ScrollArea,
-  Stack,
-  Text,
-} from "@mantine/core";
+import { Center, Checkbox, Group, Paper, ScrollArea, Stack, Text } from "@mantine/core";
 import { IconCloud, IconCpu } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
 import { useAtom, useAtomValue } from "jotai";
 import { memo } from "react";
+import LocalImage from "@/components/common/LocalImage";
+import { activeTabAtom, enginesAtom } from "@/state/atoms";
+import { type Engine, stopEngine } from "@/utils/engines";
 
-function EngineBox({
-  engine,
-  toggleEnabled,
-}: {
-  engine: Engine;
-  toggleEnabled: () => void;
-}) {
+function EngineBox({ engine, toggleEnabled }: { engine: Engine; toggleEnabled: () => void }) {
   const activeTab = useAtomValue(activeTabAtom);
 
   return (
@@ -63,8 +49,7 @@ function EngineSelection() {
       {engines.length === 0 && (
         <Center>
           <Text>
-            No engines installed. Please{" "}
-            <Link to="/engines">Add an engine</Link> first.
+            No engines installed. Please <Link to="/engines">Add an engine</Link> first.
           </Text>
         </Center>
       )}
@@ -77,9 +62,7 @@ function EngineSelection() {
               engine={engine}
               toggleEnabled={() => {
                 setEngines(async (prev) =>
-                  (await prev).map((e) =>
-                    e.name === engine.name ? { ...e, loaded: !e.loaded } : e,
-                  ),
+                  (await prev).map((e) => (e.name === engine.name ? { ...e, loaded: !e.loaded } : e)),
                 );
               }}
             />

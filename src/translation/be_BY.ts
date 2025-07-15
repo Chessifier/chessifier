@@ -142,10 +142,8 @@ export const be_BY = {
     "Board.Tabs.Info": "Інфармацыя",
     "Board.Practice.Train": "Трэніравацца",
     "Board.Practice.Build": "Стварыць",
-    "Board.Practice.NoPositionForTrain1":
-      "Няма пазіцый для трэніроўкі. Спачатку дадайце хады ў гэты файл PGN.",
-    "Board.Practice.NoPositionForTrain2":
-      "Неабходна пераключыцца ў рэжым аналізу, каб дадаваць хады.",
+    "Board.Practice.NoPositionForTrain1": "Няма пазіцый для трэніроўкі. Спачатку дадайце хады ў гэты файл PGN.",
+    "Board.Practice.NoPositionForTrain2": "Неабходна пераключыцца ў рэжым аналізу, каб дадаваць хады.",
     "Board.Practice.SeeAnser": "Паглядзець адказ",
     "Board.Practice.Practiced": "Адпрацавана",
     "Board.Practice.Due": "Падлягае трэніроўцы",
@@ -173,8 +171,7 @@ export const be_BY = {
     "Board.Analysis.Reversed": "Зваротны аналіз",
     "Board.Analysis.Reversed.Desc": "Аналізаваць гульню з апошняй пазіцыі.",
     "Board.Analysis.AnnotateNovelties": "Анатаваць навінкі",
-    "Board.Analysis.AnnotateNovelties.Desc":
-      "Дадаць каментарый да першай пазіцыі, якой няма ў базе дадзеных.",
+    "Board.Analysis.AnnotateNovelties.Desc": "Дадаць каментарый да першай пазіцыі, якой няма ў базе дадзеных.",
     "Board.Analysis.Analyze": "Аналізаваць",
     "Board.Analysis.Advantage": "Перавага",
     "Board.Analysis.Accuracy": "Дакладнасць",
@@ -211,11 +208,9 @@ export const be_BY = {
     "Engines.Add.Name.Autodetect": "Аўтавызначэнне",
     "Engines.Add.Elo.Desc": "Эла рухавіка",
     "Engines.Add.ImageFile": "Файл выявы",
-    "Engines.Add.ImageFile.Desc":
-      "Націсніце для выбару файла выявы (рэкамендуецца: 60x60)",
+    "Engines.Add.ImageFile.Desc": "Націсніце для выбару файла выявы (рэкамендуецца: 60x60)",
     "Engines.Remove.Title": "Выдаліць рухавік",
-    "Engines.Remove.Message":
-      "Вы ўпэўнены, што хочаце выдаліць гэты рухавік з Chessifier?",
+    "Engines.Remove.Message": "Вы ўпэўнены, што хочаце выдаліць гэты рухавік з Chessifier?",
 
     "Databases.Title": "Базы дадзеных",
     "Databases.Card.Games": "Гульні",
@@ -234,8 +229,7 @@ export const be_BY = {
     "Databases.Settings.Explore": "Даследаваць",
     "Databases.Settings.AdvancedTools": "Пашыраныя інструменты",
     "Databases.Settings.MergePlayers": "Аб'яднаць гульцоў",
-    "Databases.Settings.MergePlayers.Desc":
-      "Замяняе ўсе выпадкі першага гульца на другога ў базе дадзеных.",
+    "Databases.Settings.MergePlayers.Desc": "Замяняе ўсе выпадкі першага гульца на другога ў базе дадзеных.",
     "Databases.Settings.Merge": "Аб'яднаць",
     "Databases.Settings.BatchDelete": "Масавае выдаленне",
     "Databases.Settings.BatchDelete.Desc":
@@ -246,8 +240,7 @@ export const be_BY = {
     "Databases.Settings.AddGames": "Дадаць гульні",
     "Databases.Settings.ExportPGN": "Экспартаваць у PGN",
     "Databases.Delete.Title": "Выдаліць базу дадзеных",
-    "Databases.Delete.Message":
-      "Вы ўпэўнены, што хочаце выдаліць гэтую базу дадзеных?",
+    "Databases.Delete.Message": "Вы ўпэўнены, што хочаце выдаліць гэтую базу дадзеных?",
 
     "Files.Title": "Файлы",
     "Files.FileType": "Тып файла",
@@ -273,8 +266,7 @@ export const be_BY = {
     "Settings.Keybindings": "Гарачыя клавішы",
     "Settings.Directories": "Каталогі",
 
-    "Settings.Board.Desc":
-      "Наладзіць дошку аналізу і элементы кіравання гульнёй",
+    "Settings.Board.Desc": "Наладзіць дошку аналізу і элементы кіравання гульнёй",
     "Settings.PieceDest": "Месцы прызначэння фігур",
     "Settings.PieceDest.Desc": "Паказаць магчымыя хады для кожнай фігуры",
     "Settings.Arrows": "Стрэлкі",
@@ -294,36 +286,29 @@ export const be_BY = {
     "Settings.AutoSave": "Аўтазахаванне",
     "Settings.AutoSave.Desc": "Аўтаматычна захоўваць пасля кожнага ходу",
     "Settings.PreviewBoard": "Папярэдні прагляд дошкі",
-    "Settings.PreviewBoard.Desc":
-      "Паказваць дошку пры навядзенні курсора на ход у аналізе",
+    "Settings.PreviewBoard.Desc": "Паказваць дошку пры навядзенні курсора на ход у аналізе",
     "Settings.ScrollThroughMoves": "Пракрутка хадоў",
-    "Settings.ScrollThroughMoves.Desc":
-      "Уключыць або выключыць пракрутку хадоў на дошцы",
+    "Settings.ScrollThroughMoves.Desc": "Уключыць або выключыць пракрутку хадоў на дошцы",
     "Settings.Inputs.Desc": "Наладзіць уводы",
     "Settings.Inputs.TextInput": "Тэкставы ўвод",
     "Settings.Inputs.TextInput.Desc": "Уводзіць хады тэкстам",
     "Settings.Inputs.SpellCheck": "Праверка арфаграфіі",
-    "Settings.Inputs.SpellCheck.Desc":
-      "Уключыць або выключыць праверку арфаграфіі пры ўводзе тэксту",
+    "Settings.Inputs.SpellCheck.Desc": "Уключыць або выключыць праверку арфаграфіі пры ўводзе тэксту",
     "Settings.OpeningReport.Desc": "Наладзіць параметры справаздачы па дэбютах",
     "Settings.OpeningReport.PercentCoverage": "Працэнт ахопу",
-    "Settings.OpeningReport.PercentCoverage.Desc":
-      "Працэнт ахопленых хадоў у кожнай пазіцыі",
+    "Settings.OpeningReport.PercentCoverage.Desc": "Працэнт ахопленых хадоў у кожнай пазіцыі",
     "Settings.OpeningReport.MinGames": "Мінімальная колькасць гульняў",
-    "Settings.OpeningReport.MinGames.Desc":
-      "Мінімальная колькасць гульняў для кожнай пазіцыі, каб быць улічанай",
+    "Settings.OpeningReport.MinGames.Desc": "Мінімальная колькасць гульняў для кожнай пазіцыі, каб быць улічанай",
     "Settings.Anarchy.Desc": "Вясёлыя опцыі",
     "Settings.Anarchy.ForcedChessifier": "Прымусовы Chessifier",
-    "Settings.Anarchy.ForcedChessifier.Desc":
-      "Змушае рабіць ход Chessifier, калі гэта легальны ход.",
+    "Settings.Anarchy.ForcedChessifier.Desc": "Змушае рабіць ход Chessifier, калі гэта легальны ход.",
     "Settings.Appearance.Desc": "Наладзіць знешні выгляд праграмы",
     "Settings.Appearance.Theme": "Тэма",
     "Settings.Appearance.Theme.Desc": "Агульная каляровая схема",
     "Settings.Appearance.Theme.Light": "Светлая",
     "Settings.Appearance.Theme.Dark": "Цёмная",
     "Settings.Appearance.TitleBar": "Загаловак акна",
-    "Settings.Appearance.TitleBar.Desc":
-      "Выберыце паміж стандартнай або наладжвальнай панэллю загалоўка",
+    "Settings.Appearance.TitleBar.Desc": "Выберыце паміж стандартнай або наладжвальнай панэллю загалоўка",
     "Settings.Appearance.Language": "Мова",
     "Settings.Appearance.Language.Desc": "Мова праграмы",
     "Settings.Appearance.TitleBar.Native": "Стандартная",
@@ -331,11 +316,9 @@ export const be_BY = {
     "Settings.Appearance.FontSize": "Памер шрыфта",
     "Settings.Appearance.FontSize.Desc": "Агульны памер шрыфта",
     "Settings.Appearance.PieceSet": "Набор фігур",
-    "Settings.Appearance.PieceSet.Desc":
-      "Фігуры, што выкарыстоўваюцца на дошцы",
+    "Settings.Appearance.PieceSet.Desc": "Фігуры, што выкарыстоўваюцца на дошцы",
     "Settings.Appearance.BoardImage": "Выява дошкі",
-    "Settings.Appearance.BoardImage.Desc":
-      "Выява, што выкарыстоўваецца як фон для дошкі",
+    "Settings.Appearance.BoardImage.Desc": "Выява, што выкарыстоўваецца як фон для дошкі",
     "Settings.Appearance.AccentColor": "Асноўны колер",
     "Settings.Appearance.AccentColor.Desc": "Асноўны колер праграмы",
     "Settings.Sound.Desc": "Наладзіць параметры гуку",
@@ -343,11 +326,9 @@ export const be_BY = {
     "Settings.Sound.Volume.Desc": "Агульная гучнасць",
     "Settings.Sound.Collection": "Калекцыя гукаў",
     "Settings.Sound.Collection.Desc": "Выкарыстоўваная калекцыя гукаў",
-    "Settings.Directories.Desc":
-      "Наладзіць каталогі, якія выкарыстоўваюцца праграмай",
+    "Settings.Directories.Desc": "Наладзіць каталогі, якія выкарыстоўваюцца праграмай",
     "Settings.Directories.Files": "Каталог для файлаў",
-    "Settings.Directories.Files.Desc":
-      "Тут захоўваюцца гульнявыя файлы на старонцы файлаў",
+    "Settings.Directories.Files.Desc": "Тут захоўваюцца гульнявыя файлы на старонцы файлаў",
 
     "PgnInput.Comments": "Каментарыі",
     "PgnInput.Glyphs": "Сімвалы",

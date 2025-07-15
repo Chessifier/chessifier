@@ -1,9 +1,9 @@
-import type { Tab } from "@/utils/tabs";
 import { ActionIcon, Button, Menu } from "@mantine/core";
 import { useClickOutside, useHotkeys, useToggle } from "@mantine/hooks";
 import { IconCopy, IconEdit, IconX } from "@tabler/icons-react";
 import cx from "clsx";
 import { useEffect } from "react";
+import type { Tab } from "@/utils/tabs";
 import * as classes from "./BoardTab.css";
 import { ContentEditable } from "./ContentEditable";
 
@@ -93,23 +93,13 @@ export function BoardTab({
         </Button>
       </Menu.Target>
       <Menu.Dropdown>
-        <Menu.Item
-          leftSection={<IconCopy size="0.875rem" />}
-          onClick={() => duplicateTab(tab.value)}
-        >
+        <Menu.Item leftSection={<IconCopy size="0.875rem" />} onClick={() => duplicateTab(tab.value)}>
           Duplicate Tab
         </Menu.Item>
-        <Menu.Item
-          leftSection={<IconEdit size="0.875rem" />}
-          onClick={() => toggleRenaming(true)}
-        >
+        <Menu.Item leftSection={<IconEdit size="0.875rem" />} onClick={() => toggleRenaming(true)}>
           Rename Tab
         </Menu.Item>
-        <Menu.Item
-          color="red"
-          leftSection={<IconX size="0.875rem" />}
-          onClick={() => closeTab(tab.value)}
-        >
+        <Menu.Item color="red" leftSection={<IconX size="0.875rem" />} onClick={() => closeTab(tab.value)}>
           Close Tab
         </Menu.Item>
       </Menu.Dropdown>

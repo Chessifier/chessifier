@@ -1,8 +1,8 @@
-import { masterOptionsAtom } from "@/state/atoms";
-import { MIN_DATE } from "@/utils/lichess/api";
 import { Group } from "@mantine/core";
 import { YearPickerInput } from "@mantine/dates";
 import { useAtom } from "jotai";
+import { masterOptionsAtom } from "@/state/atoms";
+import { MIN_DATE } from "@/utils/lichess/api";
 
 const MasterOptionsPanel = () => {
   const [options, setOptions] = useAtom(masterOptionsAtom);
@@ -14,9 +14,7 @@ const MasterOptionsPanel = () => {
         value={options.since}
         minDate={MIN_DATE}
         maxDate={new Date()}
-        onChange={(value) =>
-          setOptions({ ...options, since: value ?? undefined })
-        }
+        onChange={(value) => setOptions({ ...options, since: value ?? undefined })}
         clearable
       />
       <YearPickerInput
@@ -25,9 +23,7 @@ const MasterOptionsPanel = () => {
         value={options.until}
         minDate={MIN_DATE}
         maxDate={new Date()}
-        onChange={(value) =>
-          setOptions({ ...options, until: value ?? undefined })
-        }
+        onChange={(value) => setOptions({ ...options, until: value ?? undefined })}
         clearable
       />
     </Group>

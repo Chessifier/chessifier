@@ -1,9 +1,3 @@
-import { commands } from "@/bindings";
-import type { DatabaseInfo } from "@/bindings";
-import { referenceDbAtom, selectedDatabaseAtom } from "@/state/atoms";
-import { type SuccessDatabaseInfo, getDatabases } from "@/utils/db";
-import { formatBytes, formatNumber } from "@/utils/format";
-import { unwrap } from "@/utils/unwrap";
 import {
   Box,
   Button,
@@ -18,8 +12,8 @@ import {
   Skeleton,
   Stack,
   Text,
-  TextInput,
   Textarea,
+  TextInput,
   Title,
   Tooltip,
 } from "@mantine/core";
@@ -31,6 +25,12 @@ import { useAtom } from "jotai";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import useSWR from "swr";
+import type { DatabaseInfo } from "@/bindings";
+import { commands } from "@/bindings";
+import { referenceDbAtom, selectedDatabaseAtom } from "@/state/atoms";
+import { getDatabases, type SuccessDatabaseInfo } from "@/utils/db";
+import { formatBytes, formatNumber } from "@/utils/format";
+import { unwrap } from "@/utils/unwrap";
 import ConfirmModal from "../common/ConfirmModal";
 import GenericCard from "../common/GenericCard";
 import OpenFolderButton from "../common/OpenFolderButton";
@@ -41,12 +41,7 @@ import { PlayerSearchInput } from "./PlayerSearchInput";
 export default function DatabasesPage() {
   const { t } = useTranslation();
 
-  const {
-    data: databases,
-    error,
-    isLoading,
-    mutate,
-  } = useSWR("databases", () => getDatabases());
+  const { data: databases, error, isLoading, mutate } = useSWR("databases", () => getDatabases());
 
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
@@ -101,19 +96,9 @@ export default function DatabasesPage() {
         <OpenFolderButton base="AppDir" folder="db" />
       </Group>
 
-      <Group
-        grow
-        flex={1}
-        style={{ overflow: "hidden" }}
-        align="start"
-        px="md"
-        pb="md"
-      >
+      <Group grow flex={1} style={{ overflow: "hidden" }} align="start" px="md" pb="md">
         <ScrollArea h="100%" offsetScrollbars>
-          <SimpleGrid
-            cols={{ base: 1, md: 2 }}
-            spacing={{ base: "md", md: "sm" }}
-          >
+          <SimpleGrid cols={{ base: 1, md: 2 }} spacing={{ base: "md", md: "sm" }}>
             {isLoading && (
               <>
                 <Skeleton h="8rem" />
@@ -144,17 +129,9 @@ export default function DatabasesPage() {
                       <Group wrap="nowrap" miw={0}>
                         <IconDatabase size="1.5rem" />
                         <Box miw={0}>
-                          <Text fw={500}>
-                            {item.type === "success" ? item.title : item.error}
-                          </Text>
-                          <Text
-                            size="xs"
-                            c="dimmed"
-                            style={{ wordWrap: "break-word" }}
-                          >
-                            {item.type === "error"
-                              ? item.file
-                              : item.description}
+                          <Text fw={500}>{item.type === "success" ? item.title : item.error}</Text>
+                          <Text size="xs" c="dimmed" style={{ wordWrap: "break-word" }}>
+                            {item.type === "error" ? item.file : item.description}
                           </Text>
                         </Box>
                       </Group>
@@ -170,17 +147,11 @@ export default function DatabasesPage() {
                   stats={[
                     {
                       label: t("Databases.Card.Games"),
-                      value:
-                        item.type === "success"
-                          ? formatNumber(item.game_count)
-                          : "???",
+                      value: item.type === "success" ? formatNumber(item.game_count) : "???",
                     },
                     {
                       label: t("Databases.Card.Storage"),
-                      value:
-                        item.type === "success"
-                          ? formatBytes(item.storage_size ?? 0)
-                          : "???",
+                      value: item.type === "success" ? formatBytes(item.storage_size ?? 0) : "???",
                     },
                   ]}
                 />
@@ -208,16 +179,11 @@ export default function DatabasesPage() {
                       {` ${selectedDatabase.error}`}
                     </Text>
 
-                    <Text>
-                      Check if the file exists and that it is not corrupted.
-                    </Text>
+                    <Text>Check if the file exists and that it is not corrupted.</Text>
                   </>
                 ) : (
                   <>
-                    <Divider
-                      variant="dashed"
-                      label={t("Common.GeneralSettings")}
-                    />
+                    <Divider variant="dashed" label={t("Common.GeneralSettings")} />
                     <GeneralSettings
                       key={selectedDatabase.filename}
                       selectedDatabase={selectedDatabase}
@@ -230,11 +196,7 @@ export default function DatabasesPage() {
                         changeReferenceDatabase(selectedDatabase.file);
                       }}
                     />
-                    <IndexInput
-                      indexed={selectedDatabase.indexed}
-                      file={selectedDatabase.file}
-                      setDatabases={mutate}
-                    />
+                    <IndexInput indexed={selectedDatabase.indexed} file={selectedDatabase.file} setDatabases={mutate} />
 
                     <Divider variant="dashed" label={t("Common.Data")} />
                     <Group grow>
@@ -283,22 +245,13 @@ export default function DatabasesPage() {
                   </>
                 )}
 
-                <Divider
-                  variant="dashed"
-                  label={t("Databases.Settings.AdvancedTools")}
-                />
+                <Divider variant="dashed" label={t("Databases.Settings.AdvancedTools")} />
 
                 {selectedDatabase.type === "success" && (
-                  <AdvancedSettings
-                    selectedDatabase={selectedDatabase}
-                    reload={mutate}
-                  />
+                  <AdvancedSettings selectedDatabase={selectedDatabase} reload={mutate} />
                 )}
 
-                <Divider
-                  variant="dashed"
-                  label={t("Databases.Settings.Actions")}
-                />
+                <Divider variant="dashed" label={t("Databases.Settings.Actions")} />
                 <Group justify="space-between">
                   {selectedDatabase.type === "success" && (
                     <Group>
@@ -311,13 +264,7 @@ export default function DatabasesPage() {
                           });
                           if (!file || typeof file !== "string") return;
                           setConvertLoading(true);
-                          await commands.convertPgn(
-                            file,
-                            selectedDatabase.file,
-                            null,
-                            "",
-                            null,
-                          );
+                          await commands.convertPgn(file, selectedDatabase.file, null, "", null);
                           mutate();
                           setConvertLoading(false);
                         }}
@@ -334,10 +281,7 @@ export default function DatabasesPage() {
                           });
                           if (!destFile) return;
                           setExportLoading(true);
-                          await commands.exportToPgn(
-                            selectedDatabase.file,
-                            destFile,
-                          );
+                          await commands.exportToPgn(selectedDatabase.file, destFile);
                           setExportLoading(false);
                         }}
                       >
@@ -358,13 +302,7 @@ export default function DatabasesPage() {
   );
 }
 
-function GeneralSettings({
-  selectedDatabase,
-  mutate,
-}: {
-  selectedDatabase: SuccessDatabaseInfo;
-  mutate: () => void;
-}) {
+function GeneralSettings({ selectedDatabase, mutate }: { selectedDatabase: SuccessDatabaseInfo; mutate: () => void }) {
   const { t } = useTranslation();
 
   const [title, setTitle] = useState(selectedDatabase.title);
@@ -375,11 +313,7 @@ function GeneralSettings({
 
   useEffect(() => {
     commands
-      .editDbInfo(
-        selectedDatabase.file,
-        debouncedTitle ?? null,
-        debouncedDescription ?? null,
-      )
+      .editDbInfo(selectedDatabase.file, debouncedTitle ?? null, debouncedDescription ?? null)
       .then(() => mutate());
   }, [debouncedTitle, debouncedDescription]);
 
@@ -400,13 +334,7 @@ function GeneralSettings({
   );
 }
 
-function AdvancedSettings({
-  selectedDatabase,
-  reload,
-}: {
-  selectedDatabase: DatabaseInfo;
-  reload: () => void;
-}) {
+function AdvancedSettings({ selectedDatabase, reload }: { selectedDatabase: DatabaseInfo; reload: () => void }) {
   return (
     <Stack>
       <PlayerMerger selectedDatabase={selectedDatabase} />
@@ -415,11 +343,7 @@ function AdvancedSettings({
   );
 }
 
-function PlayerMerger({
-  selectedDatabase,
-}: {
-  selectedDatabase: DatabaseInfo;
-}) {
+function PlayerMerger({ selectedDatabase }: { selectedDatabase: DatabaseInfo }) {
   const { t } = useTranslation();
 
   const [player1, setPlayer1] = useState<number | undefined>(undefined);
@@ -431,11 +355,7 @@ function PlayerMerger({
       return;
     }
     setLoading(true);
-    const res = await commands.mergePlayers(
-      selectedDatabase.file,
-      player1,
-      player2,
-    );
+    const res = await commands.mergePlayers(selectedDatabase.file, player1, player2);
     setLoading(false);
     unwrap(res);
   }
@@ -447,35 +367,17 @@ function PlayerMerger({
       </Text>
       <Text fz="sm">{t("Databases.Settings.MergePlayers.Desc")}</Text>
       <Group grow>
-        <PlayerSearchInput
-          label="Player 1"
-          file={selectedDatabase.file}
-          setValue={setPlayer1}
-        />
-        <Button
-          loading={loading}
-          onClick={mergePlayers}
-          rightSection={<IconArrowRight size="1rem" />}
-        >
+        <PlayerSearchInput label="Player 1" file={selectedDatabase.file} setValue={setPlayer1} />
+        <Button loading={loading} onClick={mergePlayers} rightSection={<IconArrowRight size="1rem" />}>
           {t("Databases.Settings.Merge")}
         </Button>
-        <PlayerSearchInput
-          label="Player 2"
-          file={selectedDatabase.file}
-          setValue={setPlayer2}
-        />
+        <PlayerSearchInput label="Player 2" file={selectedDatabase.file} setValue={setPlayer2} />
       </Group>
     </Stack>
   );
 }
 
-function DuplicateRemover({
-  selectedDatabase,
-  reload,
-}: {
-  selectedDatabase: DatabaseInfo;
-  reload: () => void;
-}) {
+function DuplicateRemover({ selectedDatabase, reload }: { selectedDatabase: DatabaseInfo; reload: () => void }) {
   const { t } = useTranslation();
 
   const [loading, setLoading] = useState(false);
@@ -549,9 +451,7 @@ function IndexInput({
           checked={indexed}
           onChange={(e) => {
             setLoading(true);
-            const fn = e.currentTarget.checked
-              ? commands.createIndexes
-              : commands.deleteIndexes;
+            const fn = e.currentTarget.checked ? commands.createIndexes : commands.deleteIndexes;
             fn(file).then(() => {
               getDatabases().then((dbs) => {
                 setDatabases(dbs);

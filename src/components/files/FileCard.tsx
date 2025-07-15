@@ -1,22 +1,14 @@
-import { commands } from "@/bindings";
-import { activeTabAtom, tabsAtom } from "@/state/atoms";
-import { capitalize } from "@/utils/format";
-import { createTab } from "@/utils/tabs";
-import { unwrap } from "@/utils/unwrap";
-import {
-  ActionIcon,
-  Badge,
-  Box,
-  Group,
-  Stack,
-  Text,
-  Tooltip,
-} from "@mantine/core";
+import { ActionIcon, Badge, Box, Group, Stack, Text, Tooltip } from "@mantine/core";
 import { IconEdit, IconEye } from "@tabler/icons-react";
 import { useNavigate } from "@tanstack/react-router";
 import { useAtom, useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { commands } from "@/bindings";
+import { activeTabAtom, tabsAtom } from "@/state/atoms";
+import { capitalize } from "@/utils/format";
+import { createTab } from "@/utils/tabs";
+import { unwrap } from "@/utils/unwrap";
 import GamePreview from "../databases/GamePreview";
 import GameSelector from "../panels/info/GameSelector";
 import type { FileMetadata } from "./file";
@@ -75,9 +67,7 @@ function FileCard({
         <Text ta="center" fz="xl" fw="bold">
           {selected?.name}
         </Text>
-        <Badge>
-          {t(`Files.FileType.${capitalize(selected.metadata.type)}`)}
-        </Badge>
+        <Badge>{t(`Files.FileType.${capitalize(selected.metadata.type)}`)}</Badge>
       </Stack>
 
       <Group align="center" grow>

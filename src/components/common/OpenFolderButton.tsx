@@ -4,13 +4,7 @@ import { appDataDir, resolve } from "@tauri-apps/api/path";
 import { open } from "@tauri-apps/plugin-shell";
 import { useTranslation } from "react-i18next";
 
-function OpenFolderButton({
-  base,
-  folder,
-}: {
-  base?: "AppDir" | "Document";
-  folder: string;
-}) {
+function OpenFolderButton({ base, folder }: { base?: "AppDir" | "Document"; folder: string }) {
   const { t } = useTranslation();
 
   async function openAppDirData() {

@@ -1,7 +1,7 @@
-import type { BestMoves, EngineOptions, GoMode, ScoreValue } from "@/bindings";
 import { fetch } from "@tauri-apps/plugin-http";
 import { parseUci } from "chessops";
 import { makeFen } from "chessops/fen";
+import type { BestMoves, EngineOptions, GoMode, ScoreValue } from "@/bindings";
 import { positionFromFen } from "../chessops";
 
 const endpoint = "https://www.chessdb.cn/cdb.php";
@@ -48,12 +48,7 @@ export async function getBestMoves(
   return [
     100,
     moves
-      .slice(
-        0,
-        Number.parseInt(
-          options.extraOptions.find((o) => o.name === "MultiPV")?.value ?? "1",
-        ),
-      )
+      .slice(0, Number.parseInt(options.extraOptions.find((o) => o.name === "MultiPV")?.value ?? "1"))
       .map((m, i) => ({
         score: { value: chessDBevalToScore(m.score), wdl: null },
         nodes: 0,
@@ -70,8 +65,7 @@ function chessDBevalToScore(score: number): ScoreValue {
   if (Math.abs(score) > 250_00) {
     return {
       type: "mate",
-      value:
-        Math.floor((300_00 - Math.abs(score) + 1) / 2) * (score > 0 ? 1 : -1),
+      value: Math.floor((300_00 - Math.abs(score) + 1) / 2) * (score > 0 ? 1 : -1),
     };
   }
   if (Math.abs(score) > 200_00) {

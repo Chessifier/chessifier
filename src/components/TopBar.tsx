@@ -1,19 +1,13 @@
 import { Box, Button, Center, Group, Image, Menu, Text } from "@mantine/core";
+import { useColorScheme } from "@mantine/hooks";
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import * as classes from "./TopBar.css";
 
-import { useColorScheme } from "@mantine/hooks";
 const appWindow = getCurrentWebviewWindow();
 
 function IconMinimize() {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      width="24"
-      height="24"
-      transform="scale(0.8)"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" transform="scale(0.8)">
       <title>Minimize</title>
       <path d="M19 13H5v-2h14v2z" fill="currentColor" />
     </svg>
@@ -22,13 +16,7 @@ function IconMinimize() {
 
 function IconMaximize() {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      width="24"
-      height="24"
-      transform="scale(0.8)"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" transform="scale(0.8)">
       <title>Maximize</title>
       <path d="M19 5H5v14h14V5zm-2 12H7V7h10v10z" fill="currentColor" />
     </svg>
@@ -37,13 +25,7 @@ function IconMaximize() {
 
 function IconX() {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      width="24"
-      height="24"
-      transform="scale(0.8)"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" transform="scale(0.8)">
       <title>Close</title>
       <path
         d="M19 6.41l-1.41-1.41L12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
@@ -127,28 +109,13 @@ function TopBar({ menuActions }: { menuActions: MenuGroup[] }) {
         </Box>
         <Box h={35}>
           <Group gap={0} data-tauri-drag-region>
-            <Center
-              h={35}
-              w={45}
-              onClick={() => appWindow.minimize()}
-              className={classes.icon}
-            >
+            <Center h={35} w={45} onClick={() => appWindow.minimize()} className={classes.icon}>
               <IconMinimize />
             </Center>
-            <Center
-              h={35}
-              w={45}
-              onClick={() => appWindow.toggleMaximize()}
-              className={classes.icon}
-            >
+            <Center h={35} w={45} onClick={() => appWindow.toggleMaximize()} className={classes.icon}>
               <IconMaximize />
             </Center>
-            <Center
-              h={35}
-              w={45}
-              onClick={() => appWindow.close()}
-              className={classes.close}
-            >
+            <Center h={35} w={45} onClick={() => appWindow.close()} className={classes.close}>
               <IconX />
             </Center>
           </Group>

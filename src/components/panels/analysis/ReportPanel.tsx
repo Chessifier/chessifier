@@ -1,3 +1,12 @@
+import { Grid, Group, Paper, ScrollArea, Stack, Text } from "@mantine/core";
+import { useToggle } from "@mantine/hooks";
+import { IconZoomCheck } from "@tabler/icons-react";
+import cx from "clsx";
+import equal from "fast-deep-equal";
+import { useAtomValue } from "jotai";
+import React, { memo, Suspense, useContext, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useStore } from "zustand";
 import { events } from "@/bindings";
 import EvalChart from "@/components/common/EvalChart";
 import ProgressButton from "@/components/common/ProgressButton";
@@ -5,16 +14,6 @@ import { TreeStateContext } from "@/components/common/TreeStateContext";
 import { activeTabAtom } from "@/state/atoms";
 import { ANNOTATION_INFO, isBasicAnnotation } from "@/utils/annotation";
 import { getGameStats, getMainLine } from "@/utils/chess";
-import { Grid, Group, Paper, ScrollArea, Stack, Text } from "@mantine/core";
-import { useToggle } from "@mantine/hooks";
-import { IconZoomCheck } from "@tabler/icons-react";
-import cx from "clsx";
-import equal from "fast-deep-equal";
-import { useAtomValue } from "jotai";
-import React, { Suspense, useState } from "react";
-import { memo, useContext, useMemo } from "react";
-import { useTranslation } from "react-i18next";
-import { useStore } from "zustand";
 import { label } from "./AnalysisPanel.css";
 import ReportModal from "./ReportModal";
 
@@ -49,16 +48,8 @@ function ReportPanel() {
         <Group grow style={{ textAlign: "center" }}>
           {stats.whiteAccuracy && stats.blackAccuracy && (
             <>
-              <AccuracyCard
-                color={t("Common.WHITE")}
-                accuracy={stats.whiteAccuracy}
-                cpl={stats.whiteCPL}
-              />
-              <AccuracyCard
-                color={t("Common.BLACK")}
-                accuracy={stats.blackAccuracy}
-                cpl={stats.blackCPL}
-              />
+              <AccuracyCard color={t("Common.WHITE")} accuracy={stats.whiteAccuracy} cpl={stats.whiteCPL} />
+              <AccuracyCard color={t("Common.BLACK")} accuracy={stats.blackAccuracy} cpl={stats.blackCPL} />
             </>
           )}
           <div>
@@ -81,10 +72,7 @@ function ReportPanel() {
           </div>
         </Group>
         <Paper withBorder p="md">
-          <EvalChart
-            isAnalysing={inProgress}
-            startAnalysis={toggleReportingMode}
-          />
+          <EvalChart isAnalysing={inProgress} startAnalysis={toggleReportingMode} />
         </Paper>
         <GameStats {...stats} />
       </Stack>
@@ -152,22 +140,11 @@ const GameStats = memo(
     );
   },
   (prev, next) => {
-    return (
-      equal(prev.whiteAnnotations, next.whiteAnnotations) &&
-      equal(prev.blackAnnotations, next.blackAnnotations)
-    );
+    return equal(prev.whiteAnnotations, next.whiteAnnotations) && equal(prev.blackAnnotations, next.blackAnnotations);
   },
 );
 
-function AccuracyCard({
-  color,
-  cpl,
-  accuracy,
-}: {
-  color: string;
-  cpl: number;
-  accuracy: number;
-}) {
+function AccuracyCard({ color, cpl, accuracy }: { color: string; cpl: number; accuracy: number }) {
   const { t } = useTranslation();
 
   return (

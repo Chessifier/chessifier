@@ -1,15 +1,6 @@
-import { pieceSetAtom } from "@/state/atoms";
-import {
-  Box,
-  Combobox,
-  Flex,
-  Input,
-  InputBase,
-  ScrollArea,
-  Text,
-  useCombobox,
-} from "@mantine/core";
+import { Box, Combobox, Flex, Input, InputBase, ScrollArea, Text, useCombobox } from "@mantine/core";
 import { useAtom } from "jotai";
+import { pieceSetAtom } from "@/state/atoms";
 import PieceComponent from "../common/Piece";
 
 type Item = {
@@ -71,11 +62,7 @@ export default function PiecesSelect() {
   const [pieceSet, setPieceSet] = useAtom(pieceSetAtom);
 
   const options = pieceSets.map((item) => (
-    <Combobox.Option
-      value={item.value}
-      key={item.value}
-      onMouseOver={() => setPieceSet(item.value)}
-    >
+    <Combobox.Option value={item.value} key={item.value} onMouseOver={() => setPieceSet(item.value)}>
       <Text fz="sm" fw={500}>
         {item.label}
       </Text>

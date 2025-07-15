@@ -77,10 +77,7 @@ export async function openingReport({
       },
       "opening",
     );
-    const total = openings.reduce(
-      (acc, opening) => acc + opening.black + opening.white + opening.draw,
-      0,
-    );
+    const total = openings.reduce((acc, opening) => acc + opening.black + opening.white + opening.draw, 0);
 
     if (total < minimumGames) {
       ignoredPositions.add(item.position);
@@ -88,16 +85,12 @@ export async function openingReport({
     }
 
     const filteredOpenings = openings.filter(
-      (opening) =>
-        (opening.black + opening.white + opening.draw) / total >
-        1 - percentageCoverage / 100,
+      (opening) => (opening.black + opening.white + opening.draw) / total > 1 - percentageCoverage / 100,
     );
 
     // Check if there's any opening with a 5% or more frequency that isn't a child of item.node
     for (const opening of filteredOpenings) {
-      const child = item.node.children.find(
-        (child) => child.san === opening.move,
-      );
+      const child = item.node.children.find((child) => child.san === opening.move);
       if (!child && opening.move !== "*") {
         missingMoves.push({
           position: item.position,

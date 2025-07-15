@@ -1,22 +1,12 @@
-import { events, type PuzzleDatabaseInfo, commands } from "@/bindings";
-import { getDefaultPuzzleDatabases } from "@/utils/db";
-import { formatBytes, formatNumber } from "@/utils/format";
-import { getPuzzleDatabases } from "@/utils/puzzles";
-import {
-  Alert,
-  Box,
-  Divider,
-  Group,
-  Modal,
-  Paper,
-  ScrollArea,
-  Stack,
-  Text,
-} from "@mantine/core";
+import { Alert, Box, Divider, Group, Modal, Paper, ScrollArea, Stack, Text } from "@mantine/core";
 import { IconAlertCircle } from "@tabler/icons-react";
 import { appDataDir, resolve } from "@tauri-apps/api/path";
 import { type Dispatch, type SetStateAction, useState } from "react";
 import useSWRImmutable from "swr/immutable";
+import { commands, events, type PuzzleDatabaseInfo } from "@/bindings";
+import { getDefaultPuzzleDatabases } from "@/utils/db";
+import { formatBytes, formatNumber } from "@/utils/format";
+import { getPuzzleDatabases } from "@/utils/puzzles";
 import ProgressButton from "../common/ProgressButton";
 
 function AddPuzzle({
@@ -30,17 +20,10 @@ function AddPuzzle({
   setOpened: (opened: boolean) => void;
   setPuzzleDbs: Dispatch<SetStateAction<PuzzleDatabaseInfo[]>>;
 }) {
-  const { data: dbs, error } = useSWRImmutable(
-    "default_puzzle_databases",
-    getDefaultPuzzleDatabases,
-  );
+  const { data: dbs, error } = useSWRImmutable("default_puzzle_databases", getDefaultPuzzleDatabases);
 
   return (
-    <Modal
-      opened={opened}
-      onClose={() => setOpened(false)}
-      title="Add Database"
-    >
+    <Modal opened={opened} onClose={() => setOpened(false)} title="Add Database">
       <ScrollArea.Autosize mah={500} offsetScrollbars>
         <Stack>
           {dbs?.map((db, i) => (
@@ -53,11 +36,7 @@ function AddPuzzle({
             />
           ))}
           {error && (
-            <Alert
-              icon={<IconAlertCircle size="1rem" />}
-              title="Error"
-              color="red"
-            >
+            <Alert icon={<IconAlertCircle size="1rem" />} title="Error" color="red">
               {"Failed to fetch the database's info from the server."}
             </Alert>
           )}
@@ -126,13 +105,7 @@ function PuzzleDbCard({
               inProgress: "Downloading",
               finalizing: "Extracting",
             }}
-            onClick={() =>
-              downloadDatabase(
-                databaseId,
-                puzzleDb.downloadLink!,
-                puzzleDb.title,
-              )
-            }
+            onClick={() => downloadDatabase(databaseId, puzzleDb.downloadLink!, puzzleDb.title)}
             inProgress={inProgress}
             setInProgress={setInProgress}
           />

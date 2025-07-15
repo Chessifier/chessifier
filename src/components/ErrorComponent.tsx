@@ -1,20 +1,7 @@
-import {
-  Anchor,
-  Button,
-  Code,
-  CopyButton,
-  Group,
-  Stack,
-  Text,
-  Title,
-} from "@mantine/core";
+import { Anchor, Button, Code, CopyButton, Group, Stack, Text, Title } from "@mantine/core";
 import { useNavigate } from "@tanstack/react-router";
 
-export default function ErrorComponent({
-  error,
-}: {
-  error: unknown;
-}) {
+export default function ErrorComponent({ error }: { error: unknown }) {
   const navigate = useNavigate();
 
   return (
@@ -43,13 +30,7 @@ export default function ErrorComponent({
             )}
           </CopyButton>
         )}
-        <Button
-          onClick={() =>
-            navigate({ to: "/" }).then(() => window.location.reload())
-          }
-        >
-          Reload
-        </Button>
+        <Button onClick={() => navigate({ to: "/" }).then(() => window.location.reload())}>Reload</Button>
       </Group>
 
       <Text>

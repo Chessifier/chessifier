@@ -1,15 +1,6 @@
-import { boardImageAtom } from "@/state/atoms";
-import {
-  Box,
-  Combobox,
-  Group,
-  Input,
-  InputBase,
-  ScrollArea,
-  Text,
-  useCombobox,
-} from "@mantine/core";
+import { Box, Combobox, Group, Input, InputBase, ScrollArea, Text, useCombobox } from "@mantine/core";
 import { useAtom } from "jotai";
+import { boardImageAtom } from "@/state/atoms";
 
 const boardImages: string[] = [
   "purple.svg",
@@ -97,11 +88,7 @@ export default function BoardSelect() {
           multiline
           w="10rem"
         >
-          {selected ? (
-            <SelectOption label={selected} />
-          ) : (
-            <Input.Placeholder>Pick value</Input.Placeholder>
-          )}
+          {selected ? <SelectOption label={selected} /> : <Input.Placeholder>Pick value</Input.Placeholder>}
         </InputBase>
       </Combobox.Target>
 

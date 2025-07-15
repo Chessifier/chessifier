@@ -1,7 +1,7 @@
-import type { BestMoves, Score, ScoreValue } from "@/bindings";
 import { minMax } from "@tiptap/react";
 import type { Color } from "chessops";
 import { match } from "ts-pattern";
+import type { BestMoves, Score, ScoreValue } from "@/bindings";
 import type { Annotation } from "./annotation";
 
 export const INITIAL_SCORE: Score = {
@@ -46,38 +46,19 @@ export function normalizeScore(score: ScoreValue, color: Color): number {
   return minMax(cp, -CP_CEILING, CP_CEILING);
 }
 
-function normalizeScores(
-  prev: ScoreValue,
-  next: ScoreValue,
-  color: Color,
-): { prevCP: number; nextCP: number } {
+function normalizeScores(prev: ScoreValue, next: ScoreValue, color: Color): { prevCP: number; nextCP: number } {
   return {
     prevCP: normalizeScore(prev, color),
     nextCP: normalizeScore(next, color),
   };
 }
 
-export function getAccuracy(
-  prev: ScoreValue,
-  next: ScoreValue,
-  color: Color,
-): number {
+export function getAccuracy(prev: ScoreValue, next: ScoreValue, color: Color): number {
   const { prevCP, nextCP } = normalizeScores(prev, next, color);
-  return minMax(
-    103.1668 *
-      Math.exp(-0.04354 * (getWinChance(prevCP) - getWinChance(nextCP))) -
-      3.1669 +
-      1,
-    0,
-    100,
-  );
+  return minMax(103.1668 * Math.exp(-0.04354 * (getWinChance(prevCP) - getWinChance(nextCP))) - 3.1669 + 1, 0, 100);
 }
 
-export function getCPLoss(
-  prev: ScoreValue,
-  next: ScoreValue,
-  color: Color,
-): number {
+export function getCPLoss(prev: ScoreValue, next: ScoreValue, color: Color): number {
   const { prevCP, nextCP } = normalizeScores(prev, next, color);
 
   return Math.max(0, prevCP - nextCP);
@@ -92,11 +73,7 @@ export function getAnnotation(
   is_sacrifice?: boolean,
   move?: string,
 ): Annotation {
-  const { prevCP, nextCP } = normalizeScores(
-    prev || { type: "cp", value: 0 },
-    next,
-    color,
-  );
+  const { prevCP, nextCP } = normalizeScores(prev || { type: "cp", value: 0 }, next, color);
   const winChanceDiff = getWinChance(prevCP) - getWinChance(nextCP);
 
   if (winChanceDiff > 20) {
@@ -110,20 +87,9 @@ export function getAnnotation(
   }
 
   if (prevMoves.length > 1) {
-    const scores = normalizeScores(
-      prevMoves[0].score.value,
-      prevMoves[1].score.value,
-      color,
-    );
-    if (
-      getWinChance(scores.prevCP) - getWinChance(scores.nextCP) > 10 &&
-      move === prevMoves[0].sanMoves[0]
-    ) {
-      const scores = normalizeScores(
-        prevprev || { type: "cp", value: 0 },
-        prevMoves[0].score.value,
-        color,
-      );
+    const scores = normalizeScores(prevMoves[0].score.value, prevMoves[1].score.value, color);
+    if (getWinChance(scores.prevCP) - getWinChance(scores.nextCP) > 10 && move === prevMoves[0].sanMoves[0]) {
+      const scores = normalizeScores(prevprev || { type: "cp", value: 0 }, prevMoves[0].score.value, color);
       if (is_sacrifice) {
         return "!!";
       }

@@ -1,11 +1,3 @@
-import { events, type DatabaseInfo, commands } from "@/bindings";
-import {
-  type SuccessDatabaseInfo,
-  getDatabases,
-  useDefaultDatabases,
-} from "@/utils/db";
-import { capitalize, formatBytes, formatNumber } from "@/utils/format";
-import { unwrap } from "@/utils/unwrap";
 import {
   Alert,
   Box,
@@ -29,6 +21,10 @@ import { open } from "@tauri-apps/plugin-dialog";
 import { type Dispatch, type SetStateAction, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { KeyedMutator } from "swr";
+import { commands, type DatabaseInfo, events } from "@/bindings";
+import { getDatabases, type SuccessDatabaseInfo, useDefaultDatabases } from "@/utils/db";
+import { capitalize, formatBytes, formatNumber } from "@/utils/format";
+import { unwrap } from "@/utils/unwrap";
 import FileInput from "../common/FileInput";
 import ProgressButton from "../common/ProgressButton";
 
@@ -51,9 +47,7 @@ function AddDatabase({
   async function convertDB(path: string, title: string, description?: string) {
     setLoading(true);
     const dbPath = await resolve(await appDataDir(), "db", `${title}.db3`);
-    unwrap(
-      await commands.convertPgn(path, dbPath, null, title, description ?? null),
-    );
+    unwrap(await commands.convertPgn(path, dbPath, null, title, description ?? null));
     setDatabases(await getDatabases());
     setLoading(false);
   }
@@ -70,8 +64,7 @@ function AddDatabase({
     validate: {
       title: (value) => {
         if (!value) return t("Common.RequireName");
-        if (databases.find((e) => e.type === "success" && e.title === value))
-          return t("Common.NameAlreadyUsed");
+        if (databases.find((e) => e.type === "success" && e.title === value)) return t("Common.NameAlreadyUsed");
       },
       file: (value) => {
         if (!value) return t("Common.RequirePath");
@@ -80,11 +73,7 @@ function AddDatabase({
   });
 
   return (
-    <Modal
-      opened={opened}
-      onClose={() => setOpened(false)}
-      title={t("Databases.Add.Title")}
-    >
+    <Modal opened={opened} onClose={() => setOpened(false)} title={t("Databases.Add.Title")}>
       <Tabs defaultValue="web">
         <Tabs.List>
           <Tabs.Tab value="web">{t("Databases.Add.Web")}</Tabs.Tab>
@@ -105,19 +94,12 @@ function AddDatabase({
                   key={i}
                   setDatabases={setDatabases}
                   initInstalled={databases.some(
-                    (e) =>
-                      e.type === "success" &&
-                      db.type === "success" &&
-                      e.title === db.title,
+                    (e) => e.type === "success" && db.type === "success" && e.title === db.title,
                   )}
                 />
               ))}
               {error && (
-                <Alert
-                  icon={<IconAlertCircle size="1rem" />}
-                  title="Error"
-                  color="red"
-                >
+                <Alert icon={<IconAlertCircle size="1rem" />} title="Error" color="red">
                   {"Failed to fetch the database's info from the server."}
                 </Alert>
               )}
@@ -131,16 +113,9 @@ function AddDatabase({
               setOpened(false);
             })}
           >
-            <TextInput
-              label={t("Common.Name")}
-              withAsterisk
-              {...form.getInputProps("title")}
-            />
+            <TextInput label={t("Common.Name")} withAsterisk {...form.getInputProps("title")} />
 
-            <TextInput
-              label={t("Common.Description")}
-              {...form.getInputProps("description")}
-            />
+            <TextInput label={t("Common.Description")} {...form.getInputProps("description")} />
 
             <FileInput
               label={t("Common.PGNFile")}
@@ -161,12 +136,7 @@ function AddDatabase({
                 if (filename) {
                   form.setFieldValue("filename", filename);
                   if (!form.values.title) {
-                    form.setFieldValue(
-                      "title",
-                      capitalize(
-                        filename.replaceAll(/[_-]/g, " ").replace(".pgn", ""),
-                      ),
-                    );
+                    form.setFieldValue("title", capitalize(filename.replaceAll(/[_-]/g, " ").replace(".pgn", "")));
                   }
                 }
               }}
@@ -251,13 +221,7 @@ function DatabaseCard({
               inProgress: t("Common.Downloading"),
               finalizing: t("Common.Extracting"),
             }}
-            onClick={() =>
-              downloadDatabase(
-                databaseId,
-                database.downloadLink!,
-                database.title!,
-              )
-            }
+            onClick={() => downloadDatabase(databaseId, database.downloadLink!, database.title!)}
             inProgress={inProgress}
             setInProgress={setInProgress}
           />

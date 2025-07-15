@@ -1,3 +1,10 @@
+import { ActionIcon, Alert, Button, Group, Progress, Stack, Text, Tooltip } from "@mantine/core";
+import { IconInfoCircle, IconReload } from "@tabler/icons-react";
+import { useAtom, useAtomValue } from "jotai";
+import { atomWithStorage } from "jotai/utils";
+import { DataTable, type DataTableSortStatus } from "mantine-datatable";
+import { useContext, useMemo, useState } from "react";
+import { useStore } from "zustand";
 import { TreeStateContext } from "@/components/common/TreeStateContext";
 import {
   currentTabAtom,
@@ -6,27 +13,7 @@ import {
   percentageCoverageAtom,
   referenceDbAtom,
 } from "@/state/atoms";
-import {
-  type MissingMove,
-  getTreeStats,
-  openingReport,
-} from "@/utils/repertoire";
-import {
-  ActionIcon,
-  Alert,
-  Button,
-  Group,
-  Progress,
-  Stack,
-  Text,
-  Tooltip,
-} from "@mantine/core";
-import { IconInfoCircle, IconReload } from "@tabler/icons-react";
-import { useAtom, useAtomValue } from "jotai";
-import { atomWithStorage } from "jotai/utils";
-import { DataTable, type DataTableSortStatus } from "mantine-datatable";
-import { useContext, useMemo, useState } from "react";
-import { useStore } from "zustand";
+import { getTreeStats, type MissingMove, openingReport } from "@/utils/repertoire";
 
 function RepertoireInfo() {
   const store = useContext(TreeStateContext)!;
@@ -92,8 +79,7 @@ function RepertoireInfo() {
       {!headers.start ||
         (headers.start.length === 0 && (
           <Alert icon={<IconInfoCircle />}>
-            Mark a move as <b>Start</b> in order to exclude unwanted moves from
-            the results
+            Mark a move as <b>Start</b> in order to exclude unwanted moves from the results
           </Alert>
         ))}
 
@@ -103,12 +89,7 @@ function RepertoireInfo() {
           <Progress value={progress} />
         </>
       ) : (
-        missingMoves && (
-          <MissingMoves
-            missingMoves={missingMoves}
-            search={searchForMissingMoves}
-          />
-        )
+        missingMoves && <MissingMoves missingMoves={missingMoves} search={searchForMissingMoves} />
       )}
     </Stack>
   );
@@ -126,13 +107,7 @@ const sortStatusAtom = atomWithStorage<SortStatus>(
   { getOnInit: true },
 );
 
-function MissingMoves({
-  missingMoves,
-  search,
-}: {
-  missingMoves: MissingMove[];
-  search: () => void;
-}) {
+function MissingMoves({ missingMoves, search }: { missingMoves: MissingMove[]; search: () => void }) {
   const store = useContext(TreeStateContext)!;
   const goToMove = useStore(store, (s) => s.goToMove);
 
@@ -212,9 +187,7 @@ function MissingMoves({
             {
               accessor: "percentage",
               sortable: true,
-              render: ({ percentage }) => (
-                <Text>{(percentage * 100).toFixed(1)}%</Text>
-              ),
+              render: ({ percentage }) => <Text>{(percentage * 100).toFixed(1)}%</Text>,
             },
           ],
         },

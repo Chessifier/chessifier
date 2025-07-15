@@ -1,3 +1,13 @@
+import { Paper, Portal, Stack, Tabs } from "@mantine/core";
+import { useHotkeys, useToggle } from "@mantine/hooks";
+import { IconDatabase, IconInfoCircle, IconNotes, IconTargetArrow, IconZoomCheck } from "@tabler/icons-react";
+import { useLoaderData } from "@tanstack/react-router";
+import { writeTextFile } from "@tauri-apps/plugin-fs";
+import { useAtom, useAtomValue } from "jotai";
+import { Suspense, useCallback, useContext, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
+import { useStore } from "zustand";
+import { useShallow } from "zustand/react/shallow";
 import {
   allEnabledAtom,
   autoSaveAtom,
@@ -9,22 +19,6 @@ import {
 import { keyMapAtom } from "@/state/keybindings";
 import { defaultPGN, getVariationLine } from "@/utils/chess";
 import { saveToFile } from "@/utils/tabs";
-import { Paper, Portal, Stack, Tabs } from "@mantine/core";
-import { useHotkeys, useToggle } from "@mantine/hooks";
-import {
-  IconDatabase,
-  IconInfoCircle,
-  IconNotes,
-  IconTargetArrow,
-  IconZoomCheck,
-} from "@tabler/icons-react";
-import { useLoaderData } from "@tanstack/react-router";
-import { writeTextFile } from "@tauri-apps/plugin-fs";
-import { useAtom, useAtomValue } from "jotai";
-import { Suspense, useCallback, useContext, useEffect, useRef } from "react";
-import { useTranslation } from "react-i18next";
-import { useStore } from "zustand";
-import { useShallow } from "zustand/react/shallow";
 import GameNotation from "../common/GameNotation";
 import MoveControls from "../common/MoveControls";
 import { TreeStateContext } from "../common/TreeStateContext";
@@ -83,8 +77,7 @@ function BoardAnalysis() {
 
   const [, enable] = useAtom(enableAllAtom);
   const allEnabledLoader = useAtomValue(allEnabledAtom);
-  const allEnabled =
-    allEnabledLoader.state === "hasData" && allEnabledLoader.data;
+  const allEnabled = allEnabledLoader.state === "hasData" && allEnabledLoader.data;
 
   const keyMap = useAtomValue(keyMapAtom);
   useHotkeys([
@@ -117,13 +110,10 @@ function BoardAnalysis() {
     ],
   ]);
 
-  const [currentTabSelected, setCurrentTabSelected] = useAtom(
-    currentTabSelectedAtom,
-  );
+  const [currentTabSelected, setCurrentTabSelected] = useAtom(currentTabSelectedAtom);
   const practiceTabSelected = useAtomValue(currentPracticeTabAtom);
   const isRepertoire = currentTab?.file?.metadata.type === "repertoire";
-  const practicing =
-    currentTabSelected === "practice" && practiceTabSelected === "train";
+  const practicing = currentTabSelected === "practice" && practiceTabSelected === "train";
 
   return (
     <>
@@ -162,44 +152,25 @@ function BoardAnalysis() {
           >
             <Tabs.List grow mb="1rem">
               {isRepertoire && (
-                <Tabs.Tab
-                  value="practice"
-                  leftSection={<IconTargetArrow size="1rem" />}
-                >
+                <Tabs.Tab value="practice" leftSection={<IconTargetArrow size="1rem" />}>
                   {t("Board.Tabs.Practice")}
                 </Tabs.Tab>
               )}
-              <Tabs.Tab
-                value="analysis"
-                leftSection={<IconZoomCheck size="1rem" />}
-              >
+              <Tabs.Tab value="analysis" leftSection={<IconZoomCheck size="1rem" />}>
                 {t("Board.Tabs.Analysis")}
               </Tabs.Tab>
-              <Tabs.Tab
-                value="database"
-                leftSection={<IconDatabase size="1rem" />}
-              >
+              <Tabs.Tab value="database" leftSection={<IconDatabase size="1rem" />}>
                 {t("Board.Tabs.Database")}
               </Tabs.Tab>
-              <Tabs.Tab
-                value="annotate"
-                leftSection={<IconNotes size="1rem" />}
-              >
+              <Tabs.Tab value="annotate" leftSection={<IconNotes size="1rem" />}>
                 {t("Board.Tabs.Annotate")}
               </Tabs.Tab>
-              <Tabs.Tab
-                value="info"
-                leftSection={<IconInfoCircle size="1rem" />}
-              >
+              <Tabs.Tab value="info" leftSection={<IconInfoCircle size="1rem" />}>
                 {t("Board.Tabs.Info")}
               </Tabs.Tab>
             </Tabs.List>
             {isRepertoire && (
-              <Tabs.Panel
-                value="practice"
-                flex={1}
-                style={{ overflowY: "hidden" }}
-              >
+              <Tabs.Panel value="practice" flex={1} style={{ overflowY: "hidden" }}>
                 <Suspense>
                   <PracticePanel />
                 </Suspense>
@@ -208,25 +179,13 @@ function BoardAnalysis() {
             <Tabs.Panel value="info" flex={1} style={{ overflowY: "hidden" }}>
               <InfoPanel />
             </Tabs.Panel>
-            <Tabs.Panel
-              value="database"
-              flex={1}
-              style={{ overflowY: "hidden" }}
-            >
+            <Tabs.Panel value="database" flex={1} style={{ overflowY: "hidden" }}>
               <DatabasePanel />
             </Tabs.Panel>
-            <Tabs.Panel
-              value="annotate"
-              flex={1}
-              style={{ overflowY: "hidden" }}
-            >
+            <Tabs.Panel value="annotate" flex={1} style={{ overflowY: "hidden" }}>
               <AnnotationPanel />
             </Tabs.Panel>
-            <Tabs.Panel
-              value="analysis"
-              flex={1}
-              style={{ overflowY: "hidden" }}
-            >
+            <Tabs.Panel value="analysis" flex={1} style={{ overflowY: "hidden" }}>
               <Suspense>
                 <AnalysisPanel />
               </Suspense>

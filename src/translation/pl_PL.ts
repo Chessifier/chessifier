@@ -142,10 +142,8 @@ export const pl_PL = {
     "Board.Tabs.Info": "Informacje",
     "Board.Practice.Train": "Trenuj",
     "Board.Practice.Build": "Buduj",
-    "Board.Practice.NoPositionForTrain1":
-      "Brak pozycji do ćwiczenia. Rozpocznij od dodania ruchów do tego pliku PGN.",
-    "Board.Practice.NoPositionForTrain2":
-      "Musisz przełączyć się na tryb Analizy, aby móc dodawać ruchy.",
+    "Board.Practice.NoPositionForTrain1": "Brak pozycji do ćwiczenia. Rozpocznij od dodania ruchów do tego pliku PGN.",
+    "Board.Practice.NoPositionForTrain2": "Musisz przełączyć się na tryb Analizy, aby móc dodawać ruchy.",
     "Board.Practice.SeeAnser": "Zobacz odpowiedź",
     "Board.Practice.Practiced": "Przećwiczone",
     "Board.Practice.Due": "Termin",
@@ -167,8 +165,7 @@ export const pl_PL = {
     "Board.Analysis.GeneratingReport": "Generowanie raportu",
     "Board.Analysis.NotAnalysed": "Nie przeanalizowane",
     "Board.Analysis.EngineRequired": "Wymagany silnik",
-    "Board.Analysis.RefDBRequired":
-      "Nie wybrano bazy odniesienia. Wybierz ją najpierw na stronie bazy danych",
+    "Board.Analysis.RefDBRequired": "Nie wybrano bazy odniesienia. Wybierz ją najpierw na stronie bazy danych",
     "Board.Analysis.Time": "Czas (ms)",
     "Board.Analysis.Reversed": "Odwrócona analiza",
     "Board.Analysis.Reversed.Desc": "Analizuj grę od ostatniego ruchu.",
@@ -204,19 +201,16 @@ export const pl_PL = {
     "Engines.Settings.Reset": "Przywróć domyślne",
     "Engines.Add.Title": "Dodaj silnik",
     "Engines.Add.Cloud": "Chmura",
-    "Engines.Add.ErrorFetch":
-      "Nie udało się pobrać informacji o silniku z serwera.",
+    "Engines.Add.ErrorFetch": "Nie udało się pobrać informacji o silniku z serwera.",
     "Engines.Add.BinaryFile": "Plik binarny",
     "Engines.Add.BinaryFile.Desc": "Kliknij, aby wybrać plik binarny",
     "Engines.Add.Name": "Nazwa",
     "Engines.Add.Name.Autodetect": "Autodetekcja",
     "Engines.Add.Elo.Desc": "Elo silnika",
     "Engines.Add.ImageFile": "Plik graficzny",
-    "Engines.Add.ImageFile.Desc":
-      "Kliknij, aby wybrać plik graficzny (zalecany rozmiar: 60x60)",
+    "Engines.Add.ImageFile.Desc": "Kliknij, aby wybrać plik graficzny (zalecany rozmiar: 60x60)",
     "Engines.Remove.Title": "Usuń silnik",
-    "Engines.Remove.Message":
-      "Czy na pewno chcesz usunąć ten silnik z Chessifier?",
+    "Engines.Remove.Message": "Czy na pewno chcesz usunąć ten silnik z Chessifier?",
 
     "Databases.Title": "Twoje bazy danych",
     "Databases.Card.Games": "Gry",
@@ -224,8 +218,7 @@ export const pl_PL = {
     "Databases.Card.Storage": "Przechowywanie",
     "Databases.Add.Title": "Dodaj bazę danych",
     "Databases.Add.Web": "Sieć",
-    "Databases.Add.ErrorFetch":
-      "Nie udało się pobrać informacji o bazie danych z serwera.",
+    "Databases.Add.ErrorFetch": "Nie udało się pobrać informacji o bazie danych z serwera.",
     "Databases.Add.ClickToSelectPGN": "Kliknij, aby wybrać plik PGN",
     "Databases.Add.Convert": "Konwertuj",
     "Databases.Settings.ReferenceDatabase": "Baza odniesienia",
@@ -240,8 +233,7 @@ export const pl_PL = {
       "Zastąp wszystkie wystąpienia pierwszego gracza drugim graczem w bazie danych.",
     "Databases.Settings.Merge": "Scal",
     "Databases.Settings.BatchDelete": "Usuń zbiorczo",
-    "Databases.Settings.BatchDelete.Desc":
-      "Te operacje nieodwracalnie usuną gry z bazy danych. Używaj ostrożnie.",
+    "Databases.Settings.BatchDelete.Desc": "Te operacje nieodwracalnie usuną gry z bazy danych. Używaj ostrożnie.",
     "Databases.Settings.RemoveDup": "Usuń duplikaty",
     "Databases.Settings.RemoveEmpty": "Usuń puste gry",
     "Databases.Settings.Actions": "Akcje",
@@ -288,43 +280,35 @@ export const pl_PL = {
     "Settings.EraseDrawablesOnClick.Desc":
       "Wyczyść szachownicę z narysowanych strzałek i okręgów, klikając lewym przyciskiem myszy",
     "Settings.AutoPromition": "Automatyczna promocja",
-    "Settings.AutoPromition.Desc":
-      "Automatycznie promuj na hetmana, gdy pionek dotrze do ostatniego rzędu",
+    "Settings.AutoPromition.Desc": "Automatycznie promuj na hetmana, gdy pionek dotrze do ostatniego rzędu",
     "Settings.Coordinates": "Współrzędne",
     "Settings.Coordinates.Desc": "Pokaż współrzędne na szachownicy",
     "Settings.AutoSave": "Automatyczne zapisywanie",
     "Settings.AutoSave.Desc": "Automatycznie zapisuj do pliku po każdym ruchu",
     "Settings.PreviewBoard": "Podgląd szachownicy",
-    "Settings.PreviewBoard.Desc":
-      "Pokaż podgląd szachownicy po najechaniu kursorem na ruch w analizie silnika",
+    "Settings.PreviewBoard.Desc": "Pokaż podgląd szachownicy po najechaniu kursorem na ruch w analizie silnika",
     "Settings.ScrollThroughMoves": "Przewijaj ruchy",
-    "Settings.ScrollThroughMoves.Desc":
-      "Włącz lub wyłącz przewijanie ruchów na szachownicy",
+    "Settings.ScrollThroughMoves.Desc": "Włącz lub wyłącz przewijanie ruchów na szachownicy",
     "Settings.Inputs.Desc": "Dostosuj ustawienia wejścia",
     "Settings.Inputs.TextInput": "Tekstowe wprowadzanie ruchów",
     "Settings.Inputs.TextInput.Desc": "Wprowadzaj ruchy w formacie tekstowym",
     "Settings.Inputs.SpellCheck": "Sprawdzanie pisowni",
-    "Settings.Inputs.SpellCheck.Desc":
-      "Włącz lub wyłącz sprawdzanie pisowni w tekstowych polach wprowadzania",
+    "Settings.Inputs.SpellCheck.Desc": "Włącz lub wyłącz sprawdzanie pisowni w tekstowych polach wprowadzania",
     "Settings.OpeningReport.Desc": "Dostosuj ustawienia raportu otwarcia",
     "Settings.OpeningReport.PercentCoverage": "Procentowe pokrycie",
-    "Settings.OpeningReport.PercentCoverage.Desc":
-      "Procent ruchów objętych w każdej pozycji",
+    "Settings.OpeningReport.PercentCoverage.Desc": "Procent ruchów objętych w każdej pozycji",
     "Settings.OpeningReport.MinGames": "Minimalna liczba gier",
-    "Settings.OpeningReport.MinGames.Desc":
-      "Minimalna liczba gier w każdej pozycji, aby była brana pod uwagę",
+    "Settings.OpeningReport.MinGames.Desc": "Minimalna liczba gier w każdej pozycji, aby była brana pod uwagę",
     "Settings.Anarchy.Desc": "Zabawne opcje",
     "Settings.Anarchy.ForcedChessifier": "Wymuszony Chessifier",
-    "Settings.Anarchy.ForcedChessifier.Desc":
-      "Zmusi cię do zagrania Chessifier, jeśli jest to legalny ruch.",
+    "Settings.Anarchy.ForcedChessifier.Desc": "Zmusi cię do zagrania Chessifier, jeśli jest to legalny ruch.",
     "Settings.Appearance.Desc": "Dostosuj wygląd aplikacji",
     "Settings.Appearance.Theme": "Motyw",
     "Settings.Appearance.Theme.Desc": "Ogólny schemat kolorów",
     "Settings.Appearance.Theme.Light": "Jasny",
     "Settings.Appearance.Theme.Dark": "Ciemny",
     "Settings.Appearance.TitleBar": "Pasek tytułu",
-    "Settings.Appearance.TitleBar.Desc":
-      "Wybierz między natywnym a niestandardowym paskiem tytułu",
+    "Settings.Appearance.TitleBar.Desc": "Wybierz między natywnym a niestandardowym paskiem tytułu",
     "Settings.Appearance.Language": "Język",
     "Settings.Appearance.Language.Desc": "Język używany w aplikacji",
     "Settings.Appearance.TitleBar.Native": "Natywny",
@@ -344,8 +328,7 @@ export const pl_PL = {
     "Settings.Sound.Collection.Desc": "Kolekcja używanych dźwięków",
     "Settings.Directories.Desc": "Dostosuj katalogi używane przez aplikację",
     "Settings.Directories.Files": "Katalog plików",
-    "Settings.Directories.Files.Desc":
-      "To miejsce, gdzie są przechowywane twoje gry na stronie Pliki",
+    "Settings.Directories.Files.Desc": "To miejsce, gdzie są przechowywane twoje gry na stronie Pliki",
 
     "PgnInput.Comments": "Komentarze",
     "PgnInput.Glyphs": "Symbole",

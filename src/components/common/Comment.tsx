@@ -5,8 +5,7 @@ import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 
 export function Comment({ comment }: { comment: string }) {
-  const multipleLine =
-    comment.split("\n").filter((v) => v.trim() !== "").length > 1;
+  const multipleLine = comment.split("\n").filter((v) => v.trim() !== "").length > 1;
 
   return (
     <TypographyStylesProvider
@@ -18,9 +17,7 @@ export function Comment({ comment }: { comment: string }) {
     >
       <Markdown
         components={{
-          a: ({ node, ...props }) => (
-            <a {...props} target="_blank" rel="noreferrer" />
-          ),
+          a: ({ node, ...props }) => <a {...props} target="_blank" rel="noreferrer" />,
         }}
         rehypePlugins={[rehypeRaw, remarkGfm]}
       >

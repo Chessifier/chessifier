@@ -1,21 +1,13 @@
-import type { GoMode } from "@/bindings";
-import GoModeInput from "@/components/common/GoModeInput";
-import { activeTabAtom, enginesAtom } from "@/state/atoms";
-import { type Engine, type EngineSettings, killEngine } from "@/utils/engines";
-import {
-  ActionIcon,
-  Checkbox,
-  Group,
-  type MantineColor,
-  Stack,
-  Text,
-  Tooltip,
-} from "@mantine/core";
+import { ActionIcon, Checkbox, Group, type MantineColor, Stack, Text, Tooltip } from "@mantine/core";
 import { IconPlayerStopFilled, IconSettings } from "@tabler/icons-react";
 import { useNavigate } from "@tanstack/react-router";
 import { useAtomValue } from "jotai";
 import React, { memo, useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import type { GoMode } from "@/bindings";
+import GoModeInput from "@/components/common/GoModeInput";
+import { activeTabAtom, enginesAtom } from "@/state/atoms";
+import { type Engine, type EngineSettings, killEngine } from "@/utils/engines";
 import CoresSlider from "./CoresSlider";
 import HashSlider from "./HashSlider";
 import LinesSlider from "./LinesSlider";
@@ -37,15 +29,7 @@ interface EngineSettingsProps {
   gameMode?: boolean;
 }
 
-function EngineSettingsForm({
-  engine,
-  settings,
-  setSettings,
-  color,
-  minimal,
-  remote,
-  gameMode,
-}: EngineSettingsProps) {
+function EngineSettingsForm({ engine, settings, setSettings, color, minimal, remote, gameMode }: EngineSettingsProps) {
   const { t } = useTranslation();
 
   const multipv = settings.settings.find((o) => o.name === "MultiPV");
@@ -65,13 +49,7 @@ function EngineSettingsForm({
 
   return (
     <Stack>
-      {!remote && (
-        <GoModeInput
-          gameMode={gameMode}
-          goMode={settings.go}
-          setGoMode={setGoMode}
-        />
-      )}
+      {!remote && <GoModeInput gameMode={gameMode} goMode={settings.go} setGoMode={setGoMode} />}
 
       {!minimal && multipv && (
         <Group grow>
@@ -84,9 +62,7 @@ function EngineSettingsForm({
               setSettings((prev) => {
                 return {
                   ...prev,
-                  settings: prev.settings.map((o) =>
-                    o.name === "MultiPV" ? { ...o, value: v || 1 } : o,
-                  ),
+                  settings: prev.settings.map((o) => (o.name === "MultiPV" ? { ...o, value: v || 1 } : o)),
                 };
               })
             }
@@ -106,9 +82,7 @@ function EngineSettingsForm({
               setValue={(v) =>
                 setSettings((prev) => ({
                   ...prev,
-                  settings: prev.settings.map((o) =>
-                    o.name === "Threads" ? { ...o, value: v || 1 } : o,
-                  ),
+                  settings: prev.settings.map((o) => (o.name === "Threads" ? { ...o, value: v || 1 } : o)),
                 }))
               }
               color={color}
@@ -125,9 +99,7 @@ function EngineSettingsForm({
                 setValue={(v) =>
                   setSettings((prev) => ({
                     ...prev,
-                    settings: prev.settings.map((o) =>
-                      o.name === "Hash" ? { ...o, value: v || 1 } : o,
-                    ),
+                    settings: prev.settings.map((o) => (o.name === "Hash" ? { ...o, value: v || 1 } : o)),
                   }))
                 }
                 color={color}
@@ -138,11 +110,7 @@ function EngineSettingsForm({
       )}
       {!minimal && (
         <Group>
-          <SyncSettings
-            settings={settings}
-            engine={engine.name}
-            setSettings={setSettings}
-          />
+          <SyncSettings settings={settings} engine={engine.name} setSettings={setSettings} />
           <ActionIcon.Group>
             {engine.type === "local" && (
               <Tooltip label="Kill engine">
@@ -180,10 +148,7 @@ function SyncSettings({
   const { t } = useTranslation();
 
   const engines = useAtomValue(enginesAtom);
-  const engineDefault = useMemo(
-    () => engines.find((o) => o.name === engine)!,
-    [engines, engine],
-  );
+  const engineDefault = useMemo(() => engines.find((o) => o.name === engine)!, [engines, engine]);
 
   return (
     <Checkbox

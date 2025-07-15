@@ -1,3 +1,37 @@
+import { ActionIcon, Box, Center, Group, Menu, Text, Tooltip, useMantineTheme } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
+import {
+  IconArrowBack,
+  IconCamera,
+  IconChess,
+  IconChessFilled,
+  IconChevronRight,
+  IconDeviceFloppy,
+  IconDotsVertical,
+  IconEdit,
+  IconEditOff,
+  IconEraser,
+  IconPlus,
+  IconSwitchVertical,
+  IconTarget,
+  IconZoomCheck,
+} from "@tabler/icons-react";
+import { documentDir } from "@tauri-apps/api/path";
+import { save } from "@tauri-apps/plugin-dialog";
+import { writeFile } from "@tauri-apps/plugin-fs";
+import type { DrawShape } from "chessground/draw";
+import { makeSquare, type NormalMove, parseSquare, parseUci, type SquareName } from "chessops";
+import { chessgroundDests, chessgroundMove } from "chessops/compat";
+import { makeSan } from "chessops/san";
+import domtoimage from "dom-to-image";
+import { useAtom, useAtomValue } from "jotai";
+import { memo, useCallback, useContext, useMemo, useState } from "react";
+import { Helmet } from "react-helmet";
+import { useHotkeys } from "react-hotkeys-hook";
+import { useTranslation } from "react-i18next";
+import { match } from "ts-pattern";
+import { useStore } from "zustand";
+import { useShallow } from "zustand/react/shallow";
 import { Chessground } from "@/chessground/Chessground";
 import {
   autoPromoteAtom,
@@ -20,62 +54,9 @@ import { keyMapAtom } from "@/state/keybindings";
 import { chessboard } from "@/styles/Chessboard.css";
 import { ANNOTATION_INFO, isBasicAnnotation } from "@/utils/annotation";
 import { getMaterialDiff, getVariationLine } from "@/utils/chess";
-import {
-  chessopsError,
-  forceEnPassant,
-  positionFromFen,
-} from "@/utils/chessops";
-import { type TimeControlField, getClockInfo } from "@/utils/clock";
+import { chessopsError, forceEnPassant, positionFromFen } from "@/utils/chessops";
+import { getClockInfo, type TimeControlField } from "@/utils/clock";
 import { getNodeAtPath } from "@/utils/treeReducer";
-import {
-  ActionIcon,
-  Box,
-  Center,
-  Group,
-  Menu,
-  Text,
-  Tooltip,
-  useMantineTheme,
-} from "@mantine/core";
-import { notifications } from "@mantine/notifications";
-import {
-  IconArrowBack,
-  IconCamera,
-  IconChess,
-  IconChessFilled,
-  IconChevronRight,
-  IconDeviceFloppy,
-  IconDotsVertical,
-  IconEdit,
-  IconEditOff,
-  IconEraser,
-  IconPlus,
-  IconSwitchVertical,
-  IconTarget,
-  IconZoomCheck,
-} from "@tabler/icons-react";
-import { documentDir } from "@tauri-apps/api/path";
-import { save } from "@tauri-apps/plugin-dialog";
-import { writeFile } from "@tauri-apps/plugin-fs";
-import type { DrawShape } from "chessground/draw";
-import {
-  type NormalMove,
-  type SquareName,
-  makeSquare,
-  parseSquare,
-  parseUci,
-} from "chessops";
-import { chessgroundDests, chessgroundMove } from "chessops/compat";
-import { makeSan } from "chessops/san";
-import domtoimage from "dom-to-image";
-import { useAtom, useAtomValue } from "jotai";
-import { memo, useCallback, useContext, useMemo, useState } from "react";
-import { Helmet } from "react-helmet";
-import { useHotkeys } from "react-hotkeys-hook";
-import { useTranslation } from "react-i18next";
-import { match } from "ts-pattern";
-import { useStore } from "zustand";
-import { useShallow } from "zustand/react/shallow";
 import ShowMaterial from "../common/ShowMaterial";
 import { TreeStateContext } from "../common/TreeStateContext";
 import { updateCardPerformance } from "../files/opening";
@@ -163,9 +144,7 @@ function Board({
   const showCoordinates = useAtomValue(showCoordinatesAtom);
   const autoSave = useAtomValue(autoSaveAtom);
 
-  let dests: Map<SquareName, SquareName[]> = pos
-    ? chessgroundDests(pos)
-    : new Map();
+  let dests: Map<SquareName, SquareName[]> = pos ? chessgroundDests(pos) : new Map();
   if (forcedEP && pos) {
     dests = forceEnPassant(dests, pos);
   }
@@ -291,10 +270,7 @@ function Board({
               )
               .otherwise(() => SMALL_BRUSH);
 
-            if (
-              ii === 0 ||
-              (showConsecutiveArrows && j === 0 && ii % 2 === 0)
-            ) {
+            if (ii === 0 || (showConsecutiveArrows && j === 0 && ii % 2 === 0)) {
               if (
                 ii < 5 && // max 3 arrows
                 !shapes.find((s) => s.orig === from && s.dest === to) &&
@@ -350,87 +326,46 @@ function Board({
           </Menu.Target>
           <Menu.Dropdown>
             <Menu.Item
-              leftSection={
-                viewPawnStructure ? (
-                  <IconChessFilled size="1.3rem" />
-                ) : (
-                  <IconChess size="1.3rem" />
-                )
-              }
+              leftSection={viewPawnStructure ? <IconChessFilled size="1.3rem" /> : <IconChess size="1.3rem" />}
               onClick={() => setViewPawnStructure(!viewPawnStructure)}
             >
               {t("Board.Action.TogglePawnStructureView")}
             </Menu.Item>
-            <Menu.Item
-              leftSection={<IconCamera size="1.3rem" />}
-              onClick={() => takeSnapshot()}
-            >
+            <Menu.Item leftSection={<IconCamera size="1.3rem" />} onClick={() => takeSnapshot()}>
               {t("Board.Action.TakeSnapshot")}
             </Menu.Item>
           </Menu.Dropdown>
         </Menu>
         {canTakeBack && (
           <Tooltip label="Take Back">
-            <ActionIcon
-              variant="default"
-              size="lg"
-              onClick={() => deleteMove()}
-            >
+            <ActionIcon variant="default" size="lg" onClick={() => deleteMove()}>
               <IconArrowBack />
             </ActionIcon>
           </Tooltip>
         )}
-        <Tooltip
-          label={t(
-            currentTab?.type === "analysis"
-              ? "Board.Action.PlayFromHere"
-              : "Board.AnalyzeGame",
-          )}
-        >
+        <Tooltip label={t(currentTab?.type === "analysis" ? "Board.Action.PlayFromHere" : "Board.AnalyzeGame")}>
           <ActionIcon variant="default" size="lg" onClick={changeTabType}>
-            {currentTab?.type === "analysis" ? (
-              <IconTarget size="1.3rem" />
-            ) : (
-              <IconZoomCheck size="1.3rem" />
-            )}
+            {currentTab?.type === "analysis" ? <IconTarget size="1.3rem" /> : <IconZoomCheck size="1.3rem" />}
           </ActionIcon>
         </Tooltip>
         {!eraseDrawablesOnClick && (
           <Tooltip label={t("Board.Action.ClearDrawings")}>
-            <ActionIcon
-              variant="default"
-              size="lg"
-              onClick={() => clearShapes()}
-            >
+            <ActionIcon variant="default" size="lg" onClick={() => clearShapes()}>
               <IconEraser size="1.3rem" />
             </ActionIcon>
           </Tooltip>
         )}
         {!disableVariations && (
           <Tooltip label={t("Board.Action.EditPosition")}>
-            <ActionIcon
-              variant={editingMode ? "filled" : "default"}
-              size="lg"
-              onClick={() => toggleEditingMode()}
-            >
-              {editingMode ? (
-                <IconEditOff size="1.3rem" />
-              ) : (
-                <IconEdit size="1.3rem" />
-              )}
+            <ActionIcon variant={editingMode ? "filled" : "default"} size="lg" onClick={() => toggleEditingMode()}>
+              {editingMode ? <IconEditOff size="1.3rem" /> : <IconEdit size="1.3rem" />}
             </ActionIcon>
           </Tooltip>
         )}
 
         {saveFile && (
-          <Tooltip
-            label={t("Board.Action.SavePGN", { key: keyMap.SAVE_FILE.keys })}
-          >
-            <ActionIcon
-              onClick={() => saveFile()}
-              size="lg"
-              variant={dirty && !autoSave ? "outline" : "default"}
-            >
+          <Tooltip label={t("Board.Action.SavePGN", { key: keyMap.SAVE_FILE.keys })}>
+            <ActionIcon onClick={() => saveFile()} size="lg" variant={dirty && !autoSave ? "outline" : "default"}>
               <IconDeviceFloppy size="1.3rem" />
             </ActionIcon>
           </Tooltip>
@@ -447,11 +382,7 @@ function Board({
             key: keyMap.SWAP_ORIENTATION.keys,
           })}
         >
-          <ActionIcon
-            variant="default"
-            size="lg"
-            onClick={() => toggleOrientation()}
-          >
+          <ActionIcon variant="default" size="lg" onClick={() => toggleOrientation()}>
             <IconSwitchVertical size="1.3rem" />
           </ActionIcon>
         </Tooltip>
@@ -471,8 +402,7 @@ function Board({
     ],
   );
   const materialDiff = getMaterialDiff(currentNode.fen);
-  const practiceLock =
-    !!practicing && !deck.positions.find((c) => c.fen === currentNode.fen);
+  const practiceLock = !!practicing && !deck.positions.find((c) => c.fen === currentNode.fen);
 
   const movableColor: "white" | "black" | "both" | undefined = useMemo(() => {
     return practiceLock
@@ -513,18 +443,12 @@ function Board({
   useHotkeys(keyMap.TOGGLE_EVAL_BAR.keys, () => setEvalOpen((e) => !e));
 
   const square = match(currentNode)
-    .with({ san: "O-O" }, ({ halfMoves }) =>
-      parseSquare(halfMoves % 2 === 1 ? "g1" : "g8"),
-    )
-    .with({ san: "O-O-O" }, ({ halfMoves }) =>
-      parseSquare(halfMoves % 2 === 1 ? "c1" : "c8"),
-    )
+    .with({ san: "O-O" }, ({ halfMoves }) => parseSquare(halfMoves % 2 === 1 ? "g1" : "g8"))
+    .with({ san: "O-O-O" }, ({ halfMoves }) => parseSquare(halfMoves % 2 === 1 ? "c1" : "c8"))
     .otherwise((node) => node.move?.to);
 
   const lastMove =
-    currentNode.move && square !== undefined
-      ? [chessgroundMove(currentNode.move)[0], makeSquare(square)!]
-      : undefined;
+    currentNode.move && square !== undefined ? [chessgroundMove(currentNode.move)[0], makeSquare(square)!] : undefined;
 
   return (
     <>
@@ -572,19 +496,13 @@ function Board({
             }}
             gap="sm"
           >
-            {currentNode.annotations.length > 0 &&
-              currentNode.move &&
-              square !== undefined && (
-                <Box pl="2.5rem" w="100%" h="100%" pos="absolute">
-                  <Box pos="relative" w="100%" h="100%">
-                    <AnnotationHint
-                      orientation={orientation}
-                      square={square}
-                      annotation={currentNode.annotations[0]}
-                    />
-                  </Box>
+            {currentNode.annotations.length > 0 && currentNode.move && square !== undefined && (
+              <Box pl="2.5rem" w="100%" h="100%" pos="absolute">
+                <Box pos="relative" w="100%" h="100%">
+                  <AnnotationHint orientation={orientation} square={square} annotation={currentNode.annotations[0]} />
                 </Box>
-              )}
+              </Box>
+            )}
             <Box
               h="100%"
               style={{
@@ -600,10 +518,7 @@ function Board({
               )}
               {evalOpen && (
                 <Box onClick={() => setEvalOpen(false)} h="100%">
-                  <EvalBar
-                    score={currentNode.score?.value || null}
-                    orientation={orientation}
-                  />
+                  <EvalBar score={currentNode.score?.value || null} orientation={orientation} />
                 </Box>
               )}
             </Box>
@@ -672,8 +587,7 @@ function Board({
                         if (pos) {
                           if (
                             pos.board.get(from)?.role === "pawn" &&
-                            ((dest[1] === "8" && turn === "white") ||
-                              (dest[1] === "1" && turn === "black"))
+                            ((dest[1] === "8" && turn === "white") || (dest[1] === "1" && turn === "black"))
                           ) {
                             if (autoPromote && !metadata.ctrlKey) {
                               makeMove({
@@ -723,19 +637,8 @@ function Board({
           <Group justify="space-between" h="2.125rem">
             {materialDiff && (
               <Group ml="2.5rem">
-                {hasClock && (
-                  <Clock
-                    color={orientation}
-                    turn={turn}
-                    whiteTime={whiteTime}
-                    blackTime={blackTime}
-                  />
-                )}
-                <ShowMaterial
-                  diff={materialDiff.diff}
-                  pieces={materialDiff.pieces}
-                  color={orientation}
-                />
+                {hasClock && <Clock color={orientation} turn={turn} whiteTime={whiteTime} blackTime={blackTime} />}
+                <ShowMaterial diff={materialDiff.diff} pieces={materialDiff.pieces} color={orientation} />
               </Group>
             )}
 

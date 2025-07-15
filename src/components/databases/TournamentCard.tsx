@@ -1,15 +1,4 @@
-import type { Event, NormalizedGame } from "@/bindings";
-import { activeTabAtom, tabsAtom } from "@/state/atoms";
-import { getTournamentGames } from "@/utils/db";
-import { createTab } from "@/utils/tabs";
-import {
-  ActionIcon,
-  Paper,
-  Stack,
-  Tabs,
-  Text,
-  useMantineTheme,
-} from "@mantine/core";
+import { ActionIcon, Paper, Stack, Tabs, Text, useMantineTheme } from "@mantine/core";
 import { IconEye } from "@tabler/icons-react";
 import { useNavigate } from "@tanstack/react-router";
 import { useAtom, useSetAtom } from "jotai";
@@ -17,6 +6,10 @@ import { DataTable, type DataTableSortStatus } from "mantine-datatable";
 import { useState } from "react";
 import useSWRImmutable from "swr/immutable";
 import { match } from "ts-pattern";
+import type { Event, NormalizedGame } from "@/bindings";
+import { activeTabAtom, tabsAtom } from "@/state/atoms";
+import { getTournamentGames } from "@/utils/db";
+import { createTab } from "@/utils/tabs";
 
 const gamePoints = (game: NormalizedGame, player: string) => {
   if (game.white === player) {
@@ -33,13 +26,7 @@ const gamePoints = (game: NormalizedGame, player: string) => {
     .otherwise(() => 0);
 };
 
-function TournamentCard({
-  tournament,
-  file,
-}: {
-  tournament: Event;
-  file: string;
-}) {
+function TournamentCard({ tournament, file }: { tournament: Event; file: string }) {
   const theme = useMantineTheme();
   const navigate = useNavigate();
   const [, setTabs] = useAtom(tabsAtom);
@@ -99,16 +86,9 @@ function TournamentCard({
       [] as { name: string; points: number }[],
     ) || [];
 
-  players.sort(
-    (a, b) =>
-      b.points - a.points ||
-      a.name.localeCompare(b.name, "en", { sensitivity: "base" }),
-  );
+  players.sort((a, b) => b.points - a.points || a.name.localeCompare(b.name, "en", { sensitivity: "base" }));
 
-  const paginatedGames = sortedGames.slice(
-    (page - 1) * 25,
-    (page - 1) * 25 + 25,
-  );
+  const paginatedGames = sortedGames.slice((page - 1) * 25, (page - 1) * 25 + 25);
 
   return (
     <Paper shadow="sm" p="sm" withBorder h="100%">
@@ -116,12 +96,7 @@ function TournamentCard({
         <Text fz="lg" fw={500}>
           {tournament.name}
         </Text>
-        <Tabs
-          defaultValue="games"
-          style={{ flexDirection: "column", overflow: "hidden" }}
-          display="flex"
-          h="100%"
-        >
+        <Tabs defaultValue="games" style={{ flexDirection: "column", overflow: "hidden" }} display="flex" h="100%">
           <Tabs.List>
             <Tabs.Tab value="games">Games</Tabs.Tab>
             <Tabs.Tab value="leaderboard">Leaderboard</Tabs.Tab>
@@ -199,11 +174,7 @@ function TournamentCard({
               noRecordsText="No games found"
             />
           </Tabs.Panel>
-          <Tabs.Panel
-            value="leaderboard"
-            flex={1}
-            style={{ overflow: "hidden" }}
-          >
+          <Tabs.Panel value="leaderboard" flex={1} style={{ overflow: "hidden" }}>
             <DataTable
               fetching={isLoading}
               withTableBorder

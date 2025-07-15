@@ -167,12 +167,10 @@ export const nb_NO = {
     "Board.Analysis.GeneratingReport": "Lagger rapport",
     "Board.Analysis.NotAnalysed": "Ikke analysert",
     "Board.Analysis.EngineRequired": "Computer kreves",
-    "Board.Analysis.RefDBRequired":
-      "Ingen referansedatabase funnet. Velg en database i databasesiden.",
+    "Board.Analysis.RefDBRequired": "Ingen referansedatabase funnet. Velg en database i databasesiden.",
     "Board.Analysis.Time": "Tid (ms)",
     "Board.Analysis.Reversed": "Baklengs analyse",
-    "Board.Analysis.Reversed.Desc":
-      "Analyser partiet fra siste til første trekk.",
+    "Board.Analysis.Reversed.Desc": "Analyser partiet fra siste til første trekk.",
     "Board.Analysis.AnnotateNovelties": "Kommenter nye trekk",
     "Board.Analysis.AnnotateNovelties.Desc":
       "Legger til en kommentar for den første stillingen som ikke er i referansedatabasen.",
@@ -212,11 +210,9 @@ export const nb_NO = {
     "Engines.Add.Name.Autodetect": "Automatisk",
     "Engines.Add.Elo.Desc": "Computeren sin Elo",
     "Engines.Add.ImageFile": "Bildefil",
-    "Engines.Add.ImageFile.Desc":
-      "Klikk for å velge bildefilen (anbefalt størrelse: 60x60)",
+    "Engines.Add.ImageFile.Desc": "Klikk for å velge bildefilen (anbefalt størrelse: 60x60)",
     "Engines.Remove.Title": "Fjern computer",
-    "Engines.Remove.Message":
-      "Er du sikker på at du vil fjerne denne computeren fra Chessifier?",
+    "Engines.Remove.Message": "Er du sikker på at du vil fjerne denne computeren fra Chessifier?",
 
     "Databases.Title": "Dine databaser",
     "Databases.Card.Games": "Partier",
@@ -224,20 +220,17 @@ export const nb_NO = {
     "Databases.Card.Storage": "Lagring",
     "Databases.Add.Title": "Legg til database",
     "Databases.Add.Web": "Internett",
-    "Databases.Add.ErrorFetch":
-      "Kunne ikke hente databasens info fra serveren.",
+    "Databases.Add.ErrorFetch": "Kunne ikke hente databasens info fra serveren.",
     "Databases.Add.ClickToSelectPGN": "Klikk for å velge PGN-filen",
     "Databases.Add.Convert": "Konverter",
     "Databases.Settings.ReferenceDatabase": "Referansedatabase",
     "Databases.Settings.Indexed": "Indeksert",
-    "Databases.Settings.Indexed.Desc":
-      "Indekser brukes for raskere søk, men tar ekstra plass.",
+    "Databases.Settings.Indexed.Desc": "Indekser brukes for raskere søk, men tar ekstra plass.",
     "Databases.Settings.Events": "Turneringer",
     "Databases.Settings.Explore": "Åpne",
     "Databases.Settings.AdvancedTools": "Avanserte verktøy",
     "Databases.Settings.MergePlayers": "Slå sammen spillere",
-    "Databases.Settings.MergePlayers.Desc":
-      "Erstatter den første spilleren med den andre spilleren i databasen.",
+    "Databases.Settings.MergePlayers.Desc": "Erstatter den første spilleren med den andre spilleren i databasen.",
     "Databases.Settings.Merge": "Slå sammen",
     "Databases.Settings.BatchDelete": "Slett flere",
     "Databases.Settings.BatchDelete.Desc":
@@ -284,21 +277,17 @@ export const nb_NO = {
     "Settings.ConsecutiveArrows.Desc":
       "Vis flere piler for den beste linjen, hvis det innebærer å flytte den samme brikken flere ganger",
     "Settings.EraseDrawablesOnClick": "Slett tegninger ved klikk",
-    "Settings.EraseDrawablesOnClick.Desc":
-      "Fjern piler og sirkler fra brette med venstre museklikk",
+    "Settings.EraseDrawablesOnClick.Desc": "Fjern piler og sirkler fra brette med venstre museklikk",
     "Settings.AutoPromition": "Automatisk forvandeling",
-    "Settings.AutoPromition.Desc":
-      "Bonden blir til en dronning når den kommer til siste rad.",
+    "Settings.AutoPromition.Desc": "Bonden blir til en dronning når den kommer til siste rad.",
     "Settings.Coordinates": "Kordinater",
     "Settings.Coordinates.Desc": "Vis kordinater på brette",
     "Settings.AutoSave": "Lagre automatisk",
     "Settings.AutoSave.Desc": "Lagre til filen etter hvert trekk",
     "Settings.PreviewBoard": "Forhåndshvis brett",
-    "Settings.PreviewBoard.Desc":
-      "Vis sjakkbrett når musen er over trekk i komputeranalysen.",
+    "Settings.PreviewBoard.Desc": "Vis sjakkbrett når musen er over trekk i komputeranalysen.",
     "Settings.ScrollThroughMoves": "Bla gjennom trekk",
-    "Settings.ScrollThroughMoves.Desc":
-      "Slå av eller på muligheten til å bla gjennom trekk på brettet",
+    "Settings.ScrollThroughMoves.Desc": "Slå av eller på muligheten til å bla gjennom trekk på brettet",
     "Settings.Inputs.Desc": "Tilpass input instillinger",
     "Settings.Inputs.TextInput": "Tekst for trekk",
     "Settings.Inputs.TextInput.Desc": "Legg til trekk i tekstformat",
@@ -306,23 +295,19 @@ export const nb_NO = {
     "Settings.Inputs.SpellCheck.Desc": "Slå av eller på stavekontroll på tekst",
     "Settings.OpeningReport.Desc": "Tilpass innstillinger for åpningsrapporter",
     "Settings.OpeningReport.PercentCoverage": "Dekning i prosent",
-    "Settings.OpeningReport.PercentCoverage.Desc":
-      "Prosentandel av trekk dekket i hver posisjon",
+    "Settings.OpeningReport.PercentCoverage.Desc": "Prosentandel av trekk dekket i hver posisjon",
     "Settings.OpeningReport.MinGames": "Minimum partier",
-    "Settings.OpeningReport.MinGames.Desc":
-      "Minimum antall partier i hver posisjon for at den skal tas med",
+    "Settings.OpeningReport.MinGames.Desc": "Minimum antall partier i hver posisjon for at den skal tas med",
     "Settings.Anarchy.Desc": "Morsome valg",
     "Settings.Anarchy.ForcedChessifier": "Forced Chessifier",
-    "Settings.Anarchy.ForcedChessifier.Desc":
-      "Tvinger deg til å spille en passant, hvis det er ett lovlig trekk.",
+    "Settings.Anarchy.ForcedChessifier.Desc": "Tvinger deg til å spille en passant, hvis det er ett lovlig trekk.",
     "Settings.Appearance.Desc": "Tilpass hvordan appen ser ut",
     "Settings.Appearance.Theme": "Tema",
     "Settings.Appearance.Theme.Desc": "Generell fargemodus",
     "Settings.Appearance.Theme.Light": "Lys",
     "Settings.Appearance.Theme.Dark": "Mørk",
     "Settings.Appearance.TitleBar": "Tittelbar",
-    "Settings.Appearance.TitleBar.Desc":
-      "Velg mellom standard eller tilpasset tittelbar",
+    "Settings.Appearance.TitleBar.Desc": "Velg mellom standard eller tilpasset tittelbar",
     "Settings.Appearance.Language": "Språk",
     "Settings.Appearance.Language.Desc": "Språk brukt i appen",
     "Settings.Appearance.TitleBar.Native": "Standard",
@@ -342,8 +327,7 @@ export const nb_NO = {
     "Settings.Sound.Collection.Desc": "Velg mellom flere lydprofiler",
     "Settings.Directories.Desc": "Tilpass mappene brukt av appen",
     "Settings.Directories.Files": "Filmappe",
-    "Settings.Directories.Files.Desc":
-      "Dette er hvor partiene fra Fil-siden blir lagret",
+    "Settings.Directories.Files.Desc": "Dette er hvor partiene fra Fil-siden blir lagret",
 
     "PgnInput.Comments": "Kommentarer",
     "PgnInput.Glyphs": "Symboler",

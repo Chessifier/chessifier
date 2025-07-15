@@ -1,14 +1,3 @@
-import { events, commands } from "@/bindings";
-import { enginesAtom } from "@/state/atoms";
-import {
-  type LocalEngine,
-  type RemoteEngine,
-  requiredEngineSettings,
-  useDefaultEngines,
-} from "@/utils/engines";
-import { usePlatform } from "@/utils/files";
-import { formatBytes } from "@/utils/format";
-import { unwrap } from "@/utils/unwrap";
 import {
   Alert,
   Box,
@@ -30,22 +19,20 @@ import { appDataDir, join, resolve } from "@tauri-apps/api/path";
 import { useAtom } from "jotai";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { commands, events } from "@/bindings";
+import { enginesAtom } from "@/state/atoms";
+import { type LocalEngine, type RemoteEngine, requiredEngineSettings, useDefaultEngines } from "@/utils/engines";
+import { usePlatform } from "@/utils/files";
+import { formatBytes } from "@/utils/format";
+import { unwrap } from "@/utils/unwrap";
 import ProgressButton from "../common/ProgressButton";
 import EngineForm from "./EngineForm";
 
-function AddEngine({
-  opened,
-  setOpened,
-}: {
-  opened: boolean;
-  setOpened: (opened: boolean) => void;
-}) {
+function AddEngine({ opened, setOpened }: { opened: boolean; setOpened: (opened: boolean) => void }) {
   const { t } = useTranslation();
 
   const [allEngines, setEngines] = useAtom(enginesAtom);
-  const engines = allEngines.filter(
-    (e): e is LocalEngine => e.type === "local",
-  );
+  const engines = allEngines.filter((e): e is LocalEngine => e.type === "local");
 
   const { os } = usePlatform();
 
@@ -64,8 +51,7 @@ function AddEngine({
     validate: {
       name: (value) => {
         if (!value) return t("Common.RequireName");
-        if (engines.find((e) => e.name === value))
-          return t("Common.NameAlreadyUsed");
+        if (engines.find((e) => e.name === value)) return t("Common.NameAlreadyUsed");
       },
       path: (value) => {
         if (!value) return t("Common.RequirePath");
@@ -74,11 +60,7 @@ function AddEngine({
   });
 
   return (
-    <Modal
-      opened={opened}
-      onClose={() => setOpened(false)}
-      title={t("Engines.Add.Title")}
-    >
+    <Modal opened={opened} onClose={() => setOpened(false)} title={t("Engines.Add.Title")}>
       <Tabs defaultValue="download">
         <Tabs.List>
           <Tabs.Tab value="download">{t("Common.Download")}</Tabs.Tab>
@@ -102,11 +84,7 @@ function AddEngine({
                 />
               ))}
               {error && (
-                <Alert
-                  icon={<IconAlertCircle size="1rem" />}
-                  title={t("Common.Error")}
-                  color="red"
-                >
+                <Alert icon={<IconAlertCircle size="1rem" />} title={t("Common.Error")} color="red">
                   {t("Engines.Add.ErrorFetch")}
                 </Alert>
               )}
@@ -205,11 +183,7 @@ function EngineCard({
   const downloadEngine = useCallback(
     async (id: number, url: string) => {
       setInProgress(true);
-      let path = await resolve(
-        await appDataDir(),
-        "engines",
-        `${url.slice(url.lastIndexOf("/") + 1)}`,
-      );
+      let path = await resolve(await appDataDir(), "engines", `${url.slice(url.lastIndexOf("/") + 1)}`);
       if (url.endsWith(".zip") || url.endsWith(".tar")) {
         path = await resolve(await appDataDir(), "engines");
       }
@@ -218,11 +192,7 @@ function EngineCard({
       if (appDataDirPath.endsWith("/") || appDataDirPath.endsWith("\\")) {
         appDataDirPath = appDataDirPath.slice(0, -1);
       }
-      const enginePath = await join(
-        appDataDirPath,
-        "engines",
-        ...engine.path.split("/"),
-      );
+      const enginePath = await join(appDataDirPath, "engines", ...engine.path.split("/"));
       await commands.setFileAsExecutable(enginePath);
       const config = unwrap(await commands.getEngineConfig(enginePath));
       setEngines(async (prev) => [

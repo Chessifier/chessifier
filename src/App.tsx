@@ -2,13 +2,13 @@ import {
   ActionIcon,
   Autocomplete,
   Input,
-  MantineProvider,
-  TextInput,
-  Textarea,
   localStorageColorSchemeManager,
+  MantineProvider,
+  Textarea,
+  TextInput,
 } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
-import { RouterProvider, createRouter } from "@tanstack/react-router";
+import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { getMatches } from "@tauri-apps/plugin-cli";
 import { attachConsole, info } from "@tauri-apps/plugin-log";
@@ -48,8 +48,8 @@ const colorSchemeManager = localStorageColorSchemeManager({
   key: "mantine-color-scheme",
 });
 
-import ErrorComponent from "@/components/ErrorComponent";
 import { documentDir, resolve } from "@tauri-apps/api/path";
+import ErrorComponent from "@/components/ErrorComponent";
 import { routeTree } from "./routeTree.gen";
 
 export type Dirs = {
@@ -62,9 +62,7 @@ const router = createRouter({
   context: {
     loadDirs: async () => {
       const store = getDefaultStore();
-      const doc =
-        store.get(storedDocumentDirAtom) ||
-          (await resolve(await documentDir(), "Chessifier"));
+      const doc = store.get(storedDocumentDirAtom) || (await resolve(await documentDir(), "Chessifier"));
       const dirs: Dirs = { documentDir: doc };
       return dirs;
     },

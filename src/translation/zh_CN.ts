@@ -142,10 +142,8 @@ export const zh_CN = {
     "Board.Tabs.Info": "信息",
     "Board.Practice.Train": "训练",
     "Board.Practice.Build": "构建",
-    "Board.Practice.NoPositionForTrain1":
-      "没有可供练习的局面，请先向 PGN 文件中添加着法。",
-    "Board.Practice.NoPositionForTrain2":
-      "你需要切换到分析模式来向 PGN 文件中添加着法。",
+    "Board.Practice.NoPositionForTrain1": "没有可供练习的局面，请先向 PGN 文件中添加着法。",
+    "Board.Practice.NoPositionForTrain2": "你需要切换到分析模式来向 PGN 文件中添加着法。",
     "Board.Practice.SeeAnser": "查看答案",
     "Board.Practice.Practiced": "已练习",
     "Board.Practice.Due": "需复习",
@@ -167,14 +165,12 @@ export const zh_CN = {
     "Board.Analysis.GeneratingReport": "正在生成报告",
     "Board.Analysis.NotAnalysed": "尚未分析",
     "Board.Analysis.EngineRequired": "请指定一个引擎",
-    "Board.Analysis.RefDBRequired":
-      "没有参考数据库，请在数据库页面选择一个参考数据库",
+    "Board.Analysis.RefDBRequired": "没有参考数据库，请在数据库页面选择一个参考数据库",
     "Board.Analysis.Time": "时间 (ms)",
     "Board.Analysis.Reversed": "反向分析",
     "Board.Analysis.Reversed.Desc": "从最后一步开始分析",
     "Board.Analysis.AnnotateNovelties": "评注新奇着法",
-    "Board.Analysis.AnnotateNovelties.Desc":
-      "在不在参考数据库中的第一个着法上添加注释",
+    "Board.Analysis.AnnotateNovelties.Desc": "在不在参考数据库中的第一个着法上添加注释",
     "Board.Analysis.Analyze": "分析",
     "Board.Analysis.Advantage": "优势",
     "Board.Analysis.Accuracy": "精度",
@@ -226,18 +222,15 @@ export const zh_CN = {
     "Databases.Add.Convert": "转换",
     "Databases.Settings.ReferenceDatabase": "作为参考数据库",
     "Databases.Settings.Indexed": "建立索引",
-    "Databases.Settings.Indexed.Desc":
-      "索引可以加速搜索，但会占用额外的磁盘空间",
+    "Databases.Settings.Indexed.Desc": "索引可以加速搜索，但会占用额外的磁盘空间",
     "Databases.Settings.Events": "赛事数量",
     "Databases.Settings.Explore": "查看对局",
     "Databases.Settings.AdvancedTools": "高级工具",
     "Databases.Settings.MergePlayers": "合并棋手",
-    "Databases.Settings.MergePlayers.Desc":
-      "将数据库中第一位棋手替换为第二位棋手",
+    "Databases.Settings.MergePlayers.Desc": "将数据库中第一位棋手替换为第二位棋手",
     "Databases.Settings.Merge": "合并",
     "Databases.Settings.BatchDelete": "批量删除",
-    "Databases.Settings.BatchDelete.Desc":
-      "这会不可逆地从数据库中删除对局，小心地使用",
+    "Databases.Settings.BatchDelete.Desc": "这会不可逆地从数据库中删除对局，小心地使用",
     "Databases.Settings.RemoveDup": "删除重复对局",
     "Databases.Settings.RemoveEmpty": "删除空对局",
     "Databases.Settings.Actions": "动作",
@@ -278,11 +271,9 @@ export const zh_CN = {
     "Settings.SnapArrows": "吸附箭头",
     "Settings.SnapArrows.Desc": "将箭头吸附到合法的移动上",
     "Settings.ConsecutiveArrows": "连续箭头",
-    "Settings.ConsecutiveArrows.Desc":
-      "如果最佳着法中会多次移动同一个棋子，显示多个箭头",
+    "Settings.ConsecutiveArrows.Desc": "如果最佳着法中会多次移动同一个棋子，显示多个箭头",
     "Settings.EraseDrawablesOnClick": "单击时擦除可绘制对象",
-    "Settings.EraseDrawablesOnClick.Desc":
-      "通过单击鼠标左键清除棋盘上绘制的箭头和圆圈",
+    "Settings.EraseDrawablesOnClick.Desc": "通过单击鼠标左键清除棋盘上绘制的箭头和圆圈",
     "Settings.AutoPromition": "自动升变",
     "Settings.AutoPromition.Desc": "兵抵达底线时自动升变为后",
     "Settings.Coordinates": "坐标",
@@ -290,11 +281,9 @@ export const zh_CN = {
     "Settings.AutoSave": "自动保存",
     "Settings.AutoSave.Desc": "每走一步棋都自动保存棋局",
     "Settings.PreviewBoard": "预览棋盘",
-    "Settings.PreviewBoard.Desc":
-      "在引擎分析中，当鼠标悬停在着法上时显示一个预览棋盘",
+    "Settings.PreviewBoard.Desc": "在引擎分析中，当鼠标悬停在着法上时显示一个预览棋盘",
     "Settings.ScrollThroughMoves": "滚动着法",
-    "Settings.ScrollThroughMoves.Desc":
-      "在引擎分析中，用鼠标滚轮在着法之间快速切换",
+    "Settings.ScrollThroughMoves.Desc": "在引擎分析中，用鼠标滚轮在着法之间快速切换",
     "Settings.Inputs.Desc": "自定义输入选项",
     "Settings.Inputs.TextInput": "文本输入着法",
     "Settings.Inputs.TextInput.Desc": "以文本方式输入着法",
@@ -302,14 +291,12 @@ export const zh_CN = {
     "Settings.Inputs.SpellCheck.Desc": "启用或禁用文本输入的拼写检查",
     "Settings.OpeningReport.Desc": "自定义开局报告",
     "Settings.OpeningReport.PercentCoverage": "覆盖率百分比",
-    "Settings.OpeningReport.PercentCoverage.Desc":
-      "每个局面中的着法覆盖率百分比",
+    "Settings.OpeningReport.PercentCoverage.Desc": "每个局面中的着法覆盖率百分比",
     "Settings.OpeningReport.MinGames": "最小对局数",
     "Settings.OpeningReport.MinGames.Desc": "每个局面中被考虑的最小对局数",
     "Settings.Anarchy.Desc": "有趣的选项",
     "Settings.Anarchy.ForcedChessifier": "强制 Chessifier",
-    "Settings.Anarchy.ForcedChessifier.Desc":
-      "如果 Chessifier 是合法的着法，强制走出这一着",
+    "Settings.Anarchy.ForcedChessifier.Desc": "如果 Chessifier 是合法的着法，强制走出这一着",
     "Settings.Appearance.Desc": "自定义应用程序的外观",
     "Settings.Appearance.Theme": "主题",
     "Settings.Appearance.Theme.Desc": "总体的颜色主题",

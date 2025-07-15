@@ -1,21 +1,14 @@
-import { Chessground } from "@/chessground/Chessground";
-import PiecesGrid from "@/components/boards/PiecesGrid";
-import { PlayerSearchInput } from "@/components/databases/PlayerSearchInput";
-import { currentLocalOptionsAtom } from "@/state/atoms";
-import {
-  Box,
-  Button,
-  Group,
-  SegmentedControl,
-  Stack,
-  Text,
-} from "@mantine/core";
+import { Box, Button, Group, SegmentedControl, Stack, Text } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { parseSquare } from "chessops";
 import { EMPTY_BOARD_FEN, makeFen, parseFen } from "chessops/fen";
 import dayjs from "dayjs";
 import { useAtom } from "jotai";
 import { useRef } from "react";
+import { Chessground } from "@/chessground/Chessground";
+import PiecesGrid from "@/components/boards/PiecesGrid";
+import { PlayerSearchInput } from "@/components/databases/PlayerSearchInput";
+import { currentLocalOptionsAtom } from "@/state/atoms";
 
 function LocalOptionsPanel({ boardFen }: { boardFen: string }) {
   const boardRef = useRef(null);
@@ -52,9 +45,7 @@ function LocalOptionsPanel({ boardFen }: { boardFen: string }) {
               { value: "black", label: "Black" },
             ]}
             value={options.color}
-            onChange={(v) =>
-              setOptions({ ...options, color: v as "white" | "black" })
-            }
+            onChange={(v) => setOptions({ ...options, color: v as "white" | "black" })}
           />
         </Group>
         <Group>
@@ -63,17 +54,11 @@ function LocalOptionsPanel({ boardFen }: { boardFen: string }) {
             placeholder="Start date"
             valueFormat="YYYY-MM-DD"
             clearable
-            value={
-              options.start_date
-                ? dayjs(options.start_date, "YYYY.MM.DD").toDate()
-                : undefined
-            }
+            value={options.start_date ? dayjs(options.start_date, "YYYY.MM.DD").toDate() : undefined}
             onChange={(value) =>
               setOptions({
                 ...options,
-                start_date: value
-                  ? dayjs(value).format("YYYY.MM.DD")
-                  : undefined,
+                start_date: value ? dayjs(value).format("YYYY.MM.DD") : undefined,
               })
             }
           />
@@ -82,11 +67,7 @@ function LocalOptionsPanel({ boardFen }: { boardFen: string }) {
             placeholder="End date"
             valueFormat="YYYY-MM-DD"
             clearable
-            value={
-              options.end_date
-                ? dayjs(options.end_date, "YYYY.MM.DD").toDate()
-                : null
-            }
+            value={options.end_date ? dayjs(options.end_date, "YYYY.MM.DD").toDate() : null}
             onChange={(value) =>
               setOptions({
                 ...options,
@@ -105,9 +86,7 @@ function LocalOptionsPanel({ boardFen }: { boardFen: string }) {
             { value: "partial", label: "Partial" },
           ]}
           value={options.type}
-          onChange={(v) =>
-            setOptions({ ...options, type: v as "exact" | "partial" })
-          }
+          onChange={(v) => setOptions({ ...options, type: v as "exact" | "partial" })}
         />
       </Group>
 
@@ -165,11 +144,7 @@ function LocalOptionsPanel({ boardFen }: { boardFen: string }) {
           </Group>
         </Stack>
 
-        <Box
-          flex={1}
-          style={{ display: "flex", flexDirection: "column" }}
-          h="30rem"
-        >
+        <Box flex={1} style={{ display: "flex", flexDirection: "column" }} h="30rem">
           <PiecesGrid
             boardRef={boardRef}
             fen={options.fen}

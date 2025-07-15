@@ -1,8 +1,5 @@
 import { atomWithStorage } from "jotai/utils";
-import type {
-  SyncStorage,
-  SyncStringStorage,
-} from "jotai/vanilla/utils/atomWithStorage";
+import type { SyncStorage, SyncStringStorage } from "jotai/vanilla/utils/atomWithStorage";
 
 const keys = {
   NEW_TAB: { name: "New tab", keys: "ctrl+t" },
@@ -48,16 +45,9 @@ const keys = {
   NEXT_GAME: { name: "Next game", keys: "pagedown" },
 };
 
-export const keyMapAtom = atomWithStorage(
-  "keybinds",
-  keys,
-  defaultStorage(keys, localStorage),
-);
+export const keyMapAtom = atomWithStorage("keybinds", keys, defaultStorage(keys, localStorage));
 
-function defaultStorage<T>(
-  keys: T,
-  storage: SyncStringStorage,
-): SyncStorage<T> {
+function defaultStorage<T>(keys: T, storage: SyncStringStorage): SyncStorage<T> {
   return {
     getItem(key, initialValue) {
       const storedValue = storage.getItem(key);

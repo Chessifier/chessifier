@@ -1,22 +1,13 @@
-import { keyMapAtom } from "@/state/keybindings";
 import { ActionIcon, Group } from "@mantine/core";
-import {
-  IconChevronLeft,
-  IconChevronRight,
-  IconChevronsLeft,
-  IconChevronsRight,
-} from "@tabler/icons-react";
+import { IconChevronLeft, IconChevronRight, IconChevronsLeft, IconChevronsRight } from "@tabler/icons-react";
 import { useAtomValue } from "jotai";
 import { memo, useContext } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useStore } from "zustand";
+import { keyMapAtom } from "@/state/keybindings";
 import { TreeStateContext } from "./TreeStateContext";
 
-function MoveControls({
-  readOnly,
-}: {
-  readOnly?: boolean;
-}) {
+function MoveControls({ readOnly }: { readOnly?: boolean }) {
   const store = useContext(TreeStateContext)!;
   const next = useStore(store, (s) => s.goToNext);
   const previous = useStore(store, (s) => s.goToPrevious);

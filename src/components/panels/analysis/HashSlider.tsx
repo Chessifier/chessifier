@@ -1,15 +1,11 @@
-import { commands } from "@/bindings";
-import { formatBytes } from "@/utils/format";
-import { Slider, rem } from "@mantine/core";
+import { rem, Slider } from "@mantine/core";
 import { IconGripVertical } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import useSWRImmutable from "swr/immutable";
+import { commands } from "@/bindings";
+import { formatBytes } from "@/utils/format";
 
-export default function HashSlider(props: {
-  value: number;
-  setValue: (v: number) => void;
-  color?: string;
-}) {
+export default function HashSlider(props: { value: number; setValue: (v: number) => void; color?: string }) {
   const [tempValue, setTempValue] = useState(Math.log2(props.value));
 
   useEffect(() => {
@@ -30,12 +26,7 @@ export default function HashSlider(props: {
         onChange={setTempValue}
         onChangeEnd={(v) => props.setValue(2 ** v)}
         label={(v) => formatBytes(2 ** v * 1024 * 1024)}
-        thumbChildren={
-          <IconGripVertical
-            style={{ width: rem(20), height: rem(20) }}
-            stroke={1.5}
-          />
-        }
+        thumbChildren={<IconGripVertical style={{ width: rem(20), height: rem(20) }} stroke={1.5} />}
         styles={(theme) => ({
           mark: {
             display: "flex",

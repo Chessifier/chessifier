@@ -9,16 +9,11 @@ export const chessboard = style({
   aspectRatio: "1",
 });
 
-globalStyle(
-  `${chessboard} > .cg-wrap > cg-container > cg-board > square.last-move`,
-  {
-    [vars.darkSelector]: {
-      backgroundColor:
-        "color-mix(in srgb, var(--light-color, var(--mantine-primary-color-5)) 40%, transparent)",
-    },
-    [vars.lightSelector]: {
-      backgroundColor:
-        "color-mix(in srgb, var(--dark-color, var(--mantine-primary-color-3)) 40%, transparent)",
-    },
+globalStyle(`${chessboard} > .cg-wrap > cg-container > cg-board > square.last-move`, {
+  [vars.darkSelector]: {
+    backgroundColor: "color-mix(in srgb, var(--light-color, var(--mantine-primary-color-5)) 40%, transparent)",
   },
-);
+  [vars.lightSelector]: {
+    backgroundColor: "color-mix(in srgb, var(--dark-color, var(--mantine-primary-color-3)) 40%, transparent)",
+  },
+});

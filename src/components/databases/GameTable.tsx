@@ -1,13 +1,3 @@
-import type {
-  DatabaseInfo,
-  GameQuery,
-  GameSort,
-  NormalizedGame,
-  Outcome,
-} from "@/bindings";
-import { activeTabAtom, tabsAtom } from "@/state/atoms";
-import { query_games } from "@/utils/db";
-import { createTab } from "@/utils/tabs";
 import {
   ActionIcon,
   Box,
@@ -30,6 +20,10 @@ import { useAtom, useSetAtom } from "jotai";
 import { DataTable } from "mantine-datatable";
 import { useState } from "react";
 import useSWR from "swr";
+import type { DatabaseInfo, GameQuery, GameSort, NormalizedGame, Outcome } from "@/bindings";
+import { activeTabAtom, tabsAtom } from "@/state/atoms";
+import { query_games } from "@/utils/db";
+import { createTab } from "@/utils/tabs";
 import GameCard from "./GameCard";
 import GridLayout from "./GridLayout";
 import { PlayerSearchInput } from "./PlayerSearchInput";
@@ -62,9 +56,7 @@ function GameTable({ database }: { database: DatabaseInfo }) {
   const [, setTabs] = useAtom(tabsAtom);
   const setActiveTab = useSetAtom(activeTabAtom);
 
-  const { data, isLoading, mutate } = useSWR(["games", query], () =>
-    query_games(file, query),
-  );
+  const { data, isLoading, mutate } = useSWR(["games", query], () => query_games(file, query));
 
   const games = data?.data ?? [];
   const count = data?.count;
@@ -145,9 +137,7 @@ function GameTable({ database }: { database: DatabaseInfo }) {
                           { value: 2000, label: "2000" },
                           { value: 3000, label: "3000" },
                         ]}
-                        onChangeEnd={(value) =>
-                          setQuery({ ...query, range1: value })
-                        }
+                        onChangeEnd={(value) => setQuery({ ...query, range1: value })}
                       />
                     </InputWrapper>
 
@@ -161,9 +151,7 @@ function GameTable({ database }: { database: DatabaseInfo }) {
                           { value: 2000, label: "2000" },
                           { value: 3000, label: "3000" },
                         ]}
-                        onChangeEnd={(value) =>
-                          setQuery({ ...query, range2: value })
-                        }
+                        onChangeEnd={(value) => setQuery({ ...query, range2: value })}
                       />
                     </InputWrapper>
                   </Group>
@@ -190,17 +178,11 @@ function GameTable({ database }: { database: DatabaseInfo }) {
                       placeholder="Start date"
                       clearable
                       valueFormat="YYYY-MM-DD"
-                      value={
-                        query.start_date
-                          ? dayjs(query.start_date, "YYYY.MM.DD").toDate()
-                          : null
-                      }
+                      value={query.start_date ? dayjs(query.start_date, "YYYY.MM.DD").toDate() : null}
                       onChange={(value) =>
                         setQuery({
                           ...query,
-                          start_date: value
-                            ? dayjs(value).format("YYYY.MM.DD")
-                            : undefined,
+                          start_date: value ? dayjs(value).format("YYYY.MM.DD") : undefined,
                         })
                       }
                     />
@@ -209,17 +191,11 @@ function GameTable({ database }: { database: DatabaseInfo }) {
                       placeholder="End date"
                       clearable
                       valueFormat="YYYY-MM-DD"
-                      value={
-                        query.end_date
-                          ? dayjs(query.end_date, "YYYY.MM.DD").toDate()
-                          : null
-                      }
+                      value={query.end_date ? dayjs(query.end_date, "YYYY.MM.DD").toDate() : null}
                       onChange={(value) =>
                         setQuery({
                           ...query,
-                          end_date: value
-                            ? dayjs(value).format("YYYY.MM.DD")
-                            : undefined,
+                          end_date: value ? dayjs(value).format("YYYY.MM.DD") : undefined,
                         })
                       }
                     />
@@ -227,10 +203,7 @@ function GameTable({ database }: { database: DatabaseInfo }) {
                 </Stack>
               </Collapse>
             </Box>
-            <ActionIcon
-              style={{ flexGrow: 0 }}
-              onClick={() => toggleOpenedSettings()}
-            >
+            <ActionIcon style={{ flexGrow: 0 }} onClick={() => toggleOpenedSettings()}>
               <IconDotsVertical size="1rem" />
             </ActionIcon>
           </Flex>
@@ -290,9 +263,7 @@ function GameTable({ database }: { database: DatabaseInfo }) {
               { accessor: "event" },
               { accessor: "site" },
             ]}
-            rowClassName={(_, i) =>
-              i === selectedGame ? classes.selected : ""
-            }
+            rowClassName={(_, i) => (i === selectedGame ? classes.selected : "")}
             noRecordsText="No games found"
             totalRecords={count!}
             recordsPerPage={query.options?.pageSize ?? 25}

@@ -1,3 +1,10 @@
+import type { DrawShape } from "chessground/draw";
+import { isNormal, type Move } from "chessops";
+import { INITIAL_FEN, makeFen } from "chessops/fen";
+import { makeSan, parseSan } from "chessops/san";
+import { produce } from "immer";
+import { createStore, type StateCreator } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
 import type { BestMoves, Outcome, Score } from "@/bindings";
 import { ANNOTATION_INFO, type Annotation } from "@/utils/annotation";
 import { getPGN } from "@/utils/chess";
@@ -6,21 +13,14 @@ import { isPrefix } from "@/utils/misc";
 import { getAnnotation } from "@/utils/score";
 import { playSound } from "@/utils/sound";
 import {
-  type GameHeaders,
-  type TreeNode,
-  type TreeState,
   createNode,
   defaultTree,
+  type GameHeaders,
   getNodeAtPath,
+  type TreeNode,
+  type TreeState,
   treeIteratorMainLine,
 } from "@/utils/treeReducer";
-import type { DrawShape } from "chessground/draw";
-import { type Move, isNormal } from "chessops";
-import { INITIAL_FEN, makeFen } from "chessops/fen";
-import { makeSan, parseSan } from "chessops/san";
-import { produce } from "immer";
-import { type StateCreator, createStore } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
 
 export interface TreeStoreState {
   root: TreeNode;
@@ -52,16 +52,9 @@ export interface TreeStoreState {
     changeHeaders?: boolean;
   }) => void;
 
-  appendMove: (args: {
-    payload: Move;
-    clock?: number;
-  }) => void;
+  appendMove: (args: { payload: Move; clock?: number }) => void;
 
-  makeMoves: (args: {
-    payload: string[];
-    mainline?: boolean;
-    changeHeaders?: boolean;
-  }) => void;
+  makeMoves: (args: { payload: string[]; mainline?: boolean; changeHeaders?: boolean }) => void;
   deleteMove: (path?: number[]) => void;
   promoteVariation: (path: number[]) => void;
   promoteToMainline: (path: number[]) => void;
@@ -141,8 +134,7 @@ export const createTreeStore = (id?: string, initialTree?: TreeState) => {
         }
         return state;
       }),
-    goToPrevious: () =>
-      set((state) => ({ ...state, position: state.position.slice(0, -1) })),
+    goToPrevious: () => set((state) => ({ ...state, position: state.position.slice(0, -1) })),
 
     goToAnnotation: (annotation, color) =>
       set(
@@ -160,10 +152,7 @@ export const createTreeStore = (id?: string, initialTree?: TreeState) => {
 
             node = getNodeAtPath(state.root, p);
 
-            if (
-              node.annotations.includes(annotation) &&
-              node.halfMoves % 2 === colorN
-            ) {
+            if (node.annotations.includes(annotation) && node.halfMoves % 2 === colorN) {
               break;
             }
           }
@@ -172,13 +161,7 @@ export const createTreeStore = (id?: string, initialTree?: TreeState) => {
         }),
       ),
 
-    makeMove: ({
-      payload,
-      changePosition,
-      mainline,
-      clock,
-      changeHeaders = true,
-    }) => {
+    makeMove: ({ payload, changePosition, mainline, clock, changeHeaders = true }) => {
       set(
         produce((state) => {
           if (typeof payload === "string") {
@@ -257,17 +240,11 @@ export const createTreeStore = (id?: string, initialTree?: TreeState) => {
     goToBranchStart: () => {
       set(
         produce((state) => {
-          if (
-            state.position.length > 0 &&
-            state.position[state.position.length - 1] !== 0
-          ) {
+          if (state.position.length > 0 && state.position[state.position.length - 1] !== 0) {
             state.position = state.position.slice(0, -1);
           }
 
-          while (
-            state.position.length > 0 &&
-            state.position[state.position.length - 1] === 0
-          ) {
+          while (state.position.length > 0 && state.position[state.position.length - 1] === 0) {
             state.position = state.position.slice(0, -1);
           }
         }),
@@ -300,10 +277,7 @@ export const createTreeStore = (id?: string, initialTree?: TreeState) => {
             state.position.push(0);
           }
 
-          state.position = [
-            ...state.position.slice(0, -1),
-            (branchIndex + 1) % parent.children.length,
-          ];
+          state.position = [...state.position.slice(0, -1), (branchIndex + 1) % parent.children.length];
         }),
       ),
     previousBranch: () =>
@@ -409,9 +383,7 @@ export const createTreeStore = (id?: string, initialTree?: TreeState) => {
               node.annotations = node.annotations.filter((a) => a !== payload);
             } else {
               const newAnnotations = node.annotations.filter(
-                (a) =>
-                  !ANNOTATION_INFO[a].group ||
-                  ANNOTATION_INFO[a].group !== ANNOTATION_INFO[payload].group,
+                (a) => !ANNOTATION_INFO[a].group || ANNOTATION_INFO[a].group !== ANNOTATION_INFO[payload].group,
               );
               node.annotations = [...newAnnotations, payload].sort((a, b) =>
                 ANNOTATION_INFO[a].nag > ANNOTATION_INFO[b].nag ? 1 : -1,
@@ -516,9 +488,7 @@ function makeMove({
   sound?: boolean;
 }) {
   const mainLine = Array.from(treeIteratorMainLine(state.root));
-  const position = last
-    ? mainLine[mainLine.length - 1].position
-    : state.position;
+  const position = last ? mainLine[mainLine.length - 1].position : state.position;
   const moveNode = getNodeAtPath(state.root, position);
   if (!moveNode) return;
   const [pos] = positionFromFen(moveNode.fen);
@@ -540,10 +510,7 @@ function makeMove({
 
   const newFen = makeFen(pos.toSetup());
 
-  if (
-    (changeHeaders && isThreeFoldRepetition(state, newFen)) ||
-    is50MoveRule(state)
-  ) {
+  if ((changeHeaders && isThreeFoldRepetition(state, newFen)) || is50MoveRule(state)) {
     state.headers.result = "1/2-1/2";
   }
 
@@ -604,9 +571,7 @@ function is50MoveRule(state: TreeState) {
     if (
       node.move &&
       isNormal(node.move) &&
-      (node.move.promotion ||
-        node.san?.includes("x") ||
-        pos.board.get(node.move.from)?.role === "pawn")
+      (node.move.promotion || node.san?.includes("x") || pos.board.get(node.move.from)?.role === "pawn")
     ) {
       count = 0;
     }
@@ -651,9 +616,7 @@ function setShapes(state: TreeState, shapes: DrawShape[]) {
 
   const [shape] = shapes;
   if (shape) {
-    const index = node.shapes.findIndex(
-      (s) => s.orig === shape.orig && s.dest === shape.dest,
-    );
+    const index = node.shapes.findIndex((s) => s.orig === shape.orig && s.dest === shape.dest);
 
     if (index !== -1) {
       node.shapes.splice(index, 1);

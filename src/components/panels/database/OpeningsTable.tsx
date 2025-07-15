@@ -1,21 +1,15 @@
-import { TreeStateContext } from "@/components/common/TreeStateContext";
-import { moveNotationTypeAtom } from "@/state/atoms";
-import { addPieceSymbol } from "@/utils/annotation";
-import type { Opening } from "@/utils/db";
-import { formatNumber } from "@/utils/format";
 import { Group, Progress, Text } from "@mantine/core";
 import { useAtom } from "jotai";
 import { DataTable } from "mantine-datatable";
 import { memo, useContext } from "react";
 import { useStore } from "zustand";
+import { TreeStateContext } from "@/components/common/TreeStateContext";
+import { moveNotationTypeAtom } from "@/state/atoms";
+import { addPieceSymbol } from "@/utils/annotation";
+import type { Opening } from "@/utils/db";
+import { formatNumber } from "@/utils/format";
 
-function OpeningsTable({
-  openings,
-  loading,
-}: {
-  openings: Opening[];
-  loading: boolean;
-}) {
+function OpeningsTable({ openings, loading }: { openings: Opening[]; loading: boolean }) {
   const store = useContext(TreeStateContext)!;
   const makeMove = useStore(store, (s) => s.makeMove);
   const [moveNotationType] = useAtom(moveNotationTypeAtom);
@@ -64,11 +58,7 @@ function OpeningsTable({
                   Game end
                 </Text>
               );
-            return (
-              <Text fz="sm">
-                {moveNotationType === "symbols" ? addPieceSymbol(move) : move}
-              </Text>
-            );
+            return <Text fz="sm">{moveNotationType === "symbols" ? addPieceSymbol(move) : move}</Text>;
           },
         },
         {
@@ -79,9 +69,7 @@ function OpeningsTable({
             const percentage = (total / grandTotal) * 100;
             return (
               <Group>
-                {move !== "Total" && (
-                  <Text fz="sm">{percentage.toFixed(0)}%</Text>
-                )}
+                {move !== "Total" && <Text fz="sm">{percentage.toFixed(0)}%</Text>}
                 <Text fz="sm" flex={1} ta="right">
                   {formatNumber(total)}
                 </Text>
@@ -99,19 +87,13 @@ function OpeningsTable({
             return (
               <Progress.Root size="xl">
                 <Progress.Section value={whitePercent} color="white">
-                  <Progress.Label c="black">
-                    {whitePercent > 10 ? `${whitePercent.toFixed(1)}%` : ""}
-                  </Progress.Label>
+                  <Progress.Label c="black">{whitePercent > 10 ? `${whitePercent.toFixed(1)}%` : ""}</Progress.Label>
                 </Progress.Section>
                 <Progress.Section value={drawPercent} color="gray">
-                  <Progress.Label>
-                    {drawPercent > 10 ? `${drawPercent.toFixed(1)}%` : ""}
-                  </Progress.Label>
+                  <Progress.Label>{drawPercent > 10 ? `${drawPercent.toFixed(1)}%` : ""}</Progress.Label>
                 </Progress.Section>
                 <Progress.Section value={blackPercent} color="black">
-                  <Progress.Label>
-                    {blackPercent > 10 ? `${blackPercent.toFixed(1)}%` : ""}
-                  </Progress.Label>
+                  <Progress.Label>{blackPercent > 10 ? `${blackPercent.toFixed(1)}%` : ""}</Progress.Label>
                 </Progress.Section>
               </Progress.Root>
             );

@@ -144,8 +144,7 @@ export const de_DE = {
     "Board.Practice.Build": "Erstellen",
     "Board.Practice.NoPositionForTrain1":
       "Es gibt keine Position zum Üben. Beginne damit, Züge zu diesem PGN hinzuzufügen.",
-    "Board.Practice.NoPositionForTrain2":
-      "Wechsle in den Analysemodus, um Züge hinzufügen zu können.",
+    "Board.Practice.NoPositionForTrain2": "Wechsle in den Analysemodus, um Züge hinzufügen zu können.",
     "Board.Practice.SeeAnser": "Antwort anzeigen",
     "Board.Practice.Practiced": "Geübt",
     "Board.Practice.Due": "Fällig",
@@ -167,12 +166,10 @@ export const de_DE = {
     "Board.Analysis.GeneratingReport": "Bericht wird erstellt",
     "Board.Analysis.NotAnalysed": "Nicht analysiert",
     "Board.Analysis.EngineRequired": "Engine ist erforderlich",
-    "Board.Analysis.RefDBRequired":
-      "Keine Referenzdatenbank ausgewählt. Wähle zuerst eine auf der Datenbankseite aus.",
+    "Board.Analysis.RefDBRequired": "Keine Referenzdatenbank ausgewählt. Wähle zuerst eine auf der Datenbankseite aus.",
     "Board.Analysis.Time": "Zeit (ms)",
     "Board.Analysis.Reversed": "Umgekehrte Analyse",
-    "Board.Analysis.Reversed.Desc":
-      "Analysiere das Spiel ausgehend vom letzten Zug.",
+    "Board.Analysis.Reversed.Desc": "Analysiere das Spiel ausgehend vom letzten Zug.",
     "Board.Analysis.AnnotateNovelties": "Neuerungen kommentieren",
     "Board.Analysis.AnnotateNovelties.Desc":
       "Füge dem ersten Zug, der nicht in der Referenzdatenbank ist, einen Kommentar hinzu.",
@@ -205,19 +202,16 @@ export const de_DE = {
     "Engines.Settings.Reset": "Auf Standard zurücksetzen",
     "Engines.Add.Title": "Engine hinzufügen",
     "Engines.Add.Cloud": "Cloud",
-    "Engines.Add.ErrorFetch":
-      "Fehler beim Abrufen der Engine-Informationen vom Server.",
+    "Engines.Add.ErrorFetch": "Fehler beim Abrufen der Engine-Informationen vom Server.",
     "Engines.Add.BinaryFile": "Binärdatei",
     "Engines.Add.BinaryFile.Desc": "Klicke, um die Binärdatei auszuwählen",
     "Engines.Add.Name": "Name",
     "Engines.Add.Name.Autodetect": "Automatisch erkennen",
     "Engines.Add.Elo.Desc": "Elo der Engine",
     "Engines.Add.ImageFile": "Bilddatei",
-    "Engines.Add.ImageFile.Desc":
-      "Klicke, um die Bilddatei auszuwählen (empfohlene Größe: 60x60)",
+    "Engines.Add.ImageFile.Desc": "Klicke, um die Bilddatei auszuwählen (empfohlene Größe: 60x60)",
     "Engines.Remove.Title": "Engine entfernen",
-    "Engines.Remove.Message":
-      "Bist du sicher, dass du diese Engine aus Chessifier entfernen möchtest?",
+    "Engines.Remove.Message": "Bist du sicher, dass du diese Engine aus Chessifier entfernen möchtest?",
 
     "Databases.Title": "Deine Datenbanken",
     "Databases.Card.Games": "Spiele",
@@ -225,8 +219,7 @@ export const de_DE = {
     "Databases.Card.Storage": "Speicher",
     "Databases.Add.Title": "Datenbank hinzufügen",
     "Databases.Add.Web": "Web",
-    "Databases.Add.ErrorFetch":
-      "Fehler beim Abrufen der Datenbankinformationen vom Server.",
+    "Databases.Add.ErrorFetch": "Fehler beim Abrufen der Datenbankinformationen vom Server.",
     "Databases.Add.ClickToSelectPGN": "Klicke, um die PGN-Datei auszuwählen",
     "Databases.Add.Convert": "Konvertieren",
     "Databases.Settings.ReferenceDatabase": "Referenzdatenbank",
@@ -241,16 +234,14 @@ export const de_DE = {
       "Ersetze alle Vorkommen des ersten Spielers durch den zweiten Spieler in der Datenbank.",
     "Databases.Settings.Merge": "Zusammenführen",
     "Databases.Settings.BatchDelete": "Stapel-Löschung",
-    "Databases.Settings.BatchDelete.Desc":
-      "Diese Aktionen entfernen Spiele irreversibel aus der Datenbank. Vorsicht!",
+    "Databases.Settings.BatchDelete.Desc": "Diese Aktionen entfernen Spiele irreversibel aus der Datenbank. Vorsicht!",
     "Databases.Settings.RemoveDup": "Duplikate entfernen",
     "Databases.Settings.RemoveEmpty": "Leere Spiele entfernen",
     "Databases.Settings.Actions": "Aktionen",
     "Databases.Settings.AddGames": "Spiele hinzufügen",
     "Databases.Settings.ExportPGN": "In PGN exportieren",
     "Databases.Delete.Title": "Datenbank löschen",
-    "Databases.Delete.Message":
-      "Bist du sicher, dass du diese Datenbank löschen möchtest?",
+    "Databases.Delete.Message": "Bist du sicher, dass du diese Datenbank löschen möchtest?",
 
     "Files.Title": "Dateien",
     "Files.FileType": "Dateityp",
@@ -261,8 +252,7 @@ export const de_DE = {
     "Files.FileType.Other": "Andere",
     "Files.FileType.Folder": "Ordner",
     "Files.Delete.Title": "Datei löschen",
-    "Files.Delete.Message":
-      "Bist du sicher, dass du {{fileName}} löschen möchtest?",
+    "Files.Delete.Message": "Bist du sicher, dass du {{fileName}} löschen möchtest?",
     "Files.EditMetadata": "Metadaten bearbeiten",
     "Files.Edit.Title": "Datei bearbeiten",
     "Files.Create.Title": "Datei erstellen",
@@ -288,48 +278,38 @@ export const de_DE = {
     "Settings.ConsecutiveArrows.Desc":
       "Zeige mehrere Pfeile für die beste Zugfolge, wenn derselbe Zug mehrmals ausgeführt wird",
     "Settings.EraseDrawablesOnClick": "Zeichnungen mit Klick löschen",
-    "Settings.EraseDrawablesOnClick.Desc":
-      "Lösche Pfeile und Kreise auf dem Brett durch Linksklick",
+    "Settings.EraseDrawablesOnClick.Desc": "Lösche Pfeile und Kreise auf dem Brett durch Linksklick",
     "Settings.AutoPromition": "Automatische Beförderung",
-    "Settings.AutoPromition.Desc":
-      "Automatisch zur Dame befördern, wenn ein Bauer die letzte Reihe erreicht",
+    "Settings.AutoPromition.Desc": "Automatisch zur Dame befördern, wenn ein Bauer die letzte Reihe erreicht",
     "Settings.Coordinates": "Koordinaten",
     "Settings.Coordinates.Desc": "Zeige Koordinaten auf dem Brett",
     "Settings.AutoSave": "Automatisches Speichern",
-    "Settings.AutoSave.Desc":
-      "Speichere nach jedem Zug automatisch in eine Datei",
+    "Settings.AutoSave.Desc": "Speichere nach jedem Zug automatisch in eine Datei",
     "Settings.PreviewBoard": "Vorschau-Brett",
     "Settings.PreviewBoard.Desc":
       "Zeige eine Vorschau des Brettes, wenn man im Engine-Analysemodus über einen Zug fährt",
     "Settings.ScrollThroughMoves": "Züge durchscrollen",
-    "Settings.ScrollThroughMoves.Desc":
-      "Aktiviere oder deaktiviere das Durchscrollen von Zügen auf dem Schachbrett",
+    "Settings.ScrollThroughMoves.Desc": "Aktiviere oder deaktiviere das Durchscrollen von Zügen auf dem Schachbrett",
     "Settings.Inputs.Desc": "Passe die Eingabeeinstellungen an",
     "Settings.Inputs.TextInput": "Zug-Eingabe im Text",
     "Settings.Inputs.TextInput.Desc": "Züge im Textformat eingeben",
     "Settings.Inputs.SpellCheck": "Rechtschreibprüfung",
-    "Settings.Inputs.SpellCheck.Desc":
-      "Aktiviere oder deaktiviere die Rechtschreibprüfung für Texteingaben",
-    "Settings.OpeningReport.Desc":
-      "Passe die Einstellungen für Eröffnungsberichte an",
+    "Settings.Inputs.SpellCheck.Desc": "Aktiviere oder deaktiviere die Rechtschreibprüfung für Texteingaben",
+    "Settings.OpeningReport.Desc": "Passe die Einstellungen für Eröffnungsberichte an",
     "Settings.OpeningReport.PercentCoverage": "Abdeckungs-Prozentsatz",
-    "Settings.OpeningReport.PercentCoverage.Desc":
-      "Prozentualer Anteil der Züge, die in jeder Position abgedeckt sind",
+    "Settings.OpeningReport.PercentCoverage.Desc": "Prozentualer Anteil der Züge, die in jeder Position abgedeckt sind",
     "Settings.OpeningReport.MinGames": "Mindestanzahl an Spielen",
-    "Settings.OpeningReport.MinGames.Desc":
-      "Mindestanzahl an Spielen in jeder Position, damit sie berücksichtigt wird",
+    "Settings.OpeningReport.MinGames.Desc": "Mindestanzahl an Spielen in jeder Position, damit sie berücksichtigt wird",
     "Settings.Anarchy.Desc": "Spaßoptionen",
     "Settings.Anarchy.ForcedChessifier": "Erzwungene Chessifier",
-    "Settings.Anarchy.ForcedChessifier.Desc":
-      "Erzwingt das Spielen von Chessifier, wenn es ein legaler Zug ist.",
+    "Settings.Anarchy.ForcedChessifier.Desc": "Erzwingt das Spielen von Chessifier, wenn es ein legaler Zug ist.",
     "Settings.Appearance.Desc": "Passe das Erscheinungsbild der App an",
     "Settings.Appearance.Theme": "Thema",
     "Settings.Appearance.Theme.Desc": "Allgemeine Farbgestaltung",
     "Settings.Appearance.Theme.Light": "Hell",
     "Settings.Appearance.Theme.Dark": "Dunkel",
     "Settings.Appearance.TitleBar": "Titelleiste",
-    "Settings.Appearance.TitleBar.Desc":
-      "Wähle zwischen nativer oder benutzerdefinierter Titelleiste",
+    "Settings.Appearance.TitleBar.Desc": "Wähle zwischen nativer oder benutzerdefinierter Titelleiste",
     "Settings.Appearance.Language": "Sprache",
     "Settings.Appearance.Language.Desc": "In der App verwendete Sprache",
     "Settings.Appearance.TitleBar.Native": "Native",
@@ -337,11 +317,9 @@ export const de_DE = {
     "Settings.Appearance.FontSize": "Schriftgröße",
     "Settings.Appearance.FontSize.Desc": "Allgemeine Schriftgröße",
     "Settings.Appearance.PieceSet": "Figurenset",
-    "Settings.Appearance.PieceSet.Desc":
-      "Figuren, die auf den Brettern verwendet werden",
+    "Settings.Appearance.PieceSet.Desc": "Figuren, die auf den Brettern verwendet werden",
     "Settings.Appearance.BoardImage": "Brettbild",
-    "Settings.Appearance.BoardImage.Desc":
-      "Bild, das als Hintergrund für das Brett verwendet wird",
+    "Settings.Appearance.BoardImage.Desc": "Bild, das als Hintergrund für das Brett verwendet wird",
     "Settings.Appearance.AccentColor": "Akzentfarbe",
     "Settings.Appearance.AccentColor.Desc": "Hauptfarbe der App",
     "Settings.Sound.Desc": "Passe die Toneinstellungen an",
@@ -351,8 +329,7 @@ export const de_DE = {
     "Settings.Sound.Collection.Desc": "Verwendete Sammlung von Tönen",
     "Settings.Directories.Desc": "Passe die Verzeichnisse der App an",
     "Settings.Directories.Files": "Dateienverzeichnis",
-    "Settings.Directories.Files.Desc":
-      "Hier werden deine Spiele auf der Dateien-Seite gespeichert",
+    "Settings.Directories.Files.Desc": "Hier werden deine Spiele auf der Dateien-Seite gespeichert",
 
     "PgnInput.Comments": "Kommentare",
     "PgnInput.Glyphs": "Glyphen",

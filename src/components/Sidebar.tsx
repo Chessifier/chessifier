@@ -1,13 +1,5 @@
 import { AppShellSection, Stack, Tooltip } from "@mantine/core";
-import {
-  type Icon,
-  IconChess,
-  IconCpu,
-  IconDatabase,
-  IconFiles,
-  IconSettings,
-  IconUser,
-} from "@tabler/icons-react";
+import { type Icon, IconChess, IconCpu, IconDatabase, IconFiles, IconSettings, IconUser } from "@tabler/icons-react";
 import { Link, useMatchRoute } from "@tanstack/react-router";
 import cx from "clsx";
 import { useTranslation } from "react-i18next";
@@ -51,9 +43,7 @@ const linksdata = [
 export function SideBar() {
   const { t } = useTranslation();
 
-  const links = linksdata.map((link) => (
-    <NavbarLink {...link} label={t(`SideBar.${link.label}`)} key={link.label} />
-  ));
+  const links = linksdata.map((link) => <NavbarLink {...link} label={t(`SideBar.${link.label}`)} key={link.label} />);
 
   return (
     <>
@@ -64,11 +54,7 @@ export function SideBar() {
       </AppShellSection>
       <AppShellSection>
         <Stack justify="center" gap={0}>
-          <NavbarLink
-            icon={IconSettings}
-            label={t("SideBar.Settings")}
-            url="/settings"
-          />
+          <NavbarLink icon={IconSettings} label={t("SideBar.Settings")} url="/settings" />
         </Stack>
       </AppShellSection>
     </>

@@ -1,10 +1,6 @@
 import { SegmentedControl, useMantineTheme } from "@mantine/core";
 
-export default function LinesSlider(props: {
-  value: number;
-  setValue: (v: number) => void;
-  color?: string;
-}) {
+export default function LinesSlider(props: { value: number; setValue: (v: number) => void; color?: string }) {
   const theme = useMantineTheme();
 
   return (

@@ -142,10 +142,8 @@ export const tr_TR = {
     "Board.Tabs.Info": "Bilgi",
     "Board.Practice.Train": "Çalış",
     "Board.Practice.Build": "Oluştur",
-    "Board.Practice.NoPositionForTrain1":
-      "Çalışılacak pozisyon yok. Bu PGN dosyasına hamle ekleyerek başlayın.",
-    "Board.Practice.NoPositionForTrain2":
-      "Hamle ekleyebilmeniz için Analiz moduna geçmelisiniz.",
+    "Board.Practice.NoPositionForTrain1": "Çalışılacak pozisyon yok. Bu PGN dosyasına hamle ekleyerek başlayın.",
+    "Board.Practice.NoPositionForTrain2": "Hamle ekleyebilmeniz için Analiz moduna geçmelisiniz.",
     "Board.Practice.SeeAnser": "Cevabı Gör",
     "Board.Practice.Practiced": "Çalışıldı",
     "Board.Practice.Due": "Çalışılmalı",
@@ -167,15 +165,12 @@ export const tr_TR = {
     "Board.Analysis.GeneratingReport": "Rapor oluşturuluyor",
     "Board.Analysis.NotAnalysed": "Analiz edilmedi",
     "Board.Analysis.EngineRequired": "Motor gerekli",
-    "Board.Analysis.RefDBRequired":
-      "Referans veritabanı seçilmedi. Önce veritabanları sayfasından birini seçin",
+    "Board.Analysis.RefDBRequired": "Referans veritabanı seçilmedi. Önce veritabanları sayfasından birini seçin",
     "Board.Analysis.Time": "Süre (ms)",
     "Board.Analysis.Reversed": "Tersten analiz",
-    "Board.Analysis.Reversed.Desc":
-      "Oyunu son hamleden ilk hamleye analiz eder.",
+    "Board.Analysis.Reversed.Desc": "Oyunu son hamleden ilk hamleye analiz eder.",
     "Board.Analysis.AnnotateNovelties": "Yenilikleri İşaretle",
-    "Board.Analysis.AnnotateNovelties.Desc":
-      "Referans veritabanında bulunmayan ilk pozisyona not ekler.",
+    "Board.Analysis.AnnotateNovelties.Desc": "Referans veritabanında bulunmayan ilk pozisyona not ekler.",
     "Board.Analysis.Analyze": "Analiz",
     "Board.Analysis.Advantage": "Avantaj",
     "Board.Analysis.Accuracy": "Doğruluk",
@@ -212,11 +207,9 @@ export const tr_TR = {
     "Engines.Add.Name.Autodetect": "Otomatik bul",
     "Engines.Add.Elo.Desc": "Motor ELO'su",
     "Engines.Add.ImageFile": "Görsel dosyası",
-    "Engines.Add.ImageFile.Desc":
-      "Görsel dosyası seçmek için tıklayın (önerilen boyut: 60x60)",
+    "Engines.Add.ImageFile.Desc": "Görsel dosyası seçmek için tıklayın (önerilen boyut: 60x60)",
     "Engines.Remove.Title": "Motor Kaldır",
-    "Engines.Remove.Message":
-      "Bu motoru Chessifier'tan kaldırmak istediğinize emin misiniz?",
+    "Engines.Remove.Message": "Bu motoru Chessifier'tan kaldırmak istediğinize emin misiniz?",
 
     "Databases.Title": "Veritabanlarınız",
     "Databases.Card.Games": "Oyunlar",
@@ -229,14 +222,12 @@ export const tr_TR = {
     "Databases.Add.Convert": "Dönüştür",
     "Databases.Settings.ReferenceDatabase": "Referans Veritabanı",
     "Databases.Settings.Indexed": "İndeksli",
-    "Databases.Settings.Indexed.Desc":
-      "İndeksler arama hızını arttırır ama daha fazla depolama kullanır.",
+    "Databases.Settings.Indexed.Desc": "İndeksler arama hızını arttırır ama daha fazla depolama kullanır.",
     "Databases.Settings.Events": "Etkinlikler",
     "Databases.Settings.Explore": "Keşfed",
     "Databases.Settings.AdvancedTools": "Gelişmiş aletler",
     "Databases.Settings.MergePlayers": "Oyuncuları Birleştir",
-    "Databases.Settings.MergePlayers.Desc":
-      "İlk oyuncunun tüm kayıtlarını ikinci oyuncuyla değiştir.",
+    "Databases.Settings.MergePlayers.Desc": "İlk oyuncunun tüm kayıtlarını ikinci oyuncuyla değiştir.",
     "Databases.Settings.Merge": "Birleştir",
     "Databases.Settings.BatchDelete": "Toplu Sil",
     "Databases.Settings.BatchDelete.Desc":
@@ -258,8 +249,7 @@ export const tr_TR = {
     "Files.FileType.Other": "Diğer",
     "Files.FileType.Folder": "Klasör",
     "Files.Delete.Title": "Dosyayı sil",
-    "Files.Delete.Message":
-      "Bu dosyayı silmek istediğine emin misin: {{fileName}}?",
+    "Files.Delete.Message": "Bu dosyayı silmek istediğine emin misin: {{fileName}}?",
     "Files.EditMetadata": "Metadata Düzenle",
     "Files.Edit.Title": "Dosya düzenle",
     "Files.Create.Title": "Dosya oluştur",
@@ -285,19 +275,15 @@ export const tr_TR = {
     "Settings.ConsecutiveArrows.Desc":
       "Aynı taşı birkaç kez hareket ettirmeyi içeriyorsa en iyi varyant için birden fazla ok göster.",
     "Settings.EraseDrawablesOnClick": "Tıklandığında Çizilenleri Sil",
-    "Settings.EraseDrawablesOnClick.Desc":
-      "Tahtadaki okları ve yuvarlakları sol tıklandığında sil",
+    "Settings.EraseDrawablesOnClick.Desc": "Tahtadaki okları ve yuvarlakları sol tıklandığında sil",
     "Settings.AutoPromition": "Otomatik Terfi",
-    "Settings.AutoPromition.Desc":
-      "Piyon son yataya eriştiğinde otomatik olarak vezire terfi et",
+    "Settings.AutoPromition.Desc": "Piyon son yataya eriştiğinde otomatik olarak vezire terfi et",
     "Settings.Coordinates": "Kordinatlar",
     "Settings.Coordinates.Desc": "Kordinatları tahtada göster",
     "Settings.AutoSave": "Otomatik Kaydet",
-    "Settings.AutoSave.Desc":
-      "Her hamle sonrası otomatik olarak dosyaya kaydet",
+    "Settings.AutoSave.Desc": "Her hamle sonrası otomatik olarak dosyaya kaydet",
     "Settings.PreviewBoard": "Tahtayı Önizle",
-    "Settings.PreviewBoard.Desc":
-      "Motor analizinde bir hareketin üzerine gelindiğinde tahtanın önizlemesini göster",
+    "Settings.PreviewBoard.Desc": "Motor analizinde bir hareketin üzerine gelindiğinde tahtanın önizlemesini göster",
     "Settings.ScrollThroughMoves": "Fare Tekeriyle Hamlelerde Gezin",
     "Settings.ScrollThroughMoves.Desc":
       "Satranç tahtasındaki hamleler arasında fare tekeriyle hareketi etkinleştirin veya devre dışı bırakın",
@@ -308,23 +294,19 @@ export const tr_TR = {
     "Settings.Inputs.SpellCheck.Desc": "Yazılı hamlelerde yazımı kontrol et",
     "Settings.OpeningReport.Desc": "Açılış raporu ayarlarını düzenleyin",
     "Settings.OpeningReport.PercentCoverage": "Yüzdelik Kapsam",
-    "Settings.OpeningReport.PercentCoverage.Desc":
-      "Her pozisyonda kapsanan hamlelerin yüzdeliği",
+    "Settings.OpeningReport.PercentCoverage.Desc": "Her pozisyonda kapsanan hamlelerin yüzdeliği",
     "Settings.OpeningReport.MinGames": "En Az Oyun",
-    "Settings.OpeningReport.MinGames.Desc":
-      "Pozisyonun göz önünde bulundurulması için gereken en az oyun",
+    "Settings.OpeningReport.MinGames.Desc": "Pozisyonun göz önünde bulundurulması için gereken en az oyun",
     "Settings.Anarchy.Desc": "Eğlence ayarları",
     "Settings.Anarchy.ForcedChessifier": "Zorunlu Chessifier",
-    "Settings.Anarchy.ForcedChessifier.Desc":
-      "Eğer oynayabiliyorsan Chessifier oynamak zorundasın",
+    "Settings.Anarchy.ForcedChessifier.Desc": "Eğer oynayabiliyorsan Chessifier oynamak zorundasın",
     "Settings.Appearance.Desc": "Uygulamanın görünüşünü düzenleyin",
     "Settings.Appearance.Theme": "Tema",
     "Settings.Appearance.Theme.Desc": "Genel renk şeması",
     "Settings.Appearance.Theme.Light": "Açık",
     "Settings.Appearance.Theme.Dark": "Koyu",
     "Settings.Appearance.TitleBar": "Başlık çubuğu",
-    "Settings.Appearance.TitleBar.Desc":
-      "Yerel veya özel başlık çubuğu arasında seçim yapın",
+    "Settings.Appearance.TitleBar.Desc": "Yerel veya özel başlık çubuğu arasında seçim yapın",
     "Settings.Appearance.Language": "Dil",
     "Settings.Appearance.Language.Desc": "Uygulamada kullanılan dil",
     "Settings.Appearance.TitleBar.Native": "Yerel",
@@ -334,8 +316,7 @@ export const tr_TR = {
     "Settings.Appearance.PieceSet": "Taş Seti",
     "Settings.Appearance.PieceSet.Desc": "Tahtada kullanılan taşlar",
     "Settings.Appearance.BoardImage": "Tahta Görseli",
-    "Settings.Appearance.BoardImage.Desc":
-      "Tahta arkaplanı olarak kullanılan görsel",
+    "Settings.Appearance.BoardImage.Desc": "Tahta arkaplanı olarak kullanılan görsel",
     "Settings.Appearance.AccentColor": "Baskın Renk",
     "Settings.Appearance.AccentColor.Desc": "Uygulamanın ana rengi",
     "Settings.Sound.Desc": "Ses ayarlarını düzenleyin",
@@ -343,11 +324,9 @@ export const tr_TR = {
     "Settings.Sound.Volume.Desc": "Genel yükseklik",
     "Settings.Sound.Collection": "Ses koleksiyonu",
     "Settings.Sound.Collection.Desc": "Kullanılan seslerin koleksiyonu",
-    "Settings.Directories.Desc":
-      "Uygulama tarafından kullanılan klasörleri düzenleyin",
+    "Settings.Directories.Desc": "Uygulama tarafından kullanılan klasörleri düzenleyin",
     "Settings.Directories.Files": "Dosyalar Klasörü",
-    "Settings.Directories.Files.Desc":
-      "Dosyalar sayfasındaki oyunlarınız burada saklanır",
+    "Settings.Directories.Files.Desc": "Dosyalar sayfasındaki oyunlarınız burada saklanır",
 
     "PgnInput.Comments": "Yorumlar",
     "PgnInput.Glyphs": "Semboller",

@@ -1,15 +1,7 @@
 import { Box, Group } from "@mantine/core";
 import * as classes from "./GridLayout.css";
 
-function GridLayout({
-  search,
-  table,
-  preview,
-}: {
-  search: JSX.Element;
-  table: JSX.Element;
-  preview: JSX.Element;
-}) {
+function GridLayout({ search, table, preview }: { search: JSX.Element; table: JSX.Element; preview: JSX.Element }) {
   return (
     <>
       <Group grow h="100%">

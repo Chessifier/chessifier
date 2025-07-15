@@ -135,8 +135,7 @@ export const fr_FR = {
     "Home.Card.Puzzle.Desc": "Entraînement pour vous améliorer",
     "Home.Card.Puzzle.Button": "S'entraîner",
 
-    "Board.Action.TogglePawnStructureView":
-      "Basculer l'affichage de la structure de pions",
+    "Board.Action.TogglePawnStructureView": "Basculer l'affichage de la structure de pions",
     "Board.Action.TakeSnapshot": "Prendre une capture d'écran",
     "Board.Action.AnalyzeGame": "Analyser la partie",
     "Board.Action.PlayFromHere": "Jouer à partir d'ici",
@@ -155,8 +154,7 @@ export const fr_FR = {
     "Board.Practice.Build": "Créer",
     "Board.Practice.NoPositionForTrain1":
       "Aucune position pour s'entraîner. Commencez en ajoutant des coups à ce fichier PGN.",
-    "Board.Practice.NoPositionForTrain2":
-      "Vous devez utiliser le mode Analyse pour ajouter des coups.",
+    "Board.Practice.NoPositionForTrain2": "Vous devez utiliser le mode Analyse pour ajouter des coups.",
     "Board.Practice.SeeAnser": "Voir la solution",
     "Board.Practice.Practiced": "Entraîné",
     "Board.Practice.Due": "À faire",
@@ -182,8 +180,7 @@ export const fr_FR = {
       "Aucune base de données de référence sélectionnée. Sélectionnez-en une dans la page Base de données",
     "Board.Analysis.Time": "Temps (ms)",
     "Board.Analysis.Reversed": "Analyse inversée",
-    "Board.Analysis.Reversed.Desc":
-      "Analyse la partie en commençant par le dernier coup.",
+    "Board.Analysis.Reversed.Desc": "Analyse la partie en commençant par le dernier coup.",
     "Board.Analysis.AnnotateNovelties": "Annoter les nouveautés",
     "Board.Analysis.AnnotateNovelties.Desc":
       "Ajoute un commentaire au premier coup qui n'est pas dans la base de données de référence.",
@@ -197,12 +194,10 @@ export const fr_FR = {
     "Board.Database.Stats": "Statistiques",
     "Board.Database.Games": "Parties",
     "Board.Database.Options": "Options",
-    "Board.Database.NoReference1":
-      "Aucune base de données de référence sélectionnée.",
+    "Board.Database.NoReference1": "Aucune base de données de référence sélectionnée.",
     "Board.Database.NoReference2": "Merci",
     "Board.Database.SelectReference": "ajouter une base de donnée",
-    "Board.Database.NoReference3":
-      "en premier puis sélectionnez-la comme référence.",
+    "Board.Database.NoReference3": "en premier puis sélectionnez-la comme référence.",
     "Board.Database.TimeControl": "Contrôle du temps",
     "Board.Database.AverageRating": "Classement moyen",
     "Board.Annotate.WriteHere": "Écrire ici...",
@@ -218,16 +213,14 @@ export const fr_FR = {
     "Engines.Settings.Reset": "Remise à zéro",
     "Engines.Add.Title": "Ajouter un moteur",
     "Engines.Add.Cloud": "Nuage",
-    "Engines.Add.ErrorFetch":
-      "Impossible de télécharger les infos du moteur depuis le serveur.",
+    "Engines.Add.ErrorFetch": "Impossible de télécharger les infos du moteur depuis le serveur.",
     "Engines.Add.BinaryFile": "Fichier binaire",
     "Engines.Add.BinaryFile.Desc": "Cliquez pour choisir le fichier",
     "Engines.Add.Name": "Nom",
     "Engines.Add.Name.Autodetect": "Détection automatique",
     "Engines.Add.Elo.Desc": "Elo du moteur",
     "Engines.Add.ImageFile": "Fichier image",
-    "Engines.Add.ImageFile.Desc":
-      "Cliquez pour sélectionner une image (taille: 60x60px recommandée)",
+    "Engines.Add.ImageFile.Desc": "Cliquez pour sélectionner une image (taille: 60x60px recommandée)",
     "Engines.Remove.Title": "Supprimer le moteur",
     "Engines.Remove.Message": "Êtes-vous sûr de vouloir supprimer le moteur ?",
 
@@ -237,10 +230,8 @@ export const fr_FR = {
     "Databases.Card.Storage": "Stockage",
     "Databases.Add.Title": "Ajouter une base de données",
     "Databases.Add.Web": "Web",
-    "Databases.Add.ErrorFetch":
-      "Impossible de télécharger les informations de la base de données depuis le serveur.",
-    "Databases.Add.ClickToSelectPGN":
-      "Cliquez pour sélectionner un fichier PGN",
+    "Databases.Add.ErrorFetch": "Impossible de télécharger les informations de la base de données depuis le serveur.",
+    "Databases.Add.ClickToSelectPGN": "Cliquez pour sélectionner un fichier PGN",
     "Databases.Add.Convert": "Convertir",
     "Databases.Settings.ReferenceDatabase": "Base de données de référence",
     "Databases.Settings.Indexed": "Indexée",
@@ -262,8 +253,7 @@ export const fr_FR = {
     "Databases.Settings.AddGames": "Ajouter des parties",
     "Databases.Settings.ExportPGN": "Exporter en PGN",
     "Databases.Delete.Title": "Supprimer la base de données",
-    "Databases.Delete.Message":
-      "Êtes-vous sûr de vouloir supprimer cette base de données ?",
+    "Databases.Delete.Message": "Êtes-vous sûr de vouloir supprimer cette base de données ?",
 
     "Errors.EmptyBoard": "Échiquier vide",
     "Errors.InvalidKings": "Nombre de Rois invalide",
@@ -317,11 +307,9 @@ export const fr_FR = {
     "Settings.Keybindings": "Configuration clavier",
     "Settings.Directories": "Dossiers",
 
-    "Settings.Board.Desc":
-      "Personnaliser l'échiquier d'analyse et les contrôles",
+    "Settings.Board.Desc": "Personnaliser l'échiquier d'analyse et les contrôles",
     "Settings.PieceDest": "Destinations des pièces",
-    "Settings.PieceDest.Desc":
-      "Affiche les mouvements possibles de chaque pièce",
+    "Settings.PieceDest.Desc": "Affiche les mouvements possibles de chaque pièce",
     "Settings.Arrows": "Flèches",
     "Settings.Arrows.Desc": "Affiche une flèche pour les meilleurs coups",
     "Settings.SnapArrows": "Flèches magnétiques",
@@ -330,50 +318,38 @@ export const fr_FR = {
     "Settings.ConsecutiveArrows.Desc":
       "Affiche plusieurs flèches pour la meilleur ligne, si cela implique de déplacer la même pièce plusieurs fois",
     "Settings.EraseDrawablesOnClick": "Effacer les indications au clic",
-    "Settings.EraseDrawablesOnClick.Desc":
-      "Efface toutes les indications de l'échiquier en cliquant avec la souris",
+    "Settings.EraseDrawablesOnClick.Desc": "Efface toutes les indications de l'échiquier en cliquant avec la souris",
     "Settings.AutoPromition": "Promotion automatique",
-    "Settings.AutoPromition.Desc":
-      "Promotion en Reine automatique lorsqu'un pion est éligible",
+    "Settings.AutoPromition.Desc": "Promotion en Reine automatique lorsqu'un pion est éligible",
     "Settings.Coordinates": "Coordonnées",
     "Settings.Coordinates.Desc": "Affiche les coordonnées sur l'échiquier",
     "Settings.AutoSave": "Sauvegarde automatique",
-    "Settings.AutoSave.Desc":
-      "Sauvegarde la partie automatiquement après chaque coup",
+    "Settings.AutoSave.Desc": "Sauvegarde la partie automatiquement après chaque coup",
     "Settings.PreviewBoard": "Aperçu de l'échiquier",
     "Settings.PreviewBoard.Desc":
       "Affiche un aperçu de l'échiquier lors du survol d'une variante analysée par le moteur",
     "Settings.ScrollThroughMoves": "Défiler les coups",
-    "Settings.ScrollThroughMoves.Desc":
-      "Active ou désactive le défilement des coups sur l'échiquier",
+    "Settings.ScrollThroughMoves.Desc": "Active ou désactive le défilement des coups sur l'échiquier",
     "Settings.Inputs.Desc": "Personnalisation des touches",
     "Settings.Inputs.TextInput": "Saisie des coups au clavier",
-    "Settings.Inputs.TextInput.Desc":
-      "Permets la saisie des coups au format texte",
+    "Settings.Inputs.TextInput.Desc": "Permets la saisie des coups au format texte",
     "Settings.Inputs.SpellCheck": "Vérification orthographique",
-    "Settings.Inputs.SpellCheck.Desc":
-      "Active ou désactive la vérification orthographique des champs de saisie",
-    "Settings.OpeningReport.Desc":
-      "Personnalisation des paramètres du rapport d'ouverture",
+    "Settings.Inputs.SpellCheck.Desc": "Active ou désactive la vérification orthographique des champs de saisie",
+    "Settings.OpeningReport.Desc": "Personnalisation des paramètres du rapport d'ouverture",
     "Settings.OpeningReport.PercentCoverage": "Pourcentage de couverture",
-    "Settings.OpeningReport.PercentCoverage.Desc":
-      "Pourcentage des coups couverts dans chaque position",
+    "Settings.OpeningReport.PercentCoverage.Desc": "Pourcentage des coups couverts dans chaque position",
     "Settings.OpeningReport.MinGames": "Parties minimum",
-    "Settings.OpeningReport.MinGames.Desc":
-      "Numbre minimum de parties à considérer pour chaque position",
+    "Settings.OpeningReport.MinGames.Desc": "Numbre minimum de parties à considérer pour chaque position",
     "Settings.Anarchy.Desc": "Options fun",
     "Settings.Anarchy.ForcedChessifier": "Chessifier forcé",
-    "Settings.Anarchy.ForcedChessifier.Desc":
-      "Vous oblige à jouer Chessifier, si c'est un coup candidat.",
-    "Settings.Appearance.Desc":
-      "Personnalisation de l'interface de l'application",
+    "Settings.Anarchy.ForcedChessifier.Desc": "Vous oblige à jouer Chessifier, si c'est un coup candidat.",
+    "Settings.Appearance.Desc": "Personnalisation de l'interface de l'application",
     "Settings.Appearance.Theme": "Thème",
     "Settings.Appearance.Theme.Desc": "Thème de couleurs principal",
     "Settings.Appearance.Theme.Light": "Clair",
     "Settings.Appearance.Theme.Dark": "Sombre",
     "Settings.Appearance.TitleBar": "Barre de titre",
-    "Settings.Appearance.TitleBar.Desc":
-      "Choisissez entre une barre native ou personnalisée",
+    "Settings.Appearance.TitleBar.Desc": "Choisissez entre une barre native ou personnalisée",
     "Settings.Appearance.Language": "Langue",
     "Settings.Appearance.Language.Desc": "Langue utilisée dans l'application",
     "Settings.Appearance.TitleBar.Native": "Native",
@@ -383,21 +359,17 @@ export const fr_FR = {
     "Settings.Appearance.PieceSet": "Jeu de pièces",
     "Settings.Appearance.PieceSet.Desc": "Pièces utilisées sur l'échiquier",
     "Settings.Appearance.BoardImage": "Image de l'échiquier",
-    "Settings.Appearance.BoardImage.Desc":
-      "Image utilisée en fond de l'échiquier",
+    "Settings.Appearance.BoardImage.Desc": "Image utilisée en fond de l'échiquier",
     "Settings.Appearance.AccentColor": "Couleur de surbrillance",
-    "Settings.Appearance.AccentColor.Desc":
-      "Couleur principale de surbrillance de l'application",
+    "Settings.Appearance.AccentColor.Desc": "Couleur principale de surbrillance de l'application",
     "Settings.Sound.Desc": "Personnalisation des paramètres de son",
     "Settings.Sound.Volume": "Volume",
     "Settings.Sound.Volume.Desc": "Volume principal",
     "Settings.Sound.Collection": "Collection de sons",
     "Settings.Sound.Collection.Desc": "Collection de sons utilisés",
-    "Settings.Directories.Desc":
-      "Personnalisation des dossiers utilisés par l'application",
+    "Settings.Directories.Desc": "Personnalisation des dossiers utilisés par l'application",
     "Settings.Directories.Files": "Dossier des fichiers de l'application",
-    "Settings.Directories.Files.Desc":
-      "C'est ici que vos fichiers de parties seront sauvegardés",
+    "Settings.Directories.Files.Desc": "C'est ici que vos fichiers de parties seront sauvegardés",
 
     "PgnInput.Comments": "Commentaires",
     "PgnInput.Glyphs": "Glyphes",

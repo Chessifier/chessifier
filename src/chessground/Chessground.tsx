@@ -1,14 +1,12 @@
-import { boardImageAtom, moveMethodAtom } from "@/state/atoms";
 import { Box } from "@mantine/core";
 import { Chessground as NativeChessground } from "chessground";
 import type { Api } from "chessground/api";
 import type { Config } from "chessground/config";
 import { useAtomValue } from "jotai";
 import { useEffect, useRef, useState } from "react";
+import { boardImageAtom, moveMethodAtom } from "@/state/atoms";
 
-export function Chessground(
-  props: Config & { setBoardFen?: (fen: string) => void },
-) {
+export function Chessground(props: Config & { setBoardFen?: (fen: string) => void }) {
   const [api, setApi] = useState<Api | null>(null);
 
   const ref = useRef<HTMLDivElement>(null);

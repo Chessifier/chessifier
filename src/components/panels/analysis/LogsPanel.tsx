@@ -1,17 +1,4 @@
-import { commands } from "@/bindings";
-import { activeTabAtom, enginesAtom, fontSizeAtom } from "@/state/atoms";
-import type { LocalEngine } from "@/utils/engines";
-import { unwrap } from "@/utils/unwrap";
-import {
-  ActionIcon,
-  Group,
-  ScrollArea,
-  SegmentedControl,
-  Select,
-  Stack,
-  Table,
-  Text,
-} from "@mantine/core";
+import { ActionIcon, Group, ScrollArea, SegmentedControl, Select, Stack, Table, Text } from "@mantine/core";
 import { IconFileExport, IconRefresh } from "@tabler/icons-react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { save } from "@tauri-apps/plugin-dialog";
@@ -19,26 +6,21 @@ import { writeTextFile } from "@tauri-apps/plugin-fs";
 import { useAtomValue } from "jotai";
 import { useEffect, useMemo, useRef, useState } from "react";
 import useSWR from "swr";
+import { commands } from "@/bindings";
+import { activeTabAtom, enginesAtom, fontSizeAtom } from "@/state/atoms";
+import type { LocalEngine } from "@/utils/engines";
+import { unwrap } from "@/utils/unwrap";
 
 export default function LogsPanel() {
   const engines = useAtomValue(enginesAtom);
-  const localEngines = engines
-    .filter((e): e is LocalEngine => e.type === "local")
-    .filter((e) => e.loaded);
-  const [engine, setEngine] = useState<LocalEngine | undefined>(
-    localEngines[0],
-  );
+  const localEngines = engines.filter((e): e is LocalEngine => e.type === "local").filter((e) => e.loaded);
+  const [engine, setEngine] = useState<LocalEngine | undefined>(localEngines[0]);
 
   const viewport = useRef<HTMLDivElement>(null);
   const activeTab = useAtomValue(activeTabAtom);
-  const { data, mutate } = useSWR(
-    ["logs", engine?.path, activeTab],
-    async () => {
-      return engine
-        ? unwrap(await commands.getEngineLogs(engine.path, activeTab!))
-        : undefined;
-    },
-  );
+  const { data, mutate } = useSWR(["logs", engine?.path, activeTab], async () => {
+    return engine ? unwrap(await commands.getEngineLogs(engine.path, activeTab!)) : undefined;
+  });
 
   useEffect(() => {
     if (viewport.current) {
@@ -62,9 +44,7 @@ export default function LogsPanel() {
 
   async function exportLogs() {
     const file = await save({ defaultPath: "logs.csv" });
-    const content = data
-      ?.map((line) => `${line.type}, ${line.value.trimEnd()}`)
-      .join("\n");
+    const content = data?.map((line) => `${line.type}, ${line.value.trimEnd()}`).join("\n");
     if (file) {
       await writeTextFile(file, content ?? "");
     }
@@ -104,9 +84,7 @@ export default function LogsPanel() {
         <Select
           allowDeselect={false}
           value={engine?.name ?? "No engines loaded"}
-          onChange={(name) =>
-            setEngine(localEngines.find((e) => e.name === name))
-          }
+          onChange={(name) => setEngine(localEngines.find((e) => e.name === name))}
           data={localEngines.map((e) => ({ value: e.name, label: e.name }))}
         />
       </Group>

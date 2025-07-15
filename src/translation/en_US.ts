@@ -152,10 +152,8 @@ export const en_US = {
     "Board.Tabs.Info": "Info",
     "Board.Practice.Train": "Train",
     "Board.Practice.Build": "Build",
-    "Board.Practice.NoPositionForTrain1":
-      "There are no position to practice. Start by adding moves to this PGN file.",
-    "Board.Practice.NoPositionForTrain2":
-      "You'll need to change to Analysis mode to be able to add moves.",
+    "Board.Practice.NoPositionForTrain1": "There are no position to practice. Start by adding moves to this PGN file.",
+    "Board.Practice.NoPositionForTrain2": "You'll need to change to Analysis mode to be able to add moves.",
     "Board.Practice.SeeAnser": "See Answer",
     "Board.Practice.Practiced": "Practiced",
     "Board.Practice.Due": "Due",
@@ -177,20 +175,17 @@ export const en_US = {
     "Board.Analysis.GeneratingReport": "Generating report",
     "Board.Analysis.NotAnalysed": "Not analysed",
     "Board.Analysis.EngineRequired": "Engine is required",
-    "Board.Analysis.RefDBRequired":
-      "No reference database selected. Select one first in the databases page",
+    "Board.Analysis.RefDBRequired": "No reference database selected. Select one first in the databases page",
     "Board.Analysis.Time": "Time (ms)",
     "Board.Analysis.Reversed": "Reversed analysis",
-    "Board.Analysis.Reversed.Desc":
-      "Analyze the game in starting from the last move.",
+    "Board.Analysis.Reversed.Desc": "Analyze the game in starting from the last move.",
     "Board.Analysis.AnnotateNovelties": "Annotate Novelties",
     "Board.Analysis.AnnotateNovelties.Desc":
       "Add a comment to the first position that is not in the reference database.",
     "Board.Analysis.Analyze": "Analyze",
     "Board.Analysis.Advantage": "Advantage",
     "Board.Analysis.Accuracy": "Accuracy",
-    "Board.Analysis.EnableWDL":
-      "You have to enable UCI_ShowWDL in the engine settings to use this feature.",
+    "Board.Analysis.EnableWDL": "You have to enable UCI_ShowWDL in the engine settings to use this feature.",
     "Board.Database.Local": "Local",
     "Board.Database.LichessAll": "Lichess All",
     "Board.Database.LichessMaster": "Lichess Masters",
@@ -217,19 +212,16 @@ export const en_US = {
     "Engines.Settings.Reset": "Reset to default",
     "Engines.Add.Title": "Add Engine",
     "Engines.Add.Cloud": "Cloud",
-    "Engines.Add.ErrorFetch":
-      "Failed to fetch the engine's info from the server.",
+    "Engines.Add.ErrorFetch": "Failed to fetch the engine's info from the server.",
     "Engines.Add.BinaryFile": "Binary file",
     "Engines.Add.BinaryFile.Desc": "Click to select the binary file",
     "Engines.Add.Name": "Name",
     "Engines.Add.Name.Autodetect": "Autodetect",
     "Engines.Add.Elo.Desc": "Engine's Elo",
     "Engines.Add.ImageFile": "Image file",
-    "Engines.Add.ImageFile.Desc":
-      "Click to select the image file (recommended size: 60x60)",
+    "Engines.Add.ImageFile.Desc": "Click to select the image file (recommended size: 60x60)",
     "Engines.Remove.Title": "Remove Engine",
-    "Engines.Remove.Message":
-      "Are you sure you want to remove this engine from Chessifier?",
+    "Engines.Remove.Message": "Are you sure you want to remove this engine from Chessifier?",
 
     "Databases.Title": "Your Databases",
     "Databases.Card.Games": "Games",
@@ -237,14 +229,12 @@ export const en_US = {
     "Databases.Card.Storage": "Storage",
     "Databases.Add.Title": "Add Database",
     "Databases.Add.Web": "Web",
-    "Databases.Add.ErrorFetch":
-      "Failed to fetch the database's info from the server.",
+    "Databases.Add.ErrorFetch": "Failed to fetch the database's info from the server.",
     "Databases.Add.ClickToSelectPGN": "Click to select the PGN file",
     "Databases.Add.Convert": "Convert",
     "Databases.Settings.ReferenceDatabase": "Reference Database",
     "Databases.Settings.Indexed": "Indexed",
-    "Databases.Settings.Indexed.Desc":
-      "Indexes are used to speed up the search process, but they take up extra space.",
+    "Databases.Settings.Indexed.Desc": "Indexes are used to speed up the search process, but they take up extra space.",
     "Databases.Settings.Events": "Events",
     "Databases.Settings.Explore": "Explore",
     "Databases.Settings.AdvancedTools": "Advanced tools",
@@ -261,8 +251,7 @@ export const en_US = {
     "Databases.Settings.AddGames": "Add Games",
     "Databases.Settings.ExportPGN": "Export to PGN",
     "Databases.Delete.Title": "Delete Database",
-    "Databases.Delete.Message":
-      "Are you sure you want to delete this database?",
+    "Databases.Delete.Message": "Are you sure you want to delete this database?",
 
     "Errors.EmptyBoard": "Empty board",
     "Errors.InvalidKings": "Invalid number of kings",
@@ -327,46 +316,37 @@ export const en_US = {
     "Settings.ConsecutiveArrows.Desc":
       "Show multiple arrows for the best line, if it involves moving the same piece several times",
     "Settings.EraseDrawablesOnClick": "Erase Drawables On Click",
-    "Settings.EraseDrawablesOnClick.Desc":
-      "Clear the board of drawn arrows & circles by left-clicking the mouse",
+    "Settings.EraseDrawablesOnClick.Desc": "Clear the board of drawn arrows & circles by left-clicking the mouse",
     "Settings.AutoPromition": "Auto Promotion",
-    "Settings.AutoPromition.Desc":
-      "Automatically promote to a queen when a pawn reaches the last rank",
+    "Settings.AutoPromition.Desc": "Automatically promote to a queen when a pawn reaches the last rank",
     "Settings.Coordinates": "Coordinates",
     "Settings.Coordinates.Desc": "Show coordinates on the board",
     "Settings.AutoSave": "Auto Save",
     "Settings.AutoSave.Desc": "Auto save to file after each move",
     "Settings.PreviewBoard": "Preview Board",
-    "Settings.PreviewBoard.Desc":
-      "Show a preview of the board when hovering over a move in the engine analysis",
+    "Settings.PreviewBoard.Desc": "Show a preview of the board when hovering over a move in the engine analysis",
     "Settings.ScrollThroughMoves": "Scroll Through Moves",
-    "Settings.ScrollThroughMoves.Desc":
-      "Enable or disable scrolling through moves on the chessboard",
+    "Settings.ScrollThroughMoves.Desc": "Enable or disable scrolling through moves on the chessboard",
     "Settings.Inputs.Desc": "Customize the input settings",
     "Settings.Inputs.TextInput": "Text Move Input",
     "Settings.Inputs.TextInput.Desc": "Enter moves in text format",
     "Settings.Inputs.SpellCheck": "Spell Check",
-    "Settings.Inputs.SpellCheck.Desc":
-      "Enable or disable spell check on text inputs",
+    "Settings.Inputs.SpellCheck.Desc": "Enable or disable spell check on text inputs",
     "Settings.OpeningReport.Desc": "Customize the opening report settings",
     "Settings.OpeningReport.PercentCoverage": "Percent Coverage",
-    "Settings.OpeningReport.PercentCoverage.Desc":
-      "Percentage of moves covered in each position",
+    "Settings.OpeningReport.PercentCoverage.Desc": "Percentage of moves covered in each position",
     "Settings.OpeningReport.MinGames": "Minimum Games",
-    "Settings.OpeningReport.MinGames.Desc":
-      "Minimum number of games in each position for it to be considered",
+    "Settings.OpeningReport.MinGames.Desc": "Minimum number of games in each position for it to be considered",
     "Settings.Anarchy.Desc": "Fun options",
     "Settings.Anarchy.ForcedChessifier": "Forced Chessifier",
-    "Settings.Anarchy.ForcedChessifier.Desc":
-      "Forces you to play Chessifier, if it's a legal move.",
+    "Settings.Anarchy.ForcedChessifier.Desc": "Forces you to play Chessifier, if it's a legal move.",
     "Settings.Appearance.Desc": "Customize the look of the app",
     "Settings.Appearance.Theme": "Theme",
     "Settings.Appearance.Theme.Desc": "Overall color scheme",
     "Settings.Appearance.Theme.Light": "Light",
     "Settings.Appearance.Theme.Dark": "Dark",
     "Settings.Appearance.TitleBar": "Title Bar",
-    "Settings.Appearance.TitleBar.Desc":
-      "Choose between native or custom title bar",
+    "Settings.Appearance.TitleBar.Desc": "Choose between native or custom title bar",
     "Settings.Appearance.Language": "Language",
     "Settings.Appearance.Language.Desc": "Language used in the app",
     "Settings.Appearance.TitleBar.Native": "Native",
@@ -376,8 +356,7 @@ export const en_US = {
     "Settings.Appearance.PieceSet": "Piece Set",
     "Settings.Appearance.PieceSet.Desc": "Pieces used on the boards",
     "Settings.Appearance.BoardImage": "Board Image",
-    "Settings.Appearance.BoardImage.Desc":
-      "Image used as the background of the board",
+    "Settings.Appearance.BoardImage.Desc": "Image used as the background of the board",
     "Settings.Appearance.AccentColor": "Accent Color",
     "Settings.Appearance.AccentColor.Desc": "Main color of the app",
     "Settings.Sound.Desc": "Customize the sound settings",
@@ -387,8 +366,7 @@ export const en_US = {
     "Settings.Sound.Collection.Desc": "Collection of sounds used",
     "Settings.Directories.Desc": "Customize the directories used by the app",
     "Settings.Directories.Files": "Files directory",
-    "Settings.Directories.Files.Desc":
-      "This is where your games in the Files page are stored",
+    "Settings.Directories.Files.Desc": "This is where your games in the Files page are stored",
 
     "PgnInput.Comments": "Comments",
     "PgnInput.Glyphs": "Glyphs",

@@ -1,14 +1,12 @@
 import { Box, Button, Card, SimpleGrid, Stack, Text } from "@mantine/core";
-
-import { tabsAtom } from "@/state/atoms";
-import type { Tab } from "@/utils/tabs";
+import { IconChess, IconFileImport, IconPuzzle } from "@tabler/icons-react";
 import { useAtom } from "jotai";
 import { useState } from "react";
-import ImportModal from "./ImportModal";
-
-import { IconChess, IconFileImport, IconPuzzle } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
+import { tabsAtom } from "@/state/atoms";
+import type { Tab } from "@/utils/tabs";
 import Chessboard from "../icons/Chessboard";
+import ImportModal from "./ImportModal";
 
 export default function NewTabHome({ id }: { id: string }) {
   const { t } = useTranslation();
@@ -89,13 +87,7 @@ export default function NewTabHome({ id }: { id: string }) {
                 </Text>
               </Box>
 
-              <Button
-                variant="light"
-                fullWidth
-                mt="md"
-                radius="md"
-                onClick={card.onClick}
-              >
+              <Button variant="light" fullWidth mt="md" radius="md" onClick={card.onClick}>
                 {card.label}
               </Button>
             </Stack>

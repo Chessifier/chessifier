@@ -1,24 +1,18 @@
-import { Chessground } from "@/chessground/Chessground";
-import { jumpToNextPuzzleAtom, showCoordinatesAtom } from "@/state/atoms";
-import { chessboard } from "@/styles/Chessboard.css";
-import { positionFromFen } from "@/utils/chessops";
-import type { Completion, Puzzle } from "@/utils/puzzles";
-import { getNodeAtPath, treeIteratorMainLine } from "@/utils/treeReducer";
 import { Box } from "@mantine/core";
 import { useElementSize, useForceUpdate } from "@mantine/hooks";
-import {
-  Chess,
-  type Move,
-  type NormalMove,
-  makeUci,
-  parseSquare,
-} from "chessops";
+import { Chess, type Move, makeUci, type NormalMove, parseSquare } from "chessops";
 import { chessgroundDests, chessgroundMove } from "chessops/compat";
 import { parseFen } from "chessops/fen";
 import equal from "fast-deep-equal";
 import { useAtom, useAtomValue } from "jotai";
 import { useContext, useState } from "react";
 import { useStore } from "zustand";
+import { Chessground } from "@/chessground/Chessground";
+import { jumpToNextPuzzleAtom, showCoordinatesAtom } from "@/state/atoms";
+import { chessboard } from "@/styles/Chessboard.css";
+import { positionFromFen } from "@/utils/chessops";
+import type { Completion, Puzzle } from "@/utils/puzzles";
+import { getNodeAtPath, treeIteratorMainLine } from "@/utils/treeReducer";
 import PromotionModal from "../boards/PromotionModal";
 import { TreeStateContext } from "../common/TreeStateContext";
 
@@ -146,9 +140,7 @@ function PuzzleBoard({
           movable={{
             free: false,
             color:
-              puzzle &&
-              equal(position, Array(currentMove).fill(0)) &&
-              puzzle.completion === "incomplete"
+              puzzle && equal(position, Array(currentMove).fill(0)) && puzzle.completion === "incomplete"
                 ? turn
                 : undefined,
             dests: dests,
@@ -159,8 +151,7 @@ function PuzzleBoard({
                 const move: NormalMove = { from, to };
                 if (
                   pos?.board.get(from)?.role === "pawn" &&
-                  ((dest[1] === "8" && turn === "white") ||
-                    (dest[1] === "1" && turn === "black"))
+                  ((dest[1] === "8" && turn === "white") || (dest[1] === "1" && turn === "black"))
                 ) {
                   setPendingMove(move);
                 } else {
@@ -169,9 +160,7 @@ function PuzzleBoard({
               },
             },
           }}
-          lastMove={
-            currentNode.move ? chessgroundMove(currentNode.move) : undefined
-          }
+          lastMove={currentNode.move ? chessgroundMove(currentNode.move) : undefined}
           turnColor={turn}
           fen={currentNode.fen}
           check={pos?.isCheck()}

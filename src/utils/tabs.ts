@@ -1,9 +1,9 @@
-import { commands } from "@/bindings";
-import { type FileMetadata, fileMetadataSchema } from "@/components/files/file";
-import type { TreeStoreState } from "@/state/store";
 import { save } from "@tauri-apps/plugin-dialog";
 import { z } from "zod";
 import type { StoreApi } from "zustand";
+import { commands } from "@/bindings";
+import { type FileMetadata, fileMetadataSchema } from "@/components/files/file";
+import type { TreeStoreState } from "@/state/store";
 import { getPGN, parsePGN } from "./chess";
 import type { GameHeaders } from "./treeReducer";
 
@@ -57,10 +57,7 @@ export async function createTab({
   }
 
   setTabs((prev) => {
-    if (
-      prev.length === 0 ||
-      (prev.length === 1 && prev[0].type === "new" && tab.type !== "new")
-    ) {
+    if (prev.length === 0 || (prev.length === 1 && prev[0].type === "new" && tab.type !== "new")) {
       return [
         {
           ...tab,

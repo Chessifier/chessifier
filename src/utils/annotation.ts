@@ -150,8 +150,6 @@ export const ANNOTATION_INFO: Record<Annotation, AnnotationInfo> = {
   "⨀": { name: "Zugzwang", translationKey: "Zugzwang", nag: 22 },
 };
 
-export function isBasicAnnotation(
-  annotation: string,
-): annotation is "!" | "!!" | "?" | "??" | "!?" | "?!" {
+export function isBasicAnnotation(annotation: string): annotation is "!" | "!!" | "?" | "??" | "!?" | "?!" {
   return ["!", "!!", "?", "??", "!?", "?!"].includes(annotation);
 }

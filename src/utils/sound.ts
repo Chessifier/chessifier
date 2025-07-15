@@ -1,5 +1,5 @@
-import { soundCollectionAtom, soundVolumeAtom } from "@/state/atoms";
 import { getDefaultStore } from "jotai";
+import { soundCollectionAtom, soundVolumeAtom } from "@/state/atoms";
 
 let lastTime = 0;
 

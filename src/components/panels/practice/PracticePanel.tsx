@@ -1,19 +1,3 @@
-import ConfirmModal from "@/components/common/ConfirmModal";
-import { TreeStateContext } from "@/components/common/TreeStateContext";
-import {
-  buildFromTree,
-  getCardForReview,
-  getStats,
-  updateCardPerformance,
-} from "@/components/files/opening";
-import {
-  type PracticeData,
-  currentInvisibleAtom,
-  currentPracticeTabAtom,
-  currentTabAtom,
-  deckAtomFamily,
-} from "@/state/atoms";
-import { findFen, getNodeAtPath } from "@/utils/treeReducer";
 import {
   ActionIcon,
   Badge,
@@ -37,6 +21,17 @@ import { useHotkeys } from "react-hotkeys-hook";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "ts-fsrs";
 import { useStore } from "zustand";
+import ConfirmModal from "@/components/common/ConfirmModal";
+import { TreeStateContext } from "@/components/common/TreeStateContext";
+import { buildFromTree, getCardForReview, getStats, updateCardPerformance } from "@/components/files/opening";
+import {
+  currentInvisibleAtom,
+  currentPracticeTabAtom,
+  currentTabAtom,
+  deckAtomFamily,
+  type PracticeData,
+} from "@/state/atoms";
+import { findFen, getNodeAtPath } from "@/utils/treeReducer";
 import RepertoireInfo from "./RepertoireInfo";
 
 function PracticePanel() {
@@ -60,11 +55,7 @@ function PracticePanel() {
   );
 
   useEffect(() => {
-    const newDeck = buildFromTree(
-      root,
-      headers.orientation || "white",
-      headers.start || [],
-    );
+    const newDeck = buildFromTree(root, headers.orientation || "white", headers.start || []);
     if (newDeck.length > 0 && deck.positions.length === 0) {
       setDeck({ positions: newDeck, logs: [] });
     }
@@ -126,11 +117,7 @@ function PracticePanel() {
                   thickness={10}
                   label={
                     <Text ta="center" px="xs" style={{ pointerEvents: "none" }}>
-                      {stats.total === 0
-                        ? "0%"
-                        : `${Math.round(
-                            (stats.practiced / stats.total) * 100,
-                          )}%`}
+                      {stats.total === 0 ? "0%" : `${Math.round((stats.practiced / stats.total) * 100)}%`}
                     </Text>
                   }
                   sections={[
@@ -154,9 +141,7 @@ function PracticePanel() {
                 <Group wrap="nowrap">
                   <Group wrap="nowrap">
                     <div>
-                      <Badge color="blue">
-                        {t("Board.Practice.Practiced")}
-                      </Badge>
+                      <Badge color="blue">{t("Board.Practice.Practiced")}</Badge>
                       <Text ta="center">{stats.practiced}</Text>
                     </div>
                     <div>
@@ -174,16 +159,11 @@ function PracticePanel() {
                       <Text>
                         {t("Board.Practice.PracticedAll1")}
                         <br />
-                        {t("Board.Practice.PracticedAll2")}{" "}
-                        {dayjs(stats.nextDue).format("MMM D, HH:mm")}
+                        {t("Board.Practice.PracticedAll2")} {dayjs(stats.nextDue).format("MMM D, HH:mm")}
                       </Text>
                     )}
-                    <Button onClick={() => setPositionsOpen(true)}>
-                      {t("Board.Practice.ShowAll")}
-                    </Button>
-                    <Button onClick={() => setLogsOpen(true)}>
-                      {t("Board.Practice.ShowLogs")}
-                    </Button>
+                    <Button onClick={() => setPositionsOpen(true)}>{t("Board.Practice.ShowAll")}</Button>
+                    <Button onClick={() => setLogsOpen(true)}>{t("Board.Practice.ShowLogs")}</Button>
                   </Group>
                 </Group>
               </Group>
@@ -191,11 +171,7 @@ function PracticePanel() {
 
             <Group>
               <Button
-                variant={
-                  headers.orientation === "white" && fen.split(" ")[1] === "w"
-                    ? "default"
-                    : "filled"
-                }
+                variant={headers.orientation === "white" && fen.split(" ")[1] === "w" ? "default" : "filled"}
                 onClick={() => newPractice()}
                 disabled={stats.due === 0 && stats.unseen === 0}
               >
@@ -204,16 +180,9 @@ function PracticePanel() {
               <Button
                 variant="default"
                 onClick={() => {
-                  const currentIndex = deck.positions.findIndex(
-                    (c) => c.fen === fen,
-                  );
+                  const currentIndex = deck.positions.findIndex((c) => c.fen === fen);
                   if (currentIndex === -1) return;
-                  updateCardPerformance(
-                    setDeck,
-                    currentIndex,
-                    deck.positions[currentIndex].card,
-                    2,
-                  );
+                  updateCardPerformance(setDeck, currentIndex, deck.positions[currentIndex].card, 2);
                   newPractice();
                 }}
                 disabled={stats.due === 0 && stats.unseen === 0}
@@ -247,21 +216,13 @@ function PracticePanel() {
         opened={resetModal}
         onClose={toggleResetModal}
         onConfirm={() => {
-          const cards = buildFromTree(
-            root,
-            headers.orientation || "white",
-            headers.start || [],
-          );
+          const cards = buildFromTree(root, headers.orientation || "white", headers.start || []);
           setDeck({ positions: cards, logs: [] });
           toggleResetModal();
         }}
         confirmLabel="Reset"
       />
-      <PositionsModal
-        open={positionsOpen}
-        setOpen={setPositionsOpen}
-        deck={deck}
-      />
+      <PositionsModal open={positionsOpen} setOpen={setPositionsOpen} deck={deck} />
       <LogsModal open={logsOpen} setOpen={setLogsOpen} logs={deck.logs} />
     </>
   );
@@ -282,15 +243,8 @@ function PositionsModal({
   const root = useStore(store, (s) => s.root);
   const goToMove = useStore(store, (s) => s.goToMove);
   return (
-    <Modal
-      opened={open}
-      onClose={() => setOpen(false)}
-      size="xl"
-      title={<b>Practice Positions</b>}
-    >
-      {deck.positions.length === 0 && (
-        <Text>You haven't added any positions to practice yet.</Text>
-      )}
+    <Modal opened={open} onClose={() => setOpen(false)} size="xl" title={<b>Practice Positions</b>}>
+      {deck.positions.length === 0 && <Text>You haven't added any positions to practice yet.</Text>}
       <SimpleGrid cols={2}>
         {deck.positions.map((c) => {
           const position = findFen(c.fen, root);
@@ -308,15 +262,7 @@ function PositionsModal({
                   <Text tt="uppercase" fw="bold" fz="sm">
                     Status
                   </Text>
-                  <Badge
-                    color={
-                      c.card.reps === 0
-                        ? "gray"
-                        : c.card.due < new Date()
-                          ? "yellow"
-                          : "blue"
-                    }
-                  >
+                  <Badge color={c.card.reps === 0 ? "gray" : c.card.due < new Date() ? "yellow" : "blue"}>
                     {c.card.reps === 0
                       ? t("Board.Practice.Unseen")
                       : c.card.due < new Date()
@@ -361,12 +307,7 @@ function LogsModal({
   const root = useStore(store, (s) => s.root);
   const goToMove = useStore(store, (s) => s.goToMove);
   return (
-    <Modal
-      opened={open}
-      onClose={() => setOpen(false)}
-      size="xl"
-      title={<b>Practice Logs</b>}
-    >
+    <Modal opened={open} onClose={() => setOpen(false)} size="xl" title={<b>Practice Logs</b>}>
       <SimpleGrid cols={2}>
         {logs.length === 0 && <Text>No logs yet</Text>}
         {logs.map((log) => {
@@ -387,9 +328,7 @@ function LogsModal({
                   <Text tt="uppercase" fw="bold" fz="sm">
                     Rating
                   </Text>
-                  <Badge color={log.rating === 4 ? "green" : "red"}>
-                    {log.rating === 4 ? "Success" : "Fail"}
-                  </Badge>
+                  <Badge color={log.rating === 4 ? "green" : "red"}>{log.rating === 4 ? "Success" : "Fail"}</Badge>
                 </Stack>
                 <Stack>
                   <Text tt="uppercase" fw="bold" fz="sm">

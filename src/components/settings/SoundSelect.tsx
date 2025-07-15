@@ -1,15 +1,7 @@
+import { Combobox, Group, Input, InputBase, ScrollArea, Text, useCombobox } from "@mantine/core";
+import { useAtom } from "jotai";
 import { soundCollectionAtom } from "@/state/atoms";
 import { playSound } from "@/utils/sound";
-import {
-  Combobox,
-  Group,
-  Input,
-  InputBase,
-  ScrollArea,
-  Text,
-  useCombobox,
-} from "@mantine/core";
-import { useAtom } from "jotai";
 
 type Item = {
   label: string;
@@ -71,11 +63,7 @@ export default function SoundSelect() {
           multiline
           w="10rem"
         >
-          {selected ? (
-            <SelectOption label={selected.label} />
-          ) : (
-            <Input.Placeholder>Pick value</Input.Placeholder>
-          )}
+          {selected ? <SelectOption label={selected.label} /> : <Input.Placeholder>Pick value</Input.Placeholder>}
         </InputBase>
       </Combobox.Target>
 

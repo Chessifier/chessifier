@@ -1,15 +1,5 @@
-import { commands } from "@/bindings";
-import { activeTabAtom, deckAtomFamily, tabsAtom } from "@/state/atoms";
-import { capitalize } from "@/utils/format";
-import { createTab } from "@/utils/tabs";
-import { unwrap } from "@/utils/unwrap";
 import { Badge, Box, Group } from "@mantine/core";
-import {
-  IconChevronRight,
-  IconEye,
-  IconTarget,
-  IconTrash,
-} from "@tabler/icons-react";
+import { IconChevronRight, IconEye, IconTarget, IconTrash } from "@tabler/icons-react";
 import { useNavigate } from "@tanstack/react-router";
 import { remove } from "@tauri-apps/plugin-fs";
 import clsx from "clsx";
@@ -21,16 +11,17 @@ import { useContextMenu } from "mantine-contextmenu";
 import { DataTable, type DataTableSortStatus } from "mantine-datatable";
 import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { commands } from "@/bindings";
+import { activeTabAtom, deckAtomFamily, tabsAtom } from "@/state/atoms";
+import { capitalize } from "@/utils/format";
+import { createTab } from "@/utils/tabs";
+import { unwrap } from "@/utils/unwrap";
 import * as classes from "./DirectoryTable.css";
 import type { Directory, FileMetadata } from "./file";
 import { getStats } from "./opening";
 
-function flattenFiles(
-  files: (FileMetadata | Directory)[],
-): (FileMetadata | Directory)[] {
-  return files.flatMap((f) =>
-    f.type === "directory" ? flattenFiles(f.children) : [f],
-  );
+function flattenFiles(files: (FileMetadata | Directory)[]): (FileMetadata | Directory)[] {
+  return files.flatMap((f) => (f.type === "directory" ? flattenFiles(f.children) : [f]));
 }
 
 function recursiveSort(
@@ -127,9 +118,7 @@ export default function DirectoryTable({
       .filter((f) => searchResults.some((r) => r.item.path.includes(f.path)))
       .map((f) => {
         if (f.type === "file") return f;
-        const children = f.children.filter((c) =>
-          searchResults.some((r) => r.item.path.includes(c.path)),
-        );
+        const children = f.children.filter((c) => searchResults.some((r) => r.item.path.includes(c.path)));
         return {
           ...f,
           children,
@@ -137,16 +126,12 @@ export default function DirectoryTable({
       });
   }
   if (filter) {
-    const typeFilteredFiles = flattedFiles.filter(
-      (f) => (f.type === "file" && f.metadata.type) === filter,
-    );
+    const typeFilteredFiles = flattedFiles.filter((f) => (f.type === "file" && f.metadata.type) === filter);
     filteredFiles = filteredFiles
       .filter((f) => typeFilteredFiles.some((r) => r.path.includes(f.path)))
       .map((f) => {
         if (f.type === "file") return f;
-        const children = f.children.filter((c) =>
-          typeFilteredFiles.some((r) => r.path.includes(c.path)),
-        );
+        const children = f.children.filter((c) => typeFilteredFiles.some((r) => r.path.includes(c.path)));
         return {
           ...f,
           children,
@@ -192,9 +177,7 @@ function Table({
   const { t } = useTranslation();
 
   const [expandedIds, setExpandedIds] = useState<string[]>([]);
-  const expandedFiles = expandedIds.filter((id) =>
-    files?.find((f) => f.path === id && f.type === "directory"),
-  );
+  const expandedFiles = expandedIds.filter((id) => files?.find((f) => f.path === id && f.type === "directory"));
   const navigate = useNavigate();
   const [, setTabs] = useAtom(tabsAtom);
   const setActiveTab = useSetAtom(activeTabAtom);
@@ -232,9 +215,7 @@ function Table({
         scrollbars: "y",
       }}
       idAccessor="path"
-      rowClassName={(record) =>
-        record.path === selected?.path ? classes.selected : ""
-      }
+      rowClassName={(record) => (record.path === selected?.path ? classes.selected : "")}
       sortStatus={sort}
       onRowDoubleClick={({ record }) => {
         if (record.type === "directory") return;
@@ -252,16 +233,12 @@ function Table({
                 {row.type === "directory" && (
                   <IconChevronRight
                     className={clsx(classes.icon, classes.expandIcon, {
-                      [classes.expandIconRotated]: expandedFiles.includes(
-                        row.path,
-                      ),
+                      [classes.expandIconRotated]: expandedFiles.includes(row.path),
                     })}
                   />
                 )}
                 <span>{row.name}</span>
-                {row.type === "file" && row.metadata.type === "repertoire" && (
-                  <DuePositions file={row.path} />
-                )}
+                {row.type === "file" && row.metadata.type === "repertoire" && <DuePositions file={row.path} />}
               </Group>
             </Box>
           ),
@@ -270,10 +247,7 @@ function Table({
           accessor: "metadata.type",
           title: "Type",
           width: 100,
-          render: (row) =>
-            t(
-              `Files.FileType.${capitalize((row.type === "file" && row.metadata.type) || "Folder")}`,
-            ),
+          render: (row) => t(`Files.FileType.${capitalize((row.type === "file" && row.metadata.type) || "Folder")}`),
         },
         {
           accessor: "lastModified",
@@ -282,11 +256,7 @@ function Table({
           width: 200,
           render: (row) => {
             if (row.type === "directory") return null;
-            return (
-              <Box ml={20 * depth}>
-                {dayjs(row.lastModified * 1000).format("DD MMM YYYY HH:mm")}
-              </Box>
-            );
+            return <Box ml={20 * depth}>{dayjs(row.lastModified * 1000).format("DD MMM YYYY HH:mm")}</Box>;
           },
         },
       ]}
@@ -359,9 +329,5 @@ function DuePositions({ file }: { file: string }) {
 
   if (stats.due + stats.unseen === 0) return null;
 
-  return (
-    <Badge leftSection={<IconTarget size="1rem" />}>
-      {stats.due + stats.unseen}
-    </Badge>
-  );
+  return <Badge leftSection={<IconTarget size="1rem" />}>{stats.due + stats.unseen}</Badge>;
 }

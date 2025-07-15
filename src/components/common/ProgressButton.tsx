@@ -1,9 +1,5 @@
 import { Box, Button, Progress, useMantineTheme } from "@mantine/core";
-import {
-  type EventCallback,
-  type UnlistenFn,
-  listen,
-} from "@tauri-apps/api/event";
+import { type EventCallback, listen, type UnlistenFn } from "@tauri-apps/api/event";
 import { memo, useEffect, useState } from "react";
 import * as classes from "./ProgressButton.css";
 
@@ -86,13 +82,7 @@ function ProgressButton<T extends Payload>({
       >
         <span className={classes.label}>{label}</span>
         {progress !== 0 && (
-          <Progress
-            pos="absolute"
-            h="100%"
-            value={progress}
-            className={classes.progress}
-            radius="sm"
-          />
+          <Progress pos="absolute" h="100%" value={progress} className={classes.progress} radius="sm" />
         )}
       </Button>
     </>

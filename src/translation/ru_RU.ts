@@ -152,10 +152,8 @@ export const ru_RU = {
     "Board.Tabs.Info": "Информация",
     "Board.Practice.Train": "Тренировать",
     "Board.Practice.Build": "Создать",
-    "Board.Practice.NoPositionForTrain1":
-      "Нет позиций для тренировки. Сначала добавьте ходы в этот файл PGN.",
-    "Board.Practice.NoPositionForTrain2":
-      "Необходимо переключиться в режим анализа, чтобы добавлять ходы.",
+    "Board.Practice.NoPositionForTrain1": "Нет позиций для тренировки. Сначала добавьте ходы в этот файл PGN.",
+    "Board.Practice.NoPositionForTrain2": "Необходимо переключиться в режим анализа, чтобы добавлять ходы.",
     "Board.Practice.SeeAnser": "Посмотреть ответ",
     "Board.Practice.Practiced": "Отработано",
     "Board.Practice.Due": "Подлежит тренировке",
@@ -177,8 +175,7 @@ export const ru_RU = {
     "Board.Analysis.GeneratingReport": "Создание отчёта",
     "Board.Analysis.NotAnalysed": "Не проанализировано",
     "Board.Analysis.EngineRequired": "Требуется движок",
-    "Board.Analysis.RefDBRequired":
-      "Не выбрана база данных. Сначала выберите базу данных на странице баз данных.",
+    "Board.Analysis.RefDBRequired": "Не выбрана база данных. Сначала выберите базу данных на странице баз данных.",
     "Board.Analysis.Time": "Время (мс)",
     "Board.Analysis.Reversed": "Обратный анализ",
     "Board.Analysis.Reversed.Desc": "Анализировать игру с последней позиции.",
@@ -188,8 +185,7 @@ export const ru_RU = {
     "Board.Analysis.Analyze": "Анализировать",
     "Board.Analysis.Advantage": "Преимущество",
     "Board.Analysis.Accuracy": "Точность",
-    "Board.Analysis.EnableWDL":
-      "Чтобы использовать эту функцию, нужно включить UCI_ShowWDL в настройках движка.",
+    "Board.Analysis.EnableWDL": "Чтобы использовать эту функцию, нужно включить UCI_ShowWDL в настройках движка.",
     "Board.Database.Local": "Локальная",
     "Board.Database.LichessAll": "Lichess Все",
     "Board.Database.LichessMaster": "Lichess Мастера",
@@ -223,11 +219,9 @@ export const ru_RU = {
     "Engines.Add.Name.Autodetect": "Автоопределение",
     "Engines.Add.Elo.Desc": "Эло движка",
     "Engines.Add.ImageFile": "Файл изображения",
-    "Engines.Add.ImageFile.Desc":
-      "Нажмите для выбора файла изображения (рекомендуется: 60x60)",
+    "Engines.Add.ImageFile.Desc": "Нажмите для выбора файла изображения (рекомендуется: 60x60)",
     "Engines.Remove.Title": "Удалить движок",
-    "Engines.Remove.Message":
-      "Вы уверены, что хотите удалить этот движок из Chessifier?",
+    "Engines.Remove.Message": "Вы уверены, что хотите удалить этот движок из Chessifier?",
 
     "Databases.Title": "Базы данных",
     "Databases.Card.Games": "Игры",
@@ -240,14 +234,12 @@ export const ru_RU = {
     "Databases.Add.Convert": "Конвертировать",
     "Databases.Settings.ReferenceDatabase": "Справочная база данных",
     "Databases.Settings.Indexed": "Проиндексировано",
-    "Databases.Settings.Indexed.Desc":
-      "Индексы используются для ускорения поиска, но требуют дополнительного места.",
+    "Databases.Settings.Indexed.Desc": "Индексы используются для ускорения поиска, но требуют дополнительного места.",
     "Databases.Settings.Events": "События",
     "Databases.Settings.Explore": "Исследовать",
     "Databases.Settings.AdvancedTools": "Расширенные инструменты",
     "Databases.Settings.MergePlayers": "Объединить игроков",
-    "Databases.Settings.MergePlayers.Desc":
-      "Заменяет все вхождения первого игрока на второго в базе данных.",
+    "Databases.Settings.MergePlayers.Desc": "Заменяет все вхождения первого игрока на второго в базе данных.",
     "Databases.Settings.Merge": "Объединить",
     "Databases.Settings.BatchDelete": "Массовое удаление",
     "Databases.Settings.BatchDelete.Desc":
@@ -258,8 +250,7 @@ export const ru_RU = {
     "Databases.Settings.AddGames": "Добавить игры",
     "Databases.Settings.ExportPGN": "Экспортировать в PGN",
     "Databases.Delete.Title": "Удалить базу данных",
-    "Databases.Delete.Message":
-      "Вы уверены, что хотите удалить эту базу данных?",
+    "Databases.Delete.Message": "Вы уверены, что хотите удалить эту базу данных?",
 
     "Errors.EmptyBoard": "Пустая доска",
     "Errors.InvalidKings": "Неверное количество королей",
@@ -313,8 +304,7 @@ export const ru_RU = {
     "Settings.Keybindings": "Горячие клавиши",
     "Settings.Directories": "Каталоги",
 
-    "Settings.Board.Desc":
-      "Настроить доску анализа и игровые элементы управления",
+    "Settings.Board.Desc": "Настроить доску анализа и игровые элементы управления",
     "Settings.PieceDest": "Пункты назначения фигур",
     "Settings.PieceDest.Desc": "Показать возможные ходы для каждой фигуры",
     "Settings.Arrows": "Стрелки",
@@ -334,36 +324,29 @@ export const ru_RU = {
     "Settings.AutoSave": "Автосохранение",
     "Settings.AutoSave.Desc": "Автоматически сохранять после каждого хода",
     "Settings.PreviewBoard": "Предварительный просмотр доски",
-    "Settings.PreviewBoard.Desc":
-      "Показывать доску при наведении курсора на ход в анализе",
+    "Settings.PreviewBoard.Desc": "Показывать доску при наведении курсора на ход в анализе",
     "Settings.ScrollThroughMoves": "Прокрутка ходов",
-    "Settings.ScrollThroughMoves.Desc":
-      "Включить или отключить прокрутку ходов на доске",
+    "Settings.ScrollThroughMoves.Desc": "Включить или отключить прокрутку ходов на доске",
     "Settings.Inputs.Desc": "Настроить ввод",
     "Settings.Inputs.TextInput": "Текстовый ввод",
     "Settings.Inputs.TextInput.Desc": "Ввод ходов текстом",
     "Settings.Inputs.SpellCheck": "Проверка орфографии",
-    "Settings.Inputs.SpellCheck.Desc":
-      "Включить или отключить проверку орфографии при вводе текста",
+    "Settings.Inputs.SpellCheck.Desc": "Включить или отключить проверку орфографии при вводе текста",
     "Settings.OpeningReport.Desc": "Настроить параметры отчёта по дебютам",
     "Settings.OpeningReport.PercentCoverage": "Процент охвата",
-    "Settings.OpeningReport.PercentCoverage.Desc":
-      "Процент охваченных ходов в каждой позиции",
+    "Settings.OpeningReport.PercentCoverage.Desc": "Процент охваченных ходов в каждой позиции",
     "Settings.OpeningReport.MinGames": "Минимальное количество игр",
-    "Settings.OpeningReport.MinGames.Desc":
-      "Минимальное количество игр для каждой позиции, чтобы быть учтённой",
+    "Settings.OpeningReport.MinGames.Desc": "Минимальное количество игр для каждой позиции, чтобы быть учтённой",
     "Settings.Anarchy.Desc": "Весёлые опции",
     "Settings.Anarchy.ForcedChessifier": "Принудительный Chessifier",
-    "Settings.Anarchy.ForcedChessifier.Desc":
-      "Заставляет делать ход Chessifier, если это легальный ход.",
+    "Settings.Anarchy.ForcedChessifier.Desc": "Заставляет делать ход Chessifier, если это легальный ход.",
     "Settings.Appearance.Desc": "Настроить внешний вид приложения",
     "Settings.Appearance.Theme": "Тема",
     "Settings.Appearance.Theme.Desc": "Общая цветовая схема",
     "Settings.Appearance.Theme.Light": "Светлая",
     "Settings.Appearance.Theme.Dark": "Тёмная",
     "Settings.Appearance.TitleBar": "Заголовок окна",
-    "Settings.Appearance.TitleBar.Desc":
-      "Выберите между стандартной или настраиваемой панелью заголовка",
+    "Settings.Appearance.TitleBar.Desc": "Выберите между стандартной или настраиваемой панелью заголовка",
     "Settings.Appearance.Language": "Язык",
     "Settings.Appearance.Language.Desc": "Язык приложения",
     "Settings.Appearance.TitleBar.Native": "Стандартная",
@@ -373,8 +356,7 @@ export const ru_RU = {
     "Settings.Appearance.PieceSet": "Набор фигур",
     "Settings.Appearance.PieceSet.Desc": "Фигуры, используемые на доске",
     "Settings.Appearance.BoardImage": "Изображение доски",
-    "Settings.Appearance.BoardImage.Desc":
-      "Изображение, используемое в качестве фона для доски",
+    "Settings.Appearance.BoardImage.Desc": "Изображение, используемое в качестве фона для доски",
     "Settings.Appearance.AccentColor": "Основной цвет",
     "Settings.Appearance.AccentColor.Desc": "Основной цвет приложения",
     "Settings.Sound.Desc": "Настроить параметры звука",
@@ -384,8 +366,7 @@ export const ru_RU = {
     "Settings.Sound.Collection.Desc": "Используемая коллекция звуков",
     "Settings.Directories.Desc": "Настроить каталоги, используемые приложением",
     "Settings.Directories.Files": "Каталог для файлов",
-    "Settings.Directories.Files.Desc":
-      "Здесь хранятся игровые файлы на странице файлов",
+    "Settings.Directories.Files.Desc": "Здесь хранятся игровые файлы на странице файлов",
 
     "PgnInput.Comments": "Комментарии",
     "PgnInput.Glyphs": "Символы",

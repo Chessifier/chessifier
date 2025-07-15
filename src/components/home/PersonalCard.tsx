@@ -1,15 +1,3 @@
-import { type MonthData, commands } from "@/bindings";
-import {
-  activeTabAtom,
-  fontSizeAtom,
-  sessionsAtom,
-  tabsAtom,
-} from "@/state/atoms";
-import { parsePGN } from "@/utils/chess";
-import type { PlayerGameInfo } from "@/utils/db";
-import { createTab } from "@/utils/tabs";
-import { countMainPly, defaultTree } from "@/utils/treeReducer";
-import { unwrap } from "@/utils/unwrap";
 import {
   ActionIcon,
   Box,
@@ -34,17 +22,14 @@ import { useVirtualizer } from "@tanstack/react-virtual";
 import type { Color } from "chessops";
 import { useAtom, useAtomValue } from "jotai";
 import { useRef, useState } from "react";
-import {
-  Bar,
-  CartesianGrid,
-  ComposedChart,
-  Legend,
-  Line,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { Bar, CartesianGrid, ComposedChart, Legend, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { commands, type MonthData } from "@/bindings";
+import { activeTabAtom, fontSizeAtom, sessionsAtom, tabsAtom } from "@/state/atoms";
+import { parsePGN } from "@/utils/chess";
+import type { PlayerGameInfo } from "@/utils/db";
+import { createTab } from "@/utils/tabs";
+import { countMainPly, defaultTree } from "@/utils/treeReducer";
+import { unwrap } from "@/utils/unwrap";
 import FideInfo from "../databases/FideInfo";
 import * as classes from "./PersonalCard.css";
 
@@ -74,9 +59,7 @@ function fillMissingMonths(
   return newData;
 }
 
-function mergeYears(
-  data: { name: string; data: { count: number; avg_elo: number | null } }[],
-) {
+function mergeYears(data: { name: string; data: { count: number; avg_elo: number | null } }[]) {
   // group by year in the same format
   const grouped = data.reduce(
     (acc, curr) => {
@@ -110,10 +93,7 @@ function mergeYears(
 }
 
 function zip<T>(a: T[], b: T[]) {
-  return Array.from(Array(Math.max(b.length, a.length)), (_, i) => [
-    a[i],
-    b[i],
-  ]);
+  return Array.from(Array(Math.max(b.length, a.length)), (_, i) => [a[i], b[i]]);
 }
 
 function PersonalPlayerCard({
@@ -140,11 +120,7 @@ function PersonalPlayerCard({
   const [opened, setOpened] = useState(false);
   const sessions = useAtomValue(sessionsAtom);
   const players = Array.from(
-    new Set(
-      sessions.map(
-        (s) => s.player || s.lichess?.username || s.chessCom?.username || "",
-      ),
-    ),
+    new Set(sessions.map((s) => s.player || s.lichess?.username || s.chessCom?.username || "")),
   );
 
   return (
@@ -159,11 +135,7 @@ function PersonalPlayerCard({
       <Box pos="relative">
         {name !== "Stats" && (
           <MTTooltip label="FIDE info">
-            <ActionIcon
-              pos="absolute"
-              right={0}
-              onClick={() => setOpened(true)}
-            >
+            <ActionIcon pos="absolute" right={0} onClick={() => setOpened(true)}>
               <IconInfoCircle />
             </ActionIcon>
           </MTTooltip>
@@ -214,24 +186,14 @@ function PersonalPlayerCard({
 
             {total > 0 && (
               <>
-                <ResultsChart
-                  won={info.won}
-                  draw={info.draw}
-                  lost={info.lost}
-                  size="2rem"
-                />
+                <ResultsChart won={info.won} draw={info.draw} lost={info.lost} size="2rem" />
 
                 <DateChart data_per_month={info.data_per_month} />
               </>
             )}
           </Stack>
         </Tabs.Panel>
-        <Tabs.Panel
-          value="openings"
-          flex={1}
-          py="md"
-          style={{ overflow: "hidden" }}
-        >
+        <Tabs.Panel value="openings" flex={1} py="md" style={{ overflow: "hidden" }}>
           <OpeningsPanel
             white_openings={white_openings}
             black_openings={black_openings}
@@ -303,21 +265,9 @@ function OpeningsPanel({
                     <Stack py="sm" justify="space-between">
                       <Group justify="space-between" wrap="nowrap">
                         <OpeningNameButton name={white[0]} color="white" />
-                        <Text>
-                          {(
-                            ((white[1].won + white[1].draw + white[1].lost) /
-                              whiteGames) *
-                            100
-                          ).toFixed(2)}
-                          %
-                        </Text>
+                        <Text>{(((white[1].won + white[1].draw + white[1].lost) / whiteGames) * 100).toFixed(2)}%</Text>
                       </Group>
-                      <ResultsChart
-                        won={white[1].won}
-                        draw={white[1].draw}
-                        lost={white[1].lost}
-                        size="1.5rem"
-                      />
+                      <ResultsChart won={white[1].won} draw={white[1].draw} lost={white[1].lost} size="1.5rem" />
                     </Stack>
                   ) : (
                     <div />
@@ -326,21 +276,9 @@ function OpeningsPanel({
                     <Stack py="sm" justify="space-between">
                       <Group justify="space-between" wrap="nowrap">
                         <OpeningNameButton name={black[0]} color="black" />
-                        <Text>
-                          {(
-                            ((black[1].won + black[1].draw + black[1].lost) /
-                              blackGames) *
-                            100
-                          ).toFixed(2)}
-                          %
-                        </Text>
+                        <Text>{(((black[1].won + black[1].draw + black[1].lost) / blackGames) * 100).toFixed(2)}%</Text>
                       </Group>
-                      <ResultsChart
-                        won={black[1].won}
-                        draw={black[1].draw}
-                        lost={black[1].lost}
-                        size="1.5rem"
-                      />
+                      <ResultsChart won={black[1].won} draw={black[1].draw} lost={black[1].lost} size="1.5rem" />
                     </Stack>
                   ) : (
                     <div />
@@ -356,11 +294,7 @@ function OpeningsPanel({
   );
 }
 
-function DateChart({
-  data_per_month,
-}: {
-  data_per_month: [string, MonthData][];
-}) {
+function DateChart({ data_per_month }: { data_per_month: [string, MonthData][] }) {
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
 
   let data = fillMissingMonths(
@@ -408,52 +342,28 @@ function DateChart({
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />3
         <YAxis yAxisId="left" />
-        <YAxis
-          yAxisId="right"
-          orientation="right"
-          domain={["dataMin - 50", "dataMax + 50"]}
-        />
+        <YAxis yAxisId="right" orientation="right" domain={["dataMin - 50", "dataMax + 50"]} />
         <Tooltip
           contentStyle={{
-            backgroundColor:
-              colorScheme === "dark"
-                ? theme.colors.dark[7]
-                : theme.colors.gray[0],
+            backgroundColor: colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.gray[0],
           }}
         />
         <Legend />
         <Bar yAxisId="left" dataKey="data.count" fill="#8884d8" name="Games" />
-        <Line
-          yAxisId="right"
-          dataKey="data.avg_elo"
-          stroke="#82ca9d"
-          name="Average ELO"
-        />
+        <Line yAxisId="right" dataKey="data.avg_elo" stroke="#82ca9d" name="Average ELO" />
       </ComposedChart>
     </ResponsiveContainer>
   );
 }
 
-function ResultsChart({
-  won,
-  draw,
-  lost,
-  size,
-}: {
-  won: number;
-  draw: number;
-  lost: number;
-  size: string;
-}) {
+function ResultsChart({ won, draw, lost, size }: { won: number; draw: number; lost: number; size: string }) {
   const total = won + draw + lost;
   return (
     <Progress.Root size={size}>
       <MTTooltip label={`${won} wins`}>
         <Progress.Section value={(won / total) * 100} color="green">
           <Progress.Label style={{ textOverflow: "clip" }}>
-            {won / total > 0.15
-              ? `${((won / total) * 100).toFixed(1)}%`
-              : undefined}
+            {won / total > 0.15 ? `${((won / total) * 100).toFixed(1)}%` : undefined}
           </Progress.Label>
         </Progress.Section>
       </MTTooltip>
@@ -461,9 +371,7 @@ function ResultsChart({
       <MTTooltip label={`${draw} draws`}>
         <Progress.Section value={(draw / total) * 100} color="gray">
           <Progress.Label style={{ textOverflow: "clip" }}>
-            {draw / total > 0.15
-              ? `${((draw / total) * 100).toFixed(1)}%`
-              : undefined}
+            {draw / total > 0.15 ? `${((draw / total) * 100).toFixed(1)}%` : undefined}
           </Progress.Label>
         </Progress.Section>
       </MTTooltip>
@@ -471,9 +379,7 @@ function ResultsChart({
       <MTTooltip label={`${lost} losses`}>
         <Progress.Section value={(lost / total) * 100} color="red">
           <Progress.Label style={{ textOverflow: "clip" }}>
-            {lost / total > 0.15
-              ? `${((lost / total) * 100).toFixed(1)}%`
-              : undefined}
+            {lost / total > 0.15 ? `${((lost / total) * 100).toFixed(1)}%` : undefined}
           </Progress.Label>
         </Progress.Section>
       </MTTooltip>

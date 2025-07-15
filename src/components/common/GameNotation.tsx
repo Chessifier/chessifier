@@ -1,20 +1,4 @@
-import { Comment } from "@/components/common/Comment";
-import { TreeStateContext } from "@/components/common/TreeStateContext";
-import { currentInvisibleAtom } from "@/state/atoms";
-import { keyMapAtom } from "@/state/keybindings";
-import { type TreeNode, getNodeAtPath } from "@/utils/treeReducer";
-import {
-  ActionIcon,
-  Box,
-  Divider,
-  Group,
-  Overlay,
-  Paper,
-  ScrollArea,
-  Stack,
-  Text,
-  Tooltip,
-} from "@mantine/core";
+import { ActionIcon, Box, Divider, Group, Overlay, Paper, ScrollArea, Stack, Text, Tooltip } from "@mantine/core";
 import { useColorScheme, useToggle } from "@mantine/hooks";
 import {
   IconArrowRight,
@@ -29,10 +13,14 @@ import {
 import { INITIAL_FEN } from "chessops/fen";
 import equal from "fast-deep-equal";
 import { useAtom, useAtomValue } from "jotai";
-import { memo, useContext, useEffect, useRef, useState } from "react";
-import React from "react";
+import React, { memo, useContext, useEffect, useRef, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useStore } from "zustand";
+import { Comment } from "@/components/common/Comment";
+import { TreeStateContext } from "@/components/common/TreeStateContext";
+import { currentInvisibleAtom } from "@/state/atoms";
+import { keyMapAtom } from "@/state/keybindings";
+import { getNodeAtPath, type TreeNode } from "@/utils/treeReducer";
 import CompleteMoveCell from "./CompleteMoveCell";
 import * as styles from "./GameNotation.css";
 import OpeningName from "./OpeningName";
@@ -69,12 +57,7 @@ function GameNotation({ topBar }: { topBar?: boolean }) {
   useHotkeys(keyMap.TOGGLE_BLUR.keys, () => setInvisible((v) => !v));
 
   return (
-    <Paper
-      withBorder
-      p="md"
-      flex={1}
-      style={{ position: "relative", overflow: "hidden" }}
-    >
+    <Paper withBorder p="md" flex={1} style={{ position: "relative", overflow: "hidden" }}>
       <Stack h="100%" gap={0}>
         {topBar && (
           <NotationHeader
@@ -95,9 +78,7 @@ function GameNotation({ topBar }: { topBar?: boolean }) {
                   zIndex={2}
                 />
               )}
-              {showComments && root.comment && (
-                <Comment comment={root.comment} />
-              )}
+              {showComments && root.comment && <Comment comment={root.comment} />}
               <RenderVariationTree
                 targetRef={targetRef}
                 tree={root}
@@ -114,11 +95,7 @@ function GameNotation({ topBar }: { topBar?: boolean }) {
                 {headers.result}
                 <br />
                 <Text span fs="italic">
-                  {headers.result === "1/2-1/2"
-                    ? "Draw"
-                    : headers.result === "1-0"
-                      ? "White wins"
-                      : "Black wins"}
+                  {headers.result === "1/2-1/2" ? "Draw" : headers.result === "1-0" ? "White wins" : "Black wins"}
                 </Text>
               </Text>
             )}
@@ -153,20 +130,12 @@ const NotationHeader = memo(function NotationHeader({
           </Tooltip>
           <Tooltip label={showComments ? "Hide comments" : "Show comments"}>
             <ActionIcon onClick={() => toggleComments()}>
-              {showComments ? (
-                <IconArticle size="1rem" />
-              ) : (
-                <IconArticleOff size="1rem" />
-              )}
+              {showComments ? <IconArticle size="1rem" /> : <IconArticleOff size="1rem" />}
             </ActionIcon>
           </Tooltip>
           <Tooltip label={showVariations ? "Show Variations" : "Main line"}>
             <ActionIcon onClick={() => toggleVariations()}>
-              {showVariations ? (
-                <IconArrowsSplit size="1rem" />
-              ) : (
-                <IconArrowRight size="1rem" />
-              )}
+              {showVariations ? <IconArrowsSplit size="1rem" /> : <IconArrowRight size="1rem" />}
             </ActionIcon>
           </Tooltip>
         </Group>

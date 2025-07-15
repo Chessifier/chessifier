@@ -1,11 +1,11 @@
-import type { Outcome } from "@/bindings";
-import type { GameHeaders } from "@/utils/treeReducer";
 import { Box, Group, Select, SimpleGrid, Text } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import cx from "clsx";
 import dayjs from "dayjs";
 import { memo, useContext, useState } from "react";
 import { useStore } from "zustand";
+import type { Outcome } from "@/bindings";
+import type { GameHeaders } from "@/utils/treeReducer";
 import FideInfo from "../databases/FideInfo";
 import { ContentEditable } from "../tabs/ContentEditable";
 import * as classes from "./GameInfo.css";
@@ -22,8 +22,7 @@ function GameInfo({
 }) {
   const store = useContext(TreeStateContext);
   const disabled = store === null;
-  const setHeaders =
-    store !== null ? useStore(store, (s) => s.setHeaders) : () => {};
+  const setHeaders = store !== null ? useStore(store, (s) => s.setHeaders) : () => {};
 
   const date = headers.date
     ? dayjs(headers.date, "YYYY.MM.DD").isValid()
@@ -38,26 +37,12 @@ function GameInfo({
 
   return (
     <Box px="md" pt="md">
-      <FideInfo
-        opened={whiteOpened}
-        setOpened={setWhiteOpened}
-        name={headers.white}
-      />
-      <FideInfo
-        opened={blackOpened}
-        setOpened={setBlackOpened}
-        name={headers.black}
-      />
+      <FideInfo opened={whiteOpened} setOpened={setWhiteOpened} name={headers.white} />
+      <FideInfo opened={blackOpened} setOpened={setBlackOpened} name={headers.black} />
 
       <Group w="100%" wrap="nowrap">
         {!simplified && (
-          <Text
-            c="dimmed"
-            tt="uppercase"
-            fw="bold"
-            className={classes.colorHover}
-            onClick={() => setWhiteOpened(true)}
-          >
+          <Text c="dimmed" tt="uppercase" fw="bold" className={classes.colorHover} onClick={() => setWhiteOpened(true)}>
             White
           </Text>
         )}
@@ -65,13 +50,8 @@ function GameInfo({
           <ContentEditable
             disabled={disabled}
             html={event}
-            data-placeholder={
-              simplified ? "Enter Opening Title" : "Unknown Event"
-            }
-            className={cx(
-              classes.contentEditable,
-              !event && classes.contentEditablePlaceholder,
-            )}
+            data-placeholder={simplified ? "Enter Opening Title" : "Unknown Event"}
+            className={cx(classes.contentEditable, !event && classes.contentEditablePlaceholder)}
             onChange={(e) => {
               setHeaders({
                 ...headers,
@@ -168,21 +148,15 @@ function GameInfo({
             disabled={disabled}
           />
           <Group justify="center">
-            {headers.site.startsWith("https://lichess.org") ||
-            headers.site.startsWith("https://www.chess.com") ? (
+            {headers.site.startsWith("https://lichess.org") || headers.site.startsWith("https://www.chess.com") ? (
               <a href={headers.site} target="_blank" rel="noreferrer">
                 <Text p="sm" w={90}>
-                  {headers.site.startsWith("https://lichess.org")
-                    ? "Lichess"
-                    : "Chess.com"}
+                  {headers.site.startsWith("https://lichess.org") ? "Lichess" : "Chess.com"}
                 </Text>
               </a>
             ) : (
               <ContentEditable
-                className={cx(
-                  classes.contentEditable,
-                  !site && classes.contentEditablePlaceholder,
-                )}
+                className={cx(classes.contentEditable, !site && classes.contentEditablePlaceholder)}
                 data-placeholder="Unknown Site"
                 html={site}
                 onChange={(e) =>

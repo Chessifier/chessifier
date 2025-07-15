@@ -1,4 +1,12 @@
-import { events, type EngineOptions, type GoMode } from "@/bindings";
+import { parseUci } from "chessops";
+import { INITIAL_FEN, makeFen } from "chessops/fen";
+import equal from "fast-deep-equal";
+import { useAtom, useAtomValue } from "jotai";
+import { startTransition, useContext, useEffect, useMemo } from "react";
+import { match } from "ts-pattern";
+import { useStore } from "zustand";
+import { useShallow } from "zustand/react/shallow";
+import { type EngineOptions, events, type GoMode } from "@/bindings";
 import {
   activeTabAtom,
   currentThreatAtom,
@@ -10,22 +18,9 @@ import {
 import { getVariationLine } from "@/utils/chess";
 import { getBestMoves as chessdbGetBestMoves } from "@/utils/chessdb/api";
 import { positionFromFen, swapMove } from "@/utils/chessops";
-import {
-  type Engine,
-  type LocalEngine,
-  getBestMoves as localGetBestMoves,
-  stopEngine,
-} from "@/utils/engines";
+import { type Engine, type LocalEngine, getBestMoves as localGetBestMoves, stopEngine } from "@/utils/engines";
 import { getBestMoves as lichessGetBestMoves } from "@/utils/lichess/api";
 import { useThrottledEffect } from "@/utils/misc";
-import { parseUci } from "chessops";
-import { INITIAL_FEN, makeFen } from "chessops/fen";
-import equal from "fast-deep-equal";
-import { useAtom, useAtomValue } from "jotai";
-import { startTransition, useContext, useEffect, useMemo } from "react";
-import { match } from "ts-pattern";
-import { useStore } from "zustand";
-import { useShallow } from "zustand/react/shallow";
 import { TreeStateContext } from "../common/TreeStateContext";
 
 function EvalListener() {
@@ -111,13 +106,9 @@ function EngineListener({
   const setScore = useStore(store, (s) => s.setScore);
   const activeTab = useAtomValue(activeTabAtom);
 
-  const [, setProgress] = useAtom(
-    engineProgressFamily({ engine: engine.name, tab: activeTab! }),
-  );
+  const [, setProgress] = useAtom(engineProgressFamily({ engine: engine.name, tab: activeTab! }));
 
-  const [, setEngineVariation] = useAtom(
-    engineMovesFamily({ engine: engine.name, tab: activeTab! }),
-  );
+  const [, setEngineVariation] = useAtom(engineMovesFamily({ engine: engine.name, tab: activeTab! }));
   const [settings] = useAtom(
     tabEngineSettingsFamily({
       engineName: engine.name,
@@ -207,10 +198,7 @@ function EngineListener({
               const [progress, bestMoves] = moves;
               setEngineVariation((prev) => {
                 const newMap = new Map(prev);
-                newMap.set(
-                  `${searchingFen}:${searchingMoves.join(",")}`,
-                  bestMoves,
-                );
+                newMap.set(`${searchingFen}:${searchingMoves.join(",")}`, bestMoves);
                 return newMap;
               });
               setProgress(progress);

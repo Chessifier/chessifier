@@ -1,23 +1,15 @@
-import { type GoMode, commands } from "@/bindings";
-import { TreeStateContext } from "@/components/common/TreeStateContext";
-import { enginesAtom, referenceDbAtom } from "@/state/atoms";
-import type { LocalEngine } from "@/utils/engines";
-import { unwrap } from "@/utils/unwrap";
-import {
-  Button,
-  Checkbox,
-  Group,
-  Modal,
-  NumberInput,
-  Select,
-  Stack,
-} from "@mantine/core";
+import { Button, Checkbox, Group, Modal, NumberInput, Select, Stack } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useAtom, useAtomValue } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 import { memo, useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useStore } from "zustand";
+import { commands, type GoMode } from "@/bindings";
+import { TreeStateContext } from "@/components/common/TreeStateContext";
+import { enginesAtom, referenceDbAtom } from "@/state/atoms";
+import type { LocalEngine } from "@/utils/engines";
+import { unwrap } from "@/utils/unwrap";
 
 const reportSettingsAtom = atomWithStorage("report-settings", {
   novelty: true,
@@ -46,9 +38,7 @@ function ReportModal({
 
   const referenceDb = useAtomValue(referenceDbAtom);
   const engines = useAtomValue(enginesAtom);
-  const localEngines = engines.filter(
-    (e): e is LocalEngine => e.type === "local",
-  );
+  const localEngines = engines.filter((e): e is LocalEngine => e.type === "local");
   const store = useContext(TreeStateContext)!;
   const addAnalysis = useStore(store, (s) => s.addAnalysis);
 
@@ -111,11 +101,7 @@ function ReportModal({
   }
 
   return (
-    <Modal
-      opened={reportingMode}
-      onClose={() => toggleReportingMode()}
-      title={t("Board.Analysis.GenerateReport")}
-    >
+    <Modal opened={reportingMode} onClose={() => toggleReportingMode()} title={t("Board.Analysis.GenerateReport")}>
       <form onSubmit={form.onSubmit(() => analyze())}>
         <Stack>
           <Select

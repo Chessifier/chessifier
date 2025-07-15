@@ -16,15 +16,7 @@ type Props<T> = {
   onDoubleClick?: () => void;
 };
 
-export default function GenericCard<T>({
-  id,
-  isSelected,
-  setSelected,
-  error,
-  stats,
-  Header,
-  onDoubleClick,
-}: Props<T>) {
+export default function GenericCard<T>({ id, isSelected, setSelected, error, stats, Header, onDoubleClick }: Props<T>) {
   return (
     <Box
       tabIndex={0}
@@ -45,13 +37,7 @@ export default function GenericCard<T>({
           <div className={classes.info}>
             {stats.map((stat) => (
               <div key={stat.label}>
-                <Text
-                  size="xs"
-                  c="dimmed"
-                  fw="bold"
-                  className={classes.label}
-                  mt="1rem"
-                >
+                <Text size="xs" c="dimmed" fw="bold" className={classes.label} mt="1rem">
                   {stat.label}
                 </Text>
                 <Text fw={700} size="lg" style={{ lineHeight: 1 }}>

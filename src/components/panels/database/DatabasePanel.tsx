@@ -1,3 +1,11 @@
+import { Alert, Group, ScrollArea, SegmentedControl, Stack, Tabs, Text } from "@mantine/core";
+import { useDebouncedValue } from "@mantine/hooks";
+import { useAtom, useAtomValue } from "jotai";
+import { memo, useContext, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import useSWR from "swr/immutable";
+import { match } from "ts-pattern";
+import { useStore } from "zustand";
 import { TreeStateContext } from "@/components/common/TreeStateContext";
 import {
   currentDbTabAtom,
@@ -10,31 +18,8 @@ import {
 } from "@/state/atoms";
 import { type Opening, searchPosition } from "@/utils/db";
 import { formatNumber } from "@/utils/format";
-import {
-  convertToNormalized,
-  getLichessGames,
-  getMasterGames,
-} from "@/utils/lichess/api";
-import type {
-  LichessGamesOptions,
-  MasterGamesOptions,
-} from "@/utils/lichess/explorer";
-import {
-  Alert,
-  Group,
-  ScrollArea,
-  SegmentedControl,
-  Stack,
-  Tabs,
-  Text,
-} from "@mantine/core";
-import { useDebouncedValue } from "@mantine/hooks";
-import { useAtom, useAtomValue } from "jotai";
-import { memo, useContext, useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import useSWR from "swr/immutable";
-import { match } from "ts-pattern";
-import { useStore } from "zustand";
+import { convertToNormalized, getLichessGames, getMasterGames } from "@/utils/lichess/api";
+import type { LichessGamesOptions, MasterGamesOptions } from "@/utils/lichess/explorer";
 import DatabaseLoader from "./DatabaseLoader";
 import GamesTable from "./GamesTable";
 import NoDatabaseWarning from "./NoDatabaseWarning";
@@ -59,9 +44,7 @@ export type LocalOptions = {
 };
 
 function sortOpenings(openings: Opening[]) {
-  return openings.sort(
-    (a, b) => b.black + b.draw + b.white - (a.black + a.draw + a.white),
-  );
+  return openings.sort((a, b) => b.black + b.draw + b.white - (a.black + a.draw + a.white));
 }
 
 async function fetchOpening(db: DBType, tab: string) {
@@ -75,9 +58,7 @@ async function fetchOpening(db: DBType, tab: string) {
           black: move.black,
           draw: move.draws,
         })),
-        games: await convertToNormalized(
-          data.topGames || data.recentGames || [],
-        ),
+        games: await convertToNormalized(data.topGames || data.recentGames || []),
       };
     })
     .with({ type: "lch_master" }, async ({ fen, options }) => {
@@ -89,9 +70,7 @@ async function fetchOpening(db: DBType, tab: string) {
           black: move.black,
           draw: move.draws,
         })),
-        games: await convertToNormalized(
-          data.topGames || data.recentGames || [],
-        ),
+        games: await convertToNormalized(data.topGames || data.recentGames || []),
       };
     })
     .with({ type: "local" }, async ({ options }) => {
@@ -157,10 +136,7 @@ function DatabasePanel() {
     return fetchOpening(dbType, tab?.value || "");
   });
 
-  const grandTotal = openingData?.openings?.reduce(
-    (acc, curr) => acc + curr.black + curr.white + curr.draw,
-    0,
-  );
+  const grandTotal = openingData?.openings?.reduce((acc, curr) => acc + curr.black + curr.white + curr.draw, 0);
 
   return (
     <Stack h="100%" gap={0}>
@@ -172,17 +148,13 @@ function DatabasePanel() {
             { label: t("Board.Database.LichessMaster"), value: "lch_master" },
           ]}
           value={db}
-          onChange={(value) =>
-            setDb(value as "local" | "lch_all" | "lch_master")
-          }
+          onChange={(value) => setDb(value as "local" | "lch_all" | "lch_master")}
         />
 
         {tabType !== "options" && (
           <Text>
             {t("Board.Database.Matches", {
-              matches: formatNumber(
-                Math.max(grandTotal || 0, openingData?.games.length || 0),
-              ),
+              matches: formatNumber(Math.max(grandTotal || 0, openingData?.games.length || 0)),
             })}
           </Text>
         )}
@@ -201,12 +173,7 @@ function DatabasePanel() {
         style={{ overflow: "hidden" }}
       >
         <Tabs.List>
-          <Tabs.Tab
-            value="stats"
-            disabled={
-              dbType.type === "local" && dbType.options.type === "partial"
-            }
-          >
+          <Tabs.Tab value="stats" disabled={dbType.type === "local" && dbType.options.type === "partial"}>
             {t("Board.Database.Stats")}
           </Tabs.Tab>
           <Tabs.Tab value="games">{t("Board.Database.Games")}</Tabs.Tab>
@@ -214,10 +181,7 @@ function DatabasePanel() {
         </Tabs.List>
 
         <PanelWithError value="stats" error={error} type={db}>
-          <OpeningsTable
-            openings={openingData?.openings || []}
-            loading={isLoading}
-          />
+          <OpeningsTable openings={openingData?.openings || []} loading={isLoading} />
         </PanelWithError>
         <PanelWithError value="games" error={error} type={db}>
           <GamesTable games={openingData?.games || []} loading={isLoading} />
@@ -225,9 +189,7 @@ function DatabasePanel() {
         <PanelWithError value="options" error={error} type={db}>
           <ScrollArea h="100%" offsetScrollbars>
             {match(db)
-              .with("local", () => (
-                <LocalOptionsPanel boardFen={debouncedFen} />
-              ))
+              .with("local", () => <LocalOptionsPanel boardFen={debouncedFen} />)
               .with("lch_all", () => <LichessOptionsPanel />)
               .with("lch_master", () => <MasterOptionsPanel />)
               .exhaustive()}
@@ -238,12 +200,7 @@ function DatabasePanel() {
   );
 }
 
-function PanelWithError(props: {
-  value: string;
-  error: string;
-  type: string;
-  children: React.ReactNode;
-}) {
+function PanelWithError(props: { value: string; error: string; type: string; children: React.ReactNode }) {
   const referenceDatabase = useAtomValue(referenceDbAtom);
   let children = props.children;
   if (props.type === "local" && !referenceDatabase) {

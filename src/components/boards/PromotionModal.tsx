@@ -1,9 +1,9 @@
-import { squareToCoordinates } from "@/utils/chessops";
 import { ActionIcon, SimpleGrid } from "@mantine/core";
 import { useClickOutside } from "@mantine/hooks";
 import type { Color } from "chessground/types";
 import type { NormalMove, Role } from "chessops";
 import { memo } from "react";
+import { squareToCoordinates } from "@/utils/chessops";
 import Piece from "../common/Piece";
 
 const PromotionModal = memo(function PromotionModal({
@@ -26,10 +26,7 @@ const PromotionModal = memo(function PromotionModal({
   }
   const { file, rank } = squareToCoordinates(pendingMove.to, orientation);
   const promotionPieces: Role[] = ["queen", "knight", "rook", "bishop"];
-  if (
-    (turn === "black" && orientation === "white") ||
-    (turn === "white" && orientation === "black")
-  ) {
+  if ((turn === "black" && orientation === "white") || (turn === "white" && orientation === "black")) {
     promotionPieces.reverse();
   }
 

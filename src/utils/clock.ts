@@ -1,6 +1,6 @@
 import type { Chess } from "chessops";
 import { match } from "ts-pattern";
-import { type GameHeaders, type TreeNode, getNodeAtPath } from "./treeReducer";
+import { type GameHeaders, getNodeAtPath, type TreeNode } from "./treeReducer";
 
 function calculateProgress(
   root: TreeNode,
@@ -81,9 +81,7 @@ export function getClockInfo({
   white: ClockInfo;
   black: ClockInfo;
 } {
-  const timeControl = headers.time_control
-    ? parseTimeControl(headers.time_control)
-    : null;
+  const timeControl = headers.time_control ? parseTimeControl(headers.time_control) : null;
 
   let whiteTc: TimeControlField | null = null;
   let blackTc: TimeControlField | null = null;
@@ -135,21 +133,11 @@ export function getClockInfo({
   return {
     white: {
       value: whiteSeconds,
-      progress: calculateProgress(
-        root,
-        timeControl,
-        whiteSeconds ?? null,
-        whiteTc,
-      ),
+      progress: calculateProgress(root, timeControl, whiteSeconds ?? null, whiteTc),
     },
     black: {
       value: blackSeconds,
-      progress: calculateProgress(
-        root,
-        timeControl,
-        blackSeconds ?? null,
-        blackTc,
-      ),
+      progress: calculateProgress(root, timeControl, blackSeconds ?? null, blackTc),
     },
   };
 }

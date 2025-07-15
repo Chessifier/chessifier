@@ -1,8 +1,3 @@
-import { commands } from "@/bindings";
-import { activeTabAtom, tabsAtom } from "@/state/atoms";
-import { keyMapAtom } from "@/state/keybindings";
-import { type Tab, createTab, genID } from "@/utils/tabs";
-import { unwrap } from "@/utils/unwrap";
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { ActionIcon, ScrollArea, Tabs } from "@mantine/core";
 import { useHotkeys, useToggle } from "@mantine/hooks";
@@ -12,6 +7,11 @@ import { useCallback, useEffect, useTransition } from "react";
 import { useTranslation } from "react-i18next";
 import { Mosaic, type MosaicNode } from "react-mosaic-component";
 import { match } from "ts-pattern";
+import { commands } from "@/bindings";
+import { activeTabAtom, tabsAtom } from "@/state/atoms";
+import { keyMapAtom } from "@/state/keybindings";
+import { createTab, genID, type Tab } from "@/utils/tabs";
+import { unwrap } from "@/utils/unwrap";
 import BoardAnalysis from "../boards/BoardAnalysis";
 import BoardGame from "../boards/BoardGame";
 import { TreeStateProvider } from "../common/TreeStateContext";
@@ -181,23 +181,11 @@ export default function BoardsPage() {
           >
             <Droppable droppableId="droppable" direction="horizontal">
               {(provided) => (
-                <div
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                  style={{ display: "flex" }}
-                >
+                <div ref={provided.innerRef} {...provided.droppableProps} style={{ display: "flex" }}>
                   {tabs.map((tab, i) => (
-                    <Draggable
-                      key={tab.value}
-                      draggableId={tab.value}
-                      index={i}
-                    >
+                    <Draggable key={tab.value} draggableId={tab.value} index={i}>
                       {(provided) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                        >
+                        <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                           <BoardTab
                             tab={tab}
                             setActiveTab={setActiveTab}
@@ -236,14 +224,7 @@ export default function BoardsPage() {
           </DragDropContext>
         </ScrollArea>
         {tabs.map((tab) => (
-          <Tabs.Panel
-            key={tab.value}
-            value={tab.value}
-            h="100%"
-            w="100%"
-            pb="sm"
-            px="sm"
-          >
+          <Tabs.Panel key={tab.value} value={tab.value} h="100%" w="100%" pb="sm" px="sm">
             <TabSwitch
               tab={tab}
               saveModalOpened={saveModalOpened}

@@ -1,17 +1,10 @@
-import {
-  BaseDirectory,
-  readTextFile,
-  writeTextFile,
-} from "@tauri-apps/plugin-fs";
+import { BaseDirectory, readTextFile, writeTextFile } from "@tauri-apps/plugin-fs";
 import type React from "react";
 import { useEffect, useState } from "react";
 
 type StorageValue<T> = [T, React.Dispatch<React.SetStateAction<T>>];
 
-export function useLocalFile<T>(
-  filename: string,
-  defaultValue: T,
-): StorageValue<T> {
+export function useLocalFile<T>(filename: string, defaultValue: T): StorageValue<T> {
   const [state, setState] = useState<T>(defaultValue);
   const [loaded, setLoaded] = useState(false);
 
@@ -51,20 +44,14 @@ export function isPrefix<T>(shorter: T[], longer: T[]): boolean {
   return true;
 }
 
-export function* takeWhile<T>(
-  collection: Iterable<T>,
-  condition: (item: T) => boolean,
-): Generator<T> {
+export function* takeWhile<T>(collection: Iterable<T>, condition: (item: T) => boolean): Generator<T> {
   for (const item of collection) {
     if (condition(item)) yield item;
     else break;
   }
 }
 
-export function* skipWhile<T>(
-  collection: Iterable<T>,
-  condition: (item: T) => boolean,
-): Generator<T> {
+export function* skipWhile<T>(collection: Iterable<T>, condition: (item: T) => boolean): Generator<T> {
   let conditionBroken = false;
   for (const item of collection) {
     if (!conditionBroken && !condition(item)) {
@@ -76,11 +63,7 @@ export function* skipWhile<T>(
   }
 }
 
-export const useThrottledEffect = (
-  callback: () => void,
-  delay: number,
-  deps: React.DependencyList,
-) => {
+export const useThrottledEffect = (callback: () => void, delay: number, deps: React.DependencyList) => {
   useEffect(() => {
     const handler = setTimeout(() => callback(), delay);
 

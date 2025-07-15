@@ -144,8 +144,7 @@ export const es_ES = {
     "Board.Practice.Build": "Construir",
     "Board.Practice.NoPositionForTrain1":
       "No hay posiciones para practicar. Comienza agregando movimientos a este archivo PGN.",
-    "Board.Practice.NoPositionForTrain2":
-      "Necesitas cambiar al modo de análisis para poder agregar movimientos.",
+    "Board.Practice.NoPositionForTrain2": "Necesitas cambiar al modo de análisis para poder agregar movimientos.",
     "Board.Practice.SeeAnser": "Ver respuesta",
     "Board.Practice.Practiced": "Practicado",
     "Board.Practice.Due": "Por practicar",
@@ -171,8 +170,7 @@ export const es_ES = {
       "No se ha seleccionado una base de datos de referencia. Selecciona una primero en la página de bases de datos",
     "Board.Analysis.Time": "Tiempo (ms)",
     "Board.Analysis.Reversed": "Análisis inverso",
-    "Board.Analysis.Reversed.Desc":
-      "Analizar la partida desde el último movimiento.",
+    "Board.Analysis.Reversed.Desc": "Analizar la partida desde el último movimiento.",
     "Board.Analysis.AnnotateNovelties": "Anotar novedades",
     "Board.Analysis.AnnotateNovelties.Desc":
       "Agregar un comentario a la primera posición que no esté en la base de datos de referencia.",
@@ -186,8 +184,7 @@ export const es_ES = {
     "Board.Database.Stats": "Estadísticas",
     "Board.Database.Games": "Partidas",
     "Board.Database.Options": "Opciones",
-    "Board.Database.NoReference1":
-      "No se ha seleccionado una base de datos de referencia.",
+    "Board.Database.NoReference1": "No se ha seleccionado una base de datos de referencia.",
     "Board.Database.NoReference2": "Por favor",
     "Board.Database.SelectReference": "agrega una base de datos",
     "Board.Database.NoReference3": "primero y marcarla como la referencia.",
@@ -206,20 +203,16 @@ export const es_ES = {
     "Engines.Settings.Reset": "Restablecer valores predeterminados",
     "Engines.Add.Title": "Agregar motor",
     "Engines.Add.Cloud": "Nube",
-    "Engines.Add.ErrorFetch":
-      "No se pudo obtener la información del motor del servidor.",
+    "Engines.Add.ErrorFetch": "No se pudo obtener la información del motor del servidor.",
     "Engines.Add.BinaryFile": "Archivo ejecutable",
-    "Engines.Add.BinaryFile.Desc":
-      "Haga clic para seleccionar el archivo ejecutable",
+    "Engines.Add.BinaryFile.Desc": "Haga clic para seleccionar el archivo ejecutable",
     "Engines.Add.Name": "Nombre",
     "Engines.Add.Name.Autodetect": "Autodetectar",
     "Engines.Add.Elo.Desc": "Elo del motor",
     "Engines.Add.ImageFile": "Archivo de imagen",
-    "Engines.Add.ImageFile.Desc":
-      "Haga clic para seleccionar el archivo de imagen (tamaño recomendado: 60x60)",
+    "Engines.Add.ImageFile.Desc": "Haga clic para seleccionar el archivo de imagen (tamaño recomendado: 60x60)",
     "Engines.Remove.Title": "Eliminar motor",
-    "Engines.Remove.Message":
-      "¿Está seguro de que desea eliminar este motor de Chessifier?",
+    "Engines.Remove.Message": "¿Está seguro de que desea eliminar este motor de Chessifier?",
 
     "Databases.Title": "Tus bases de datos",
     "Databases.Card.Games": "Partidas",
@@ -227,10 +220,8 @@ export const es_ES = {
     "Databases.Card.Storage": "Almacenamiento",
     "Databases.Add.Title": "Agregar base de datos",
     "Databases.Add.Web": "Web",
-    "Databases.Add.ErrorFetch":
-      "No se pudo obtener la información de la base de datos del servidor.",
-    "Databases.Add.ClickToSelectPGN":
-      "Haga clic para seleccionar el archivo PGN",
+    "Databases.Add.ErrorFetch": "No se pudo obtener la información de la base de datos del servidor.",
+    "Databases.Add.ClickToSelectPGN": "Haga clic para seleccionar el archivo PGN",
     "Databases.Add.Convert": "Convertir",
     "Databases.Settings.ReferenceDatabase": "Base de datos de referencia",
     "Databases.Settings.Indexed": "Indexada",
@@ -252,8 +243,7 @@ export const es_ES = {
     "Databases.Settings.AddGames": "Agregar partidas",
     "Databases.Settings.ExportPGN": "Exportar a PGN",
     "Databases.Delete.Title": "Eliminar base de datos",
-    "Databases.Delete.Message":
-      "¿Está seguro de que desea eliminar esta base de datos?",
+    "Databases.Delete.Message": "¿Está seguro de que desea eliminar esta base de datos?",
 
     "Files.Title": "Archivos",
     "Files.FileType": "Tipo de archivo",
@@ -279,11 +269,9 @@ export const es_ES = {
     "Settings.Keybindings": "Atajos de teclado",
     "Settings.Directories": "Directorios",
 
-    "Settings.Board.Desc":
-      "Personalizar el tablero de análisis y los controles de la partida",
+    "Settings.Board.Desc": "Personalizar el tablero de análisis y los controles de la partida",
     "Settings.PieceDest": "Destinos de las piezas",
-    "Settings.PieceDest.Desc":
-      "Mostrar los movimientos posibles para cada pieza",
+    "Settings.PieceDest.Desc": "Mostrar los movimientos posibles para cada pieza",
     "Settings.Arrows": "Flechas",
     "Settings.Arrows.Desc": "Mostrar la flecha del mejor movimiento",
     "Settings.SnapArrows": "Ajustar Flechas",
@@ -299,8 +287,7 @@ export const es_ES = {
     "Settings.Coordinates": "Coordenadas",
     "Settings.Coordinates.Desc": "Mostrar coordenadas en el tablero",
     "Settings.AutoSave": "Guardar automáticamente",
-    "Settings.AutoSave.Desc":
-      "Guardar automáticamente después de cada movimiento",
+    "Settings.AutoSave.Desc": "Guardar automáticamente después de cada movimiento",
     "Settings.PreviewBoard": "Previsualizar tablero",
     "Settings.PreviewBoard.Desc":
       "Mostrar una previsualización del tablero al pasar el ratón sobre un movimiento en el análisis del motor",
@@ -309,31 +296,24 @@ export const es_ES = {
       "Habilitar o deshabilitar el desplazamiento por los movimientos con el ratón en el tablero",
     "Settings.Inputs.Desc": "Personalizar la configuración de entrada",
     "Settings.Inputs.TextInput": "Entrada de texto de movimientos",
-    "Settings.Inputs.TextInput.Desc":
-      "Ingresar movimientos en formato de texto",
+    "Settings.Inputs.TextInput.Desc": "Ingresar movimientos en formato de texto",
     "Settings.Inputs.SpellCheck": "Revisión ortográfica",
-    "Settings.Inputs.SpellCheck.Desc":
-      "Habilitar o deshabilitar la revisión ortográfica en las entradas de texto",
-    "Settings.OpeningReport.Desc":
-      "Personalizar la configuración del informe de apertura",
+    "Settings.Inputs.SpellCheck.Desc": "Habilitar o deshabilitar la revisión ortográfica en las entradas de texto",
+    "Settings.OpeningReport.Desc": "Personalizar la configuración del informe de apertura",
     "Settings.OpeningReport.PercentCoverage": "Porcentaje de cobertura",
-    "Settings.OpeningReport.PercentCoverage.Desc":
-      "Porcentaje de movimientos cubiertos en cada posición",
+    "Settings.OpeningReport.PercentCoverage.Desc": "Porcentaje de movimientos cubiertos en cada posición",
     "Settings.OpeningReport.MinGames": "Partidas mínimas",
-    "Settings.OpeningReport.MinGames.Desc":
-      "Número mínimo de partidas en cada posición para que se considere",
+    "Settings.OpeningReport.MinGames.Desc": "Número mínimo de partidas en cada posición para que se considere",
     "Settings.Anarchy.Desc": "Opciones divertidas",
     "Settings.Anarchy.ForcedChessifier": "Forzar Chessifier",
-    "Settings.Anarchy.ForcedChessifier.Desc":
-      "Forzar a jugar Chessifier, si es un movimiento legal.",
+    "Settings.Anarchy.ForcedChessifier.Desc": "Forzar a jugar Chessifier, si es un movimiento legal.",
     "Settings.Appearance.Desc": "Personalizar la apariencia de la aplicación",
     "Settings.Appearance.Theme": "Tema",
     "Settings.Appearance.Theme.Desc": "Esquema de color general",
     "Settings.Appearance.Theme.Light": "Claro",
     "Settings.Appearance.Theme.Dark": "Oscuro",
     "Settings.Appearance.TitleBar": "Barra de título",
-    "Settings.Appearance.TitleBar.Desc":
-      "Elegir entre la barra de título nativa o personalizada",
+    "Settings.Appearance.TitleBar.Desc": "Elegir entre la barra de título nativa o personalizada",
     "Settings.Appearance.Language": "Idioma",
     "Settings.Appearance.Language.Desc": "Idioma utilizado en la aplicación",
     "Settings.Appearance.TitleBar.Native": "Nativa",
@@ -343,8 +323,7 @@ export const es_ES = {
     "Settings.Appearance.PieceSet": "Conjunto de piezas",
     "Settings.Appearance.PieceSet.Desc": "Piezas utilizadas en los tableros",
     "Settings.Appearance.BoardImage": "Imagen del tablero",
-    "Settings.Appearance.BoardImage.Desc":
-      "Imagen utilizada como fondo del tablero",
+    "Settings.Appearance.BoardImage.Desc": "Imagen utilizada como fondo del tablero",
     "Settings.Appearance.AccentColor": "Color principal",
     "Settings.Appearance.AccentColor.Desc": "Color principal de la aplicación",
     "Settings.Sound.Desc": "Personalizar la configuración de sonido",
@@ -352,11 +331,9 @@ export const es_ES = {
     "Settings.Sound.Volume.Desc": "Volumen general",
     "Settings.Sound.Collection": "Colección de sonidos",
     "Settings.Sound.Collection.Desc": "Colección de sonidos utilizada",
-    "Settings.Directories.Desc":
-      "Personalizar los directorios utilizados por la aplicación",
+    "Settings.Directories.Desc": "Personalizar los directorios utilizados por la aplicación",
     "Settings.Directories.Files": "Directorio de archivos",
-    "Settings.Directories.Files.Desc":
-      "Este es el lugar donde se almacenan sus partidas de la página de archivos",
+    "Settings.Directories.Files.Desc": "Este es el lugar donde se almacenan sus partidas de la página de archivos",
 
     "PgnInput.Comments": "Comentarios",
     "PgnInput.Glyphs": "Símbolos",
@@ -365,7 +342,6 @@ export const es_ES = {
     "PgnInput.MaxDepth": "Profundidad máxima",
     "PgnInput.TotalMoves": "Movimientos totales",
 
-    "Puzzle.JumpToNextPuzzleImmediately":
-      "Saltar al siguiente puzzle inmediatamente",
+    "Puzzle.JumpToNextPuzzleImmediately": "Saltar al siguiente puzzle inmediatamente",
   },
 };

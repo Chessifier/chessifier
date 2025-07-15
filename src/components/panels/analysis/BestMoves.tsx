@@ -1,16 +1,3 @@
-import type { BestMoves } from "@/bindings";
-import {
-  activeTabAtom,
-  currentThreatAtom,
-  engineMovesFamily,
-  engineProgressFamily,
-  enginesAtom,
-  tabEngineSettingsFamily,
-} from "@/state/atoms";
-import { chessopsError, positionFromFen, swapMove } from "@/utils/chessops";
-import type { Engine } from "@/utils/engines";
-import { formatNodes } from "@/utils/format";
-import { formatScore } from "@/utils/score";
 import {
   Accordion,
   ActionIcon,
@@ -27,13 +14,7 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import { useToggle } from "@mantine/hooks";
-import {
-  IconGripVertical,
-  IconPlayerPause,
-  IconPlayerPlay,
-  IconSettings,
-  IconTargetArrow,
-} from "@tabler/icons-react";
+import { IconGripVertical, IconPlayerPause, IconPlayerPlay, IconSettings, IconTargetArrow } from "@tabler/icons-react";
 import { parseUci } from "chessops";
 import { INITIAL_FEN, makeFen } from "chessops/fen";
 import equal from "fast-deep-equal";
@@ -41,6 +22,19 @@ import { useAtom, useAtomValue } from "jotai";
 import { memo, useCallback, useDeferredValue, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { match } from "ts-pattern";
+import type { BestMoves } from "@/bindings";
+import {
+  activeTabAtom,
+  currentThreatAtom,
+  engineMovesFamily,
+  engineProgressFamily,
+  enginesAtom,
+  tabEngineSettingsFamily,
+} from "@/state/atoms";
+import { chessopsError, positionFromFen, swapMove } from "@/utils/chessops";
+import type { Engine } from "@/utils/engines";
+import { formatNodes } from "@/utils/format";
+import { formatScore } from "@/utils/score";
 import AnalysisRow from "./AnalysisRow";
 import * as classes from "./BestMoves.css";
 import EngineSettingsForm, { type Settings } from "./EngineSettingsForm";
@@ -62,24 +56,12 @@ interface BestMovesProps {
   orientation: "white" | "black";
 }
 
-function BestMovesComponent({
-  id,
-  engine,
-  fen,
-  moves,
-  halfMoves,
-  dragHandleProps,
-  orientation,
-}: BestMovesProps) {
+function BestMovesComponent({ id, engine, fen, moves, halfMoves, dragHandleProps, orientation }: BestMovesProps) {
   const { t } = useTranslation();
 
   const activeTab = useAtomValue(activeTabAtom);
-  const ev = useAtomValue(
-    engineMovesFamily({ engine: engine.name, tab: activeTab! }),
-  );
-  const progress = useAtomValue(
-    engineProgressFamily({ engine: engine.name, tab: activeTab! }),
-  );
+  const ev = useAtomValue(engineMovesFamily({ engine: engine.name, tab: activeTab! }));
+  const progress = useAtomValue(engineProgressFamily({ engine: engine.name, tab: activeTab! }));
   const [, setEngines] = useAtom(enginesAtom);
   const [settings, setSettings2] = useAtom(
     tabEngineSettingsFamily({
@@ -107,9 +89,7 @@ function BestMovesComponent({
       if (newSettings.synced) {
         setEngines(async (prev) =>
           (await prev).map((o) =>
-            o.name === engine.name
-              ? { ...o, settings: newSettings.settings, go: newSettings.go }
-              : o,
+            o.name === engine.name ? { ...o, settings: newSettings.settings, go: newSettings.go } : o,
           ),
         );
       }
@@ -152,10 +132,7 @@ function BestMovesComponent({
   );
 
   const engineVariations = useDeferredValue(
-    useMemo(
-      () => ev.get(`${searchingFen}:${searchingMoves.join(",")}`),
-      [ev, searchingFen, searchingMoves],
-    ),
+    useMemo(() => ev.get(`${searchingFen}:${searchingMoves.join(",")}`), [ev, searchingFen, searchingMoves]),
   );
 
   return (
@@ -171,11 +148,7 @@ function BestMovesComponent({
             }}
             ml={12}
           >
-            {settings.enabled ? (
-              <IconPlayerPause size="1rem" />
-            ) : (
-              <IconPlayerPlay size="1rem" />
-            )}
+            {settings.enabled ? <IconPlayerPause size="1rem" /> : <IconPlayerPlay size="1rem" />}
           </ActionIcon>
         </Stack>
         <Accordion.Control>
@@ -201,12 +174,7 @@ function BestMovesComponent({
               <IconTargetArrow color={threat ? "red" : undefined} size="1rem" />
             </ActionIcon>
           </Tooltip>
-          <ActionIcon
-            size="lg"
-            onClick={() => toggleSettingsOn()}
-            mt="auto"
-            mb="auto"
-          >
+          <ActionIcon size="lg" onClick={() => toggleSettingsOn()} mt="auto" mb="auto">
             <IconSettings size="1rem" />
           </ActionIcon>
           <ActionIcon
@@ -261,27 +229,20 @@ function BestMovesComponent({
                 </Table.Td>
               </Table.Tr>
             )}
-            {engineVariations &&
-              engineVariations.length === 0 &&
-              !isGameOver && (
-                <Table.Tr>
-                  <Table.Td>
-                    <Text ta="center" my="lg">
-                      No analysis available
-                    </Text>
-                  </Table.Td>
-                </Table.Tr>
-              )}
+            {engineVariations && engineVariations.length === 0 && !isGameOver && (
+              <Table.Tr>
+                <Table.Td>
+                  <Text ta="center" my="lg">
+                    No analysis available
+                  </Text>
+                </Table.Td>
+              </Table.Tr>
+            )}
             {!isGameOver &&
               !error &&
               !engineVariations &&
               (settings.enabled ? (
-                [
-                  ...Array(
-                    settings.settings.find((s) => s.name === "MultiPV")
-                      ?.value ?? 1,
-                  ),
-                ].map((_, i) => (
+                [...Array(settings.settings.find((s) => s.name === "MultiPV")?.value ?? 1)].map((_, i) => (
                   <Table.Tr key={i}>
                     <Table.Td>
                       <Skeleton height={35} radius="xl" p={5} />
@@ -347,29 +308,18 @@ function EngineTop({
         <Text fw="bold" fz="xl">
           {name}
         </Text>
-        {enabled && !isGameOver && !error && !engineVariations && (
-          <Code fz="xs">Loading...</Code>
+        {enabled && !isGameOver && !error && !engineVariations && <Code fz="xs">Loading...</Code>}
+        {progress < 100 && enabled && !isGameOver && engineVariations && engineVariations.length > 0 && (
+          <Tooltip label={"How fast the engine is running"}>
+            <Code fz="xs">{nps} nodes/s</Code>
+          </Tooltip>
         )}
-        {progress < 100 &&
-          enabled &&
-          !isGameOver &&
-          engineVariations &&
-          engineVariations.length > 0 && (
-            <Tooltip label={"How fast the engine is running"}>
-              <Code fz="xs">{nps} nodes/s</Code>
-            </Tooltip>
-          )}
       </Group>
       <Group gap="lg">
         {!isGameOver && engineVariations && engineVariations.length > 0 && (
           <>
             <Stack align="center" gap={0}>
-              <Text
-                size="0.7rem"
-                tt="uppercase"
-                fw={700}
-                className={classes.subtitle}
-              >
+              <Text size="0.7rem" tt="uppercase" fw={700} className={classes.subtitle}>
                 Eval
               </Text>
               <Text fw="bold" fz="md">
@@ -377,12 +327,7 @@ function EngineTop({
               </Text>
             </Stack>
             <Stack align="center" gap={0}>
-              <Text
-                size="0.7rem"
-                tt="uppercase"
-                fw={700}
-                className={classes.subtitle}
-              >
+              <Text size="0.7rem" tt="uppercase" fw={700} className={classes.subtitle}>
                 Depth
               </Text>
               <Text fw="bold" fz="md">

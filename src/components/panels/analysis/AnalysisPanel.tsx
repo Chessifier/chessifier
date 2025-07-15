@@ -1,16 +1,3 @@
-import { TreeStateContext } from "@/components/common/TreeStateContext";
-import {
-  activeTabAtom,
-  allEnabledAtom,
-  currentAnalysisTabAtom,
-  currentExpandedEnginesAtom,
-  enableAllAtom,
-  engineMovesFamily,
-  enginesAtom,
-} from "@/state/atoms";
-import { getVariationLine } from "@/utils/chess";
-import { getPiecesCount, hasCaptures, positionFromFen } from "@/utils/chessops";
-import type { Engine } from "@/utils/engines";
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import {
   Accordion,
@@ -26,18 +13,26 @@ import {
   Tabs,
   Text,
 } from "@mantine/core";
-import {
-  IconChevronsRight,
-  IconPlayerPause,
-  IconSelector,
-  IconSettings,
-} from "@tabler/icons-react";
+import { IconChevronsRight, IconPlayerPause, IconSelector, IconSettings } from "@tabler/icons-react";
 import { useNavigate } from "@tanstack/react-router";
 import { useAtom, useAtomValue } from "jotai";
 import { memo, useContext, useDeferredValue, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useStore } from "zustand";
 import { useShallow } from "zustand/react/shallow";
+import { TreeStateContext } from "@/components/common/TreeStateContext";
+import {
+  activeTabAtom,
+  allEnabledAtom,
+  currentAnalysisTabAtom,
+  currentExpandedEnginesAtom,
+  enableAllAtom,
+  engineMovesFamily,
+  enginesAtom,
+} from "@/state/atoms";
+import { getVariationLine } from "@/utils/chess";
+import { getPiecesCount, hasCaptures, positionFromFen } from "@/utils/chessops";
+import type { Engine } from "@/utils/engines";
 import BestMoves, { arrowColors } from "./BestMoves";
 import EngineSelection from "./EngineSelection";
 import LogsPanel from "./LogsPanel";
@@ -66,15 +61,11 @@ function AnalysisPanel() {
   );
 
   const [engines, setEngines] = useAtom(enginesAtom);
-  const loadedEngines = useMemo(
-    () => engines.filter((e) => e.loaded),
-    [engines],
-  );
+  const loadedEngines = useMemo(() => engines.filter((e) => e.loaded), [engines]);
 
   const [, enable] = useAtom(enableAllAtom);
   const allEnabledLoader = useAtomValue(allEnabledAtom);
-  const allEnabled =
-    allEnabledLoader.state === "hasData" && allEnabledLoader.data;
+  const allEnabled = allEnabledLoader.state === "hasData" && allEnabledLoader.data;
 
   const [tab, setTab] = useAtom(currentAnalysisTabAtom);
   const [expanded, setExpanded] = useAtom(currentExpandedEnginesAtom);
@@ -112,18 +103,14 @@ function AnalysisPanel() {
         >
           <ScrollArea
             offsetScrollbars
-            onScrollPositionChange={() =>
-              document.dispatchEvent(new Event("analysis-panel-scroll"))
-            }
+            onScrollPositionChange={() => document.dispatchEvent(new Event("analysis-panel-scroll"))}
           >
-            {pos &&
-              (getPiecesCount(pos) <= 7 ||
-                (getPiecesCount(pos) === 8 && hasCaptures(pos))) && (
-                <>
-                  <TablebaseInfo fen={currentNodeFen} turn={pos.turn} />
-                  <Space h="sm" />
-                </>
-              )}
+            {pos && (getPiecesCount(pos) <= 7 || (getPiecesCount(pos) === 8 && hasCaptures(pos))) && (
+              <>
+                <TablebaseInfo fen={currentNodeFen} turn={pos.turn} />
+                <Space h="sm" />
+              </>
+            )}
             {loadedEngines.length > 1 && (
               <Paper withBorder p="xs" flex={1}>
                 <Group w="100%">
@@ -133,11 +120,7 @@ function AnalysisPanel() {
                     </Text>
                     <Button
                       rightSection={
-                        allEnabled ? (
-                          <IconPlayerPause size="1.2rem" />
-                        ) : (
-                          <IconChevronsRight size="1.2rem" />
-                        )
+                        allEnabled ? <IconPlayerPause size="1.2rem" /> : <IconChevronsRight size="1.2rem" />
                       }
                       variant={allEnabled ? "filled" : "default"}
                       onClick={() => enable(!allEnabled)}
@@ -147,13 +130,7 @@ function AnalysisPanel() {
                   </Stack>
                   <Group grow flex={1}>
                     {loadedEngines.map((engine, i) => (
-                      <EngineSummary
-                        key={engine.name}
-                        engine={engine}
-                        fen={rootFen}
-                        moves={moves}
-                        i={i}
-                      />
+                      <EngineSummary key={engine.name} engine={engine} fen={rootFen} moves={moves} i={i} />
                     ))}
                   </Group>
                 </Group>
@@ -200,16 +177,9 @@ function AnalysisPanel() {
                       <div ref={provided.innerRef} {...provided.droppableProps}>
                         <Stack w="100%">
                           {loadedEngines.map((engine, i) => (
-                            <Draggable
-                              key={engine.name + i.toString()}
-                              draggableId={engine.name}
-                              index={i}
-                            >
+                            <Draggable key={engine.name + i.toString()} draggableId={engine.name} index={i}>
                               {(provided) => (
-                                <div
-                                  ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                >
+                                <div ref={provided.innerRef} {...provided.draggableProps}>
                                   <Accordion.Item value={engine.name}>
                                     <BestMoves
                                       id={i}
@@ -218,9 +188,7 @@ function AnalysisPanel() {
                                       moves={moves}
                                       halfMoves={currentNodeHalfMoves}
                                       dragHandleProps={provided.dragHandleProps}
-                                      orientation={
-                                        headers.orientation || "white"
-                                      }
+                                      orientation={headers.orientation || "white"}
                                     />
                                   </Accordion.Item>
                                 </div>
@@ -288,35 +256,17 @@ function AnalysisPanel() {
   );
 }
 
-function EngineSummary({
-  engine,
-  fen,
-  moves,
-  i,
-}: {
-  engine: Engine;
-  fen: string;
-  moves: string[];
-  i: number;
-}) {
+function EngineSummary({ engine, fen, moves, i }: { engine: Engine; fen: string; moves: string[]; i: number }) {
   const activeTab = useAtomValue(activeTabAtom);
-  const [ev] = useAtom(
-    engineMovesFamily({ engine: engine.name, tab: activeTab! }),
-  );
+  const [ev] = useAtom(engineMovesFamily({ engine: engine.name, tab: activeTab! }));
 
-  const curEval = useDeferredValue(
-    useMemo(() => ev.get(`${fen}:${moves.join(",")}`), [ev, fen, moves]),
-  );
+  const curEval = useDeferredValue(useMemo(() => ev.get(`${fen}:${moves.join(",")}`), [ev, fen, moves]));
   const score = curEval && curEval.length > 0 ? curEval[0].score : null;
 
   return (
     <Card withBorder c={arrowColors[i]?.strong} p="xs">
       <Stack gap="xs" align="center">
-        <Text
-          fw="bold"
-          fz="xs"
-          style={{ textOverflow: "ellipsis", whiteSpace: "nowrap" }}
-        >
+        <Text fw="bold" fz="xs" style={{ textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
           {engine.name}
         </Text>
         {score ? (
