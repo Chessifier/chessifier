@@ -1,0 +1,52 @@
+cg-board {
+  background-image: var(--board-image, url("/board/gray.svg"));
+  border-radius: var(--mantine-radius-default);
+  overflow: hidden;
+}
+
+/** Interactive board square colors */
+cg-board square.premove-dest {
+  background: radial-gradient(
+    rgba(20, 30, 85, 0.5) 22%,
+    #203085 0,
+    rgba(0, 0, 0, 0.3) 0,
+    rgba(0, 0, 0, 0) 0
+  );
+}
+cg-board square.oc.premove-dest {
+  background: radial-gradient(
+    transparent 0%,
+    transparent 80%,
+    rgba(20, 30, 85, 0.2) 80%
+  );
+}
+cg-board square.premove-dest:hover {
+  background: rgba(20, 30, 85, 0.2);
+}
+cg-board square.check {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 0, 0, 1) 0%,
+    rgba(231, 0, 0, 1) 25%,
+    rgba(169, 0, 0, 0) 89%,
+    rgba(158, 0, 0, 0) 100%
+  );
+}
+cg-board square.current-premove {
+  background-color: rgba(20, 30, 85, 0.5);
+}
+
+/** Alternating colors in rank/file labels */
+.cg-wrap.orientation-white coords.ranks coord:nth-child(2n),
+.cg-wrap.orientation-white coords.files coord:nth-child(2n),
+.cg-wrap.orientation-black coords.ranks coord:nth-child(2n + 1),
+.cg-wrap.orientation-black coords.files coord:nth-child(2n + 1) {
+  color: rgba(72, 72, 72, 0.8);
+}
+
+.cg-wrap.orientation-black coords.ranks coord:nth-child(2n),
+.cg-wrap.orientation-black coords.files coord:nth-child(2n),
+.cg-wrap.orientation-white coords.ranks coord:nth-child(2n + 1),
+.cg-wrap.orientation-white coords.files coord:nth-child(2n + 1) {
+  color: rgba(255, 255, 255, 0.8);
+}
