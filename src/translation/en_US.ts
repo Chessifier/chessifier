@@ -313,7 +313,7 @@ export const en_US = {
     "Settings.Anarchy": "Anarchy",
     "Settings.Appearance": "Appearance",
     "Settings.Sound": "Sound",
-    "Settings.Keybinds": "Keybinds",
+    "Settings.Keybindings": "Keybindings",
     "Settings.Directories": "Directories",
 
     "Settings.Board.Desc": "Customize the analysis board and game controls",

@@ -275,7 +275,7 @@ export const it_IT = {
     "Settings.Anarchy": "Anarchia",
     "Settings.Appearance": "Aspetto",
     "Settings.Sound": "Suono",
-    "Settings.Keybinds": "Tasti di Scelta Rapida",
+    "Settings.Keybindings": "Tasti di Scelta Rapida",
     "Settings.Directories": "Cartelle",
 
     "Settings.Board.Desc":

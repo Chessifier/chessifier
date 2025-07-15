@@ -3,7 +3,7 @@ import AboutModal from "@/components/About";
 import { SideBar } from "@/components/Sidebar";
 import TopBar from "@/components/TopBar";
 import { activeTabAtom, nativeBarAtom, tabsAtom } from "@/state/atoms";
-import { keyMapAtom } from "@/state/keybinds";
+import { keyMapAtom } from "@/state/keybindings";
 import { openFile } from "@/utils/files";
 import { createTab } from "@/utils/tabs";
 import { AppShell } from "@mantine/core";

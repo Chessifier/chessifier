@@ -314,7 +314,7 @@ export const fr_FR = {
     "Settings.Anarchy": "Anarchie",
     "Settings.Appearance": "Apparence",
     "Settings.Sound": "Son",
-    "Settings.Keybinds": "Configuration clavier",
+    "Settings.Keybindings": "Configuration clavier",
     "Settings.Directories": "Dossiers",
 
     "Settings.Board.Desc":

@@ -270,7 +270,7 @@ export const nb_NO = {
     "Settings.Anarchy": "Anarki",
     "Settings.Appearance": "Utseende",
     "Settings.Sound": "Lyd",
-    "Settings.Keybinds": "Tastaturbindinger",
+    "Settings.Keybindings": "Tastaturbindinger",
     "Settings.Directories": "Mapper",
 
     "Settings.Board.Desc": "Tilpass analysebrett",

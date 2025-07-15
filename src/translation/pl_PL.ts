@@ -271,7 +271,7 @@ export const pl_PL = {
     "Settings.Anarchy": "Anarchia",
     "Settings.Appearance": "Wygląd",
     "Settings.Sound": "Dźwięk",
-    "Settings.Keybinds": "Skróty klawiszowe",
+    "Settings.Keybindings": "Skróty klawiszowe",
     "Settings.Directories": "Katalogi",
 
     "Settings.Board.Desc": "Dostosuj tablicę analizy i sterowanie grą",

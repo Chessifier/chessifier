@@ -274,7 +274,7 @@ export const de_DE = {
     "Settings.Anarchy": "Anarchie",
     "Settings.Appearance": "Erscheinungsbild",
     "Settings.Sound": "Ton",
-    "Settings.Keybinds": "Tastenkombinationen",
+    "Settings.Keybindings": "Tastenkombinationen",
     "Settings.Directories": "Verzeichnisse",
 
     "Settings.Board.Desc": "Passe das Analysebrett und die Spielsteuerung an",

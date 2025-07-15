@@ -271,7 +271,7 @@ export const pt_PT = {
     "Settings.Anarchy": "Anarquia",
     "Settings.Appearance": "Aparência",
     "Settings.Sound": "Som",
-    "Settings.Keybinds": "Atalhos de teclado",
+    "Settings.Keybindings": "Atalhos de teclado",
     "Settings.Directories": "Diretorias",
 
     "Settings.Board.Desc":

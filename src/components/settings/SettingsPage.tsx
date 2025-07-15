@@ -19,7 +19,7 @@ import {
   spellCheckAtom,
   storedDocumentDirAtom,
 } from "@/state/atoms";
-import { keyMapAtom } from "@/state/keybinds";
+import { keyMapAtom } from "@/state/keybindings";
 import {
   ActionIcon,
   Card,
@@ -30,6 +30,7 @@ import {
   Table,
   Tabs,
   Text,
+  Title,
   Tooltip,
 } from "@mantine/core";
 import {
@@ -69,7 +70,6 @@ export default function Page() {
   const [isNative, setIsNative] = useAtom(nativeBarAtom);
   const {
     dirs: { documentDir },
-    version,
   } = useLoaderData({ from: "/settings" });
   let [filesDirectory, setFilesDirectory] = useAtom(storedDocumentDirAtom);
   filesDirectory = filesDirectory || documentDir;
@@ -98,28 +98,29 @@ export default function Page() {
         <Tabs.Tab value="sound" leftSection={<IconVolume size="1rem" />}>
           {t("Settings.Sound")}
         </Tabs.Tab>
-        <Tabs.Tab value="keybinds" leftSection={<IconKeyboard size="1rem" />}>
-          {t("Settings.Keybinds")}
+        <Tabs.Tab value="keybindings" leftSection={<IconKeyboard size="1rem" />}>
+          {t("Settings.Keybindings")}
         </Tabs.Tab>
         <Tabs.Tab value="directories" leftSection={<IconFolder size="1rem" />}>
           {t("Settings.Directories")}
         </Tabs.Tab>
       </Tabs.List>
-      <Stack flex={1} px="md" pt="md">
+      <Stack flex={1}>
         <ScrollArea>
-          <Card withBorder p="lg" className={classes.card} w="100%">
+          <Card className={classes.card} w="100%" pl="lg" pr="xl">
             <Tabs.Panel value="board">
-              <Text size="lg" fw={500} className={classes.title}>
+              <Title order={1} fw={500} className={classes.title}>
                 {t("Settings.Board")}
-              </Text>
-              <Text size="xs" c="dimmed" mt={3} mb="lg">
+              </Title>
+              <Text size="xs" c="dimmed" mt={3} mb="xl">
                 {t("Settings.Board.Desc")}
               </Text>
               <Group
                 justify="space-between"
                 wrap="nowrap"
                 gap="xl"
-                className={classes.item}
+                pt="sm"
+                mt="sm"
               >
                 <div>
                   <Text>{t("Settings.PieceDest")}</Text>
@@ -310,17 +311,18 @@ export default function Page() {
             </Tabs.Panel>
 
             <Tabs.Panel value="inputs">
-              <Text size="lg" fw={500} className={classes.title}>
+              <Title order={1} fw={500} className={classes.title}>
                 {t("Settings.Inputs")}
-              </Text>
-              <Text size="xs" c="dimmed" mt={3} mb="lg">
+              </Title>
+              <Text size="xs" c="dimmed" mt={3} mb="xl">
                 {t("Settings.Inputs.Desc")}
               </Text>
               <Group
                 justify="space-between"
                 wrap="nowrap"
                 gap="xl"
-                className={classes.item}
+                pt="sm"
+                mt="sm"
               >
                 <div>
                   <Text>{t("Settings.Inputs.TextInput")}</Text>
@@ -345,18 +347,20 @@ export default function Page() {
                 <SettingsSwitch atom={spellCheckAtom} />
               </Group>
             </Tabs.Panel>
+
             <Tabs.Panel value="report">
-              <Text size="lg" fw={500} className={classes.title}>
+              <Title order={1} fw={500} className={classes.title}>
                 {t("Settings.OpeningReport")}
-              </Text>
-              <Text size="xs" c="dimmed" mt={3} mb="lg">
+              </Title>
+              <Text size="xs" c="dimmed" mt={3} mb="xl">
                 {t("Settings.OpeningReport.Desc")}
               </Text>
               <Group
                 justify="space-between"
                 wrap="nowrap"
                 gap="xl"
-                className={classes.item}
+                pt="sm"
+                mt="sm"
               >
                 <div>
                   <Text>{t("Settings.OpeningReport.PercentCoverage")}</Text>
@@ -389,17 +393,18 @@ export default function Page() {
             </Tabs.Panel>
 
             <Tabs.Panel value="anarchy">
-              <Text size="lg" fw={500} className={classes.title}>
+              <Title order={1} fw={500} className={classes.title}>
                 {t("Settings.Anarchy")}
-              </Text>
-              <Text size="xs" c="dimmed" mt={3} mb="lg">
+              </Title>
+              <Text size="xs" c="dimmed" mt={3} mb="xl">
                 {t("Settings.Anarchy.Desc")}
               </Text>
               <Group
                 justify="space-between"
                 wrap="nowrap"
                 gap="xl"
-                className={classes.item}
+                pt="sm"
+                mt="sm"
               >
                 <div>
                   <Text>{t("Settings.Anarchy.ForcedChessifier")}</Text>
@@ -412,17 +417,18 @@ export default function Page() {
             </Tabs.Panel>
 
             <Tabs.Panel value="appearance">
-              <Text size="lg" fw={500} className={classes.title}>
+              <Title order={1} fw={500} className={classes.title}>
                 {t("Settings.Appearance")}
-              </Text>
-              <Text size="xs" c="dimmed" mt={3} mb="lg">
+              </Title>
+              <Text size="xs" c="dimmed" mt={3} mb="xl">
                 {t("Settings.Appearance.Desc")}
               </Text>
               <Group
                 justify="space-between"
                 wrap="nowrap"
                 gap="xl"
-                className={classes.item}
+                pt="sm"
+                mt="sm"
               >
                 <div>
                   <Text>{t("Settings.Appearance.Theme")}</Text>
@@ -585,17 +591,18 @@ export default function Page() {
             </Tabs.Panel>
 
             <Tabs.Panel value="sound">
-              <Text size="lg" fw={500} className={classes.title}>
+              <Title order={1} fw={500} className={classes.title}>
                 {t("Settings.Sound")}
-              </Text>
-              <Text size="xs" c="dimmed" mt={3} mb="lg">
+              </Title>
+              <Text size="xs" c="dimmed" mt={3} mb="xl">
                 {t("Settings.Sound.Desc")}
               </Text>
               <Group
                 justify="space-between"
                 wrap="nowrap"
                 gap="xl"
-                className={classes.item}
+                pt="sm"
+                mt="sm"
               >
                 <div>
                   <Text>{t("Settings.Sound.Volume")}</Text>
@@ -621,11 +628,11 @@ export default function Page() {
               </Group>
             </Tabs.Panel>
 
-            <Tabs.Panel value="keybinds">
+            <Tabs.Panel value="keybindings">
               <Group>
-                <Text size="lg" fw={500} className={classes.title}>
-                  Keybinds
-                </Text>
+                <Title order={1} fw={500} className={classes.title}>
+                  Keybindings
+                </Title>
                 <Tooltip label="Reset">
                   <ActionIcon onClick={() => setKeyMap(RESET)}>
                     <IconReload size="1rem" />
@@ -658,17 +665,18 @@ export default function Page() {
             </Tabs.Panel>
 
             <Tabs.Panel value="directories">
-              <Text size="lg" fw={500} className={classes.title}>
+              <Title order={1} fw={500} className={classes.title}>
                 {t("Settings.Directories")}
-              </Text>
-              <Text size="xs" c="dimmed" mt={3} mb="lg">
+              </Title>
+              <Text size="xs" c="dimmed" mt={3} mb="xl">
                 {t("Settings.Directories.Desc")}
               </Text>
               <Group
                 justify="space-between"
                 wrap="nowrap"
                 gap="xl"
-                className={classes.item}
+                pt="sm"
+                mt="sm"
               >
                 <div>
                   <Text>{t("Settings.Directories.Files")}</Text>
@@ -691,9 +699,6 @@ export default function Page() {
             </Tabs.Panel>
           </Card>
         </ScrollArea>
-        <Text size="xs" c="dimmed" ta="right">
-          Chessifier v{version}
-        </Text>
       </Stack>
     </Tabs>
   );

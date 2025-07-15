@@ -1,4 +1,4 @@
-import { keyMapAtom } from "@/state/keybinds";
+import { keyMapAtom } from "@/state/keybindings";
 import { ActionIcon, Group } from "@mantine/core";
 import {
   IconChevronLeft,

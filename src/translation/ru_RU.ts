@@ -270,7 +270,7 @@ export const ru_RU = {
     "Settings.Anarchy": "Анархия",
     "Settings.Appearance": "Внешний вид",
     "Settings.Sound": "Звук",
-    "Settings.Keybinds": "Горячие клавиши",
+    "Settings.Keybindings": "Горячие клавиши",
     "Settings.Directories": "Каталоги",
 
     "Settings.Board.Desc":

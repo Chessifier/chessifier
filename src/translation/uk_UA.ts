@@ -270,7 +270,7 @@ export const uk_UA = {
     "Settings.Anarchy": "Анархія",
     "Settings.Appearance": "Зовнішній вигляд",
     "Settings.Sound": "Звук",
-    "Settings.Keybinds": "Гарячі клавіші",
+    "Settings.Keybindings": "Гарячі клавіші",
     "Settings.Directories": "Каталоги",
 
     "Settings.Board.Desc":

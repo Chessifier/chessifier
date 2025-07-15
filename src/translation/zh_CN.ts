@@ -267,7 +267,7 @@ export const zh_CN = {
     "Settings.Anarchy": "安那其",
     "Settings.Appearance": "外观",
     "Settings.Sound": "声音",
-    "Settings.Keybinds": "快捷键",
+    "Settings.Keybindings": "快捷键",
     "Settings.Directories": "目录",
 
     "Settings.Board.Desc": "自定义分析面板和游戏控制",

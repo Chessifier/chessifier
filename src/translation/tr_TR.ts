@@ -271,7 +271,7 @@ export const tr_TR = {
     "Settings.Anarchy": "Anarşi",
     "Settings.Appearance": "Görünüş",
     "Settings.Sound": "Ses",
-    "Settings.Keybinds": "Tuş Atamaları",
+    "Settings.Keybindings": "Tuş Atamaları",
     "Settings.Directories": "Klasörler",
 
     "Settings.Board.Desc": "Analiz tahtasını ve oyun kontrollerini düzenleyin",

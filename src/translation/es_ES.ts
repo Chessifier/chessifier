@@ -276,7 +276,7 @@ export const es_ES = {
     "Settings.Anarchy": "Anarquía",
     "Settings.Appearance": "Apariencia",
     "Settings.Sound": "Sonido",
-    "Settings.Keybinds": "Atajos de teclado",
+    "Settings.Keybindings": "Atajos de teclado",
     "Settings.Directories": "Directorios",
 
     "Settings.Board.Desc":
