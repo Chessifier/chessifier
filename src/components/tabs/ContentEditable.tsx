@@ -68,7 +68,7 @@ export const ContentEditable: React.FC<ContentEditableProps> = ({
       }
       onInput={
         onInput
-          ? (...args) => {
+          ? (...args: [React.FormEvent<HTMLDivElement>]) => {
               if (onInputRef.current) {
                 onInputRef.current(...args);
               }
@@ -77,7 +77,7 @@ export const ContentEditable: React.FC<ContentEditableProps> = ({
       }
       onBlur={
         onBlur
-          ? (...args) => {
+          ? (...args: [React.FormEvent<HTMLDivElement>]) => {
               if (onBlurRef.current) {
                 onBlurRef.current(...args);
               }
@@ -86,7 +86,7 @@ export const ContentEditable: React.FC<ContentEditableProps> = ({
       }
       onKeyPress={
         onKeyPress
-          ? (...args) => {
+          ? (...args: [React.KeyboardEvent<HTMLDivElement>]) => {
               if (onKeyPressRef.current) {
                 onKeyPressRef.current(...args);
               }
@@ -95,7 +95,7 @@ export const ContentEditable: React.FC<ContentEditableProps> = ({
       }
       onKeyDown={
         onKeyDown
-          ? (...args) => {
+          ? (...args: [React.KeyboardEvent<HTMLDivElement>]) => {
               if (onKeyDownRef.current) {
                 onKeyDownRef.current(...args);
               }

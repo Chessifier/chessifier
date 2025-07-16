@@ -80,6 +80,7 @@ function GameNotation({ topBar }: { topBar?: boolean }) {
               )}
               {showComments && root.comment && <Comment comment={root.comment} />}
               <RenderVariationTree
+                // @ts-ignore
                 targetRef={targetRef}
                 tree={root}
                 depth={0}

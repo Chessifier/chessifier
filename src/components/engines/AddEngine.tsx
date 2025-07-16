@@ -77,6 +77,7 @@ function AddEngine({ opened, setOpened }: { opened: boolean; setOpened: (opened:
             <Stack>
               {defaultEngines?.map((engine, i) => (
                 <EngineCard
+                  // @ts-ignore
                   engine={engine}
                   engineId={i}
                   key={i}

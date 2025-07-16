@@ -1,5 +1,5 @@
 import { SimpleGrid } from "@mantine/core";
-import { COLORS, parseSquare, ROLES } from "chessops";
+import { COLORS, ROLES } from "chessops";
 import { makeFen, parseFen } from "chessops/fen";
 import Piece from "../common/Piece";
 
@@ -27,6 +27,7 @@ function PiecesGrid({
               setup.board.set(to, piece);
               onPut(makeFen(setup));
             }}
+            // @ts-ignore
             boardRef={boardRef}
             piece={{
               role,

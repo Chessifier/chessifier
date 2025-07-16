@@ -353,10 +353,10 @@ export function useDefaultEngines(os: Platform | undefined, opened: boolean) {
   const { data, error, isLoading } = useSWR(opened ? os : null, async (os: Platform) => {
     const bmi2: boolean = await commands.isBmi2Compatible();
 
-    return ENGINES.filter((e: { os: Platform; bmi2: boolean }) => e.os === os && e.bmi2 === bmi2);
+    return ENGINES.filter((e) => e.os === os && e.bmi2 === bmi2);
   });
   return {
-    defaultEngines: data as LocalEngine[],
+    defaultEngines: data,
     error,
     isLoading,
   };

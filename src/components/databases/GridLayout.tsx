@@ -1,5 +1,6 @@
 import { Box, Group } from "@mantine/core";
 import * as classes from "./GridLayout.css";
+import type { JSX } from "react";
 
 function GridLayout({ search, table, preview }: { search: JSX.Element; table: JSX.Element; preview: JSX.Element }) {
   return (

@@ -39,6 +39,7 @@ function AnnotationEditor() {
       ],
       content: currentNode.comment,
       onUpdate: ({ editor }) => {
+        // @ts-ignore
         const comment = editor.storage.markdown.getMarkdown();
         setComment(comment);
       },

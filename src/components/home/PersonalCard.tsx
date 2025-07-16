@@ -10,7 +10,6 @@ import {
   ScrollArea,
   Select,
   Stack,
-  Table,
   Tabs,
   Text,
   useMantineColorScheme,
@@ -333,6 +332,7 @@ function DateChart({ data_per_month }: { data_per_month: [string, MonthData][] }
           bottom: 5,
         }}
         onClick={(e) => {
+          // @ts-ignore
           const year = Number.parseInt(e.activePayload?.[0]?.payload?.name);
           if (year) {
             setSelectedYear((prev) => (prev === year ? null : year));

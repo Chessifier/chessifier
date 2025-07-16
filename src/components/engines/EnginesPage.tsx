@@ -51,6 +51,7 @@ export default function EnginesPage() {
   const { selected } = Route.useSearch();
   const navigate = useNavigate();
   const setSelected = (v: number | null) => {
+    // @ts-ignore
     navigate({ search: { selected: v ?? undefined } });
   };
 

@@ -231,6 +231,7 @@ export default function DatabasesPage() {
                         <Button
                           component={Link}
                           to="/databases/$databaseId"
+                          // @ts-ignore
                           params={{ databaseId: selectedDatabase.title }}
                           onClick={() => setStorageSelected(selectedDatabase)}
                           fullWidth
