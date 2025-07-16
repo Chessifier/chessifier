@@ -155,87 +155,85 @@ export default function BoardsPage() {
   ]);
 
   return (
-    <>
-      <Tabs
+    <Tabs
         value={activeTab}
         onChange={(v) => setActiveTab(v)}
         keepMounted={false}
         style={{
-          display: "flex",
-          flexDirection: "column",
-          height: "100%",
-          width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        width: "100%",
         }}
-      >
+    >
         <ScrollArea h="3.75rem" px="md" pt="sm" scrollbarSize={8}>
-          <DragDropContext
+        <DragDropContext
             onDragEnd={({ destination, source }) =>
-              destination?.index !== undefined &&
-              setTabs((prev) => {
+            destination?.index !== undefined &&
+            setTabs((prev) => {
                 const result = Array.from(prev);
                 const [removed] = result.splice(source.index, 1);
                 result.splice(destination.index, 0, removed);
                 return result;
-              })
+            })
             }
-          >
+        >
             <Droppable droppableId="droppable" direction="horizontal">
-              {(provided) => (
+            {(provided) => (
                 <div ref={provided.innerRef} {...provided.droppableProps} style={{ display: "flex" }}>
-                  {tabs.map((tab, i) => (
+                {tabs.map((tab, i) => (
                     <Draggable key={tab.value} draggableId={tab.value} index={i}>
-                      {(provided) => (
+                    {(provided) => (
                         <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                          <BoardTab
+                        <BoardTab
                             tab={tab}
                             setActiveTab={setActiveTab}
                             closeTab={closeTab}
                             renameTab={renameTab}
                             duplicateTab={duplicateTab}
                             selected={activeTab === tab.value}
-                          />
+                        />
                         </div>
-                      )}
+                    )}
                     </Draggable>
-                  ))}
-                  {provided.placeholder}
-                  <ActionIcon
+                ))}
+                {provided.placeholder}
+                <ActionIcon
                     variant="default"
                     onClick={() =>
-                      createTab({
+                    createTab({
                         tab: {
-                          name: t("Tab.NewTab"),
-                          type: "new",
+                        name: t("Tab.NewTab"),
+                        type: "new",
                         },
                         setTabs,
                         setActiveTab,
-                      })
+                    })
                     }
                     size="lg"
                     classNames={{
-                      root: classes.newTab,
+                    root: classes.newTab,
                     }}
-                  >
+                >
                     <IconPlus />
-                  </ActionIcon>
+                </ActionIcon>
                 </div>
-              )}
+            )}
             </Droppable>
-          </DragDropContext>
+        </DragDropContext>
         </ScrollArea>
         {tabs.map((tab) => (
-          <Tabs.Panel key={tab.value} value={tab.value} h="100%" w="100%" pb="sm" px="sm">
+        <Tabs.Panel key={tab.value} value={tab.value} h="100%" w="100%" pb="sm" px="sm">
             <TabSwitch
-              tab={tab}
-              saveModalOpened={saveModalOpened}
-              toggleSaveModal={toggleSaveModal}
-              closeTab={closeTab}
-              activeTab={activeTab}
+            tab={tab}
+            saveModalOpened={saveModalOpened}
+            toggleSaveModal={toggleSaveModal}
+            closeTab={closeTab}
+            activeTab={activeTab}
             />
-          </Tabs.Panel>
+        </Tabs.Panel>
         ))}
-      </Tabs>
-    </>
+    </Tabs>
   );
 }
 
@@ -259,7 +257,9 @@ const windowsStateAtom = atomWithStorage<WindowsState>("windowsState", {
       direction: "column",
       first: "topRight",
       second: "bottomRight",
+      splitPercentage: 65
     },
+    splitPercentage: 50,
   },
 });
 
@@ -276,7 +276,7 @@ function TabSwitch({
   closeTab: (value: string | null, forced?: boolean) => void;
   activeTab: string | null;
 }) {
-  const [windowsState, setWindowsState] = useAtom(windowsStateAtom);
+  const [windowsState, setWindowsState] = useAtom(windowsStateAtom);  
 
   return match(tab.type)
     .with("new", () => <NewTabHome id={tab.value} />)
