@@ -4,6 +4,7 @@ import equal from "fast-deep-equal";
 import { useAtom } from "jotai";
 import { useContext, useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import type { CategoricalChartFunc } from "recharts/types/chart/types";
 import { useStore } from "zustand";
 import { reportTypeAtom } from "@/state/atoms";
 import { ANNOTATION_INFO } from "@/utils/annotation";
@@ -13,7 +14,6 @@ import { formatScore } from "@/utils/score";
 import { type ListNode, type TreeNode, treeIteratorMainLine } from "@/utils/treeReducer";
 import * as classes from "./EvalChart.css";
 import { TreeStateContext } from "./TreeStateContext";
-import type { CategoricalChartFunc } from "recharts/types/chart/types";
 
 interface EvalChartProps {
   isAnalysing: boolean;

@@ -14,7 +14,7 @@ const MasterOptionsPanel = () => {
         value={options.since}
         minDate={MIN_DATE}
         maxDate={new Date()}
-        onChange={(value) => setOptions({ ...options, since: (value ?? undefined) as (Date | undefined) })}
+        onChange={(value) => setOptions({ ...options, since: (value ?? undefined) as Date | undefined })}
         clearable
       />
       <YearPickerInput
@@ -23,7 +23,7 @@ const MasterOptionsPanel = () => {
         value={options.until}
         minDate={MIN_DATE}
         maxDate={new Date()}
-        onChange={(value) => setOptions({ ...options, until: (value ?? undefined) as (Date | undefined) })}
+        onChange={(value) => setOptions({ ...options, until: (value ?? undefined) as Date | undefined })}
         clearable
       />
     </Group>

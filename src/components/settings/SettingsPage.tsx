@@ -333,6 +333,10 @@ export default function Page() {
                   allowDeselect={false}
                   data={[
                     {
+                      value: "am_AM",
+                      label: "Armenian",
+                    },
+                    {
                       value: "be_BY",
                       label: "Belarusian",
                     },

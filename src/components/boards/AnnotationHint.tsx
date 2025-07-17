@@ -1,8 +1,8 @@
 import { Box } from "@mantine/core";
 import type { Color, Square } from "chessops";
+import type { JSX } from "react";
 import { ANNOTATION_INFO, type Annotation } from "@/utils/annotation";
 import { squareToCoordinates } from "@/utils/chessops";
-import type { JSX } from "react";
 
 export default function AnnotationHint({
   square,

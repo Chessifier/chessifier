@@ -9,7 +9,6 @@ import {
 } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
-import { getCurrentWindow } from "@tauri-apps/api/window";
 import { getMatches } from "@tauri-apps/plugin-cli";
 import { attachConsole, info } from "@tauri-apps/plugin-log";
 import { getDefaultStore, useAtom, useAtomValue } from "jotai";
@@ -19,7 +18,6 @@ import { Helmet } from "react-helmet";
 import {
   activeTabAtom,
   fontSizeAtom,
-  nativeBarAtom,
   pieceSetAtom,
   primaryColorAtom,
   spellCheckAtom,

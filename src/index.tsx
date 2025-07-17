@@ -1,11 +1,10 @@
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import i18n from "i18next";
-import React from "react";
 import { createRoot } from "react-dom/client";
 import { initReactI18next } from "react-i18next";
 import App from "./App";
-
+import { am_AM } from "./translation/am_AM";
 import { be_BY } from "./translation/be_BY";
 import { en_US } from "./translation/en_US";
 import { es_ES } from "./translation/es_ES";
@@ -22,6 +21,7 @@ import { zh_CN } from "./translation/zh_CN";
 i18n.use(initReactI18next).init({
   resources: {
     en: en_US,
+    am_AM: am_AM,
     pt_PT: pt_PT,
     zh_CN: zh_CN,
     ru_RU: ru_RU,
@@ -40,6 +40,6 @@ i18n.use(initReactI18next).init({
 
 dayjs.extend(customParseFormat);
 
-const container = document.getElementById("app");
-const root = createRoot(container!);
+const container = document.getElementById("app") as HTMLElement;
+const root = createRoot(container);
 root.render(<App />);
