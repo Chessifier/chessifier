@@ -218,30 +218,19 @@ export async function getChesscomGame(gameURL: string) {
 }
 
 export function getStats(stats: ChessComStats) {
-  const statsArray = [];
-  if (stats.chess_bullet) {
-    statsArray.push({
-      value: stats.chess_bullet.last.rating,
-      label: "Bullet",
-    });
-  }
-  if (stats.chess_blitz) {
-    statsArray.push({
-      value: stats.chess_blitz.last.rating,
-      label: "Blitz",
-    });
-  }
-  if (stats.chess_rapid) {
-    statsArray.push({
-      value: stats.chess_rapid.last.rating,
-      label: "Rapid",
-    });
-  }
-  if (stats.chess_daily) {
-    statsArray.push({
-      value: stats.chess_daily.last.rating,
-      label: "Daily",
-    });
-  }
-  return statsArray;
+  const types = [
+    { key: "chess_bullet", label: "Bullet" },
+    { key: "chess_blitz", label: "Blitz" },
+    { key: "chess_rapid", label: "Rapid" },
+    { key: "chess_daily", label: "Daily" },
+  ] as const;
+  return types
+    .map(({ key, label }) => {
+      const perf = stats[key as keyof ChessComStats];
+      return perf ? { value: perf.last.rating, label } : null;
+    })
+    .filter(Boolean) as {
+    value: number;
+    label: string;
+  }[];
 }
