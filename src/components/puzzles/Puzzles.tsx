@@ -86,7 +86,7 @@ function Puzzles({ id }: { id: string }) {
   function generatePuzzle(db: string) {
     let range = ratingRange;
     if (progressive) {
-      const rating = puzzles[currentPuzzle]?.rating;
+      const rating = puzzles?.[currentPuzzle]?.rating;
       if (rating) {
         range = [rating + 50, rating + 100];
         setRatingRange([rating + 50, rating + 100]);
@@ -115,6 +115,7 @@ function Puzzles({ id }: { id: string }) {
   }
 
   const [addOpened, setAddOpened] = useState(false);
+  const [showingSolution, setShowingSolution] = useState(false);
 
   const [progressive, setProgressive] = useAtom(progressivePuzzlesAtom);
   const [hideRating, setHideRating] = useAtom(hidePuzzleRatingAtom);
@@ -123,7 +124,7 @@ function Puzzles({ id }: { id: string }) {
   const setActiveTab = useSetAtom(activeTabAtom);
 
   const turnToMove =
-    puzzles[currentPuzzle] !== undefined ? positionFromFen(puzzles[currentPuzzle]?.fen)[0]?.turn : null;
+    puzzles?.[currentPuzzle] !== undefined ? positionFromFen(puzzles?.[currentPuzzle]?.fen)[0]?.turn : null;
 
   return (
     <>
@@ -146,11 +147,11 @@ function Puzzles({ id }: { id: string }) {
                 Puzzle Rating
               </Text>
               <Text fw={500} size="xl">
-                {puzzles[currentPuzzle]?.completion === "incomplete"
+                {puzzles?.[currentPuzzle]?.completion === "incomplete"
                   ? hideRating
                     ? "?"
-                    : puzzles[currentPuzzle]?.rating
-                  : puzzles[currentPuzzle]?.rating}
+                    : puzzles?.[currentPuzzle]?.rating
+                  : puzzles?.[currentPuzzle]?.rating}
               </Text>
             </div>
             {averageWonRating && (
@@ -240,12 +241,12 @@ function Puzzles({ id }: { id: string }) {
                       },
                       setTabs,
                       setActiveTab,
-                      pgn: puzzles[currentPuzzle]?.moves.join(" "),
+                      pgn: puzzles?.[currentPuzzle]?.moves.join(" "),
                       headers: {
                         ...defaultTree().headers,
-                        fen: puzzles[currentPuzzle]?.fen,
+                        fen: puzzles?.[currentPuzzle]?.fen,
                         orientation:
-                          Chess.fromSetup(parseFen(puzzles[currentPuzzle].fen).unwrap()).unwrap().turn === "white"
+                          Chess.fromSetup(parseFen(puzzles?.[currentPuzzle]?.fen).unwrap()).unwrap().turn === "white"
                             ? "black"
                             : "white",
                       },
@@ -272,7 +273,8 @@ function Puzzles({ id }: { id: string }) {
             mt="sm"
             variant="light"
             onClick={async () => {
-              const curPuzzle = puzzles[currentPuzzle];
+              setShowingSolution(true);
+              const curPuzzle = puzzles?.[currentPuzzle];
               if (curPuzzle.completion === "incomplete") {
                 changeCompletion("incorrect");
               }
@@ -284,10 +286,11 @@ function Puzzles({ id }: { id: string }) {
                 });
                 await new Promise((r) => setTimeout(r, 500));
               }
+              setShowingSolution(false);
             }}
-            disabled={puzzles.length === 0}
+            disabled={puzzles.length === 0 || showingSolution}
           >
-            View Solution
+            {showingSolution ? "Showing Solution" : "View Solution"}
           </Button>
         </Paper>
       </Portal>
@@ -303,7 +306,7 @@ function Puzzles({ id }: { id: string }) {
                 current={currentPuzzle}
                 select={(i) => {
                   setCurrentPuzzle(i);
-                  setPuzzle(puzzles[i]);
+                  setPuzzle(puzzles?.[i]);
                 }}
               />
             </ScrollArea>
