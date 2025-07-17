@@ -2,7 +2,7 @@ import { Flex, Progress, Select, Text } from "@mantine/core";
 import { useAtomValue } from "jotai";
 import { useEffect, useState } from "react";
 import useSWRImmutable from "swr/immutable";
-import type { DatabaseInfo as PlainDatabaseInfo, Player } from "@/bindings";
+import type { DatabaseInfo as PlainDatabaseInfo } from "@/bindings";
 import { commands, events, type MonthData, type Results } from "@/bindings";
 import { sessionsAtom } from "@/state/atoms";
 import { getDatabases, type PlayerGameInfo, query_players } from "@/utils/db";

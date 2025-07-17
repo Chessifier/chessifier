@@ -8,7 +8,7 @@ import type { AtomFamily } from "jotai/vanilla/utils/atomFamily";
 import type { SyncStorage } from "jotai/vanilla/utils/atomWithStorage";
 import type { ReviewLog } from "ts-fsrs";
 import { z } from "zod";
-import type { BestMoves, DatabaseInfo, GoMode } from "@/bindings";
+import type { BestMoves, GoMode } from "@/bindings";
 import type { OpponentSettings } from "@/components/boards/BoardGame";
 import { type Position, positionSchema } from "@/components/files/opening";
 import type { LocalOptions } from "@/components/panels/database/DatabasePanel";

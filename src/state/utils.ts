@@ -13,7 +13,7 @@ export const fileStorage: AsyncStringStorage = {
   async getItem(key) {
     try {
       return await readTextFile(key, options);
-    } catch (error) {
+    } catch (_error) {
       return null;
     }
   },
