@@ -1,9 +1,9 @@
 use log::info;
-use serde::{ser::SerializeStruct, Deserialize, Serialize};
+use serde::{Deserialize, Serialize};
 use shakmaty::{fen::Fen, san::San, Chess, EnPassantMode, Position, Setup};
 
 use lazy_static::lazy_static;
-use specta::{specta, Type};
+use specta::{Type};
 use strsim::{jaro_winkler, sorensen_dice};
 
 use crate::error::Error;
@@ -58,7 +58,7 @@ pub fn get_opening_from_name(name: &str) -> Result<String, Error> {
     OPENINGS
         .iter()
         .find(|o| o.name == name)
-        .map(|o| o.pgn.clone().expect("opening without pgn"))
+        .and_then(|o| o.pgn.clone())
         .ok_or_else(|| Error::NoOpeningFound)
 }
 
@@ -89,7 +89,7 @@ pub async fn search_opening_name(query: String) -> Result<Vec<OutOpening>, Error
         .filter(|(_, score)| *score > 0.8)
         .collect::<Vec<_>>();
 
-    best_matches.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap());
+    best_matches.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap_or(std::cmp::Ordering::Equal));
 
     let best_matches_names = best_matches
         .iter()
@@ -125,33 +125,61 @@ lazy_static! {
         for tsv in TSV_DATA {
             let mut rdr = csv::ReaderBuilder::new().delimiter(b'\t').from_reader(tsv);
             for result in rdr.deserialize() {
-                let record: OpeningRecord = result.expect("Failed to deserialize opening");
-                let mut pos = Chess::default();
-                for token in record.pgn.split_whitespace() {
-                    if let Ok(san) = token.parse::<San>() {
-                        pos.play_unchecked(&san.to_move(&pos).expect("legal move"));
+                match result {
+                    Ok(record) => {
+                        let record: OpeningRecord = record;
+                        let mut pos = Chess::default();
+                        for token in record.pgn.split_whitespace() {
+                            if let Ok(san) = token.parse::<San>() {
+                                if let Ok(mv) = san.to_move(&pos) {
+                                    pos.play_unchecked(&mv);
+                                } else {
+                                    // Skip invalid moves but log them
+                                    info!("Skipping invalid move in opening {}: {}", record.name, token);
+                                }
+                            }
+                        }
+                        positions.push(Opening {
+                            eco: record.eco,
+                            name: record.name,
+                            setup: pos.into_setup(EnPassantMode::Legal),
+                            pgn: Some(record.pgn),
+                        });
+                    },
+                    Err(e) => {
+                        // Log the error but continue processing other openings
+                        info!("Failed to deserialize opening: {}", e);
                     }
                 }
-                positions.push(Opening {
-                    eco: record.eco,
-                    name: record.name,
-                    setup: pos.into_setup(EnPassantMode::Legal),
-                    pgn: Some(record.pgn),
-                });
             }
         }
         let mut rdr = csv::ReaderBuilder::new()
             .delimiter(b'\t')
             .from_reader(FISCHER_RANDOM_DATA);
         for result in rdr.deserialize() {
-            let record: FischerRandomRecord = result.expect("Failed to deserialize opening");
-            let fen: Fen = record.fen.parse().expect("Failed to parse fen");
-            positions.push(Opening {
-                eco: "FRC".to_string(),
-                name: record.name,
-                setup: fen.into_setup(),
-                pgn: None,
-            });
+            match result {
+                Ok(record) => {
+                    let record: FischerRandomRecord = record;
+                    match record.fen.parse::<Fen>() {
+                        Ok(fen) => {
+                            positions.push(Opening {
+                                eco: "FRC".to_string(),
+                                name: record.name,
+                                setup: fen.into_setup(),
+                                pgn: None,
+                            });
+                        },
+                        Err(e) => {
+                            // Log the error but continue processing other openings
+                            info!("Failed to parse FEN for opening {}: {}", record.name, e);
+                        }
+                    }
+                },
+                Err(e) => {
+                    // Log the error but continue processing other openings
+                    info!("Failed to deserialize Fischer Random opening: {}", e);
+                }
+            }
         }
         positions
     };

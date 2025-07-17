@@ -1,6 +1,6 @@
 use std::{
     fs::create_dir_all,
-    io::{Cursor, Write},
+    io::{Cursor},
     path::{Path, PathBuf},
 };
 
@@ -42,8 +42,16 @@ pub async fn download_file(
     // add Bearer if token is present
     if let Some(token) = token {
         let mut header_map = HeaderMap::new();
-        header_map.insert("Authorization", format!("Bearer {token}").parse().unwrap());
-        req = req.headers(header_map);
+        match format!("Bearer {token}").parse() {
+            Ok(header_value) => {
+                header_map.insert("Authorization", header_value);
+                req = req.headers(header_map);
+            },
+            Err(e) => {
+                // Log the error but continue without the Authorization header
+                info!("Failed to parse Authorization header: {}", e);
+            }
+        }
     }
     let res = req.send().await?;
     let total_size = if let Some(total_size) = total_size {
@@ -60,16 +68,21 @@ pub async fn download_file(
         let chunk = item?;
         file.extend_from_slice(&chunk);
         downloaded += chunk.len() as u64;
-        if let Some(total_size) = total_size {
-            let progress = ((downloaded as f32 / total_size as f32) * 100.0).min(100.0);
-            // println!("Downloaded {}%", progress);
-            DownloadProgress {
-                progress,
-                id: id.clone(),
-                finished: false,
-            }
-            .emit(&app)?;
+        // Emit progress event
+        let progress = if let Some(total_size) = total_size {
+            // Calculate percentage if we know the total size
+            ((downloaded as f32 / total_size as f32) * 100.0).min(100.0)
+        } else {
+            // Use an indeterminate progress indicator (-1) if total size is unknown
+            -1.0
+        };
+        
+        DownloadProgress {
+            progress,
+            id: id.clone(),
+            finished: false,
         }
+        .emit(&app)?;
     }
 
     let path = Path::new(&path);
@@ -93,7 +106,6 @@ pub async fn download_file(
         }
         .emit(&app)?;
     }
-    // remove_file(&path).await;
     Ok(())
 }
 

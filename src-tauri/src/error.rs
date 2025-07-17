@@ -52,6 +52,9 @@ pub enum Error {
     Diesel(#[from] diesel::result::Error),
 
     #[error(transparent)]
+    DieselConnection(#[from] diesel::ConnectionError),
+
+    #[error(transparent)]
     R2d2(#[from] diesel::r2d2::PoolError),
 
     #[error(transparent)]
@@ -65,9 +68,6 @@ pub enum Error {
 
     #[error("No moves found")]
     NoMovesFound,
-
-    #[error("Lower or upper bound")]
-    LowerOrUpperBound,
 
     #[error("Search stopped")]
     SearchStopped,
@@ -84,8 +84,11 @@ pub enum Error {
     #[error("No puzzles")]
     NoPuzzles,
 
-    #[error("Players aren't the same. They have played against each other")]
+    #[error("Cannot merge players: they are distinct players who have played against each other")]
     NotDistinctPlayers,
+
+    #[error("Failed to acquire mutex lock: {0}")]
+    MutexLockFailed(String),
 }
 
 impl serde::Serialize for Error {

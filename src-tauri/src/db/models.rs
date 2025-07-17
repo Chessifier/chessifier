@@ -33,8 +33,13 @@ pub struct NewPlayer<'a> {
     pub elo: Option<i32>,
 }
 
-struct White(pub Player);
-struct Black(pub Player);
+/// Marker struct for Diesel associations representing the white player in a game.
+/// Used to establish the relationship between games and white players.
+struct White();
+
+/// Marker struct for Diesel associations representing the black player in a game.
+/// Used to establish the relationship between games and black players.
+struct Black();
 
 #[derive(Default, Queryable, Serialize, Deserialize, Identifiable, Associations)]
 #[diesel(belongs_to(White, foreign_key = white_id))]
@@ -58,6 +63,10 @@ pub struct Game {
     pub eco: Option<String>,
     pub ply_count: Option<i32>,
     pub fen: Option<String>,
+    /// Binary representation of chess moves.
+    /// The moves are stored as a sequence of bytes, typically in a compressed format
+    /// that encodes the move information (source square, destination square, promotion piece, etc.)
+    /// This format is more space-efficient than storing moves as strings.
     pub moves: Vec<u8>,
     pub pawn_home: i32,
 }
@@ -129,7 +138,7 @@ pub enum Outcome {
 }
 
 impl FromStr for Outcome {
-    type Err = String;
+    type Err = crate::error::Error;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
@@ -137,7 +146,7 @@ impl FromStr for Outcome {
             "0-1" => Ok(Outcome::BlackWin),
             "1/2-1/2" => Ok(Outcome::Draw),
             "*" => Ok(Outcome::Unknown),
-            _ => Err(format!("Invalid outcome: {}", s)),
+            _ => Err(crate::error::Error::NoMatchFound),
         }
     }
 }

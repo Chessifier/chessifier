@@ -4,16 +4,11 @@ Chessifier is a modern, open-source, cross-platform chess GUI built for power us
 
 ## ✨ Features
 
-- 🔍 Game Analysis
-    Import and analyze games from [lichess.org](https://lichess.org) and [chess.com](https://chess.com)
-- ⚙️ Multi-Engine Support
-    Analyze with any UCI-compatible engine.
-- 🧠 Repertoire Training
-    Build and train your opening repertoire using spaced repetition.
-- 📦 Engine & Database Management
-    Install and manage engines and databases with minimal effort.
-- 🔎 Position Search
-    Search for absolute or partial positions across your game database.
+- 🔍 Game Analysis<br>Import and analyze games from [lichess.org](https://lichess.org) and [chess.com](https://chess.com)
+- ⚙️ Multi-Engine Support<br>Analyze with any UCI-compatible engine.
+- 🧠 Repertoire Training<br>Build and train your opening repertoire using spaced repetition.
+- 📦 Engine & Database Management<br>Install and manage engines and databases with minimal effort.
+- 🔎 Position Search<br>Search for absolute or partial positions across your game database.
 
 ## 🚀 Getting Started
 
