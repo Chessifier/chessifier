@@ -36,6 +36,10 @@ src-tauri/target/release
 
 We welcome contributions! Please refer to the [Contributing Guide](./CONTRIBUTING.md) for details on how to get started.
 
+## 💬 Community
+
+Join our [Discord server](https://discord.gg/AseVZvWr2X) to connect with other users, get help, and contribute to discussions.
+
 ## 🧱 About This Project
 
 Chessifier is a fork of [En Croissant](https://github.com/franciscoBSalgueiro/en-croissant), extended with additional features, refinements, and a focus on user experience.
