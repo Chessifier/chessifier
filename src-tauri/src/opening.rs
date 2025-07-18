@@ -10,6 +10,7 @@ use crate::error::Error;
 
 #[derive(Debug, Clone)]
 struct Opening {
+    #[allow(dead_code)]
     eco: String,
     name: String,
     setup: Setup,

@@ -79,7 +79,7 @@ export const commands = {
       else return { status: "error", error: e as any };
     }
   },
-  async memorySize(): Promise<number> {
+  async memorySize(): Promise<bigint> {
     return await TAURI_INVOKE("memory_size");
   },
   /**

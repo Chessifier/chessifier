@@ -28,7 +28,7 @@ use oauth::AuthState;
 use specta_typescript::{BigIntExportBehavior, Typescript};
 use sysinfo::SystemExt;
 use tauri::path::BaseDirectory;
-use tauri::{Manager, Window};
+use tauri::{AppHandle, Manager, Window};
 use tauri_plugin_log::{Target, TargetKind};
 
 use crate::chess::{
@@ -97,14 +97,69 @@ const REQUIRED_DIRS: &[(BaseDirectory, &str)] = &[
 const REQUIRED_FILES: &[(BaseDirectory, &str, &str)] =
     &[(BaseDirectory::AppData, "engines/engines.json", "[]")];
 
+/// Ensures that all required directories exist, creating them if necessary
+///
+/// # Arguments
+/// * `app` - The Tauri app handle used to resolve paths
+///
+/// # Returns
+/// * `Ok(())` if all directories were created or already exist
+/// * `Err(String)` if there was an error creating a directory
+fn ensure_required_directories(app: &AppHandle) -> Result<(), String> {
+    log::info!("Checking for required directories");
+    for (dir, path) in REQUIRED_DIRS.iter() {
+        if let Ok(resolved_path) = app.path().resolve(path, *dir) {
+            if !Path::new(&resolved_path).exists() {
+                log::info!("Creating directory {}", resolved_path.to_string_lossy());
+                create_dir_all(&resolved_path)
+                    .map_err(|e| format!("Failed to create directory {}: {}", 
+                                        resolved_path.to_string_lossy(), e))?;
+            } else {
+                log::info!("Directory already exists: {}", resolved_path.to_string_lossy());
+            }
+        }
+    }
+    Ok(())
+}
+
+/// Ensures that all required files exist, creating them with default content if necessary
+///
+/// # Arguments
+/// * `app` - The Tauri app handle used to resolve paths
+///
+/// # Returns
+/// * `Ok(())` if all files were created or already exist
+/// * `Err(String)` if there was an error creating a file
+fn ensure_required_files(app: &AppHandle) -> Result<(), String> {
+    log::info!("Checking for required files");
+    for (dir, path, contents) in REQUIRED_FILES.iter() {
+        let resolved_path = app.path().resolve(path, *dir)
+            .map_err(|e| format!("Failed to resolve path {}: {}", path, e))?;
+        
+        if !Path::new(&resolved_path).exists() {
+            log::info!("Creating file {}", resolved_path.to_string_lossy());
+            std::fs::write(&resolved_path, contents)
+                .map_err(|e| format!("Failed to write file {}: {}", 
+                                    resolved_path.to_string_lossy(), e))?;
+        } else {
+            log::info!("File already exists: {}", resolved_path.to_string_lossy());
+        }
+    }
+    Ok(())
+}
+
 #[tauri::command]
 #[specta::specta]
 async fn close_splashscreen(window: Window) -> Result<(), String> {
-    window
+    // Get the main window, returning an error if not found
+    let main_window = window
         .get_webview_window("main")
-        .expect("no window labeled 'main' found")
-        .show()
-        .unwrap();
+        .ok_or_else(|| String::from("No window labeled 'main' found"))?;
+    
+    // Show the main window, propagating any errors
+    main_window.show()
+        .map_err(|e| format!("Failed to show main window: {}", e))?;
+    
     Ok(())
 }
 
@@ -201,25 +256,11 @@ fn main() {
         .setup(move |app| {
             log::info!("Setting up application");
 
-            log::info!("Checking for required directories");
-            for (dir, path) in REQUIRED_DIRS.iter() {
-                let path = app.path().resolve(path, *dir);
-                if let Ok(path) = path {
-                    if !Path::new(&path).exists() {
-                        log::info!("Creating directory {}", path.to_string_lossy());
-                        create_dir_all(&path).unwrap();
-                    }
-                };
-            }
+            // Ensure required directories exist
+            ensure_required_directories(&app.handle())?;
 
-            log::info!("Checking for required files");
-            for (dir, path, contents) in REQUIRED_FILES.iter() {
-                let path = app.path().resolve(path, *dir).unwrap();
-                if !Path::new(&path).exists() {
-                    log::info!("Creating file {}", path.to_string_lossy());
-                    std::fs::write(&path, contents).unwrap();
-                }
-            }
+            // Ensure required files exist
+            ensure_required_files(&app.handle())?;
 
             // #[cfg(any(windows, target_os = "macos"))]
             // set_shadow(&app.get_webview_window("main").unwrap(), true).unwrap();
@@ -254,7 +295,7 @@ fn is_bmi2_compatible() -> bool {
 
 #[tauri::command]
 #[specta::specta]
-fn memory_size() -> u32 {
+fn memory_size() -> u64 {
     let total_bytes = sysinfo::System::new_all().total_memory();
-    (total_bytes / 1024 / 1024) as u32
+    total_bytes / 1024 / 1024
 }

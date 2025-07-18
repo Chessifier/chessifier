@@ -13,33 +13,31 @@ export default function HashSlider(props: { value: number; setValue: (v: number)
   }, [props.value]);
 
   const { data: memorySize } = useSWRImmutable("memory", async () => {
-    return (await commands.memorySize()) / 2;
+    return ((await commands.memorySize()) as unknown as number) / 2;
   });
 
   return (
-    <>
-      <Slider
-        min={0}
-        max={Math.log2(memorySize || 16)}
-        color={props.color}
-        value={tempValue}
-        onChange={setTempValue}
-        onChangeEnd={(v) => props.setValue(2 ** v)}
-        label={(v) => formatBytes(2 ** v * 1024 * 1024)}
-        thumbChildren={<IconGripVertical style={{ width: rem(20), height: rem(20) }} stroke={1.5} />}
-        styles={(theme) => ({
-          mark: {
-            display: "flex",
-          },
-          thumb: {
-            width: rem(20),
-            height: rem(20),
-            backgroundColor: theme.white,
-            color: theme.colors.gray[5],
-            border: `1px solid ${theme.colors.gray[2]}`,
-          },
-        })}
-      />
-    </>
+    <Slider
+      min={0}
+      max={Math.log2(memorySize || 16)}
+      color={props.color}
+      value={tempValue}
+      onChange={setTempValue}
+      onChangeEnd={(v) => props.setValue(2 ** v)}
+      label={(v) => formatBytes(2 ** v * 1024 * 1024)}
+      thumbChildren={<IconGripVertical style={{ width: rem(20), height: rem(20) }} stroke={1.5} />}
+      styles={(theme) => ({
+        mark: {
+          display: "flex",
+        },
+        thumb: {
+          width: rem(20),
+          height: rem(20),
+          backgroundColor: theme.white,
+          color: theme.colors.gray[5],
+          border: `1px solid ${theme.colors.gray[2]}`,
+        },
+      })}
+    />
   );
 }

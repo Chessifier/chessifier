@@ -42,6 +42,7 @@ impl PuzzleCache {
     ///
     /// # Arguments
     /// * `size` - The maximum number of puzzles to cache at once
+    #[allow(dead_code)]
     fn with_cache_size(mut self, size: usize) -> Self {
         self.cache_size = size;
         self
