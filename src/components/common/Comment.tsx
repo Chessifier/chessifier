@@ -9,15 +9,24 @@ export function Comment({ comment }: { comment: string }) {
 
   return (
     <TypographyStylesProvider
-      pl={0}
-      mx={4}
       style={{
-        display: multipleLine ? "block" : "inline-block",
+        display: multipleLine ? "block" : "inline",
+        lineHeight: multipleLine ? undefined : "inherit",
       }}
     >
       <Markdown
         components={{
           a: ({ node, ...props }) => <a {...props} target="_blank" rel="noreferrer" />,
+          p: ({ children }) => (
+            <span
+              style={{
+                display: multipleLine ? "block" : "inline",
+                marginBottom: multipleLine ? undefined : 0,
+              }}
+            >
+              {children}
+            </span>
+          ),
         }}
         rehypePlugins={[rehypeRaw, remarkGfm]}
       >
