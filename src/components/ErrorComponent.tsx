@@ -42,7 +42,7 @@ export default function ErrorComponent({ error }: { error: unknown }) {
           Github
         </Anchor>{" "}
         or on the{" "}
-          <Anchor href="https://discord.gg/AseVZvWr2X" target="_blank">
+        <Anchor href="https://discord.gg/AseVZvWr2X" target="_blank">
           Discord server
         </Anchor>
       </Text>
